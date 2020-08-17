@@ -7,7 +7,7 @@ import BaseStyles from '../utils/BaseStyles';
 
 export default function ProfileScreen() {
   return (
-    <SafeAreaView style={[BaseStyles.bgWhite, BaseStyles.p4, {flexWrap: 'wrap', minHeight: '100%'}]}>
+    <SafeAreaView style={[BaseStyles.bgWhite, BaseStyles.p4, {flex: 1}]}>
       <View style={[BaseStyles.row, BaseStyles.pb4]}>
         <View>
           <Image source={{ uri: 'http://www.fillmurray.com/200/200' }} style={[styles.profileImg, BaseStyles.rounded]} />
@@ -24,22 +24,22 @@ export default function ProfileScreen() {
       <View style={[BaseStyles.row, BaseStyles.card, BaseStyles.p3]}>
         <View style={[BaseStyles.col]}>
           <TouchableOpacity onPress={() => alert('Hello, world!')}>
-            <Text style={[BaseStyles.text]}>Run</Text>
+            <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Run</Text>
           </TouchableOpacity>
         </View>
         <View style={[BaseStyles.col]}>
           <TouchableOpacity onPress={() => alert('Hello, world!')}>
-            <Text style={[BaseStyles.text]}>Ride</Text>
+            <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Ride</Text>
           </TouchableOpacity>
         </View>
         <View style={[BaseStyles.col]}>
           <TouchableOpacity onPress={() => alert('Hello, world!')}>
-            <Text style={[BaseStyles.text]}>Swim</Text>
+            <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Swim</Text>
           </TouchableOpacity>
         </View>
         <View style={[BaseStyles.col]}>
           <TouchableOpacity onPress={() => alert('Hello, world!')}>
-            <Text style={[BaseStyles.text]}>Other</Text>
+            <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Other</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -52,32 +52,8 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
   },
-  textMuted: {
-    color: 'gray',
-  },
-  bgWhite: {
-    backgroundColor: 'white',
-    borderRadius: 8,
-  },
-  titleBar: {
-    flex: 1,
-    flexBasis: 'auto',
-    flexDirection: 'row',
-    marginBottom: 20,
-  },
-  flex: {
-    flex: 1,
-  },
   name: {
     fontSize: 20,
     fontWeight: 'bold',
-  },
-  city: {
-    fontSize: 16,
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
   },
 });

@@ -5,12 +5,13 @@ const BORDER_RADIUS = 8;
 
 export default StyleSheet.create({
   row: {
-    flex: 1,
+    flex: 0,
     flexBasis: 'auto',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
   col: {
+    flex: 1,
     flexBasis: 0,
     flexGrow: 1,
     maxWidth: '100%',
@@ -72,6 +73,9 @@ export default StyleSheet.create({
   },
   textMuted: {
     color: 'gray',
+  },
+  textCenter: {
+    textAlign: 'center',
   },
 
   // Border Radius

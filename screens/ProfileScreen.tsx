@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import Screen from '../components/Screen';
+import Card from '../components/Card';
+import { Text } from '../components/Themed';
 
 import BaseStyles from '../utils/BaseStyles';
 
 export default function ProfileScreen() {
   return (
-    <SafeAreaView style={[BaseStyles.bgWhite, BaseStyles.p4, {flex: 1}]}>
+    <Screen style={[BaseStyles.p4]}>
       <View style={[BaseStyles.row, BaseStyles.pb4]}>
         <View>
           <Image source={{ uri: 'http://www.fillmurray.com/200/200' }} style={[styles.profileImg, BaseStyles.rounded]} />
@@ -21,7 +23,7 @@ export default function ProfileScreen() {
         <FontAwesome name="gear" size={24} color="black" />
       </View>
 
-      <View style={[BaseStyles.row, BaseStyles.card, BaseStyles.p3]}>
+      <Card style={[BaseStyles.row, BaseStyles.p3]}>
         <View style={[BaseStyles.col]}>
           <TouchableOpacity onPress={() => alert('Hello, world!')}>
             <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Run</Text>
@@ -42,8 +44,8 @@ export default function ProfileScreen() {
             <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Other</Text>
           </TouchableOpacity>
         </View>
-      </View>
-    </SafeAreaView>
+      </Card>
+    </Screen>
   );
 }
 

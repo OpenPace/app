@@ -3,6 +3,7 @@ import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import Screen from '../components/Screen';
 import Card from '../components/Card';
+import TabBar from '../components/TabBar';
 import { Text } from '../components/Themed';
 
 import BaseStyles from '../utils/BaseStyles';
@@ -45,6 +46,8 @@ export default function ProfileScreen() {
           </TouchableOpacity>
         </View>
       </Card>
+
+      <TabBar />
     </Screen>
   );
 }

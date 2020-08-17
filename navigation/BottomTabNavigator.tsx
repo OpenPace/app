@@ -10,7 +10,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName="Home">
+    <BottomTab.Navigator initialRouteName="Home" tabBar={() => null } >
       <BottomTab.Screen name="Home" component={HomeStackScreen} />
       <BottomTab.Screen name="Profile" component={ProfileStackScreen} />
     </BottomTab.Navigator>

@@ -5,33 +5,40 @@ import Card from '../components/Card';
 import { MaterialIcons } from '@expo/vector-icons';
 import useColorScheme from '../hooks/useColorScheme';
 import Colors from '../constants/Colors';
+import { useNavigation, useRoute } from '@react-navigation/native';
+
+function getTabs() {
+  return [
+    { route: 'Home', icon: 'home' },
+    { route: 'Challenges', icon: 'terrain' },
+    { route: 'Notifications', icon: 'notifications' },
+    { route: 'Profile', icon: 'person' },
+  ];
+}
 
 export default function TabBar() {
   const theme = useColorScheme();
   const color = Colors[theme]['text'];
+  const primaryColor = Colors[theme]['primary'];
+
+  const { navigate } = useNavigation();
+  const route = useRoute();
+
+  const tabs = getTabs().map(tab => {
+    const linkColor = route.name.includes(tab.route) ? primaryColor : color;
+
+    return (
+      <View key={tab.route} style={[BaseStyles.col]}>
+        <TouchableOpacity onPress={() => navigate(tab.route)}>
+          <MaterialIcons name={tab.icon} style={[BaseStyles.textCenter]} size={24} color={linkColor} />
+        </TouchableOpacity>
+      </View>
+    );
+  });
 
   return (
     <Card style={[BaseStyles.row, styles.container]}>
-      <View style={[BaseStyles.col]}>
-        <TouchableOpacity onPress={() => alert('Hello, world!')}>
-          <MaterialIcons name="home" style={[BaseStyles.textCenter]} size={24} color={color} />
-        </TouchableOpacity>
-      </View>
-      <View style={[BaseStyles.col]}>
-        <TouchableOpacity onPress={() => alert('Hello, world!')}>
-          <MaterialIcons name="terrain" style={[BaseStyles.textCenter]} size={24} color={color} />
-        </TouchableOpacity>
-      </View>
-      <View style={[BaseStyles.col]}>
-        <TouchableOpacity onPress={() => alert('Hello, world!')}>
-          <MaterialIcons name="notifications" style={[BaseStyles.textCenter]} size={24} color={color} />
-        </TouchableOpacity>
-      </View>
-      <View style={[BaseStyles.col]}>
-        <TouchableOpacity onPress={() => navigation.navigate('profile')}>
-          <MaterialIcons name="person" style={[BaseStyles.textCenter]} size={24} color={color} />
-        </TouchableOpacity>
-      </View>
+      {tabs}
     </Card>
   );
 }

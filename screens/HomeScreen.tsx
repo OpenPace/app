@@ -2,11 +2,14 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
+import TabBar from '../components/TabBar';
 
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Home</Text>
+
+      <TabBar />
     </View>
   );
 }

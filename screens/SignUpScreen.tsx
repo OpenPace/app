@@ -13,7 +13,8 @@ import { apiSignup } from "../api/auth";
 
 export default function SignUpScreen() {
   const { navigate } = useNavigation();
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ export default function SignUpScreen() {
   async function handleSignUp() {
     setLoading(true);
     try {
-      await apiSignup(name, email, password);
+      await apiSignup({ firstName, lastName, email, password });
       setLoading(false);
       dispatch(loginSuccess(email));
     } catch (error) {
@@ -33,7 +34,16 @@ export default function SignUpScreen() {
 
   return (
     <View>
-      <TextInput placeholder="Name" value={name} onChangeText={setName} />
+      <TextInput
+        placeholder="First Name"
+        value={firstName}
+        onChangeText={setFirstName}
+      />
+      <TextInput
+        placeholder="Last Name"
+        value={lastName}
+        onChangeText={setLastName}
+      />
       <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
       <TextInput
         placeholder="Password"

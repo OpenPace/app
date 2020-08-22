@@ -21,7 +21,7 @@ export default function LogInScreen() {
   async function handleLogin() {
     setLoading(true);
     try {
-      await apiLogin(email, password);
+      await apiLogin({ email, password });
       setLoading(false);
       dispatch(loginSuccess(email));
     } catch (error) {

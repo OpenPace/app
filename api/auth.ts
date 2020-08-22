@@ -1,26 +1,48 @@
-export async function apiLogin(email: string, password: string): Promise<any> {
-  const ms = 2000;
-  return new Promise(resolve => {
-    console.log(email);
-    console.log(password);
-    console.log('login start')
-    setTimeout(() => {
-      console.log('login done')
-      resolve();
-    }, ms);
-  });
+const API_ENDPOINT = "http://localhost:4000";
+
+type LoginArgs = {
+  email: string;
+  password: string;
 };
 
-export async function apiSignup(name: string, email: string, password: string): Promise<any> {
-  const ms = 2000;
-  return new Promise(resolve => {
-    console.log(name);
-    console.log(email);
-    console.log(password);
-    console.log('sign up start')
-    setTimeout(() => {
-      console.log('sign up done');
-      resolve();
-    }, ms);
+export async function apiLogin({ email, password }: LoginArgs): Promise<any> {
+  return fetch(`${API_ENDPOINT}/api/users/signin`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
   });
+}
+
+type SignupArgs = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
 };
+
+export async function apiSignup({
+  firstName,
+  lastName,
+  email,
+  password,
+}: SignupArgs): Promise<any> {
+  return fetch(`${API_ENDPOINT}/api/users/signup`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      first_name: firstName,
+      last_name: lastName,
+    }),
+  });
+}

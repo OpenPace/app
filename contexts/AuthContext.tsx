@@ -68,10 +68,13 @@ function AuthProvider({ children }: React.PropsWithChildren<any>) {
   useEffect(() => {
     async function loadUser() {
       try {
-        await AsyncStorage.getItem('name');
+        await AsyncStorage.setItem('name', 'Evan');
+        const test = await AsyncStorage.getItem('name');
+        console.log(test);
       } catch (e) {
         // Restoring token failed
       }
+
       // dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     }
 

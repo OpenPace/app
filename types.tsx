@@ -15,3 +15,8 @@ export type HomeParamList = {
 export type ProfileParamList = {
   ProfileScreen: undefined;
 };
+
+export type LoggedOutParamList = {
+  LogIn: undefined;
+  SignUp: undefined;
+};

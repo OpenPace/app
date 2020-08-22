@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Button, TextInput } from "react-native";
+import { Button, TextInput, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import { Text, View } from "../components/Themed";
 import {
   useAuthContext,
@@ -14,6 +16,7 @@ export default function LogInScreen() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { dispatch } = useAuthContext();
+  const { navigate } = useNavigation();
 
   async function handleLogin() {
     setLoading(true);
@@ -45,6 +48,11 @@ export default function LogInScreen() {
         title="Log In"
         accessibilityLabel="Learn more about this purple button"
       />
+
+      <Text>Don't have an account?</Text>
+      <TouchableOpacity onPress={() => navigate("SignUp")}>
+        <Text>Sign up</Text>
+      </TouchableOpacity>
     </View>
   );
 }

@@ -24,7 +24,7 @@ export default function LogInScreen() {
 
     if (response.status === 201) {
       const body = await response.json();
-      dispatch(loginSuccess(body.email));
+      dispatch(loginSuccess(body.token));
     } else {
       dispatch(loginFail("Email or password incorrect"));
     }

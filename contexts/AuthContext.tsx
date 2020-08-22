@@ -1,16 +1,18 @@
-import React, { createContext, useContext, useEffect, useReducer  } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
+import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import * as SecureStore from 'expo-secure-store';
 
 // Types
 type State = {
   isLoggedIn: boolean;
-  name?: string;
+  token?: string;
   error?: string;
 };
 
 type Action = {
   type: string;
-  name?: string;
+  token?: string;
   error?: string;
 };
 
@@ -22,20 +24,25 @@ type ContextType = {
 // Initial state
 const initialState: State = {
   isLoggedIn: false,
-  name: undefined,
+  token: undefined,
   error: undefined,
 };
 
 export const AuthContext = createContext<ContextType>({} as any);
 
 // Actions
+export const RESTORE_TOKEN = 'RESTORE_TOKEN';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 // Action creators
-export function loginSuccess(name: string): Action {
-  return { type: LOGIN_SUCCESS, name };
+export function restoreToken(token: string): Action {
+  return { type: RESTORE_TOKEN, token };
+}
+
+export function loginSuccess(token: string): Action {
+  return { type: LOGIN_SUCCESS, token };
 }
 
 export function loginFail(error: string): Action {
@@ -50,7 +57,7 @@ export function logout(): Action {
 export function authReducer(state: State, action: Action): State {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      return { isLoggedIn: true, name: action.name };
+      return { isLoggedIn: true, token: action.token };
     case LOGIN_FAIL:
       return { isLoggedIn: false, error: action.error };
     case LOGOUT:
@@ -68,14 +75,20 @@ function AuthProvider({ children }: React.PropsWithChildren<any>) {
   useEffect(() => {
     async function loadUser() {
       try {
-        await AsyncStorage.setItem('name', 'Evan');
-        const test = await AsyncStorage.getItem('name');
-        console.log(test);
+        let token: string | null;
+
+        if (Platform.OS === 'web') {
+          token = await AsyncStorage.getItem('authToken');
+        } else {
+          token = await SecureStore.getItemAsync('authToken');
+        }
+
+        if (token) {
+          dispatch(restoreToken(token));
+        }
       } catch (e) {
         // Restoring token failed
       }
-
-      // dispatch({ type: 'RESTORE_TOKEN', token: userToken });
     }
 
     loadUser();

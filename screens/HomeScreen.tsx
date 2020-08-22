@@ -21,7 +21,7 @@ function Greeting() {
   if (auth.isLoggedIn)
     return (
       <Text>
-        Hello, {auth.name}!
+        Hello, {auth.token}!
         <TouchableOpacity onPress={() => dispatch(logout())}>
           <Text>Logout</Text>
         </TouchableOpacity>

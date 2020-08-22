@@ -15,19 +15,21 @@ export default function LogInScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { dispatch } = useAuthContext();
+  const { auth, dispatch } = useAuthContext();
   const { navigate } = useNavigation();
 
   async function handleLogin() {
     setLoading(true);
-    try {
-      await apiLogin({ email, password });
-      setLoading(false);
-      dispatch(loginSuccess(email));
-    } catch (error) {
-      setLoading(false);
-      dispatch(loginFail(error.message));
+    const response = await apiLogin({ email, password });
+
+    if (response.status === 201) {
+      const body = await response.json();
+      dispatch(loginSuccess(body.email));
+    } else {
+      dispatch(loginFail("Email or password incorrect"));
     }
+
+    setLoading(false);
   }
 
   return (
@@ -40,14 +42,14 @@ export default function LogInScreen() {
         secureTextEntry
       />
 
-      <Text>{loading ? "Loading..." : "Not Loading"}</Text>
-
       <Button
         disabled={loading}
         onPress={handleLogin}
         title="Log In"
         accessibilityLabel="Learn more about this purple button"
       />
+
+      {auth.error && <Text>{auth.error}</Text>}
 
       <Text>Don't have an account?</Text>
       <TouchableOpacity onPress={() => navigate("SignUp")}>

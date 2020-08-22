@@ -1,48 +1,21 @@
-const API_ENDPOINT = "http://localhost:4000";
+import { apiPost } from "./client";
 
-type LoginArgs = {
+type LoginParams = {
   email: string;
   password: string;
 };
 
-export async function apiLogin({ email, password }: LoginArgs): Promise<any> {
-  return fetch(`${API_ENDPOINT}/api/users/signin`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
+export async function apiLogin(params: LoginParams): Promise<any> {
+  return apiPost("/users/signin", params);
 }
 
-type SignupArgs = {
+type SignupParams = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
 };
 
-export async function apiSignup({
-  firstName,
-  lastName,
-  email,
-  password,
-}: SignupArgs): Promise<any> {
-  return fetch(`${API_ENDPOINT}/api/users/signup`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email,
-      password,
-      first_name: firstName,
-      last_name: lastName,
-    }),
-  });
+export async function apiSignup(params: SignupParams): Promise<any> {
+  return apiPost("/users/signup", params);
 }

@@ -1,5 +1,5 @@
-import React, { createContext, useReducer, useContext } from "react";
-// import AsyncStorage from '@react-native-community/async-storage';
+import React, { createContext, useContext, useEffect, useReducer  } from "react";
+import AsyncStorage from '@react-native-community/async-storage';
 
 // Types
 type State = {
@@ -64,6 +64,19 @@ function AuthProvider({ children }: React.PropsWithChildren<any>) {
   const [auth, dispatch] = useReducer(authReducer, initialState);
 
   const authData = { auth, dispatch };
+
+  useEffect(() => {
+    async function loadUser() {
+      try {
+        await AsyncStorage.getItem('name');
+      } catch (e) {
+        // Restoring token failed
+      }
+      // dispatch({ type: 'RESTORE_TOKEN', token: userToken });
+    }
+
+    loadUser();
+  }, []);
 
   return <AuthContext.Provider value={authData}>{children}</AuthContext.Provider> ;
 }

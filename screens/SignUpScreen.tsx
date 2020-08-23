@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Button, TextInput, TouchableOpacity } from "react-native";
+import { Button, Text, TextInput, Title } from "react-native-paper";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { Text, View } from "../components/Themed";
+import BaseStyles from "../utils/BaseStyles";
+import Screen from "../components/Screen";
+import { View } from "../components/Themed";
 import {
   useAuthContext,
   loginSuccess,
@@ -38,36 +41,53 @@ export default function SignUpScreen() {
   }
 
   return (
-    <View>
-      <TextInput
-        placeholder="First Name"
-        value={firstName}
-        onChangeText={setFirstName}
-      />
-      <TextInput
-        placeholder="Last Name"
-        value={lastName}
-        onChangeText={setLastName}
-      />
-      <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+    <Screen style={[BaseStyles.p4]}>
+      <View>
+        <Title style={[BaseStyles.mb4]}>Create an Account</Title>
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="First Name"
+          value={firstName}
+          onChangeText={setFirstName}
+          mode="outlined"
+        />
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="Last Name"
+          value={lastName}
+          onChangeText={setLastName}
+          mode="outlined"
+        />
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="Email"
+          value={email}
+          onChangeText={setEmail}
+          mode="outlined"
+        />
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="Password"
+          value={password}
+          onChangeText={setPassword}
+          mode="outlined"
+          secureTextEntry
+        />
 
-      <Button
-        disabled={loading}
-        onPress={handleSignUp}
-        title="Sign Up"
-        accessibilityLabel="Learn more about this purple button"
-      />
+        <Button
+          style={[BaseStyles.mb2]}
+          mode="contained"
+          loading={loading}
+          onPress={handleSignUp}
+        >
+          Create an Account
+        </Button>
 
-      <Text>Already have an account?</Text>
-      <TouchableOpacity onPress={() => navigate("LogIn")}>
-        <Text>Sign in</Text>
-      </TouchableOpacity>
-    </View>
+        <Text>Already have an account?</Text>
+        <TouchableOpacity onPress={() => navigate("LogIn")}>
+          <Text>Sign in</Text>
+        </TouchableOpacity>
+      </View>
+    </Screen>
   );
 }

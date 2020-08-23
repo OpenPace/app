@@ -66,6 +66,22 @@ export default StyleSheet.create({
   m5: {
     margin: SPACER * 3,
   },
+  mb1: {
+    marginBottom: SPACER * .25,
+  },
+  mb2: {
+    marginBottom: SPACER * .5,
+  },
+  mb3: {
+    marginBottom: SPACER,
+  },
+  mb4: {
+    marginBottom: SPACER * 1.5,
+  },
+  mb5: {
+    marginBottom: SPACER * 3,
+  },
+
 
   // Text
   text: {

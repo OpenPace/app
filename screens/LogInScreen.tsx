@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, TextInput, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { Text, View } from "../components/Themed";
+import { View } from "../components/Themed";
+import { Button, Text, TextInput, Title } from "react-native-paper";
+
 import {
   useAuthContext,
   loginSuccess,
@@ -10,6 +12,9 @@ import {
 } from "../contexts/AuthContext";
 
 import { logIn } from "../services/AuthService";
+
+import Screen from "../components/Screen";
+import BaseStyles from "../utils/BaseStyles";
 
 export default function LogInScreen() {
   const [email, setEmail] = useState("");
@@ -32,28 +37,36 @@ export default function LogInScreen() {
   }
 
   return (
-    <View>
-      <TextInput placeholder="Email" value={email} onChangeText={setEmail} />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+    <Screen style={[BaseStyles.p4]}>
+      <View>
+        <Title style={[BaseStyles.mb4]}>Welcome Back</Title>
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="Email"
+          value={email}
+          onChangeText={setEmail}
+          mode="outlined"
+        />
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="Password"
+          value={password}
+          onChangeText={setPassword}
+          mode="outlined"
+          secureTextEntry
+        />
 
-      <Button
-        disabled={loading}
-        onPress={handleLogin}
-        title="Log In"
-        accessibilityLabel="Learn more about this purple button"
-      />
+        <Button mode="contained" loading={loading} onPress={handleLogin}>
+          Log In
+        </Button>
 
-      {auth.error && <Text>{auth.error}</Text>}
+        {auth.error && <Text>{auth.error}</Text>}
 
-      <Text>Don't have an account?</Text>
-      <TouchableOpacity onPress={() => navigate("SignUp")}>
-        <Text>Sign up</Text>
-      </TouchableOpacity>
-    </View>
+        <Text>Don't have an account?</Text>
+        <TouchableOpacity onPress={() => navigate("SignUp")}>
+          <Text>Sign up</Text>
+        </TouchableOpacity>
+      </View>
+    </Screen>
   );
 }

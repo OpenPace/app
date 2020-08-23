@@ -16,6 +16,7 @@ export default {
               ProfileScreen: 'profile',
             },
           },
+          Onboard: 'onboard',
           SignUp: 'sign-up',
           LogIn: 'log-in',
         },

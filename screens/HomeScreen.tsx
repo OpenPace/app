@@ -4,7 +4,8 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import TabBar from "../components/TabBar";
 
-import { useAuthContext, loginSuccess, logout } from "../contexts/AuthContext";
+import { useAuthContext, logout } from "../contexts/AuthContext";
+import { logOut } from "../services/AuthService";
 
 export default function HomeScreen() {
   return (
@@ -18,20 +19,17 @@ export default function HomeScreen() {
 
 function Greeting() {
   const { auth, dispatch } = useAuthContext();
-  if (auth.isLoggedIn)
-    return (
-      <Text>
-        Hello, {auth.token}!
-        <TouchableOpacity onPress={() => dispatch(logout())}>
-          <Text>Logout</Text>
-        </TouchableOpacity>
-      </Text>
-    );
+
+  async function handleLogOut() {
+    await logOut();
+    dispatch(logout());
+  }
+
   return (
     <Text>
-      You are not logged in
-      <TouchableOpacity onPress={() => dispatch(loginSuccess("Evan"))}>
-        <Text>Log In</Text>
+      Hello, {auth.user && auth.user.firstName}!
+      <TouchableOpacity onPress={handleLogOut}>
+        <Text>Logout</Text>
       </TouchableOpacity>
     </Text>
   );

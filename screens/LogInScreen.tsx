@@ -9,7 +9,7 @@ import {
   loginFail,
 } from "../contexts/AuthContext";
 
-import { apiLogin } from "../api/auth";
+import { logIn } from "../services/AuthService";
 
 export default function LogInScreen() {
   const [email, setEmail] = useState("");
@@ -20,16 +20,15 @@ export default function LogInScreen() {
 
   async function handleLogin() {
     setLoading(true);
-    const response = await apiLogin({ email, password });
 
-    if (response.status === 201) {
-      const body = await response.json();
-      dispatch(loginSuccess(body.token));
-    } else {
-      dispatch(loginFail("Email or password incorrect"));
+    try {
+      const { token, user } = await logIn({ email, password });
+      setLoading(false);
+      dispatch(loginSuccess(token, user));
+    } catch (error) {
+      setLoading(false);
+      dispatch(loginFail(error.message));
     }
-
-    setLoading(false);
   }
 
   return (

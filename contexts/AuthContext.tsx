@@ -1,17 +1,18 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
-import { Platform } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import * as SecureStore from 'expo-secure-store';
+import { loadAuth } from '../services/AuthService';
+import User from '../api/models/User';
 
 // Types
 type State = {
   isLoggedIn: boolean;
+  user?: User;
   token?: string;
   error?: string;
 };
 
 type Action = {
   type: string;
+  user?: User;
   token?: string;
   error?: string;
 };
@@ -24,6 +25,7 @@ type ContextType = {
 // Initial state
 const initialState: State = {
   isLoggedIn: false,
+  user: undefined,
   token: undefined,
   error: undefined,
 };
@@ -31,18 +33,18 @@ const initialState: State = {
 export const AuthContext = createContext<ContextType>({} as any);
 
 // Actions
-export const RESTORE_TOKEN = 'RESTORE_TOKEN';
+export const RESTORE_AUTH = 'RESTORE_AUTH';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT';
 
 // Action creators
-export function restoreToken(token: string): Action {
-  return { type: RESTORE_TOKEN, token };
+export function restoreAuth(token: string, user: User): Action {
+  return { type: RESTORE_AUTH, token, user };
 }
 
-export function loginSuccess(token: string): Action {
-  return { type: LOGIN_SUCCESS, token };
+export function loginSuccess(token: string, user: User): Action {
+  return { type: LOGIN_SUCCESS, token, user };
 }
 
 export function loginFail(error: string): Action {
@@ -56,8 +58,10 @@ export function logout(): Action {
 // Reducer
 export function authReducer(state: State, action: Action): State {
   switch (action.type) {
+    case RESTORE_AUTH:
+      return { isLoggedIn: true, token: action.token, user: action.user };
     case LOGIN_SUCCESS:
-      return { isLoggedIn: true, token: action.token };
+      return { isLoggedIn: true, token: action.token, user: action.user };
     case LOGIN_FAIL:
       return { isLoggedIn: false, error: action.error };
     case LOGOUT:
@@ -75,16 +79,10 @@ function AuthProvider({ children }: React.PropsWithChildren<any>) {
   useEffect(() => {
     async function loadUser() {
       try {
-        let token: string | null;
+        const {token, user} = await loadAuth();
 
-        if (Platform.OS === 'web') {
-          token = await AsyncStorage.getItem('authToken');
-        } else {
-          token = await SecureStore.getItemAsync('authToken');
-        }
-
-        if (token) {
-          dispatch(restoreToken(token));
+        if (token && user) {
+          dispatch(restoreAuth(token, user));
         }
       } catch (e) {
         // Restoring token failed

@@ -9,7 +9,7 @@ import {
   loginFail,
 } from "../contexts/AuthContext";
 
-import { apiSignup } from "../api/auth";
+import { signUp } from "../services/AuthService";
 
 export default function SignUpScreen() {
   const { navigate } = useNavigation();
@@ -23,9 +23,14 @@ export default function SignUpScreen() {
   async function handleSignUp() {
     setLoading(true);
     try {
-      await apiSignup({ firstName, lastName, email, password });
+      const { token, user } = await signUp({
+        firstName,
+        lastName,
+        email,
+        password,
+      });
       setLoading(false);
-      dispatch(loginSuccess(email));
+      dispatch(loginSuccess(token, user));
     } catch (error) {
       setLoading(false);
       dispatch(loginFail(error.message));

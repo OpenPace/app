@@ -26,12 +26,12 @@ function Greeting() {
   }
 
   return (
-    <Text>
-      Hello, {auth.user && auth.user.firstName}!
+    <>
+      <Text>Hello, {auth.user && auth.user.firstName}!</Text>
       <TouchableOpacity onPress={handleLogOut}>
         <Text>Logout</Text>
       </TouchableOpacity>
-    </Text>
+    </>
   );
 }
 

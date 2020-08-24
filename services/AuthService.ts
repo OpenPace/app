@@ -73,6 +73,10 @@ export async function loadAuth() {
   }
 
   const userPayload = await AsyncStorage.getItem("user");
+  if (!token || !userPayload) {
+    throw new Error("User not found");
+  }
+
   return {
     token,
     user: userPayload && JSON.parse(userPayload),

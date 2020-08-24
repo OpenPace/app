@@ -4,9 +4,8 @@ import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import useCachedResources from "./hooks/useCachedResources";
-import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider, useAuthContext } from "./contexts/AuthContext";
 
 const theme = {
   ...DefaultTheme,
@@ -14,7 +13,9 @@ const theme = {
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  const { auth } = useAuthContext();
+
+  console.log(auth);
 
   if (!isLoadingComplete) {
     return null;
@@ -23,7 +24,8 @@ export default function App() {
       <AuthProvider>
         <PaperProvider theme={theme}>
           <SafeAreaProvider>
-            <Navigation colorScheme={colorScheme} />
+            <Navigation />
+
             <StatusBar />
           </SafeAreaProvider>
         </PaperProvider>

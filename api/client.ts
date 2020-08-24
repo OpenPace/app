@@ -1,4 +1,7 @@
-const API_ENDPOINT = "http://localhost:4000/api";
+import getEnvVars from "../environment";
+const { apiUrl } = getEnvVars();
+
+const API_ENDPOINT = `${apiUrl}/api`;
 
 type StringKeyable<T = any> = { [key: string]: T };
 

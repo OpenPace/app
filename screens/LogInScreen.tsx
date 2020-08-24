@@ -46,6 +46,9 @@ export default function LogInScreen() {
           value={email}
           onChangeText={setEmail}
           mode="outlined"
+          autoCompleteType="email"
+          autoCapitalize="none"
+          keyboardType="email-address"
         />
         <TextInput
           style={[BaseStyles.mb2]}
@@ -53,6 +56,7 @@ export default function LogInScreen() {
           value={password}
           onChangeText={setPassword}
           mode="outlined"
+          autoCompleteType="password"
           secureTextEntry
         />
 

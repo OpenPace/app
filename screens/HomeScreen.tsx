@@ -1,53 +1,35 @@
 import * as React from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { Card, Button } from "react-native-paper";
+import { ScrollView } from "react-native";
 
-import { Text, View } from "../components/Themed";
+import Screen from "../components/Screen";
 import TabBar from "../components/TabBar";
 
-import { useAuthContext, logout } from "../contexts/AuthContext";
-import { logOut } from "../services/AuthService";
+import BaseStyles from "../utils/BaseStyles";
 
 export default function HomeScreen() {
   return (
-    <View style={styles.container}>
-      <Greeting />
-
+    <Screen>
+      <ScrollView style={[BaseStyles.p4]}>
+        <CardExample />
+        <CardExample />
+        <CardExample />
+        <CardExample />
+      </ScrollView>
       <TabBar />
-    </View>
+    </Screen>
   );
 }
 
-function Greeting() {
-  const { auth, dispatch } = useAuthContext();
-
-  async function handleLogOut() {
-    await logOut();
-    dispatch(logout());
-  }
-
+function CardExample() {
   return (
-    <>
-      <Text>Hello, {auth.user && auth.user.firstName}!</Text>
-      <TouchableOpacity onPress={handleLogOut}>
-        <Text>Logout</Text>
-      </TouchableOpacity>
-    </>
+    <Card style={[BaseStyles.mb4]}>
+      <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+
+      <Card.Actions>
+        <Button>Cancel</Button>
+        <Button>Ok</Button>
+      </Card.Actions>
+    </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
-});

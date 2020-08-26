@@ -1,12 +1,15 @@
 {
   "expo": {
-    "name": "app",
-    "slug": "app",
+    "name": "openpace",
+    "slug": "openpace",
+    "description": "",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
+    "platforms": ["ios", "android"],
+    "githubUrl": "https://github.com/openpace/app",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",

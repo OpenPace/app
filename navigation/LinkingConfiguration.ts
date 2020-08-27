@@ -11,6 +11,11 @@ export default {
               HomeScreen: 'home',
             },
           },
+          Notifications: {
+            screens: {
+              NotificationsScreen: 'notifications',
+            },
+          },
           Profile: {
             screens: {
               ProfileScreen: 'profile',

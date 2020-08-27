@@ -1,17 +1,27 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
+import * as React from "react";
 
-import HomeScreen from '../screens/HomeScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import { BottomTabParamList, HomeParamList, ProfileParamList } from '../types';
+import HomeScreen from "../screens/HomeScreen";
+import NotificationsScreen from "../screens/NotificationsScreen";
+import ProfileScreen from "../screens/ProfileScreen";
+import {
+  BottomTabParamList,
+  HomeParamList,
+  NotificationsParamList,
+  ProfileParamList,
+} from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName="Home" tabBar={() => null } >
+    <BottomTab.Navigator initialRouteName="Home" tabBar={() => null}>
       <BottomTab.Screen name="Home" component={HomeStackScreen} />
+      <BottomTab.Screen
+        name="Notifications"
+        component={NotificationsStackScreen}
+      />
       <BottomTab.Screen name="Profile" component={ProfileStackScreen} />
     </BottomTab.Navigator>
   );
@@ -26,6 +36,19 @@ function HomeStackScreen() {
     <HomeStack.Navigator headerMode="none">
       <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
     </HomeStack.Navigator>
+  );
+}
+
+const NotificationsStack = createStackNavigator<NotificationsParamList>();
+
+function NotificationsStackScreen() {
+  return (
+    <NotificationsStack.Navigator headerMode="none">
+      <NotificationsStack.Screen
+        name="NotificationsScreen"
+        component={NotificationsScreen}
+      />
+    </NotificationsStack.Navigator>
   );
 }
 

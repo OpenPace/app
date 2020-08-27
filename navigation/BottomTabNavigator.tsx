@@ -5,6 +5,7 @@ import * as React from "react";
 import HomeScreen from "../screens/HomeScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 import {
   BottomTabParamList,
   HomeParamList,
@@ -58,6 +59,7 @@ function ProfileStackScreen() {
   return (
     <ProfileStack.Navigator headerMode="none">
       <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
+      <ProfileStack.Screen name="SettingsScreen" component={SettingsScreen} />
     </ProfileStack.Navigator>
   );
 }

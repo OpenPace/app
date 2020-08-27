@@ -19,6 +19,7 @@ export type NotificationsParamList = {
 
 export type ProfileParamList = {
   ProfileScreen: undefined;
+  SettingsScreen: undefined;
 };
 
 export type LoggedOutParamList = {

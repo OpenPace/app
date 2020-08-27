@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import Screen from "../components/Screen";
 import Card from "../components/Card";
 import TabBar from "../components/TabBar";
@@ -11,6 +12,7 @@ import BaseStyles from "../utils/BaseStyles";
 
 export default function ProfileScreen() {
   const { auth } = useAuthContext();
+  const navigation = useNavigation();
 
   if (!auth.user) {
     return null;
@@ -33,7 +35,9 @@ export default function ProfileScreen() {
           <Text style={[BaseStyles.textMuted]}>Traverse City, MI</Text>
         </View>
 
-        <FontAwesome name="gear" size={24} color="black" />
+        <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")}>
+          <FontAwesome name="gear" size={24} color="black" />
+        </TouchableOpacity>
       </View>
 
       <Card style={[BaseStyles.row, BaseStyles.p3]}>

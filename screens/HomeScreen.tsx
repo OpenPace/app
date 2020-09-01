@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Provider, Portal, FAB } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
 
@@ -13,6 +14,7 @@ export default function HomeScreen() {
 
 function ActionButton() {
   const [open, setOpen] = useState(false);
+  const navigation = useNavigation();
 
   return (
     <Provider>
@@ -20,23 +22,12 @@ function ActionButton() {
         <FAB.Group
           open={open}
           visible
-          icon={open ? "calendar-today" : "plus"}
+          icon={open ? "close" : "plus"}
           actions={[
-            { icon: "plus", onPress: () => console.log("Pressed add") },
             {
-              icon: "star",
-              label: "Star",
-              onPress: () => console.log("Pressed star"),
-            },
-            {
-              icon: "email",
-              label: "Email",
-              onPress: () => console.log("Pressed email"),
-            },
-            {
-              icon: "bell",
-              label: "Remind",
-              onPress: () => console.log("Pressed notifications"),
+              icon: "plus",
+              label: "New Challenge",
+              onPress: () => navigation.navigate("NewChallengeScreen"),
             },
           ]}
           onStateChange={({ open }) => setOpen(open)}

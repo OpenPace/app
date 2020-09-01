@@ -9,6 +9,7 @@ export default {
           Home: {
             screens: {
               HomeScreen: 'home',
+              NewChallengeScreen: 'challenges/new',
             },
           },
           Notifications: {

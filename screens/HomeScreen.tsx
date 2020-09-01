@@ -1,35 +1,52 @@
-import * as React from "react";
-import { Card, Button } from "react-native-paper";
-import { ScrollView } from "react-native";
+import React, { useState } from "react";
+import { Provider, Portal, FAB } from "react-native-paper";
 
 import Screen from "../components/Screen";
-import TabBar from "../components/TabBar";
-
-import BaseStyles from "../utils/BaseStyles";
 
 export default function HomeScreen() {
   return (
     <Screen>
-      <ScrollView style={[BaseStyles.p4]}>
-        <CardExample />
-        <CardExample />
-        <CardExample />
-        <CardExample />
-      </ScrollView>
-      <TabBar />
+      <ActionButton />
     </Screen>
   );
 }
 
-function CardExample() {
-  return (
-    <Card style={[BaseStyles.mb4]}>
-      <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+function ActionButton() {
+  const [open, setOpen] = useState(false);
 
-      <Card.Actions>
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
-      </Card.Actions>
-    </Card>
+  return (
+    <Provider>
+      <Portal>
+        <FAB.Group
+          open={open}
+          visible
+          icon={open ? "calendar-today" : "plus"}
+          actions={[
+            { icon: "plus", onPress: () => console.log("Pressed add") },
+            {
+              icon: "star",
+              label: "Star",
+              onPress: () => console.log("Pressed star"),
+            },
+            {
+              icon: "email",
+              label: "Email",
+              onPress: () => console.log("Pressed email"),
+            },
+            {
+              icon: "bell",
+              label: "Remind",
+              onPress: () => console.log("Pressed notifications"),
+            },
+          ]}
+          onStateChange={({ open }) => setOpen(open)}
+          onPress={() => {
+            if (open) {
+              // do something if the speed dial is open
+            }
+          }}
+        />
+      </Portal>
+    </Provider>
   );
 }

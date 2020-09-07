@@ -1,10 +1,10 @@
 import Challenge from "../api/models/Challenge";
-import { apiPost } from "../api/client";
+import { apiPost, Options } from "../api/client";
 import { camelizeObject } from "../utils";
 
-export async function createChallenge(authToken: string, challenge: Challenge) {
+export async function createChallenge(challenge: Challenge, options: Options) {
   const response = await apiPost("/challenges", {
-    authToken,
+    ...options,
     data: {
       challenge: camelizeObject(challenge),
     },
@@ -18,6 +18,7 @@ export async function createChallenge(authToken: string, challenge: Challenge) {
 
 function parseChallenge(challenge: any) {
   const challengeObj: Challenge = {
+    id: challenge.id,
     name: challenge.name,
     activityType: challenge.activity_type,
     challengeType: challenge.challenge_type,

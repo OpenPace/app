@@ -6,7 +6,7 @@ const API_ENDPOINT = `${apiUrl}/api`;
 
 type StringKeyable<T = any> = { [key: string]: T };
 
-interface Options {
+export interface Options {
   authToken?: string;
   data?: StringKeyable;
 }

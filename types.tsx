@@ -5,15 +5,21 @@ export type RootStackParamList = {
 
 export type BottomTabParamList = {
   Home: undefined;
+  Challenges: undefined;
   Notifications: undefined;
   Profile: undefined;
 };
 
 export type HomeParamList = {
   HomeScreen: undefined;
+  ChallengeScreen: { id: number };
   ChallengeActivityScreen: undefined;
   ChallengeTypeScreen: undefined;
   ChallengeTimelineScreen: undefined;
+};
+
+export type ChallengesParamList = {
+  ChallengeScreen: undefined;
 };
 
 export type NotificationsParamList = {

@@ -9,6 +9,7 @@ export default {
           Home: {
             screens: {
               HomeScreen: 'home',
+              ChallengeScreen: 'challenges/:id',
               ChallengeActivityScreen: 'challenges/activity',
               ChallengeTypeScreen: 'challenges/type',
               ChallengeTimelineScreen: 'challenges/timeline',

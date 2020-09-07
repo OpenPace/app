@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import HomeScreen from "../screens/HomeScreen";
+import ChallengeScreen from "../screens/ChallengeScreen";
 import ChallengeActivityScreen from "../screens/ChallengeActivityScreen";
 import ChallengeTypeScreen from "../screens/ChallengeTypeScreen";
 import ChallengeTimelineScreen from "../screens/ChallengeTimelineScreen";
@@ -11,6 +12,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import {
   BottomTabParamList,
+  ChallengesParamList,
   HomeParamList,
   NotificationsParamList,
   ProfileParamList,
@@ -24,6 +26,7 @@ export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator initialRouteName="Home" tabBar={() => null}>
       <BottomTab.Screen name="Home" component={HomeStackScreen} />
+      <BottomTab.Screen name="Challenges" component={ChallengesStackScreen} />
       <BottomTab.Screen
         name="Notifications"
         component={NotificationsStackScreen}
@@ -61,8 +64,22 @@ function HomeStackScreen() {
           component={ChallengeTimelineScreen}
           options={{ title: "Choose Your Timeline" }}
         />
+        <HomeStack.Screen name="ChallengeScreen" component={ChallengeScreen} />
       </HomeStack.Navigator>
     </ChallengeProvider>
+  );
+}
+
+const ChallengesStack = createStackNavigator<ChallengesParamList>();
+
+function ChallengesStackScreen() {
+  return (
+    <ChallengesStack.Navigator headerMode="none">
+      <ChallengesStack.Screen
+        name="ChallengeScreen"
+        component={ChallengeScreen}
+      />
+    </ChallengesStack.Navigator>
   );
 }
 

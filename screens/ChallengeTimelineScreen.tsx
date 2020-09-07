@@ -12,10 +12,14 @@ export default function ChallengeTimelineScreen() {
   const { challenge } = useChallengeContext();
   const { auth } = useAuthContext();
 
-  function selectOption(option: "day" | "week" | "weekend" | "month") {
+  async function selectOption(option: "day" | "week" | "weekend" | "month") {
     challenge.timeline = option;
-    createChallenge(auth.token, challenge);
-    navigation.navigate("HomeScreen");
+    try {
+      const newChallenge = await createChallenge(challenge, {
+        authToken: auth.token,
+      });
+      navigation.navigate("ChallengeScreen", { id: newChallenge.id });
+    } catch (e) {}
   }
 
   return (

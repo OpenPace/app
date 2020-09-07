@@ -18,6 +18,13 @@ export default function HomeScreen() {
         New Challenge
       </Button>
 
+      <Button
+        mode="contained"
+        onPress={() => navigation.navigate("ChallengeScreen", { id: 1 })}
+      >
+        Challenge
+      </Button>
+
       <TabBar />
     </Screen>
   );

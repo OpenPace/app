@@ -5,7 +5,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation";
-import { AuthProvider, useAuthContext } from "./contexts/AuthContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 const theme = {
   ...DefaultTheme,
@@ -13,9 +13,6 @@ const theme = {
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const { auth } = useAuthContext();
-
-  console.log(auth);
 
   if (!isLoadingComplete) {
     return null;

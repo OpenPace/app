@@ -10,7 +10,7 @@ type LoginParams = {
 };
 
 export async function logIn(params: LoginParams) {
-  const response = await apiPost("/users/signin", params);
+  const response = await apiPost("/users/signin", { data: params });
   if (response.status !== 201) {
     throw new Error("Email or password incorrect");
   }

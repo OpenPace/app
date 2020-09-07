@@ -35,11 +35,16 @@ const HomeStack = createStackNavigator<HomeParamList>();
 
 function HomeStackScreen() {
   return (
-    <HomeStack.Navigator headerMode="none">
-      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ title: "Home" }}
+      />
       <HomeStack.Screen
         name="NewChallengeScreen"
         component={NewChallengeScreen}
+        options={{ title: "New Challenge" }}
       />
     </HomeStack.Navigator>
   );

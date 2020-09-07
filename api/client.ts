@@ -1,5 +1,6 @@
 import getEnvVars from "../environment";
 const { apiUrl } = getEnvVars();
+import { camelizeObject } from "../utils";
 
 const API_ENDPOINT = `${apiUrl}/api`;
 
@@ -16,21 +17,8 @@ export async function apiPost(url: string, options: Options): Promise<any> {
   return fetch(`${API_ENDPOINT}${url}`, {
     method: "POST",
     headers: buildHeaders(options),
-    body: data ? stringifyData(data) : undefined,
+    body: data ? JSON.stringify(camelizeObject(data)) : undefined,
   });
-}
-
-function camelToUnderscore(key: string) {
-  return key.replace(/([A-Z])/g, "_$1").toLowerCase();
-}
-
-function stringifyData(data: StringKeyable) {
-  const newObject: StringKeyable = {};
-  for (const key in data) {
-    newObject[camelToUnderscore(key)] = data[key];
-  }
-
-  return JSON.stringify(newObject);
 }
 
 function buildHeaders({ authToken }: Options) {

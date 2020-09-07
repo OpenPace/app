@@ -35,9 +35,12 @@ type SignupParams = {
 };
 
 export async function signUp(params: SignupParams) {
-  const response = await apiPost("/users/signup", {
+  const data = {
     ...params,
     encryptedPassword: params.password,
+  };
+  const response = await apiPost("/users/signup", {
+    data,
   });
   const body = await response.json();
 

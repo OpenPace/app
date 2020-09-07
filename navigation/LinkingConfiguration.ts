@@ -9,7 +9,9 @@ export default {
           Home: {
             screens: {
               HomeScreen: 'home',
-              NewChallengeScreen: 'challenges/new',
+              ChallengeActivityScreen: 'challenges/activity',
+              ChallengeTypeScreen: 'challenges/type',
+              ChallengeTimelineScreen: 'challenges/timeline',
             },
           },
           Notifications: {

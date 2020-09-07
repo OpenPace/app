@@ -3,7 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import HomeScreen from "../screens/HomeScreen";
-import NewChallengeScreen from "../screens/NewChallengeScreen";
+import ChallengeActivityScreen from "../screens/ChallengeActivityScreen";
+import ChallengeTypeScreen from "../screens/ChallengeTypeScreen";
+import ChallengeTimelineScreen from "../screens/ChallengeTimelineScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -42,9 +44,19 @@ function HomeStackScreen() {
         options={{ title: "Home" }}
       />
       <HomeStack.Screen
-        name="NewChallengeScreen"
-        component={NewChallengeScreen}
-        options={{ title: "New Challenge" }}
+        name="ChallengeActivityScreen"
+        component={ChallengeActivityScreen}
+        options={{ title: "Choose Activity Type" }}
+      />
+      <HomeStack.Screen
+        name="ChallengeTypeScreen"
+        component={ChallengeTypeScreen}
+        options={{ title: "Choose Your Challenge" }}
+      />
+      <HomeStack.Screen
+        name="ChallengeTimelineScreen"
+        component={ChallengeTimelineScreen}
+        options={{ title: "Choose Your Timeline" }}
       />
     </HomeStack.Navigator>
   );

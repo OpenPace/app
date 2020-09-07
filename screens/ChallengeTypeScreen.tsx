@@ -1,24 +1,21 @@
-import React, { useState } from "react";
+import * as React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "react-native-paper";
-
 import Screen from "../components/Screen";
-import TabBar from "../components/TabBar";
 import BaseStyles from "../utils/BaseStyles";
+import { Button, Text } from "react-native-paper";
 
-export default function HomeScreen() {
+export default function ChallengeTypeScreen() {
   const navigation = useNavigation();
 
   return (
     <Screen style={[BaseStyles.p4]}>
+      <Text>Challenge Type</Text>
       <Button
         mode="contained"
-        onPress={() => navigation.navigate("ChallengeActivityScreen")}
+        onPress={() => navigation.navigate("ChallengeTimelineScreen")}
       >
-        New Challenge
+        Next
       </Button>
-
-      <TabBar />
     </Screen>
   );
 }

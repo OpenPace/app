@@ -1,6 +1,17 @@
 import Challenge from "../api/models/Challenge";
-import { apiPost, Options } from "../api/client";
+import { apiGet, apiPost, Options } from "../api/client";
 import { camelizeObject } from "../utils";
+
+export async function getChallenge(id: number, options: Options) {
+  const response = await apiGet(`/challenges/${id}`, options);
+
+  if (response.status !== 200) {
+    throw new Error("Error creating challenge");
+  }
+
+  const body = await response.json();
+  return parseChallenge(body);
+}
 
 export async function createChallenge(challenge: Challenge, options: Options) {
   const response = await apiPost("/challenges", {

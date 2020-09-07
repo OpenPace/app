@@ -11,6 +11,12 @@ export interface Options {
   data?: StringKeyable;
 }
 
+export async function apiGet(url: string, options: Options): Promise<any> {
+  return fetch(`${API_ENDPOINT}${url}`, {
+    headers: buildHeaders(options),
+  });
+}
+
 export async function apiPost(url: string, options: Options): Promise<any> {
   const { data } = options;
 

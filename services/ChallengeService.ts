@@ -1,6 +1,6 @@
 import Challenge from "../api/models/Challenge";
 import { apiGet, apiPost, Options } from "../api/client";
-import { underscoreObject } from "../utils";
+import { camelizeObject, underscoreObject } from "../utils";
 
 export async function getChallengesByUser(options: Options) {
   const response = await apiGet(`/challenges`, options);
@@ -39,15 +39,5 @@ export async function createChallenge(challenge: Challenge, options: Options) {
 }
 
 function parseChallenge(challenge: any) {
-  const challengeObj: Challenge = {
-    id: challenge.id,
-    name: challenge.name,
-    activityType: challenge.activity_type,
-    challengeType: challenge.challenge_type,
-    timeline: challenge.timeline,
-    startAt: challenge.start_at,
-    endAt: challenge.end_at,
-  };
-
-  return challengeObj;
+  return camelizeObject(challenge) as Challenge;
 }

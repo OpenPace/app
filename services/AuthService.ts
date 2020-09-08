@@ -3,6 +3,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import * as SecureStore from "expo-secure-store";
 import { apiPost } from "../api/client";
 import User from "../api/models/User";
+import { camelizeObject } from "../utils";
 
 type LoginParams = {
   email: string;
@@ -99,11 +100,5 @@ async function persistToken(token: string) {
 }
 
 function parseUser(user: any) {
-  const userObj: User = {
-    firstName: user.first_name,
-    lastName: user.last_name,
-    email: user.email,
-  };
-
-  return userObj;
+  return camelizeObject(user) as User;
 }

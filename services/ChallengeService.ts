@@ -1,6 +1,6 @@
 import Challenge from "../api/models/Challenge";
 import { apiGet, apiPost, Options } from "../api/client";
-import { camelizeObject } from "../utils";
+import { underscoreObject } from "../utils";
 
 export async function getChallengesByUser(options: Options) {
   const response = await apiGet(`/challenges`, options);
@@ -28,7 +28,7 @@ export async function createChallenge(challenge: Challenge, options: Options) {
   const response = await apiPost("/challenges", {
     ...options,
     data: {
-      challenge: camelizeObject(challenge),
+      challenge: underscoreObject(challenge),
     },
   });
   if (response.status !== 201) {

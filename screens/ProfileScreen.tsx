@@ -2,19 +2,21 @@ import * as React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import { Button } from "react-native-paper";
 import Screen from "../components/Screen";
 import Card from "../components/Card";
 import TabBar from "../components/TabBar";
 import { Text } from "../components/Themed";
-import { useAuthContext } from "../contexts/AuthContext";
+import { useAuthContext, logout } from "../contexts/AuthContext";
 
 import BaseStyles from "../utils/BaseStyles";
 
 export default function ProfileScreen() {
-  const { auth } = useAuthContext();
+  const { auth, dispatch } = useAuthContext();
   const navigation = useNavigation();
+  const { user } = auth;
 
-  if (!auth.user) {
+  if (!user) {
     return null;
   }
 
@@ -23,16 +25,18 @@ export default function ProfileScreen() {
       <View style={[BaseStyles.row, BaseStyles.pb4]}>
         <View>
           <Image
-            source={{ uri: "http://www.fillmurray.com/200/200" }}
+            source={{ uri: user.avatar }}
             style={[styles.profileImg, BaseStyles.rounded]}
           />
         </View>
 
         <View style={{ flexGrow: 1, marginLeft: 8 }}>
           <Text style={[styles.name]}>
-            {auth.user.firstName} {auth.user.lastName}
+            {user.firstName} {user.lastName}
           </Text>
-          <Text style={[BaseStyles.textMuted]}>Traverse City, MI</Text>
+          <Text style={[BaseStyles.textMuted]}>
+            {user.city} {user.state}
+          </Text>
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")}>
@@ -40,7 +44,7 @@ export default function ProfileScreen() {
         </TouchableOpacity>
       </View>
 
-      <Card style={[BaseStyles.row, BaseStyles.p3]}>
+      <Card style={[BaseStyles.row, BaseStyles.p3, BaseStyles.mb4]}>
         <View style={[BaseStyles.col]}>
           <TouchableOpacity onPress={() => alert("Hello, world!")}>
             <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Run</Text>
@@ -62,6 +66,10 @@ export default function ProfileScreen() {
           </TouchableOpacity>
         </View>
       </Card>
+
+      <Button mode="contained" onPress={() => dispatch(logout())}>
+        Log Out
+      </Button>
 
       <TabBar />
     </Screen>

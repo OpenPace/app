@@ -1,6 +1,6 @@
 import getEnvVars from "../environment";
 const { apiUrl } = getEnvVars();
-import { camelizeObject } from "../utils";
+import { underscoreObject } from "../utils";
 
 const API_ENDPOINT = `${apiUrl}/api`;
 
@@ -23,7 +23,7 @@ export async function apiPost(url: string, options: Options): Promise<any> {
   return fetch(`${API_ENDPOINT}${url}`, {
     method: "POST",
     headers: buildHeaders(options),
-    body: data ? JSON.stringify(camelizeObject(data)) : undefined,
+    body: data ? JSON.stringify(underscoreObject(data)) : undefined,
   });
 }
 

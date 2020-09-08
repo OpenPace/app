@@ -24,8 +24,6 @@ export default function TabBar() {
   const { navigate } = useNavigation();
   const route = useRoute();
 
-  console.log(route);
-
   const tabs = getTabs().map((tab) => {
     const linkColor = route.name.includes(tab.route) ? primaryColor : color;
 

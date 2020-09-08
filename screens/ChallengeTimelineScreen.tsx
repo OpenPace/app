@@ -18,7 +18,7 @@ export default function ChallengeTimelineScreen() {
       const newChallenge = await createChallenge(challenge, {
         authToken: auth.token,
       });
-      navigation.navigate("ChallengeScreen", { id: newChallenge.id });
+      navigation.navigate("ChallengeShowScreen", { id: newChallenge.id });
     } catch (e) {}
   }
 

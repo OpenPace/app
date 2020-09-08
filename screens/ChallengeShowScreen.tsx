@@ -8,9 +8,9 @@ import Challenge from "../api/models/Challenge";
 import { getChallenge } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
 
-type ProfileScreenRouteProp = RouteProp<HomeParamList, "ChallengeScreen">;
+type ProfileScreenRouteProp = RouteProp<HomeParamList, "ChallengeShowScreen">;
 
-export default function ChallengeScreen() {
+export default function ChallengeShowScreen() {
   const route = useRoute<ProfileScreenRouteProp>();
   const { auth } = useAuthContext();
   const [challenge, setChallenge] = useState<Challenge | undefined>(undefined);

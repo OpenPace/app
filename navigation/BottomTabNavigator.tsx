@@ -3,7 +3,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import HomeScreen from "../screens/HomeScreen";
-import ChallengeScreen from "../screens/ChallengeScreen";
+import ChallengeIndexScreen from "../screens/ChallengeIndexScreen";
+import ChallengeShowScreen from "../screens/ChallengeShowScreen";
 import ChallengeActivityScreen from "../screens/ChallengeActivityScreen";
 import ChallengeTypeScreen from "../screens/ChallengeTypeScreen";
 import ChallengeTimelineScreen from "../screens/ChallengeTimelineScreen";
@@ -64,7 +65,10 @@ function HomeStackScreen() {
           component={ChallengeTimelineScreen}
           options={{ title: "Choose Your Timeline" }}
         />
-        <HomeStack.Screen name="ChallengeScreen" component={ChallengeScreen} />
+        <HomeStack.Screen
+          name="ChallengeShowScreen"
+          component={ChallengeShowScreen}
+        />
       </HomeStack.Navigator>
     </ChallengeProvider>
   );
@@ -74,10 +78,16 @@ const ChallengesStack = createStackNavigator<ChallengesParamList>();
 
 function ChallengesStackScreen() {
   return (
-    <ChallengesStack.Navigator headerMode="none">
+    <ChallengesStack.Navigator>
       <ChallengesStack.Screen
-        name="ChallengeScreen"
-        component={ChallengeScreen}
+        name="ChallengesScreen"
+        component={ChallengeIndexScreen}
+        options={{ title: "Challenges" }}
+      />
+      <ChallengesStack.Screen
+        name="ChallengeShowScreen"
+        component={ChallengeShowScreen}
+        options={{ title: "Challenge" }}
       />
     </ChallengesStack.Navigator>
   );
@@ -87,10 +97,11 @@ const NotificationsStack = createStackNavigator<NotificationsParamList>();
 
 function NotificationsStackScreen() {
   return (
-    <NotificationsStack.Navigator headerMode="none">
+    <NotificationsStack.Navigator>
       <NotificationsStack.Screen
         name="NotificationsScreen"
         component={NotificationsScreen}
+        options={{ title: "Notifications" }}
       />
     </NotificationsStack.Navigator>
   );

@@ -7,9 +7,11 @@ const localhost =
 const ENV = {
   dev: {
     apiUrl: localhost,
+    stravaClientId: "20972",
   },
   prod: {
     apiUrl: "https://www.openpace.co",
+    stravaClientId: "20972",
   },
 };
 

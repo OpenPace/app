@@ -59,7 +59,7 @@ function ChallengeCard({ challenge }: { challenge: Challenge }) {
     `${challenge.timeline} ${challenge.activityType} challenge`;
 
   return (
-    <Card style={[BaseStyles.mb4]}>
+    <Card key={challenge.id} style={[BaseStyles.mb4]}>
       <Card.Title title={name} subtitle="Card Subtitle" />
       <Card.Actions>
         <Button

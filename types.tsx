@@ -12,15 +12,14 @@ export type BottomTabParamList = {
 
 export type HomeParamList = {
   HomeScreen: undefined;
-  ChallengeShowScreen: { id: number };
-  ChallengeActivityScreen: undefined;
-  ChallengeTypeScreen: undefined;
-  ChallengeTimelineScreen: undefined;
 };
 
 export type ChallengesParamList = {
   ChallengesScreen: undefined;
   ChallengeShowScreen: { id: number };
+  ChallengeActivityScreen: undefined;
+  ChallengeTypeScreen: undefined;
+  ChallengeTimelineScreen: undefined;
 };
 
 export type NotificationsParamList = {
@@ -38,6 +37,7 @@ export type LoggedOutParamList = {
 };
 
 export type ChallengeTabParamList = {
-  Leaderboard: { id: number };
-  Chat: { id: number };
+  Home: undefined;
+  Leaderboard: undefined;
+  Chat: undefined;
 };

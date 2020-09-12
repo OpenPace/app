@@ -18,6 +18,7 @@ export default function ChallengeTabNavigator() {
 
   return (
     <Tab.Navigator>
+      <Tab.Screen name="Home" component={ChallengeShowScreen} />
       <Tab.Screen name="Leaderboard" component={ChallengeShowScreen} />
       <Tab.Screen name="Chat" component={ChallengeShowScreen} />
     </Tab.Navigator>

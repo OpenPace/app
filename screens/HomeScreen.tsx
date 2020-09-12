@@ -12,14 +12,6 @@ export default function HomeScreen() {
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <Button
-        mode="contained"
-        onPress={() => navigation.navigate("ChallengeActivityScreen")}
-        style={[BaseStyles.mb4]}
-      >
-        New Challenge
-      </Button>
-
       <StravaButton />
 
       <TabBar />

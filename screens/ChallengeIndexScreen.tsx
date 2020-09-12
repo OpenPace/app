@@ -11,6 +11,7 @@ import { getChallengesByUser } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
 
 export default function ChallengeIndexScreen() {
+  const navigation = useNavigation();
   const { auth } = useAuthContext();
   const [challenges, setChallenges] = useState<Challenge[] | undefined>(
     undefined
@@ -40,12 +41,22 @@ export default function ChallengeIndexScreen() {
   }
 
   const cards = challenges.map((challenge) => (
-    <ChallengeCard challenge={challenge} />
+    <ChallengeCard key={challenge.id} challenge={challenge} />
   ));
 
   return (
     <Screen>
-      <ScrollView style={[BaseStyles.p4]}>{cards}</ScrollView>
+      <ScrollView style={[BaseStyles.p4]}>
+        <Button
+          mode="contained"
+          onPress={() => navigation.navigate("ChallengeActivityScreen")}
+          style={[BaseStyles.mb4]}
+        >
+          New Challenge
+        </Button>
+
+        {cards}
+      </ScrollView>
 
       <TabBar />
     </Screen>
@@ -59,7 +70,7 @@ function ChallengeCard({ challenge }: { challenge: Challenge }) {
     `${challenge.timeline} ${challenge.activityType} challenge`;
 
   return (
-    <Card key={challenge.id} style={[BaseStyles.mb4]}>
+    <Card style={[BaseStyles.mb4]}>
       <Card.Title title={name} subtitle="Card Subtitle" />
       <Card.Actions>
         <Button

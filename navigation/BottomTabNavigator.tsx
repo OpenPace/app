@@ -18,6 +18,7 @@ import {
   NotificationsParamList,
   ProfileParamList,
 } from "../types";
+import ChallengeTabNavigator from "./ChallengeTabNavigator";
 
 import { ChallengeProvider } from "../contexts/ChallengeContext";
 
@@ -86,7 +87,7 @@ function ChallengesStackScreen() {
       />
       <ChallengesStack.Screen
         name="ChallengeShowScreen"
-        component={ChallengeShowScreen}
+        component={ChallengeTabNavigator}
         options={{ title: "Challenge" }}
       />
     </ChallengesStack.Navigator>

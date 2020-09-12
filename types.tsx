@@ -36,3 +36,8 @@ export type LoggedOutParamList = {
   LogIn: undefined;
   SignUp: undefined;
 };
+
+export type ChallengeTabParamList = {
+  Leaderboard: { id: number };
+  Chat: { id: number };
+};

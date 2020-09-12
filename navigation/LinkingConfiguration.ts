@@ -9,7 +9,7 @@ export default {
           Home: {
             screens: {
               HomeScreen: 'home',
-              ChallengeShowScreen: 'challenges/:id',
+              ChallengeShowScreen: 'challenges/:id/old',
               ChallengeActivityScreen: 'challenges/activity',
               ChallengeTypeScreen: 'challenges/type',
               ChallengeTimelineScreen: 'challenges/timeline',
@@ -18,7 +18,13 @@ export default {
           Challenges: {
             screens: {
               ChallengesScreen: 'challenges',
-              ChallengeShowScreen: 'challenges/:id',
+              ChallengeShowScreen: {
+                path: 'challenges/:id',
+                screens: {
+                  Leaderboard: 'leaderboard',
+                  Chat: 'chat',
+                },
+              }
             },
           },
           Notifications: {

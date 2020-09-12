@@ -7,6 +7,7 @@ import ChallengeShowScreen from "../screens/ChallengeShowScreen";
 import { getChallenge } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useChallengeContext } from "../contexts/ChallengeContext";
+import LeaderboardScreen from "../screens/LeaderboardScreen";
 
 const Tab = createMaterialTopTabNavigator<ChallengeTabParamList>();
 
@@ -37,7 +38,7 @@ export default function ChallengeTabNavigator() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={ChallengeShowScreen} />
-      <Tab.Screen name="Leaderboard" component={ChallengeShowScreen} />
+      <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
       <Tab.Screen name="Chat" component={ChallengeShowScreen} />
     </Tab.Navigator>
   );

@@ -2,8 +2,8 @@ import React, { createContext, useContext, useState } from "react";
 import Challenge from "../api/models/Challenge";
 
 type ContextType = {
-  challenge: Challenge;
-  setChallenge: (value: Challenge) => void;
+  challenge: Challenge | undefined;
+  setChallenge: (value: Challenge | undefined) => void;
 };
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 export const ChallengeContext = createContext<ContextType>({} as any);
 
 function ChallengeProvider({ children }: Props) {
-  const [challenge, setChallenge] = useState({} as Challenge);
+  const [challenge, setChallenge] = useState<Challenge | undefined>(undefined);
 
   return (
     <ChallengeContext.Provider value={{ challenge, setChallenge }}>

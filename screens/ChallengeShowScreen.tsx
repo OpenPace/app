@@ -4,29 +4,12 @@ import BaseStyles from "../utils/BaseStyles";
 import { ActivityIndicator, Text, Title } from "react-native-paper";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { HomeParamList } from "../types";
-import Challenge from "../api/models/Challenge";
-import { getChallenge } from "../services/ChallengeService";
-import { useAuthContext } from "../contexts/AuthContext";
+import { useChallengeContext } from "../contexts/ChallengeContext";
 
 type ProfileScreenRouteProp = RouteProp<HomeParamList, "ChallengeShowScreen">;
 
 export default function ChallengeShowScreen() {
-  const route = useRoute<ProfileScreenRouteProp>();
-  const { auth } = useAuthContext();
-  const [challenge, setChallenge] = useState<Challenge | undefined>(undefined);
-
-  useEffect(() => {
-    async function loadChallenge() {
-      try {
-        const newChallenge = await getChallenge(route.params.id, {
-          authToken: auth.token,
-        });
-        setChallenge(newChallenge);
-      } catch (e) {}
-    }
-
-    loadChallenge();
-  }, []);
+  const { challenge } = useChallengeContext();
 
   if (!challenge) {
     return (

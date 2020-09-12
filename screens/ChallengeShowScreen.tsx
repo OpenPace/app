@@ -1,7 +1,8 @@
 import React from "react";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
-import { ActivityIndicator, Text, Title } from "react-native-paper";
+import { ActivityIndicator, Button, Text, Title } from "react-native-paper";
+import { Share } from "react-native";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 
 export default function ChallengeShowScreen() {
@@ -15,6 +16,25 @@ export default function ChallengeShowScreen() {
     );
   }
 
+  async function inviteFriends() {
+    try {
+      const result = await Share.share({
+        message: "Join the Challenge: URL",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  }
+
   return (
     <Screen style={[BaseStyles.p4]}>
       <Title>{challenge.name}</Title>
@@ -24,6 +44,10 @@ export default function ChallengeShowScreen() {
       <Text>Timeline: {challenge.timeline}</Text>
       <Text>Show the amount of time left</Text>
       <Text>Show 1st, 2nd, 3rd place</Text>
+
+      <Button mode="contained" onPress={inviteFriends} style={[BaseStyles.mb4]}>
+        Invite Friends
+      </Button>
     </Screen>
   );
 }

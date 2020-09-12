@@ -3,10 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import HomeScreen from "../screens/HomeScreen";
-import ChallengeIndexScreen from "../screens/ChallengeIndexScreen";
-import ChallengeActivityScreen from "../screens/ChallengeActivityScreen";
-import ChallengeTypeScreen from "../screens/ChallengeTypeScreen";
-import ChallengeTimelineScreen from "../screens/ChallengeTimelineScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -17,8 +13,6 @@ import {
   ProfileParamList,
 } from "../types";
 import ChallengesStackNavigator from "./ChallengesStackNavigator";
-
-import { ChallengeProvider } from "../contexts/ChallengeContext";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -45,15 +39,13 @@ const HomeStack = createStackNavigator<HomeParamList>();
 
 function HomeStackScreen() {
   return (
-    <ChallengeProvider>
-      <HomeStack.Navigator>
-        <HomeStack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ title: "Home" }}
-        />
-      </HomeStack.Navigator>
-    </ChallengeProvider>
+    <HomeStack.Navigator>
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{ title: "Home" }}
+      />
+    </HomeStack.Navigator>
   );
 }
 
@@ -75,9 +67,17 @@ const ProfileStack = createStackNavigator<ProfileParamList>();
 
 function ProfileStackScreen() {
   return (
-    <ProfileStack.Navigator headerMode="none">
-      <ProfileStack.Screen name="ProfileScreen" component={ProfileScreen} />
-      <ProfileStack.Screen name="SettingsScreen" component={SettingsScreen} />
+    <ProfileStack.Navigator>
+      <ProfileStack.Screen
+        name="ProfileScreen"
+        component={ProfileScreen}
+        options={{ title: "Profile" }}
+      />
+      <ProfileStack.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
+        options={{ title: "Settings" }}
+      />
     </ProfileStack.Navigator>
   );
 }

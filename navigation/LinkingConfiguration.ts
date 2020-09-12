@@ -19,7 +19,7 @@ export default {
               ChallengeTypeScreen: 'new/type',
               ChallengeTimelineScreen: 'new/timeline',
               ChallengeShowScreen: {
-                path: 'challenges/:id',
+                path: ':id',
                 screens: {
                   Home: '',
                   Leaderboard: 'leaderboard',

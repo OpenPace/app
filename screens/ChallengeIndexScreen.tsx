@@ -70,17 +70,13 @@ function ChallengeCard({ challenge }: { challenge: Challenge }) {
     `${challenge.timeline} ${challenge.activityType} challenge`;
 
   return (
-    <Card style={[BaseStyles.mb4]}>
-      <Card.Title title={name} subtitle="Card Subtitle" />
-      <Card.Actions>
-        <Button
-          onPress={() =>
-            navigation.navigate("ChallengeShowScreen", { id: challenge.id })
-          }
-        >
-          View
-        </Button>
-      </Card.Actions>
+    <Card
+      style={[BaseStyles.mb4]}
+      onPress={() =>
+        navigation.navigate("ChallengeShowScreen", { id: challenge.id })
+      }
+    >
+      <Card.Title title={name} />
     </Card>
   );
 }

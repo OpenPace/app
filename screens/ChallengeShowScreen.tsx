@@ -15,8 +15,6 @@ export default function ChallengeShowScreen() {
     );
   }
 
-  // Build out the two tabs
-  // Two tabs: leaderboard and chat?
   return (
     <Screen style={[BaseStyles.p4]}>
       <Title>{challenge.name}</Title>
@@ -24,6 +22,8 @@ export default function ChallengeShowScreen() {
       <Text>Activity Type: {challenge.activityType}</Text>
       <Text>Challenge Type: {challenge.challengeType}</Text>
       <Text>Timeline: {challenge.timeline}</Text>
+      <Text>Show the amount of time left</Text>
+      <Text>Show 1st, 2nd, 3rd place</Text>
     </Screen>
   );
 }

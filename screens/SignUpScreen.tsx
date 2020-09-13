@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 import { Button, Text, TextInput, Title } from "react-native-paper";
-import { TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-
 import BaseStyles from "../utils/BaseStyles";
 import Screen from "../components/Screen";
-import { View } from "../components/Themed";
 import {
   useAuthContext,
   loginSuccess,
   loginFail,
 } from "../contexts/AuthContext";
-
 import { signUp } from "../services/AuthService";
 
 export default function SignUpScreen() {
-  const { navigate } = useNavigation();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const { dispatch } = useAuthContext();
+  const { auth, dispatch } = useAuthContext();
 
   async function handleSignUp() {
     setLoading(true);
@@ -42,52 +36,47 @@ export default function SignUpScreen() {
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <View>
-        <Title style={[BaseStyles.mb4]}>Create an Account</Title>
-        <TextInput
-          style={[BaseStyles.mb2]}
-          label="First Name"
-          value={firstName}
-          onChangeText={setFirstName}
-          mode="outlined"
-        />
-        <TextInput
-          style={[BaseStyles.mb2]}
-          label="Last Name"
-          value={lastName}
-          onChangeText={setLastName}
-          mode="outlined"
-        />
-        <TextInput
-          style={[BaseStyles.mb2]}
-          label="Email"
-          value={email}
-          onChangeText={setEmail}
-          mode="outlined"
-        />
-        <TextInput
-          style={[BaseStyles.mb2]}
-          label="Password"
-          value={password}
-          onChangeText={setPassword}
-          mode="outlined"
-          secureTextEntry
-        />
+      <Title style={[BaseStyles.mb4]}>Create an Account</Title>
+      <TextInput
+        style={[BaseStyles.mb2]}
+        label="First Name"
+        value={firstName}
+        onChangeText={setFirstName}
+        mode="outlined"
+      />
+      <TextInput
+        style={[BaseStyles.mb2]}
+        label="Last Name"
+        value={lastName}
+        onChangeText={setLastName}
+        mode="outlined"
+      />
+      <TextInput
+        style={[BaseStyles.mb2]}
+        label="Email"
+        value={email}
+        onChangeText={setEmail}
+        mode="outlined"
+      />
+      <TextInput
+        style={[BaseStyles.mb2]}
+        label="Password"
+        value={password}
+        onChangeText={setPassword}
+        mode="outlined"
+        secureTextEntry
+      />
 
-        <Button
-          style={[BaseStyles.mb2]}
-          mode="contained"
-          loading={loading}
-          onPress={handleSignUp}
-        >
-          Create an Account
-        </Button>
+      <Button
+        style={[BaseStyles.mb2]}
+        mode="contained"
+        loading={loading}
+        onPress={handleSignUp}
+      >
+        Create an Account
+      </Button>
 
-        <Text>Already have an account?</Text>
-        <TouchableOpacity onPress={() => navigate("LogIn")}>
-          <Text>Sign in</Text>
-        </TouchableOpacity>
-      </View>
+      {auth.error && <Text>{auth.error}</Text>}
     </Screen>
   );
 }

@@ -38,6 +38,7 @@ export default {
               ProfileScreen: 'profile',
             },
           },
+          Welcome: 'welcome',
           SignUp: 'sign-up',
           LogIn: 'log-in',
         },

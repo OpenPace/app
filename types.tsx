@@ -32,8 +32,9 @@ export type ProfileParamList = {
 };
 
 export type LoggedOutParamList = {
-  LogIn: undefined;
+  Welcome: undefined;
   SignUp: undefined;
+  LogIn: undefined;
 };
 
 export type ChallengeTabParamList = {

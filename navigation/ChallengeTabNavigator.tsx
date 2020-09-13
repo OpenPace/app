@@ -33,7 +33,7 @@ export default function ChallengeTabNavigator() {
 
     setChallenge(undefined);
     loadChallenge();
-  }, []);
+  }, [route.params.id]);
 
   return (
     <Tab.Navigator>

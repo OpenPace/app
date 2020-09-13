@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
 import { ScrollView } from "react-native";
 import { ActivityIndicator, List } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
+import { getLeaderboard } from "../services/ChallengeService";
+import { useAuthContext } from "../contexts/AuthContext";
+import Score from "../api/models/Score";
 
 export default function LeaderboardScreen() {
   const { challenge } = useChallengeContext();
+  const { auth } = useAuthContext();
+  const [scores, setScores] = useState<Score[] | undefined>(undefined);
 
-  if (!challenge) {
+  useEffect(() => {
+    async function loadLeaderboard() {
+      if (!challenge || !challenge.id) {
+        return;
+      }
+
+      const result = await getLeaderboard(challenge.id, {
+        authToken: auth.token,
+      });
+      setScores(result);
+    }
+
+    loadLeaderboard();
+  }, [challenge]);
+
+  if (!challenge || !scores) {
     return (
       <Screen style={[BaseStyles.p4]}>
         <ActivityIndicator animating={true} />
@@ -16,24 +36,28 @@ export default function LeaderboardScreen() {
     );
   }
 
+  const items = scores.map((score) => (
+    <ListItem key={score.userId} score={score} />
+  ));
+
   return (
     <Screen>
-      <ScrollView>
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
-      </ScrollView>
+      <ScrollView>{items}</ScrollView>
     </Screen>
   );
 }
 
-function ListItem() {
+interface ListItemProps {
+  score: Score;
+}
+
+function ListItem({ score }: ListItemProps) {
+  const name = `${score.firstName} ${score.lastName}`;
+
   return (
     <List.Item
-      title="First Item"
-      description="Item description"
+      title={name}
+      description={score.updatedAt}
       right={(props) => <List.Icon {...props} icon="folder" />}
       left={(props) => <List.Icon {...props} icon="folder" />}
     />

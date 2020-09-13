@@ -1,4 +1,5 @@
 import Challenge from "../api/models/Challenge";
+import Score from "../api/models/Score";
 import { apiGet, apiPost, Options } from "../api/client";
 import { camelizeObject, underscoreObject } from "../utils";
 
@@ -24,6 +25,17 @@ export async function getChallenge(id: number, options: Options) {
   return parseChallenge(body);
 }
 
+export async function getLeaderboard(id: number, options: Options) {
+  const response = await apiGet(`/challenges/${id}/leaderboard`, options);
+
+  if (response.status !== 200) {
+    throw new Error("Error getting leaderboard");
+  }
+
+  const body = await response.json();
+  return body.scores.map(parseScore);
+}
+
 export async function createChallenge(challenge: Challenge, options: Options) {
   const response = await apiPost("/challenges", {
     ...options,
@@ -40,4 +52,8 @@ export async function createChallenge(challenge: Challenge, options: Options) {
 
 function parseChallenge(challenge: any) {
   return camelizeObject(challenge) as Challenge;
+}
+
+function parseScore(score: any) {
+  return camelizeObject(score) as Score;
 }

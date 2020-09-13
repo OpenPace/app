@@ -2,8 +2,15 @@ import React, { useEffect, useState } from "react";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
 import TabBar from "../components/TabBar";
+import ChallengeCard from "../components/ChallengeCard";
 import { ScrollView } from "react-native";
-import { ActivityIndicator, Button, Card } from "react-native-paper";
+import {
+  ActivityIndicator,
+  Avatar,
+  IconButton,
+  Button,
+  Card,
+} from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import Challenge from "../api/models/Challenge";
@@ -60,23 +67,5 @@ export default function ChallengeIndexScreen() {
 
       <TabBar />
     </Screen>
-  );
-}
-
-function ChallengeCard({ challenge }: { challenge: Challenge }) {
-  const navigation = useNavigation();
-  const name =
-    challenge.name ||
-    `${challenge.timeline} ${challenge.activityType} challenge`;
-
-  return (
-    <Card
-      style={[BaseStyles.mb4]}
-      onPress={() =>
-        navigation.navigate("ChallengeShowScreen", { id: challenge.id })
-      }
-    >
-      <Card.Title title={name} />
-    </Card>
   );
 }

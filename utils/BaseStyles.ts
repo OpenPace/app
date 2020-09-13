@@ -34,6 +34,28 @@ export default StyleSheet.create({
     padding: SPACER * 3,
   },
 
+  py1: {
+    paddingTop: SPACER * .25,
+    paddingBottom: SPACER * .25,
+  },
+  py2: {
+    paddingTop: SPACER * .5,
+    paddingBottom: SPACER * .5,
+  },
+  py3: {
+    paddingTop: SPACER,
+    paddingBottom: SPACER,
+  },
+  py4: {
+    paddingTop: SPACER * 1.5,
+    paddingBottom: SPACER * 1.5,
+  },
+  py5: {
+    paddingTop: SPACER * 3,
+    paddingBottom: SPACER * 3,
+  },
+
+
   pb1: {
     paddingBottom: SPACER * .25,
   },

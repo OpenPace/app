@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Screen from "../components/Screen";
+import LeaderboardItem from "../components/LeaderboardItem";
 import BaseStyles from "../utils/BaseStyles";
 import { ScrollView } from "react-native";
 import { ActivityIndicator, List } from "react-native-paper";
@@ -36,8 +37,8 @@ export default function LeaderboardScreen() {
     );
   }
 
-  const items = scores.map((score) => (
-    <ListItem key={score.userId} score={score} />
+  const items = scores.map((score, idx) => (
+    <LeaderboardItem key={score.userId} position={idx + 1} score={score} />
   ));
 
   return (

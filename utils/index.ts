@@ -1,3 +1,5 @@
+import User from '../api/models/User';
+
 type StringKeyable<T = any> = { [key: string]: T };
 
 export function camelToUnderscore(key: string) {
@@ -24,4 +26,8 @@ export function camelizeObject(data: StringKeyable) {
   }
 
   return newObject;
+}
+
+export function isStravaConnected(user: User) {
+  return user.credentials.some((x) => x.provider === 'strava');
 }

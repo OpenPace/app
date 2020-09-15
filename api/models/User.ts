@@ -1,3 +1,5 @@
+import Credential from "./Credential";
+
 export default interface User {
   id?: number;
   email: string;
@@ -6,4 +8,5 @@ export default interface User {
   avatar?: string;
   city?: string;
   state?: string;
+  credentials: Credential[];
 }

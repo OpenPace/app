@@ -2,8 +2,7 @@ import { Platform } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as SecureStore from "expo-secure-store";
 import { apiPost } from "../api/client";
-import User from "../api/models/User";
-import { camelizeObject } from "../utils";
+import { parseUser } from './UserService';
 
 type LoginParams = {
   email: string;
@@ -97,8 +96,4 @@ async function persistToken(token: string) {
   } else {
     await SecureStore.setItemAsync("authToken", token);
   }
-}
-
-function parseUser(user: any) {
-  return camelizeObject(user) as User;
 }

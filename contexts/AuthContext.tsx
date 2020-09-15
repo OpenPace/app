@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { loadAuth } from "../services/AuthService";
+import { getMe } from "../services/UserService";
 import User from "../api/models/User";
 
 // Types
@@ -75,11 +76,11 @@ export function authReducer(state: State, action: Action): State {
     case RESTORE_FAIL:
       return { isLoggedIn: false, loading: false };
     case LOGIN_SUCCESS:
-      return { isLoggedIn: true, token: action.token, user: action.user };
+      return { isLoggedIn: true, loading: false, token: action.token, user: action.user };
     case LOGIN_FAIL:
-      return { isLoggedIn: false, error: action.error };
+      return { isLoggedIn: false, loading: false, error: action.error };
     case LOGOUT:
-      return { isLoggedIn: false };
+      return { isLoggedIn: false, loading: false };
     default:
       return state;
   }
@@ -93,7 +94,8 @@ function AuthProvider({ children }: React.PropsWithChildren<any>) {
   useEffect(() => {
     async function loadUser() {
       try {
-        const { token, user } = await loadAuth();
+        const { token } = await loadAuth();
+        const user = await getMe({ authToken: token });
 
         dispatch(restoreSuccess(token, user));
       } catch (e) {

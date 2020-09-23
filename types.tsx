@@ -35,6 +35,7 @@ export type LoggedOutParamList = {
   Welcome: undefined;
   SignUp: undefined;
   LogIn: undefined;
+  Invitation: { id: number };
 };
 
 export type ChallengeTabParamList = {

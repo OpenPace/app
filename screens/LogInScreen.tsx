@@ -30,7 +30,6 @@ export default function LogInScreen() {
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <Title style={[BaseStyles.mb4]}>Welcome Back</Title>
       <TextInput
         style={[BaseStyles.mb2]}
         label="Email"
@@ -42,7 +41,7 @@ export default function LogInScreen() {
         keyboardType="email-address"
       />
       <TextInput
-        style={[BaseStyles.mb2]}
+        style={[BaseStyles.mb4]}
         label="Password"
         value={password}
         onChangeText={setPassword}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Text, TextInput, Title } from "react-native-paper";
+import { Button, Text, TextInput } from "react-native-paper";
 import BaseStyles from "../utils/BaseStyles";
 import Screen from "../components/Screen";
 import {
@@ -36,7 +36,6 @@ export default function SignUpScreen() {
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <Title style={[BaseStyles.mb4]}>Create an Account</Title>
       <TextInput
         style={[BaseStyles.mb2]}
         label="First Name"
@@ -59,7 +58,7 @@ export default function SignUpScreen() {
         mode="outlined"
       />
       <TextInput
-        style={[BaseStyles.mb2]}
+        style={[BaseStyles.mb4]}
         label="Password"
         value={password}
         onChangeText={setPassword}
@@ -67,12 +66,7 @@ export default function SignUpScreen() {
         secureTextEntry
       />
 
-      <Button
-        style={[BaseStyles.mb2]}
-        mode="contained"
-        loading={loading}
-        onPress={handleSignUp}
-      >
+      <Button mode="contained" loading={loading} onPress={handleSignUp}>
         Create an Account
       </Button>
 

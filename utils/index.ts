@@ -31,3 +31,7 @@ export function camelizeObject(data: StringKeyable) {
 export function isStravaConnected(user: User) {
   return user.credentials.some((x) => x.provider === 'strava');
 }
+
+export function cloudinaryImg(path: string) {
+  return `https://res.cloudinary.com/openpace/image/upload/v1600917437/${path}`;
+}

@@ -115,6 +115,10 @@ export default StyleSheet.create({
   textCenter: {
     textAlign: 'center',
   },
+  alignCenter: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
 
   // Border Radius
   rounded: {

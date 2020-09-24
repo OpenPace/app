@@ -4,7 +4,7 @@ import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
 import { Button } from "react-native-paper";
 import * as WebBrowser from "expo-web-browser";
 
-import { useAuthContext } from "../contexts/AuthContext";
+import { restoreSuccess, useAuthContext } from "../contexts/AuthContext";
 import { exchangeCode } from "../services/StravaService";
 
 WebBrowser.maybeCompleteAuthSession();
@@ -17,9 +17,13 @@ const discovery = {
 };
 const { stravaClientId } = getEnvVars();
 
-export default function StravaButton() {
+interface Props {
+  onSuccess?: () => void;
+}
+
+export default function StravaButton(props: Props) {
   const [loading, setLoading] = useState(false);
-  const { auth } = useAuthContext();
+  const { auth, dispatch } = useAuthContext();
 
   const [request, response, promptAsync] = useAuthRequest(
     {
@@ -41,12 +45,29 @@ export default function StravaButton() {
   }
 
   useEffect(() => {
-    if (response?.type === "success") {
-      const { code } = response.params;
-      // Make API call here
-      exchangeCode(code, { authToken: auth.token });
+    async function getCredential(code: string) {
+      try {
+        if (!user || !token) {
+          return;
+        }
+
+        // Make API call here
+        const credential = await exchangeCode(code, { authToken: token });
+        user.credentials.push(credential);
+        dispatch(restoreSuccess(token, user));
+        setLoading(false);
+        props.onSuccess && props.onSuccess();
+      } catch (error) {
+        setLoading(false);
+      }
     }
-    setLoading(false);
+
+    const { user, token } = auth;
+
+    if (response?.type === "success" && user && token) {
+      const { code } = response.params;
+      getCredential(code);
+    }
   }, [response]);
 
   return (

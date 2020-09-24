@@ -11,6 +11,7 @@ export default {
               HomeScreen: 'home',
             },
           },
+          StravaPrompt: 'strava-connect',
           Challenges: {
             path: 'challenges',
             screens: {

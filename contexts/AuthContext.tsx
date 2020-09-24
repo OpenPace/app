@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { loadAuth } from "../services/AuthService";
 import { getMe } from "../services/UserService";
+import Credential from "../api/models/Credential";
 import User from "../api/models/User";
 
 // Types
@@ -17,6 +18,7 @@ type Action = {
   user?: User;
   token?: string;
   error?: string;
+  credential?: Credential;
 };
 
 type ContextType = {
@@ -41,6 +43,7 @@ export const RESTORE_FAIL = "RESTORE_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
+export const CREDENTIAL_ADDED = "CREDENTIAL_ADDED";
 
 // Action creators
 export function restoreFail(): Action {
@@ -63,6 +66,10 @@ export function logout(): Action {
   return { type: LOGOUT };
 }
 
+export function credentialAdded(credential: Credential): Action {
+  return { type: CREDENTIAL_ADDED, credential };
+}
+
 // Reducer
 export function authReducer(state: State, action: Action): State {
   switch (action.type) {
@@ -76,7 +83,12 @@ export function authReducer(state: State, action: Action): State {
     case RESTORE_FAIL:
       return { isLoggedIn: false, loading: false };
     case LOGIN_SUCCESS:
-      return { isLoggedIn: true, loading: false, token: action.token, user: action.user };
+      return {
+        isLoggedIn: true,
+        loading: false,
+        token: action.token,
+        user: action.user,
+      };
     case LOGIN_FAIL:
       return { isLoggedIn: false, loading: false, error: action.error };
     case LOGOUT:

@@ -1,3 +1,4 @@
+import Credential from "../api/models/Credential";
 import { apiPost, Options } from "../api/client";
 
 export async function exchangeCode(code: string, options: Options) {
@@ -9,5 +10,8 @@ export async function exchangeCode(code: string, options: Options) {
   });
 
   const body = await response.json();
-  return {};
+  return {
+    provider: body.provider,
+    uid: body.uid,
+  } as Credential;
 }

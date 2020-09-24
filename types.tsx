@@ -8,6 +8,7 @@ export type BottomTabParamList = {
   Challenges: undefined;
   Notifications: undefined;
   Profile: undefined;
+  StravaPrompt: undefined;
 };
 
 export type HomeParamList = {

@@ -6,6 +6,7 @@ import HomeScreen from "../screens/HomeScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import StravaPromptScreen from "../screens/StravaPromptScreen";
 import {
   BottomTabParamList,
   HomeParamList,
@@ -19,6 +20,7 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator initialRouteName="Home" tabBar={() => null}>
+      <BottomTab.Screen name="StravaPrompt" component={StravaPromptScreen} />
       <BottomTab.Screen name="Home" component={HomeStackScreen} />
       <BottomTab.Screen
         name="Challenges"

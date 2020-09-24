@@ -56,6 +56,9 @@ export default function SignUpScreen() {
         value={email}
         onChangeText={setEmail}
         mode="outlined"
+        autoCompleteType="email"
+        autoCapitalize="none"
+        keyboardType="email-address"
       />
       <TextInput
         style={[BaseStyles.mb4]}

@@ -13,6 +13,7 @@ export type BottomTabParamList = {
 
 export type HomeParamList = {
   HomeScreen: undefined;
+  ChallengeNewScreen: undefined;
 };
 
 export type ChallengesParamList = {

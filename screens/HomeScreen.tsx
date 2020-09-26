@@ -63,11 +63,7 @@ export default function HomeScreen() {
       />
 
       <View style={[BaseStyles.p4]}>
-        <Subheading
-          style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
-        >
-          Current Challenges
-        </Subheading>
+        <SectionHeader text="Current Challenges" />
 
         <ScrollView horizontal style={[BaseStyles.py2]}>
           {cards}
@@ -75,25 +71,61 @@ export default function HomeScreen() {
       </View>
 
       <View style={[BaseStyles.p4]}>
-        <Subheading
-          style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
+        <SectionHeader text="Go Further" />
+        <Button
+          onPress={() => navigation.navigate("ChallengeNewScreen", { test: 1 })}
         >
-          Upcoming Challenges
-        </Subheading>
-        <Button>Create a 5k Challenge</Button>
+          Create a 5k Challenge
+        </Button>
+      </View>
+
+      <View style={[BaseStyles.p4]}>
+        <SectionHeader text="Fastest Segment" />
+        <Button
+          onPress={() => navigation.navigate("ChallengeNewScreen", { test: 1 })}
+        >
+          Create a 5k Challenge
+        </Button>
       </View>
 
       <View style={[BaseStyles.p4]}>
         <Subheading
           style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
         >
-          By Distance
+          Go longer
         </Subheading>
-        <Button>Create a 5k Challenge</Button>
+        <Button
+          onPress={() => navigation.navigate("ChallengeNewScreen", { test: 1 })}
+        >
+          Create a 5k Challenge
+        </Button>
+      </View>
+
+      <View style={[BaseStyles.p4]}>
+        <Subheading
+          style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
+        >
+          Climb Higher
+        </Subheading>
+        <Button
+          onPress={() => navigation.navigate("ChallengeNewScreen", { test: 1 })}
+        >
+          Create a 5k Challenge
+        </Button>
       </View>
 
       <TabBar />
     </Screen>
+  );
+}
+
+function SectionHeader({ text }: { text: string }) {
+  return (
+    <Subheading
+      style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
+    >
+      {text}
+    </Subheading>
   );
 }
 

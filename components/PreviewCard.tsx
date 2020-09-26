@@ -10,10 +10,10 @@ interface Props {
 }
 
 const images = {
-  distance: [""],
-  time: [""],
+  distance: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
+  time: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
   altitude: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
-  segment: [""],
+  segment: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
 };
 
 function imageSrc(challenge: Challenge): string {

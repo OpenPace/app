@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Card, Headline, Subheading } from "react-native-paper";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -14,6 +14,8 @@ import { BottomTabParamList } from "../types";
 import { SafeAreaView } from "react-native-safe-area-context";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
+import Challenge from "../api/models/Challenge";
+import { getChallengesByUser } from "../services/ChallengeService";
 
 type NavigationProp = StackNavigationProp<BottomTabParamList>;
 
@@ -24,6 +26,8 @@ export default function HomeScreen() {
   const navigation = useNavigation<NavigationProp>();
   const { user } = auth;
 
+  const [challenges, setChallenges] = useState<Challenge[]>([]);
+
   // Redirect to strava prompt
   useEffect(() => {
     if (user && !isStravaConnected(user)) {
@@ -31,9 +35,24 @@ export default function HomeScreen() {
     }
   }, [user]);
 
+  useEffect(() => {
+    async function loadChallenge() {
+      const allChallenges = await getChallengesByUser({
+        authToken: auth.token,
+      });
+      setChallenges(allChallenges);
+    }
+
+    loadChallenge();
+  }, []);
+
   if (!user) {
     return null;
   }
+
+  const cards = challenges.map((challenge) => (
+    <PreviewCard key={challenge.id} challenge={challenge} />
+  ));
 
   return (
     <Screen>
@@ -51,9 +70,7 @@ export default function HomeScreen() {
         </Subheading>
 
         <ScrollView horizontal style={[BaseStyles.py2]}>
-          <PreviewCard />
-          <PreviewCard />
-          <PreviewCard />
+          {cards}
         </ScrollView>
       </View>
 

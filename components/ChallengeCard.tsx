@@ -10,9 +10,6 @@ interface Props {
 
 export default function ChallengeCard({ challenge }: Props) {
   const navigation = useNavigation();
-  const name =
-    challenge.name ||
-    `${challenge.timeline} ${challenge.activityType} challenge`;
 
   return (
     <Card
@@ -22,7 +19,7 @@ export default function ChallengeCard({ challenge }: Props) {
       }
     >
       <Card.Title
-        title={challenge.name || name}
+        title={challenge.name}
         subtitle="5 Days Remaining"
         left={(props) => <LeftIcon {...props} challenge={challenge} />}
       />

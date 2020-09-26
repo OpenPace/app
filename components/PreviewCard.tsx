@@ -2,8 +2,13 @@ import React from "react";
 import BaseStyles from "../utils/BaseStyles";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Title, Surface } from "react-native-paper";
+import Challenge from "../api/models/Challenge";
 
-export default function PreviewCard() {
+interface Props {
+  challenge: Challenge;
+}
+
+export default function PreviewCard({ challenge }: Props) {
   return (
     <TouchableOpacity>
       <Surface style={[BaseStyles.rounded, styles.card]}>
@@ -15,7 +20,7 @@ export default function PreviewCard() {
           style={styles.img}
         />
         <View style={[BaseStyles.py2, styles.details]}>
-          <Title>Title Something Long</Title>
+          <Title>{challenge.name}</Title>
         </View>
       </Surface>
     </TouchableOpacity>

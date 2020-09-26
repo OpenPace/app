@@ -3,9 +3,21 @@ import BaseStyles from "../utils/BaseStyles";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Title, Surface } from "react-native-paper";
 import Challenge from "../api/models/Challenge";
+import { cloudinaryImg } from "../utils";
 
 interface Props {
   challenge: Challenge;
+}
+
+const images = {
+  distance: [""],
+  time: [""],
+  altitude: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
+  segment: [""],
+};
+
+function imageSrc(challenge: Challenge): string {
+  return images[challenge.challengeType][0];
 }
 
 export default function PreviewCard({ challenge }: Props) {
@@ -14,8 +26,7 @@ export default function PreviewCard({ challenge }: Props) {
       <Surface style={[BaseStyles.rounded, styles.card]}>
         <Image
           source={{
-            uri:
-              "https://images.unsplash.com/photo-1480497490787-505ec076689f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1349&q=80",
+            uri: imageSrc(challenge),
           }}
           style={styles.img}
         />

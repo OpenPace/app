@@ -41,7 +41,7 @@ const HomeStack = createStackNavigator<HomeParamList>();
 
 function HomeStackScreen() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator headerMode="none">
       <HomeStack.Screen
         name="HomeScreen"
         component={HomeScreen}

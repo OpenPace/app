@@ -30,6 +30,7 @@ export default function Header(props: Props) {
         { backgroundColor: colors["foreground"] },
         BaseStyles.row,
         BaseStyles.p4,
+        BaseStyles.pt5,
       ]}
     >
       <View style={{ flexGrow: 1 }}>

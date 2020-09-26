@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { Image, StyleSheet, View } from "react-native";
-import { Button, Headline, Subheading } from "react-native-paper";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Button, Card, Headline, Subheading } from "react-native-paper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import Screen from "../components/Screen";
 import TabBar from "../components/TabBar";
 import Header from "../components/Header";
+import PreviewCard from "../components/PreviewCard";
 import BaseStyles from "../utils/BaseStyles";
 import { useAuthContext } from "../contexts/AuthContext";
 import { isStravaConnected } from "../utils";
@@ -42,8 +43,37 @@ export default function HomeScreen() {
         subheading="Create a challenge to get started"
       />
 
-      <Subheading>Distance Challenges</Subheading>
-      <Button>Create a 5k Challenge</Button>
+      <View style={[BaseStyles.p4]}>
+        <Subheading
+          style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
+        >
+          Current Challenges
+        </Subheading>
+
+        <ScrollView horizontal style={[BaseStyles.py2]}>
+          <PreviewCard />
+          <PreviewCard />
+          <PreviewCard />
+        </ScrollView>
+      </View>
+
+      <View style={[BaseStyles.p4]}>
+        <Subheading
+          style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
+        >
+          Upcoming Challenges
+        </Subheading>
+        <Button>Create a 5k Challenge</Button>
+      </View>
+
+      <View style={[BaseStyles.p4]}>
+        <Subheading
+          style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
+        >
+          By Distance
+        </Subheading>
+        <Button>Create a 5k Challenge</Button>
+      </View>
 
       <TabBar />
     </Screen>
@@ -51,15 +81,7 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: "red",
-  },
-  profileImg: {
-    height: 50,
-    width: 50,
-    borderRadius: 50 / 2,
-  },
-  headline: {
-    fontWeight: "bold",
+  subheading: {
+    textTransform: "uppercase",
   },
 });

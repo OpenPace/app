@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 const SPACER = 16;
 const BORDER_RADIUS = 8;
@@ -6,23 +6,23 @@ const BORDER_RADIUS = 8;
 export default StyleSheet.create({
   row: {
     flex: 0,
-    flexBasis: 'auto',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexBasis: "auto",
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   col: {
     flex: 1,
     flexBasis: 0,
     flexGrow: 1,
-    maxWidth: '100%',
+    maxWidth: "100%",
   },
 
   // Padding
   p1: {
-    padding: SPACER * .25,
+    padding: SPACER * 0.25,
   },
   p2: {
-    padding: SPACER * .5,
+    padding: SPACER * 0.5,
   },
   p3: {
     padding: SPACER,
@@ -35,12 +35,12 @@ export default StyleSheet.create({
   },
 
   py1: {
-    paddingTop: SPACER * .25,
-    paddingBottom: SPACER * .25,
+    paddingTop: SPACER * 0.25,
+    paddingBottom: SPACER * 0.25,
   },
   py2: {
-    paddingTop: SPACER * .5,
-    paddingBottom: SPACER * .5,
+    paddingTop: SPACER * 0.5,
+    paddingBottom: SPACER * 0.5,
   },
   py3: {
     paddingTop: SPACER,
@@ -55,12 +55,27 @@ export default StyleSheet.create({
     paddingBottom: SPACER * 3,
   },
 
+  pt1: {
+    paddingTop: SPACER * 0.25,
+  },
+  pt2: {
+    paddingTop: SPACER * 0.5,
+  },
+  pt3: {
+    paddingTop: SPACER,
+  },
+  pt4: {
+    paddingTop: SPACER * 1.5,
+  },
+  pt5: {
+    paddingTop: SPACER * 3,
+  },
 
   pb1: {
-    paddingBottom: SPACER * .25,
+    paddingBottom: SPACER * 0.25,
   },
   pb2: {
-    paddingBottom: SPACER * .5,
+    paddingBottom: SPACER * 0.5,
   },
   pb3: {
     paddingBottom: SPACER,
@@ -74,10 +89,10 @@ export default StyleSheet.create({
 
   // Margin
   m1: {
-    margin: SPACER * .25,
+    margin: SPACER * 0.25,
   },
   m2: {
-    margin: SPACER * .5,
+    margin: SPACER * 0.5,
   },
   m3: {
     margin: SPACER,
@@ -89,10 +104,10 @@ export default StyleSheet.create({
     margin: SPACER * 3,
   },
   mb1: {
-    marginBottom: SPACER * .25,
+    marginBottom: SPACER * 0.25,
   },
   mb2: {
-    marginBottom: SPACER * .5,
+    marginBottom: SPACER * 0.5,
   },
   mb3: {
     marginBottom: SPACER,
@@ -104,16 +119,18 @@ export default StyleSheet.create({
     marginBottom: SPACER * 3,
   },
 
-
   // Text
   text: {
     fontSize: SPACER,
   },
   textMuted: {
-    color: 'gray',
+    color: "gray",
   },
   textCenter: {
-    textAlign: 'center',
+    textAlign: "center",
+  },
+  textBold: {
+    fontWeight: "bold",
   },
   alignCenter: {
     alignItems: "center",
@@ -127,20 +144,20 @@ export default StyleSheet.create({
 
   // Card
   card: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: BORDER_RADIUS,
     shadowColor: "#000",
     shadowOffset: {
-	    width: 0,
-	    height: 2,
+      width: 0,
+      height: 2,
     },
-    shadowOpacity: 0.10,
+    shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
   },
 
   // Background
   bgWhite: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
 });

@@ -6,6 +6,7 @@ import * as WebBrowser from "expo-web-browser";
 
 import { restoreSuccess, useAuthContext } from "../contexts/AuthContext";
 import { exchangeCode } from "../services/StravaService";
+import { getMe } from "../services/UserService";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -52,9 +53,9 @@ export default function StravaButton(props: Props) {
         }
 
         // Make API call here
-        const credential = await exchangeCode(code, { authToken: token });
-        user.credentials.push(credential);
-        dispatch(restoreSuccess(token, user));
+        await exchangeCode(code, { authToken: token });
+        const refreshUser = await getMe({ authToken: token });
+        dispatch(restoreSuccess(token, refreshUser));
         setLoading(false);
         props.onSuccess && props.onSuccess();
       } catch (error) {

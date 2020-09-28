@@ -1,9 +1,13 @@
+export type ActivityType = "run" | "ride" | "swim";
+export type ChallengeType = "distance" | "time" | "altitude" | "segment";
+export type ChallengeTimeline = "day" | "week" | "weekend" | "month" | "custom";
+
 export default interface Challenge {
   id: number;
   name: string;
-  activityType: "run" | "ride" | "swim";
-  challengeType: "distance" | "time" | "altitude" | "segment";
-  timeline: "day" | "week" | "weekend" | "month" | "custom";
+  activityType: ActivityType;
+  challengeType: ChallengeType;
+  timeline: ChallengeTimeline;
   startAt: Date;
   endAt: Date;
 }

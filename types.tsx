@@ -1,3 +1,9 @@
+import {
+  ActivityType,
+  ChallengeType,
+  ChallengeTimeline,
+} from "./api/models/Challenge";
+
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
@@ -13,15 +19,27 @@ export type BottomTabParamList = {
 
 export type HomeParamList = {
   HomeScreen: undefined;
-  ChallengeNewScreen: undefined;
 };
+
+// Activity type: bike, run, swim
+// Challenge type: total distance, total time, altitude, fastest segment
+// Segment select: if segment, show a list of segments
+// Timeline: how long do you want the challenge to last?
+// When to start? This week, next week, tomorrow, today?
+interface challengeParams {
+  activityType?: ActivityType;
+  challengeType?: ChallengeType;
+  timeline?: ChallengeTimeline;
+}
 
 export type ChallengesParamList = {
   ChallengesScreen: undefined;
   ChallengeShowScreen: { id: number };
-  ChallengeActivityScreen: undefined;
-  ChallengeTypeScreen: undefined;
-  ChallengeTimelineScreen: undefined;
+  ChallengeActivityScreen: challengeParams;
+  ChallengeTypeScreen: challengeParams;
+  ChallengeTimelineScreen: challengeParams;
+  ChallengeStartScreen: challengeParams;
+  ChallengeSegmentScreen: challengeParams;
 };
 
 export type NotificationsParamList = {

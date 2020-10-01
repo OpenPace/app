@@ -54,6 +54,13 @@ export default function HomeScreen() {
     <PreviewCard key={challenge.id} challenge={challenge} />
   ));
 
+  // Steps:
+  // Activity type: bike, run, swim
+  // Challenge type: total distance, total time, altitude, fastest segment
+  // Segment select: if segment, show a list of segments
+  // Timeline: how long do you want the challenge to last?
+  // When to start? This week, next week, tomorrow, today?
+
   return (
     <Screen>
       <Header
@@ -72,11 +79,7 @@ export default function HomeScreen() {
 
       <View style={[BaseStyles.p4]}>
         <SectionHeader text="Go Further" />
-        <Button
-          onPress={() => navigation.navigate("ChallengeNewScreen", { test: 1 })}
-        >
-          Create a 5k Challenge
-        </Button>
+        <Button>Create a 5k Challenge</Button>
       </View>
 
       <View style={[BaseStyles.p4]}>

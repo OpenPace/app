@@ -35,3 +35,7 @@ export function isStravaConnected(user: User) {
 export function cloudinaryImg(path: string) {
   return `https://res.cloudinary.com/openpace/image/upload/v1600917437/${path}`;
 }
+
+export function capitalize(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

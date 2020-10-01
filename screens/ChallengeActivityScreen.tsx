@@ -1,38 +1,35 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
-import { useChallengeContext } from "../contexts/ChallengeContext";
-import { Button } from "react-native-paper";
-import Challenge from "../api/models/Challenge";
+import { capitalize } from "../utils";
+import { Avatar, Card } from "react-native-paper";
+import { useNewChallengeContext } from "../contexts/NewChallengeContext";
+import { StyleSheet } from "react-native";
 
 export default function ChallengeActivityScreen() {
   const navigation = useNavigation();
-  const { challenge, setChallenge } = useChallengeContext();
-
-  useEffect(() => setChallenge({} as Challenge), []);
+  const { setActivityType } = useNewChallengeContext();
 
   function selectOption(option: "run" | "ride" | "swim") {
-    if (!challenge) {
-      return;
-    }
-
-    challenge.activityType = option;
-    setChallenge(challenge);
+    setActivityType(option);
     navigation.navigate("ChallengeTypeScreen");
   }
 
-  return (
-    <Screen style={[BaseStyles.p4]}>
-      <Button mode="outlined" onPress={() => selectOption("run")}>
-        Run
-      </Button>
-      <Button mode="outlined" onPress={() => selectOption("ride")}>
-        Ride
-      </Button>
-      <Button mode="outlined" onPress={() => selectOption("swim")}>
-        Swim
-      </Button>
-    </Screen>
-  );
+  const options = ["run", "bike", "swim"].map((opt) => {
+    return (
+      <Card
+        style={[BaseStyles.mb4]}
+        key={opt}
+        onPress={() => selectOption(opt)}
+      >
+        <Card.Title
+          title={capitalize(opt)}
+          left={(props) => <Avatar.Icon {...props} icon={opt} />}
+        />
+      </Card>
+    );
+  });
+
+  return <Screen style={[BaseStyles.p4]}>{options}</Screen>;
 }

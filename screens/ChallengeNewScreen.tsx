@@ -1,41 +1,20 @@
-import React, { useState } from "react";
-import { useRoute } from "@react-navigation/native";
-import Screen from "../components/Screen";
-import BaseStyles from "../utils/BaseStyles";
-import { Button } from "react-native-paper";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-interface Params {
-  name?: string;
-  activityType?: "run" | "ride" | "swim";
-  challengeType?: "distance" | "time" | "altitude" | "segment";
-  timeline?: "day" | "week" | "weekend" | "month" | "custom";
-  startAt?: Date;
-  endAt?: Date;
-}
+// Steps:
+// Activity type: bike, run, swim
+// Challenge type: total distance, total time, altitude, fastest segment
+// Segment select: if segment, show a list of segments
+// Timeline: how long do you want the challenge to last?
+// When to start? This week, next week, tomorrow, today?
 
 export default function ChallengeNewScreen() {
   const route = useRoute();
   console.log(route.params);
-  const [params, setParams] = useState<Params>({} as Params);
 
-  function selectChallengeType(
-    challengeType: "distance" | "time" | "altitude" | "segment"
-  ) {
-    params.challengeType = challengeType;
-    setParams(params);
-  }
+  const navigation = useNavigation();
+  navigation.navigate("Challenges", {
+    screen: "ChallengeActivityScreen",
+  });
 
-  return (
-    <Screen style={[BaseStyles.p4]}>
-      <Button mode="outlined" onPress={() => selectChallengeType("distance")}>
-        Total Distance
-      </Button>
-      <Button mode="outlined" onPress={() => selectChallengeType("time")}>
-        Time
-      </Button>
-      <Button mode="outlined" onPress={() => selectChallengeType("altitude")}>
-        Climbing
-      </Button>
-    </Screen>
-  );
+  return null;
 }

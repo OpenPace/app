@@ -3,19 +3,12 @@ import {
   ActivityType,
   ChallengeType,
   ChallengeTimeline,
+  ChallengeParams
 } from "../api/models/Challenge";
 
-interface Params {
-  name?: string;
-  activityType?: ActivityType;
-  challengeType?: ChallengeType;
-  timeline?: ChallengeTimeline;
-  startAt?: Date;
-  endAt?: Date;
-}
-
 type ContextType = {
-  params: Params;
+  params: ChallengeParams;
+  reset: () => void;
   setName: (name: string) => void;
   setActivityType: (activityType: ActivityType) => void;
   setChallengeType: (challengeType: ChallengeType) => void;
@@ -29,10 +22,11 @@ type Props = {
 export const NewChallengeContext = createContext<ContextType>({} as any);
 
 function NewChallengeProvider({ children }: Props) {
-  const [params, setParams] = useState<Params>({} as Params);
+  const [params, setParams] = useState<ChallengeParams>({} as ChallengeParams);
 
   const value: ContextType = {
     params,
+    reset: () => setParams({} as ChallengeParams),
     setName: (name) => setParams({ ...params, name }),
     setActivityType: (activityType) => setParams({ ...params, activityType }),
     setChallengeType: (challengeType) =>

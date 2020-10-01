@@ -1,4 +1,4 @@
-import Challenge from "../api/models/Challenge";
+import Challenge, { ChallengeParams } from "../api/models/Challenge";
 import Score from "../api/models/Score";
 import { apiGet, apiPost, Options } from "../api/client";
 import { camelizeObject, underscoreObject } from "../utils";
@@ -36,11 +36,11 @@ export async function getLeaderboard(id: number, options: Options) {
   return body.scores.map(parseScore);
 }
 
-export async function createChallenge(challenge: Challenge, options: Options) {
+export async function createChallenge(params: ChallengeParams, options: Options) {
   const response = await apiPost("/challenges", {
     ...options,
     data: {
-      challenge: underscoreObject(challenge),
+      challenge: underscoreObject(params),
     },
   });
   if (response.status !== 201) {

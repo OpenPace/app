@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
 
 import HomeScreen from "../screens/HomeScreen";
-import ChallengeNewScreen from "../screens/ChallengeNewScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -43,14 +42,7 @@ const HomeStack = createStackNavigator<HomeParamList>();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator headerMode="none">
-      <HomeStack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-      />
-      <HomeStack.Screen
-        name="ChallengeNewScreen"
-        component={ChallengeNewScreen}
-      />
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
     </HomeStack.Navigator>
   );
 }

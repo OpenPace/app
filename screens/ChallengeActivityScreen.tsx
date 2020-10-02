@@ -19,7 +19,7 @@ export default function ChallengeActivityScreen() {
   const options = ["run", "bike", "swim"].map((opt) => {
     return (
       <Card
-        style={[BaseStyles.mb4]}
+        style={[BaseStyles.mb3]}
         key={opt}
         onPress={() => selectOption(opt)}
       >

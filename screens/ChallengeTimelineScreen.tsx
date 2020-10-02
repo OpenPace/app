@@ -2,42 +2,48 @@ import * as React from "react";
 import { useNavigation } from "@react-navigation/native";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
-import { Button } from "react-native-paper";
-import { useAuthContext } from "../contexts/AuthContext";
+import { Avatar, Card } from "react-native-paper";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
-import { createChallenge } from "../services/ChallengeService";
+import { ChallengeTimeline } from "../api/models/Challenge";
 
 export default function ChallengeTimelineScreen() {
   const navigation = useNavigation();
-  const { params, setTimeline } = useNewChallengeContext();
-  const { auth } = useAuthContext();
+  const { setTimeline } = useNewChallengeContext();
 
-  async function selectOption(option: "day" | "week" | "weekend" | "month") {
+  function selectOption(option: ChallengeTimeline) {
     setTimeline(option);
-    params.timeline = option;
-
-    try {
-      const newChallenge = await createChallenge(params, {
-        authToken: auth.token,
-      });
-      navigation.navigate("ChallengeShowScreen", { id: newChallenge.id });
-    } catch (e) {}
+    navigation.navigate("ChallengeDateScreen");
   }
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <Button mode="outlined" onPress={() => selectOption("day")}>
-        Day
-      </Button>
-      <Button mode="outlined" onPress={() => selectOption("week")}>
-        Week
-      </Button>
-      <Button mode="outlined" onPress={() => selectOption("weekend")}>
-        Weekend
-      </Button>
-      <Button mode="outlined" onPress={() => selectOption("month")}>
-        Month
-      </Button>
+      <Card style={[BaseStyles.mb3]} onPress={() => selectOption("day")}>
+        <Card.Title
+          title="One Day"
+          left={(props) => <Avatar.Text {...props} label="1" />}
+        />
+      </Card>
+
+      <Card style={[BaseStyles.mb3]} onPress={() => selectOption("week")}>
+        <Card.Title
+          title="Week"
+          left={(props) => <Avatar.Text {...props} label="2" />}
+        />
+      </Card>
+
+      <Card style={[BaseStyles.mb3]} onPress={() => selectOption("weekend")}>
+        <Card.Title
+          title="Weekend"
+          left={(props) => <Avatar.Text {...props} label="3" />}
+        />
+      </Card>
+
+      <Card style={[BaseStyles.mb3]} onPress={() => selectOption("custom")}>
+        <Card.Title
+          title="Custom Dates"
+          left={(props) => <Avatar.Text {...props} label="4" />}
+        />
+      </Card>
     </Screen>
   );
 }

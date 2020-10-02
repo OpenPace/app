@@ -10,6 +10,7 @@ import ChallengeIndexScreen from "../screens/ChallengeIndexScreen";
 import ChallengeActivityScreen from "../screens/ChallengeActivityScreen";
 import ChallengeTypeScreen from "../screens/ChallengeTypeScreen";
 import ChallengeTimelineScreen from "../screens/ChallengeTimelineScreen";
+import ChallengeDateScreen from "../screens/ChallengeDateScreen";
 import { ChallengesParamList } from "../types";
 import ChallengeTabNavigator from "./ChallengeTabNavigator";
 import { ChallengeProvider } from "../contexts/ChallengeContext";
@@ -37,7 +38,7 @@ export default function ChallengesStackNavigator() {
           <ChallengesStack.Screen
             name="ChallengeActivityScreen"
             component={ChallengeActivityScreen}
-            options={{ title: "Choose Activity Type" }}
+            options={{ title: "Choose Activity" }}
           />
           <ChallengesStack.Screen
             name="ChallengeTypeScreen"
@@ -48,6 +49,11 @@ export default function ChallengesStackNavigator() {
             name="ChallengeTimelineScreen"
             component={ChallengeTimelineScreen}
             options={{ title: "Choose Your Timeline" }}
+          />
+          <ChallengesStack.Screen
+            name="ChallengeDateScreen"
+            component={ChallengeDateScreen}
+            options={{ title: "Choose Your Dates" }}
           />
         </ChallengesStack.Navigator>
       </NewChallengeProvider>

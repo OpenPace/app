@@ -1,6 +1,8 @@
+import { DateTime } from "luxon";
+
 export type ActivityType = "run" | "bike" | "swim";
 export type ChallengeType = "distance" | "time" | "altitude" | "segment";
-export type ChallengeTimeline = "day" | "week" | "weekend" | "month" | "custom";
+export type ChallengeTimeline = "day" | "week" | "weekend" | "custom";
 
 export default interface Challenge {
   id: number;
@@ -8,8 +10,8 @@ export default interface Challenge {
   activityType: ActivityType;
   challengeType: ChallengeType;
   timeline: ChallengeTimeline;
-  startAt: Date;
-  endAt: Date;
+  startAt: DateTime;
+  endAt: DateTime;
 }
 
 export interface ChallengeParams {
@@ -17,6 +19,6 @@ export interface ChallengeParams {
   activityType?: ActivityType;
   challengeType?: ChallengeType;
   timeline?: ChallengeTimeline;
-  startAt?: Date;
-  endAt?: Date;
+  startAt?: DateTime;
+  endAt?: DateTime;
 }

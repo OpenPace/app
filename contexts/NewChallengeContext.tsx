@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState } from "react";
+import { DateTime } from "luxon";
 import {
   ActivityType,
   ChallengeType,
   ChallengeTimeline,
-  ChallengeParams
+  ChallengeParams,
 } from "../api/models/Challenge";
 
 type ContextType = {
@@ -13,6 +14,7 @@ type ContextType = {
   setActivityType: (activityType: ActivityType) => void;
   setChallengeType: (challengeType: ChallengeType) => void;
   setTimeline: (timeline: ChallengeTimeline) => void;
+  setDates: (startAt: DateTime, endAt: DateTime) => void;
 };
 
 type Props = {
@@ -32,6 +34,11 @@ function NewChallengeProvider({ children }: Props) {
     setChallengeType: (challengeType) =>
       setParams({ ...params, challengeType }),
     setTimeline: (timeline) => setParams({ ...params, timeline }),
+    setDates: (startAt, endAt) => {
+      console.log("start: ", startAt.toISO());
+      console.log("end: ", endAt.toISO());
+      setParams({ ...params, startAt, endAt });
+    },
   };
 
   return (

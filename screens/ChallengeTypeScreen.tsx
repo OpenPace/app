@@ -8,36 +8,46 @@ import { ChallengeType } from "../api/models/Challenge";
 
 export default function ChallengeTypeScreen() {
   const navigation = useNavigation();
-  const { setChallengeType } = useNewChallengeContext();
+  const { params, setChallengeType } = useNewChallengeContext();
 
   function selectOption(option: ChallengeType) {
     setChallengeType(option);
     navigation.navigate("ChallengeTimelineScreen");
   }
 
+  const activity = params.activityType;
+
   const options = [
     {
       title: "Total Distance",
+      subtitle: `Who can ${activity || "go"} the furthest`,
       icon: "map-marker-distance",
       challengeType: "distance",
     },
-    { title: "Total Time", icon: "timer", challengeType: "time" },
+    {
+      title: "Total Time",
+      subtitle: `Who can ${activity || "go"} the longest`,
+      icon: "timer",
+      challengeType: "time",
+    },
     {
       title: "Total Altitude",
-      icon: "slope-uphill",
+      subtitle: `Who can ${activity || "go"} the most elevation`,
+      icon: "terrain",
       challengeType: "altitude",
     },
   ];
 
-  const optionBtns = options.map(({ title, icon, challengeType }) => {
+  const optionBtns = options.map(({ title, subtitle, icon, challengeType }) => {
     return (
       <Card
-        style={[BaseStyles.mb4]}
+        style={[BaseStyles.mb3]}
         key={title}
         onPress={() => selectOption(challengeType)}
       >
         <Card.Title
           title={title}
+          subtitle={subtitle}
           left={(props) => <Avatar.Icon {...props} icon={icon} />}
         />
       </Card>

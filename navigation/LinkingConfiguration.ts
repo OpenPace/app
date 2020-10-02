@@ -20,6 +20,7 @@ export default {
               ChallengeActivityScreen: 'new/activity',
               ChallengeTypeScreen: 'new/type',
               ChallengeTimelineScreen: 'new/timeline',
+              ChallengeDateScreen: 'new/dates',
               ChallengeShowScreen: {
                 path: ':id',
                 screens: {

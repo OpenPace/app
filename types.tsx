@@ -39,7 +39,7 @@ export type ChallengesParamList = {
   ChallengeTypeScreen: challengeParams;
   ChallengeTimelineScreen: challengeParams;
   ChallengeDateScreen: challengeParams;
-  ChallengeCustomDateScreen: challengeParams;
+  ChallengeDetailsScreen: challengeParams;
 };
 
 export type NotificationsParamList = {

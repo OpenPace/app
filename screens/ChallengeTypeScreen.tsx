@@ -30,13 +30,16 @@ export default function ChallengeTypeScreen() {
       icon: "timer",
       challengeType: "time",
     },
-    {
+  ];
+
+  if (activity !== "swim") {
+    options.push({
       title: "Total Altitude",
       subtitle: `Who can ${activity || "go"} the most elevation`,
       icon: "terrain",
       challengeType: "altitude",
-    },
-  ];
+    });
+  }
 
   const optionBtns = options.map(({ title, subtitle, icon, challengeType }) => {
     return (

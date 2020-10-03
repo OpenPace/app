@@ -5,10 +5,13 @@ import { Avatar, Button, Card } from "react-native-paper";
 import Screen from "../components/Screen";
 import DatePickerButton from "../components/DatePickerButton";
 import BaseStyles from "../utils/BaseStyles";
+import { useAuthContext } from "../contexts/AuthContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
+import { createChallenge } from "../services/ChallengeService";
 
 export default function ChallengeDateScreen() {
   const navigation = useNavigation();
+  const { auth } = useAuthContext();
   const { params, setDates } = useNewChallengeContext();
   const { timeline } = params;
   const { startAt, endAt } = params;
@@ -34,6 +37,8 @@ export default function ChallengeDateScreen() {
     if (timeline === "weekend") {
       setDates(startDate, startDate.plus({ days: 2 }));
     }
+
+    submit();
   }
 
   function setStartDate(startDate: DateTime) {
@@ -56,6 +61,15 @@ export default function ChallengeDateScreen() {
     } else {
       setDates(date.minus({ days: 1 }), date);
     }
+  }
+
+  async function submit() {
+    try {
+      const newChallenge = await createChallenge(params, {
+        authToken: auth.token,
+      });
+      navigation.navigate("ChallengeShowScreen", { id: newChallenge.id });
+    } catch (e) {}
   }
 
   // Start today
@@ -150,7 +164,12 @@ export default function ChallengeDateScreen() {
         />
       </DatePickerButton>
 
-      <Button disabled={disabled} style={[BaseStyles.mb3]} mode="contained">
+      <Button
+        disabled={disabled}
+        style={[BaseStyles.mb3]}
+        mode="contained"
+        onPress={submit}
+      >
         Continue
       </Button>
     </Screen>

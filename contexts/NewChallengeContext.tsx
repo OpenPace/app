@@ -34,11 +34,7 @@ function NewChallengeProvider({ children }: Props) {
     setChallengeType: (challengeType) =>
       setParams({ ...params, challengeType }),
     setTimeline: (timeline) => setParams({ ...params, timeline }),
-    setDates: (startAt, endAt) => {
-      console.log("start: ", startAt.toISO());
-      console.log("end: ", endAt.toISO());
-      setParams({ ...params, startAt, endAt });
-    },
+    setDates: (startAt, endAt) => setParams({ ...params, startAt, endAt }),
   };
 
   return (

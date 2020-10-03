@@ -1,15 +1,17 @@
 import * as React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { DateTime } from "luxon";
+import { Avatar, Button, Card } from "react-native-paper";
 import Screen from "../components/Screen";
+import DatePickerButton from "../components/DatePickerButton";
 import BaseStyles from "../utils/BaseStyles";
-import { Avatar, Card } from "react-native-paper";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 
 export default function ChallengeDateScreen() {
   const navigation = useNavigation();
   const { params, setDates } = useNewChallengeContext();
   const { timeline } = params;
+  const { startAt, endAt } = params;
 
   const today = DateTime.local().startOf("day");
   const tomorrow = today.plus({ days: 1 });
@@ -34,9 +36,30 @@ export default function ChallengeDateScreen() {
     }
   }
 
+  function setStartDate(startDate: DateTime) {
+    const date = startDate.startOf("day");
+
+    // Don't allow start dates after the end date
+    if (endAt && date < endAt) {
+      setDates(date, endAt);
+    } else {
+      setDates(date, date.plus({ days: 1 }));
+    }
+  }
+
+  // When picking an end date, the user wants to include that date
+  function setInclusiveEndDate(endDate: DateTime) {
+    const date = endDate.startOf("day");
+
+    if (startAt && startAt < date) {
+      setDates(startAt, date);
+    } else {
+      setDates(date.minus({ days: 1 }), date);
+    }
+  }
+
   // Start today
   // Start tomorrow
-  // Pick a custom date
   if (timeline === "day") {
     return (
       <Screen style={[BaseStyles.p4]}>
@@ -53,20 +76,12 @@ export default function ChallengeDateScreen() {
             left={(props) => <Avatar.Text {...props} label="2" />}
           />
         </Card>
-
-        <Card style={[BaseStyles.mb3]}>
-          <Card.Title
-            title="Pick a Custom Start Date"
-            left={(props) => <Avatar.Text {...props} label="3" />}
-          />
-        </Card>
       </Screen>
     );
   }
 
   // Start this week
   // Start on Monday
-  // Pick a custom date
   if (timeline === "week") {
     return (
       <Screen style={[BaseStyles.p4]}>
@@ -81,13 +96,6 @@ export default function ChallengeDateScreen() {
           <Card.Title
             title="Start Next Monday"
             left={(props) => <Avatar.Text {...props} label="2" />}
-          />
-        </Card>
-
-        <Card style={[BaseStyles.mb3]}>
-          <Card.Title
-            title="Pick a Custom Start Date"
-            left={(props) => <Avatar.Text {...props} label="3" />}
           />
         </Card>
       </Screen>
@@ -122,21 +130,29 @@ export default function ChallengeDateScreen() {
   // Custom Date Range
   // Start date
   // End date
+  const disabled = !startAt && !endAt;
+
   return (
     <Screen style={[BaseStyles.p4]}>
-      <Card style={[BaseStyles.mb3]}>
+      <DatePickerButton date={startAt || today} onChange={setStartDate}>
         <Card.Title
-          title="Pick Start Date"
+          title={
+            startAt ? `Start: ${startAt.toLocaleString()}` : "Pick Start Date"
+          }
           left={(props) => <Avatar.Text {...props} label="1" />}
         />
-      </Card>
+      </DatePickerButton>
 
-      <Card style={[BaseStyles.mb3]}>
+      <DatePickerButton date={endAt || today} onChange={setInclusiveEndDate}>
         <Card.Title
-          title="Pick End Date"
+          title={endAt ? `End: ${endAt.toLocaleString()}` : "Pick End Date"}
           left={(props) => <Avatar.Text {...props} label="2" />}
         />
-      </Card>
+      </DatePickerButton>
+
+      <Button disabled={disabled} style={[BaseStyles.mb3]} mode="contained">
+        Continue
+      </Button>
     </Screen>
   );
 }

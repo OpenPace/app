@@ -9,7 +9,6 @@ export default {
           Home: {
             screens: {
               HomeScreen: 'home',
-              ChallengeNewScreen: 'new',
             },
           },
           StravaPrompt: 'strava-connect',

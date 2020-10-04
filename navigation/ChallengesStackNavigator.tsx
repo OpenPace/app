@@ -14,8 +14,6 @@ import ChallengeDateScreen from "../screens/ChallengeDateScreen";
 import ChallengeDetailsScreen from "../screens/ChallengeDetailsScreen";
 import { ChallengesParamList } from "../types";
 import ChallengeTabNavigator from "./ChallengeTabNavigator";
-import { ChallengeProvider } from "../contexts/ChallengeContext";
-import { NewChallengeProvider } from "../contexts/NewChallengeContext";
 
 type ChallengeNavigationProp = StackNavigationProp<ChallengesParamList>;
 
@@ -23,47 +21,43 @@ const ChallengesStack = createStackNavigator<ChallengesParamList>();
 
 export default function ChallengesStackNavigator() {
   return (
-    <ChallengeProvider>
-      <NewChallengeProvider>
-        <ChallengesStack.Navigator>
-          <ChallengesStack.Screen
-            name="ChallengesScreen"
-            component={ChallengeIndexScreen}
-            options={{ title: "Challenges" }}
-          />
-          <ChallengesStack.Screen
-            name="ChallengeShowScreen"
-            component={ChallengeTabNavigator}
-            options={{ headerLeft: () => <BackButton />, title: "Challenge" }}
-          />
-          <ChallengesStack.Screen
-            name="ChallengeActivityScreen"
-            component={ChallengeActivityScreen}
-            options={{ title: "Choose Activity" }}
-          />
-          <ChallengesStack.Screen
-            name="ChallengeTypeScreen"
-            component={ChallengeTypeScreen}
-            options={{ title: "Choose Your Challenge" }}
-          />
-          <ChallengesStack.Screen
-            name="ChallengeTimelineScreen"
-            component={ChallengeTimelineScreen}
-            options={{ title: "Choose Your Timeline" }}
-          />
-          <ChallengesStack.Screen
-            name="ChallengeDateScreen"
-            component={ChallengeDateScreen}
-            options={{ title: "Choose Your Dates" }}
-          />
-          <ChallengesStack.Screen
-            name="ChallengeDetailsScreen"
-            component={ChallengeDetailsScreen}
-            options={{ title: "Choose Your Dates" }}
-          />
-        </ChallengesStack.Navigator>
-      </NewChallengeProvider>
-    </ChallengeProvider>
+    <ChallengesStack.Navigator>
+      <ChallengesStack.Screen
+        name="ChallengesScreen"
+        component={ChallengeIndexScreen}
+        options={{ title: "Challenges" }}
+      />
+      <ChallengesStack.Screen
+        name="ChallengeShowScreen"
+        component={ChallengeTabNavigator}
+        options={{ headerLeft: () => <BackButton />, title: "Challenge" }}
+      />
+      <ChallengesStack.Screen
+        name="ChallengeActivityScreen"
+        component={ChallengeActivityScreen}
+        options={{ title: "Choose Activity" }}
+      />
+      <ChallengesStack.Screen
+        name="ChallengeTypeScreen"
+        component={ChallengeTypeScreen}
+        options={{ title: "Choose Your Challenge" }}
+      />
+      <ChallengesStack.Screen
+        name="ChallengeTimelineScreen"
+        component={ChallengeTimelineScreen}
+        options={{ title: "Choose Your Timeline" }}
+      />
+      <ChallengesStack.Screen
+        name="ChallengeDateScreen"
+        component={ChallengeDateScreen}
+        options={{ title: "Choose Your Dates" }}
+      />
+      <ChallengesStack.Screen
+        name="ChallengeDetailsScreen"
+        component={ChallengeDetailsScreen}
+        options={{ title: "Choose Your Dates" }}
+      />
+    </ChallengesStack.Navigator>
   );
 }
 

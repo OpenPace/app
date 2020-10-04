@@ -7,6 +7,7 @@ import Screen from "../components/Screen";
 import TabBar from "../components/TabBar";
 import Header from "../components/Header";
 import PreviewCard from "../components/PreviewCard";
+import CannedChallenges from "../components/CannedChallenges";
 import BaseStyles from "../utils/BaseStyles";
 import { useAuthContext } from "../contexts/AuthContext";
 import { isStravaConnected } from "../utils";
@@ -69,53 +70,20 @@ export default function HomeScreen() {
         subheading="Create a challenge to get started"
       />
 
-      <View style={[BaseStyles.p4]}>
-        <SectionHeader text="Current Challenges" />
+      <ScrollView style={[BaseStyles.pbTabBar]}>
+        <View style={[BaseStyles.p4]}>
+          <SectionHeader text="Current Challenges" />
 
-        <ScrollView horizontal style={[BaseStyles.py2]}>
-          {cards}
-        </ScrollView>
-      </View>
+          <ScrollView horizontal style={[BaseStyles.py2]}>
+            {cards}
+          </ScrollView>
+        </View>
 
-      <View style={[BaseStyles.p4]}>
-        <SectionHeader text="Go Further" />
-        <Button>Create a 5k Challenge</Button>
-      </View>
-
-      <View style={[BaseStyles.p4]}>
-        <SectionHeader text="Fastest Segment" />
-        <Button
-          onPress={() => navigation.navigate("ChallengeNewScreen", { test: 1 })}
-        >
-          Create a 5k Challenge
-        </Button>
-      </View>
-
-      <View style={[BaseStyles.p4]}>
-        <Subheading
-          style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
-        >
-          Go longer
-        </Subheading>
-        <Button
-          onPress={() => navigation.navigate("ChallengeNewScreen", { test: 1 })}
-        >
-          Create a 5k Challenge
-        </Button>
-      </View>
-
-      <View style={[BaseStyles.p4]}>
-        <Subheading
-          style={[BaseStyles.textBold, BaseStyles.textMuted, styles.subheading]}
-        >
-          Climb Higher
-        </Subheading>
-        <Button
-          onPress={() => navigation.navigate("ChallengeNewScreen", { test: 1 })}
-        >
-          Create a 5k Challenge
-        </Button>
-      </View>
+        <View style={[BaseStyles.p4]}>
+          <SectionHeader text="Create a Challenge" />
+          <CannedChallenges />
+        </View>
+      </ScrollView>
 
       <TabBar />
     </Screen>

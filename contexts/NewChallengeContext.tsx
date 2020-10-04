@@ -10,6 +10,7 @@ import {
 type ContextType = {
   params: ChallengeParams;
   reset: () => void;
+  setParams: (newParams: ChallengeParams) => void;
   setName: (name: string) => void;
   setActivityType: (activityType: ActivityType) => void;
   setChallengeType: (challengeType: ChallengeType) => void;
@@ -29,6 +30,7 @@ function NewChallengeProvider({ children }: Props) {
   const value: ContextType = {
     params,
     reset: () => setParams({} as ChallengeParams),
+    setParams: setParams,
     setName: (name) => setParams({ ...params, name }),
     setActivityType: (activityType) => setParams({ ...params, activityType }),
     setChallengeType: (challengeType) =>

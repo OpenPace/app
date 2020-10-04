@@ -86,6 +86,9 @@ export default StyleSheet.create({
   pb5: {
     paddingBottom: SPACER * 3,
   },
+  pbTabBar: {
+    paddingBottom: 56 + 24, // Tab bar height + offset
+  },
 
   // Margin
   m1: {

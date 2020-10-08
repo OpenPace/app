@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { Button } from "react-native-paper";
 import Screen from "../components/Screen";
 import Card from "../components/Card";
-import TabBar from "../components/TabBar";
 import { Text } from "../components/Themed";
 import { useAuthContext, logout } from "../contexts/AuthContext";
 
@@ -70,8 +69,6 @@ export default function ProfileScreen() {
       <Button mode="contained" onPress={() => dispatch(logout())}>
         Log Out
       </Button>
-
-      <TabBar />
     </Screen>
   );
 }

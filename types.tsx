@@ -10,15 +10,10 @@ export type RootStackParamList = {
 };
 
 export type BottomTabParamList = {
-  Home: undefined;
   Challenges: undefined;
   Notifications: undefined;
   Profile: undefined;
   StravaPrompt: undefined;
-};
-
-export type HomeParamList = {
-  HomeScreen: undefined;
 };
 
 // Activity type: bike, run, swim

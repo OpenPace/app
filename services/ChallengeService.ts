@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import Challenge, { ChallengeParams } from "../api/models/Challenge";
 import Score from "../api/models/Score";
 import { apiGet, apiPost, Options } from "../api/client";
@@ -51,7 +52,15 @@ export async function createChallenge(params: ChallengeParams, options: Options)
 }
 
 function parseChallenge(challenge: any) {
-  return camelizeObject(challenge) as Challenge;
+  return {
+    id: challenge.id,
+    name: challenge.name,
+    activityType: challenge.activity_type,
+    challengeType: challenge.challenge_type,
+    timeline: challenge.timeline,
+    startAt: DateTime.fromISO(challenge.start_at),
+    endAt: DateTime.fromISO(challenge.end_at),
+  } as Challenge;
 }
 
 function parseScore(score: any) {

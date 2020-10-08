@@ -25,7 +25,7 @@ export default function ChallengesStackNavigator() {
       <ChallengesStack.Screen
         name="ChallengesScreen"
         component={ChallengeIndexScreen}
-        options={{ title: "Challenges" }}
+        options={{ title: "Challenges", headerShown: false }}
       />
       <ChallengesStack.Screen
         name="ChallengeShowScreen"

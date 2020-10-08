@@ -71,16 +71,14 @@ export default function HomeScreen() {
 
       <ScrollView style={[BaseStyles.pbTabBar]}>
         <View style={[BaseStyles.p4]}>
-          <SectionHeader text="Current Challenges" />
-
-          <ScrollView horizontal style={[BaseStyles.py2]}>
-            {cards}
-          </ScrollView>
+          <SectionHeader text="Create a Challenge" />
+          <CannedChallenges />
         </View>
 
         <View style={[BaseStyles.p4]}>
-          <SectionHeader text="Create a Challenge" />
-          <CannedChallenges />
+          <SectionHeader text="Current Challenges" />
+
+          {cards}
         </View>
       </ScrollView>
 

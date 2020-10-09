@@ -17,7 +17,7 @@ export default {
               ChallengeDateScreen: 'new/dates',
               ChallengeDetailsScreen: 'new/details',
               ChallengeShowScreen: {
-                path: ':id',
+                path: ':slug',
                 screens: {
                   Home: '',
                   Leaderboard: 'leaderboard',

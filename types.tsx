@@ -29,7 +29,7 @@ interface challengeParams {
 
 export type ChallengesParamList = {
   ChallengesScreen: undefined;
-  ChallengeShowScreen: { id: number };
+  ChallengeShowScreen: { slug: string };
   ChallengeActivityScreen: challengeParams;
   ChallengeTypeScreen: challengeParams;
   ChallengeTimelineScreen: challengeParams;

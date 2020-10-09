@@ -15,8 +15,8 @@ export async function getChallengesByUser(options: Options) {
   return body.challenges.map(parseChallenge);
 }
 
-export async function getChallenge(id: number, options: Options) {
-  const response = await apiGet(`/challenges/${id}`, options);
+export async function getChallenge(slug: string, options: Options) {
+  const response = await apiGet(`/challenges/${slug}`, options);
 
   if (response.status !== 200) {
     throw new Error("Error creating challenge");
@@ -26,8 +26,8 @@ export async function getChallenge(id: number, options: Options) {
   return parseChallenge(body);
 }
 
-export async function getLeaderboard(id: number, options: Options) {
-  const response = await apiGet(`/challenges/${id}/leaderboard`, options);
+export async function getLeaderboard(slug: string, options: Options) {
+  const response = await apiGet(`/challenges/${slug}/leaderboard`, options);
 
   if (response.status !== 200) {
     throw new Error("Error getting leaderboard");
@@ -53,7 +53,7 @@ export async function createChallenge(params: ChallengeParams, options: Options)
 
 function parseChallenge(challenge: any) {
   return {
-    id: challenge.id,
+    slug: challenge.slug,
     name: challenge.name,
     activityType: challenge.activity_type,
     challengeType: challenge.challenge_type,

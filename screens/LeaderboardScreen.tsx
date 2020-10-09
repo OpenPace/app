@@ -16,11 +16,11 @@ export default function LeaderboardScreen() {
 
   useEffect(() => {
     async function loadLeaderboard() {
-      if (!challenge || !challenge.id) {
+      if (!challenge) {
         return;
       }
 
-      const result = await getLeaderboard(challenge.id, {
+      const result = await getLeaderboard(challenge.slug, {
         authToken: auth.token,
       });
       setScores(result);

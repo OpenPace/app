@@ -28,12 +28,11 @@ export default function PreviewCard({ challenge }: Props) {
   return (
     <Card
       style={[BaseStyles.mb4]}
-      onPress={() => navigate("ChallengeShowScreen", { id: challenge.id })}
+      onPress={() => navigate("ChallengeShowScreen", { slug: challenge.slug })}
     >
       <View style={[BaseStyles.py2, styles.details]}>
         <Title>{challenge.name}</Title>
         <TimeSection challenge={challenge} />
-        <Caption>Photos of participants</Caption>
       </View>
     </Card>
   );

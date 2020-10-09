@@ -56,7 +56,7 @@ export default function ChallengeDetailsScreen() {
       const newChallenge = await createChallenge(params, {
         authToken: auth.token,
       });
-      navigation.navigate("ChallengeShowScreen", { id: newChallenge.id });
+      navigation.navigate("ChallengeShowScreen", { slug: newChallenge.slug });
       setLoading(false);
     } catch (e) {
       setLoading(false);

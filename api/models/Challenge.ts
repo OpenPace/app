@@ -5,7 +5,7 @@ export type ChallengeType = "distance" | "time" | "altitude" | "segment";
 export type ChallengeTimeline = "day" | "week" | "weekend" | "custom";
 
 export default interface Challenge {
-  id: number;
+  slug: string;
   name: string;
   activityType: ActivityType;
   challengeType: ChallengeType;

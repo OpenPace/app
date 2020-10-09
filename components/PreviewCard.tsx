@@ -1,9 +1,11 @@
 import React from "react";
 import BaseStyles from "../utils/BaseStyles";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Caption, Title, Surface } from "react-native-paper";
+import { Card, Caption, Title, Surface } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
 import Challenge from "../api/models/Challenge";
 import { cloudinaryImg } from "../utils";
+import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
 
 interface Props {
   challenge: Challenge;
@@ -21,23 +23,35 @@ function imageSrc(challenge: Challenge): string {
 }
 
 export default function PreviewCard({ challenge }: Props) {
+  const { navigate } = useNavigation();
+
   return (
-    <TouchableOpacity>
-      <Surface style={[BaseStyles.mb4, BaseStyles.rounded, styles.card]}>
-        <Image
-          source={{
-            uri: imageSrc(challenge),
-          }}
-          style={styles.img}
-        />
-        <View style={[BaseStyles.py2, styles.details]}>
-          <Title>{challenge.name}</Title>
-          <Caption>X days remaining</Caption>
-          <Caption>Photos of participants</Caption>
-        </View>
-      </Surface>
-    </TouchableOpacity>
+    <Card
+      style={[BaseStyles.mb4]}
+      onPress={() => navigate("ChallengeShowScreen", { id: challenge.id })}
+    >
+      <View style={[BaseStyles.py2, styles.details]}>
+        <Title>{challenge.name}</Title>
+        <TimeSection challenge={challenge} />
+        <Caption>Photos of participants</Caption>
+      </View>
+    </Card>
   );
+}
+
+function TimeSection({ challenge }: { challenge: Challenge }) {
+  // Not started (startAt in the future)
+  if (inFuture(challenge.startAt)) {
+    return <Caption>Starts {timeLeft(challenge.startAt)}</Caption>;
+  }
+
+  // Ended (show when)
+  if (inPast(challenge.endAt)) {
+    return <Caption>Ended {timeAgo(challenge.startAt)}</Caption>;
+  }
+
+  // Current challenge (show time remaining)
+  return <Caption>Ends {timeLeft(challenge.endAt)}</Caption>;
 }
 
 const styles = StyleSheet.create({

@@ -10,9 +10,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 type NavigationProp = StackNavigationProp<LoggedOutParamList>;
 type InviteRouteProp = RouteProp<LoggedOutParamList, "Invitation">;
 
-export default function WelcomeScreen() {
+export default function InvitationScreen() {
   const route = useRoute<InviteRouteProp>();
-  console.log(route.params.id);
+  console.log(route.params.slug);
   const { navigate } = useNavigation<NavigationProp>();
 
   return (

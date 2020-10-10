@@ -50,7 +50,7 @@ export type LoggedOutParamList = {
   Welcome: undefined;
   SignUp: undefined;
   LogIn: undefined;
-  Invitation: { id: number };
+  Invitation: { slug: string };
 };
 
 export type ChallengeTabParamList = {

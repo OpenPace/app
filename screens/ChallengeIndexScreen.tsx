@@ -51,7 +51,7 @@ export default function HomeScreen() {
   }
 
   const cards = challenges.map((challenge) => (
-    <PreviewCard key={challenge.id} challenge={challenge} />
+    <PreviewCard key={challenge.slug} challenge={challenge} />
   ));
 
   // Steps:

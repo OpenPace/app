@@ -1,4 +1,4 @@
-import User from '../api/models/User';
+import User from "../api/models/User";
 
 type StringKeyable<T = any> = { [key: string]: T };
 
@@ -29,7 +29,7 @@ export function camelizeObject(data: StringKeyable) {
 }
 
 export function isStravaConnected(user: User) {
-  return user.credentials.some((x) => x.provider === 'strava');
+  return user.credentials.some((x) => x.provider === "strava");
 }
 
 export function cloudinaryImg(path: string) {
@@ -38,4 +38,20 @@ export function cloudinaryImg(path: string) {
 
 export function capitalize(str: string) {
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function toOrdinal(num: number) {
+  const j = num % 10,
+    k = num % 100;
+
+  if (j == 1 && k != 11) {
+    return num + "st";
+  }
+  if (j == 2 && k != 12) {
+    return num + "nd";
+  }
+  if (j == 3 && k != 13) {
+    return num + "rd";
+  }
+  return num + "th";
 }

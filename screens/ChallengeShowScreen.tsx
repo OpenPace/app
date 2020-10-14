@@ -1,8 +1,9 @@
 import React from "react";
-import Screen from "../components/Screen";
-import BaseStyles from "../utils/BaseStyles";
+import { View, Share } from "react-native";
 import { ActivityIndicator, Button, Text, Title } from "react-native-paper";
-import { Share } from "react-native";
+import Screen from "../components/Screen";
+import Podium from "../components/Podium";
+import BaseStyles from "../utils/BaseStyles";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 
 export default function ChallengeShowScreen() {
@@ -38,6 +39,11 @@ export default function ChallengeShowScreen() {
   return (
     <Screen style={[BaseStyles.p4]}>
       <Title>{challenge.name}</Title>
+
+      <Podium challenge={challenge} />
+
+      <View>
+      </View>
 
       <Text>Activity Type: {challenge.activityType}</Text>
       <Text>Challenge Type: {challenge.challengeType}</Text>

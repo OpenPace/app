@@ -60,6 +60,7 @@ function parseChallenge(challenge: any) {
     timeline: challenge.timeline,
     startAt: DateTime.fromISO(challenge.start_at),
     endAt: DateTime.fromISO(challenge.end_at),
+    scores: challenge.scores.map(parseScore),
   } as Challenge;
 }
 

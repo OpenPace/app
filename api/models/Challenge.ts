@@ -1,4 +1,5 @@
 import { DateTime } from "luxon";
+import Score from "./Score";
 
 export type ActivityType = "run" | "bike" | "swim";
 export type ChallengeType = "distance" | "time" | "altitude" | "segment";
@@ -12,6 +13,7 @@ export default interface Challenge {
   timeline: ChallengeTimeline;
   startAt: DateTime;
   endAt: DateTime;
+  scores: Score[];
 }
 
 export interface ChallengeParams {

@@ -26,12 +26,12 @@ export default function StravaPrompt() {
   // Redirect to home
   useEffect(() => {
     if (user && isStravaConnected(user)) {
-      navigation.navigate("Home");
+      navigation.navigate("Challenges");
     }
   }, [user]);
 
   function onSuccess() {
-    navigation.navigate("Home");
+    navigation.navigate("Challenges");
   }
 
   return (

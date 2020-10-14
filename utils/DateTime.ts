@@ -1,15 +1,11 @@
 import { DateTime } from "luxon";
 
-const units = ["year", "month", "week", "day"] as const;
+const units = ["year", "month", "week", "day", "hour", "minute"] as const;
 
 export function timeLeft(dateTime: DateTime) {
   const diff = dateTime.diffNow().shiftTo(...units);
   const unit = units.find((unit) => diff.get(unit) !== 0) || "second";
   const amount = Math.trunc(diff.as(unit));
-
-  console.log(dateTime.toISODate());
-
-  console.log(diff);
 
   if (amount === 0) {
     return "today";

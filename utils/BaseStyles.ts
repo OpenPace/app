@@ -106,6 +106,21 @@ export default StyleSheet.create({
   m5: {
     margin: SPACER * 3,
   },
+  mr1: {
+    marginRight: SPACER * 0.25,
+  },
+  mr2: {
+    marginRight: SPACER * 0.5,
+  },
+  mr3: {
+    marginRight: SPACER,
+  },
+  mr4: {
+    marginRight: SPACER * 1.5,
+  },
+  mr5: {
+    marginRight: SPACER * 3,
+  },
   mb1: {
     marginBottom: SPACER * 0.25,
   },

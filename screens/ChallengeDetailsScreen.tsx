@@ -68,7 +68,7 @@ export default function ChallengeDetailsScreen() {
       <TextInput
         style={[BaseStyles.mb2]}
         label="Challenge Name"
-        value={name || defaultName}
+        value={name}
         onChangeText={setName}
         mode="outlined"
       />

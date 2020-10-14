@@ -85,7 +85,9 @@ export default function HomeScreen() {
       <FAB
         style={styles.fab}
         icon="plus"
-        onPress={() => navigate("Challenges", { screen: "ChallengeActivityScreen" }) }
+        onPress={() =>
+          navigate("Challenges", { screen: "ChallengeActivityScreen" })
+        }
       />
     </Screen>
   );
@@ -103,7 +105,7 @@ function SectionHeader({ text }: { text: string }) {
 
 const styles = StyleSheet.create({
   fab: {
-    position: 'absolute',
+    position: "absolute",
     margin: 16,
     right: 0,
     bottom: 0,

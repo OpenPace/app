@@ -55,3 +55,35 @@ export function toOrdinal(num: number) {
   }
   return num + "th";
 }
+
+export function formatDuration(duration: number): string {
+  const hours = Math.floor(duration / 3600);
+  const minutes = Math.floor((duration - hours * 3600) / 60);
+  const seconds = duration - hours * 3600 - minutes * 60;
+
+  return padNum(hours) + ":" + padNum(minutes) + ":" + padNum(seconds);
+}
+
+function padNum(num: number) {
+  if (num < 10) {
+    return `0${num}`;
+  }
+
+  return num.toString();
+}
+
+export function formatDistance(distance: number, imperial: boolean): string {
+  if (imperial) {
+    return (distance / 1609).toFixed(1) + " mi";
+  }
+
+  return (distance / 1000).toFixed(1) + " km";
+}
+
+export function formatAltitude(altitude: number, imperial: boolean): string {
+  if (imperial) {
+    return altitude * 3.28 + " ft";
+  }
+
+  return altitude + " m";
+}

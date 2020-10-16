@@ -3,7 +3,7 @@ import Screen from "../components/Screen";
 import LeaderboardItem from "../components/LeaderboardItem";
 import BaseStyles from "../utils/BaseStyles";
 import { ScrollView } from "react-native";
-import { ActivityIndicator, List } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { getLeaderboard } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -12,6 +12,7 @@ import Score from "../api/models/Score";
 export default function LeaderboardScreen() {
   const { challenge } = useChallengeContext();
   const { auth } = useAuthContext();
+  const { user } = auth;
   const [scores, setScores] = useState<Score[] | undefined>(undefined);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function LeaderboardScreen() {
     loadLeaderboard();
   }, [challenge]);
 
-  if (!challenge || !scores) {
+  if (!user || !challenge || !scores) {
     return (
       <Screen style={[BaseStyles.p4]}>
         <ActivityIndicator animating={true} />
@@ -38,29 +39,18 @@ export default function LeaderboardScreen() {
   }
 
   const items = scores.map((score, idx) => (
-    <LeaderboardItem key={score.userId} position={idx + 1} score={score} />
+    <LeaderboardItem
+      key={score.userId}
+      user={user}
+      position={idx + 1}
+      score={score}
+      challenge={challenge}
+    />
   ));
 
   return (
     <Screen>
       <ScrollView>{items}</ScrollView>
     </Screen>
-  );
-}
-
-interface ListItemProps {
-  score: Score;
-}
-
-function ListItem({ score }: ListItemProps) {
-  const name = `${score.firstName} ${score.lastName}`;
-
-  return (
-    <List.Item
-      title={name}
-      description={score.updatedAt}
-      right={(props) => <List.Icon {...props} icon="folder" />}
-      left={(props) => <List.Icon {...props} icon="folder" />}
-    />
   );
 }

@@ -9,4 +9,8 @@ export default interface User {
   city?: string;
   state?: string;
   credentials: Credential[];
+  imperial: boolean;
+  timezone?: string;
+  gender?: string;
+  birthdate?: Date;
 }

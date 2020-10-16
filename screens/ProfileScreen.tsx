@@ -2,10 +2,8 @@ import * as React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { Button } from "react-native-paper";
+import { Button, Text, Title } from "react-native-paper";
 import Screen from "../components/Screen";
-import Card from "../components/Card";
-import { Text } from "../components/Themed";
 import { useAuthContext, logout } from "../contexts/AuthContext";
 
 import BaseStyles from "../utils/BaseStyles";
@@ -43,28 +41,24 @@ export default function ProfileScreen() {
         </TouchableOpacity>
       </View>
 
-      <Card style={[BaseStyles.row, BaseStyles.p3, BaseStyles.mb4]}>
-        <View style={[BaseStyles.col]}>
-          <TouchableOpacity onPress={() => alert("Hello, world!")}>
-            <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Run</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[BaseStyles.col]}>
-          <TouchableOpacity onPress={() => alert("Hello, world!")}>
-            <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Ride</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[BaseStyles.col]}>
-          <TouchableOpacity onPress={() => alert("Hello, world!")}>
-            <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Swim</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={[BaseStyles.col]}>
-          <TouchableOpacity onPress={() => alert("Hello, world!")}>
-            <Text style={[BaseStyles.text, BaseStyles.textCenter]}>Other</Text>
-          </TouchableOpacity>
-        </View>
-      </Card>
+      <View>
+        <Title>User Information</Title>
+
+        <Text>Name</Text>
+        <Text>
+          {user.firstName} {user.lastName}
+        </Text>
+
+        <Text>Location</Text>
+        <Text>
+          {user.city} {user.state}
+        </Text>
+
+        <Title>Settings</Title>
+
+        <Text>Units</Text>
+        <Text>{user.imperial ? "Feet & Miles" : "Meters & Kilometers"}</Text>
+      </View>
 
       <Button mode="contained" onPress={() => dispatch(logout())}>
         Log Out

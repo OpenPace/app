@@ -34,6 +34,7 @@ export default {
           Profile: {
             screens: {
               ProfileScreen: 'profile',
+              SettingsScreen: 'settings',
             },
           },
           Welcome: 'welcome',

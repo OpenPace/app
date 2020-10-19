@@ -1,7 +1,11 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
-
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  createStackNavigator,
+  StackNavigationProp,
+  HeaderBackButton,
+} from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
@@ -56,7 +60,7 @@ function ProfileStackScreen() {
       <ProfileStack.Screen
         name="ProfileScreen"
         component={ProfileScreen}
-        options={{ title: "Profile" }}
+        options={{ headerLeft: () => <BackButton />, title: "Profile" }}
       />
       <ProfileStack.Screen
         name="SettingsScreen"
@@ -65,4 +69,10 @@ function ProfileStackScreen() {
       />
     </ProfileStack.Navigator>
   );
+}
+
+function BackButton() {
+  const { navigate } = useNavigation();
+
+  return <HeaderBackButton onPress={() => navigate("Challenges")} />;
 }

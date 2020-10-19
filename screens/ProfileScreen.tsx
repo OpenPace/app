@@ -2,11 +2,12 @@ import * as React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Text, Title } from "react-native-paper";
+import { Button, List, Text } from "react-native-paper";
 import Screen from "../components/Screen";
 import { useAuthContext, logout } from "../contexts/AuthContext";
 
 import BaseStyles from "../utils/BaseStyles";
+import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
 
 export default function ProfileScreen() {
   const { auth, dispatch } = useAuthContext();
@@ -18,8 +19,8 @@ export default function ProfileScreen() {
   }
 
   return (
-    <Screen style={[BaseStyles.p4]}>
-      <View style={[BaseStyles.row, BaseStyles.pb4]}>
+    <Screen>
+      <View style={[BaseStyles.row, BaseStyles.p4]}>
         <View>
           <Image
             source={{ uri: user.avatar }}
@@ -42,27 +43,27 @@ export default function ProfileScreen() {
       </View>
 
       <View>
-        <Title>User Information</Title>
+        <List.Section>
+          <List.Subheader>User Information</List.Subheader>
+          <List.Item title={fullName(user)} description="Name" />
+          <List.Item title={user.email} description="Email" />
+          <List.Item title={locationName(user)} description="Location" />
 
-        <Text>Name</Text>
-        <Text>
-          {user.firstName} {user.lastName}
-        </Text>
+          <List.Subheader>Preferences</List.Subheader>
+          <List.Item
+            title={unitsLabel(user)}
+            description="Units & Measurements"
+          />
 
-        <Text>Location</Text>
-        <Text>
-          {user.city} {user.state}
-        </Text>
-
-        <Title>Settings</Title>
-
-        <Text>Units</Text>
-        <Text>{user.imperial ? "Feet & Miles" : "Meters & Kilometers"}</Text>
+          <List.Item title={timezoneLabel(user)} description="Timezone" />
+        </List.Section>
       </View>
 
-      <Button mode="contained" onPress={() => dispatch(logout())}>
-        Log Out
-      </Button>
+      <View style={[BaseStyles.p4]}>
+        <Button mode="contained" onPress={() => dispatch(logout())}>
+          Log Out
+        </Button>
+      </View>
     </Screen>
   );
 }

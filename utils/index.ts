@@ -87,3 +87,27 @@ export function formatAltitude(altitude: number, imperial: boolean): string {
 
   return altitude + " m";
 }
+
+export function fullName(user: User) {
+  return `${user.firstName} ${user.lastName}`;
+}
+
+export function locationName(user: User) {
+  const arr: (string | undefined)[] = [user.city, user.state];
+
+  return arr.filter((x) => !!x).join(", ");
+}
+
+export function unitsLabel(user: User) {
+  return user.imperial ? "Feet & Miles" : "Meters & Kilometers";
+}
+
+export function timezoneLabel(user: User) {
+  const { timezone } = user;
+
+  if (timezone) {
+    return timezone.replace(/_/, " ");
+  }
+
+  return "Not Set";
+}

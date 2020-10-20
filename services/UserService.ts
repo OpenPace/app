@@ -1,7 +1,9 @@
+import { DateTime } from "luxon";
 import Credential from "../api/models/Credential";
-import User from "../api/models/User";
-import { apiGet, Options } from "../api/client";
-import { camelizeObject } from "../utils";
+import User, { UserParams } from "../api/models/User";
+import { apiGet, Options, apiPut } from "../api/client";
+import { camelizeObject, underscoreObject } from "../utils";
+import UserPrefs from "../api/models/UserPrefs";
 
 export async function getMe(options: Options) {
   const response = await apiGet(`/users/me`, options);
@@ -14,6 +16,21 @@ export async function getMe(options: Options) {
   return parseUser(body);
 }
 
+export async function saveMe(params: UserParams, options: Options) {
+  const response = await apiPut("/users/me", {
+    ...options,
+    data: {
+      user: underscoreObject(params),
+    },
+  });
+
+  if (response.status !== 204) {
+    throw new Error("User not saved");
+  }
+
+  return {};
+}
+
 export function parseUser(userObj: any) {
   const user = camelizeObject(userObj) as User;
   user.credentials = [];
@@ -21,9 +38,20 @@ export function parseUser(userObj: any) {
   if (userObj.credentials) {
     user.credentials = userObj.credentials.map(parseCredential);
   }
+  user.userPrefs = parseUserPrefs(userObj.user_prefs);
+
   return camelizeObject(user) as User;
 }
 
 function parseCredential(obj: any) {
   return obj as Credential;
+}
+
+function parseUserPrefs(obj: any) {
+  return {
+    imperial: obj.imperial,
+    timezone: obj.timezone,
+    gender: obj.gender,
+    birthdate: obj.birthdate ? DateTime.fromISO(obj.birthdate) : null,
+  } as UserPrefs;
 }

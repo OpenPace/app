@@ -27,6 +27,16 @@ export async function apiPost(url: string, options: Options): Promise<any> {
   });
 }
 
+export async function apiPut(url: string, options: Options): Promise<any> {
+  const { data } = options;
+
+  return fetch(`${API_ENDPOINT}${url}`, {
+    method: "PUT",
+    headers: buildHeaders(options),
+    body: data ? JSON.stringify(underscoreObject(data)) : undefined,
+  });
+}
+
 function buildHeaders({ authToken }: Options) {
   const headers: StringKeyable = {
     Accept: "application/json",

@@ -1,4 +1,5 @@
 import Credential from "./Credential";
+import UserPrefs from "./UserPrefs";
 
 export default interface User {
   id?: number;
@@ -9,8 +10,11 @@ export default interface User {
   city?: string;
   state?: string;
   credentials: Credential[];
-  imperial: boolean;
-  timezone?: string;
-  gender?: string;
-  birthdate?: Date;
+  userPrefs: UserPrefs;
+}
+
+export interface UserParams {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
 }

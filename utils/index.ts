@@ -98,13 +98,11 @@ export function locationName(user: User) {
   return arr.filter((x) => !!x).join(", ");
 }
 
-export function unitsLabel(user: User) {
-  return user.imperial ? "Feet & Miles" : "Meters & Kilometers";
+export function unitsLabel(imperial: boolean) {
+  return imperial ? "Feet & Miles" : "Meters & Kilometers";
 }
 
-export function timezoneLabel(user: User) {
-  const { timezone } = user;
-
+export function timezoneLabel(timezone: string) {
   if (timezone) {
     return timezone.replace(/_/, " ");
   }

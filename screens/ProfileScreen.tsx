@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { Portal, Button, List, Text } from "react-native-paper";
+import { Image, StyleSheet, View } from "react-native";
+import { Menu, Portal, Button, List, Text } from "react-native-paper";
 import Screen from "../components/Screen";
 import UserInfoDialog from "../components/profile/UserInfoDialog";
+import TimezoneDialog from "../components/profile/TimezoneDialog";
 import { useAuthContext, logout } from "../contexts/AuthContext";
 import { useUserContext } from "../contexts/UserContext";
 
@@ -13,9 +12,10 @@ import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
 
 export default function ProfileScreen() {
   const { dispatch } = useAuthContext();
-  const navigation = useNavigation();
   const { user, saveUser } = useUserContext();
   const [visible, setVisible] = useState(false);
+  const [unitMenuVisible, setUnitMenuVisible] = useState(false);
+  const [timezoneDialogVisible, setTimezoneDialogVisible] = useState(false);
 
   const prefs = user.userPrefs;
 
@@ -37,10 +37,6 @@ export default function ProfileScreen() {
             {user.city} {user.state}
           </Text>
         </View>
-
-        <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")}>
-          <FontAwesome name="gear" size={24} color="black" />
-        </TouchableOpacity>
       </View>
 
       <View>
@@ -63,14 +59,28 @@ export default function ProfileScreen() {
           />
 
           <List.Subheader>Preferences</List.Subheader>
-          <List.Item
-            title={unitsLabel(prefs.imperial)}
-            description="Units & Measurements"
-          />
+
+          <Menu
+            visible={unitMenuVisible}
+            onDismiss={() => {
+              setUnitMenuVisible(false);
+            }}
+            anchor={
+              <List.Item
+                title={unitsLabel(prefs.imperial)}
+                description="Units & Measurements"
+                onPress={() => setUnitMenuVisible(true)}
+              />
+            }
+          >
+            <Menu.Item onPress={() => {}} title="Meters & Kilometers" />
+            <Menu.Item onPress={() => {}} title="Feet & Miles" />
+          </Menu>
 
           <List.Item
             title={timezoneLabel(prefs.timezone)}
             description="Timezone"
+            onPress={() => setTimezoneDialogVisible(true)}
           />
         </List.Section>
       </View>
@@ -88,10 +98,16 @@ export default function ProfileScreen() {
           visible={visible}
           close={() => setVisible(false)}
         />
+        <TimezoneDialog
+          userPrefs={user.userPrefs}
+          visible={timezoneDialogVisible}
+          close={() => setTimezoneDialogVisible(false)}
+        />
       </Portal>
     </Screen>
   );
 }
+
 const styles = StyleSheet.create({
   profileImg: {
     height: 50,

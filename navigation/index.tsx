@@ -13,6 +13,7 @@ import DarkTheme from "./DarkTheme";
 import { useAuthContext } from "../contexts/AuthContext";
 import { ChallengeProvider } from "../contexts/ChallengeContext";
 import { NewChallengeProvider } from "../contexts/NewChallengeContext";
+import { UserProvider } from "../contexts/UserContext";
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -42,7 +43,7 @@ const Stack = createStackNavigator<RootStackParamList>();
 function RootNavigator() {
   const { auth } = useAuthContext();
 
-  if (!auth.isLoggedIn) {
+  if (!auth.user || !auth.token) {
     return (
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Root" component={LoggedOutNavigator} />
@@ -51,17 +52,19 @@ function RootNavigator() {
   }
 
   return (
-    <ChallengeProvider>
-      <NewChallengeProvider>
-        <Stack.Navigator headerMode="none">
-          <Stack.Screen name="Root" component={BottomTabNavigator} />
-          <Stack.Screen
-            name="NotFound"
-            component={NotFoundScreen}
-            options={{ title: "Oops!" }}
-          />
-        </Stack.Navigator>
-      </NewChallengeProvider>
-    </ChallengeProvider>
+    <UserProvider user={auth.user} authToken={auth.token}>
+      <ChallengeProvider>
+        <NewChallengeProvider>
+          <Stack.Navigator headerMode="none">
+            <Stack.Screen name="Root" component={BottomTabNavigator} />
+            <Stack.Screen
+              name="NotFound"
+              component={NotFoundScreen}
+              options={{ title: "Oops!" }}
+            />
+          </Stack.Navigator>
+        </NewChallengeProvider>
+      </ChallengeProvider>
+    </UserProvider>
   );
 }

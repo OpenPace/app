@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -12,20 +12,17 @@ import {
 } from "react-native-paper";
 import Screen from "../components/Screen";
 import { useAuthContext, logout } from "../contexts/AuthContext";
+import { useUserContext } from "../contexts/UserContext";
 
 import BaseStyles from "../utils/BaseStyles";
 import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
-import User from "../api/models/User";
+import User, { UserParams } from "../api/models/User";
 
 export default function ProfileScreen() {
-  const { auth, dispatch } = useAuthContext();
+  const { dispatch } = useAuthContext();
   const navigation = useNavigation();
-  const { user } = auth;
-  const [visible, setVisible] = React.useState(false);
-
-  if (!user) {
-    return null;
-  }
+  const { user, saveUser } = useUserContext();
+  const [visible, setVisible] = useState(false);
 
   const prefs = user.userPrefs;
 
@@ -61,8 +58,16 @@ export default function ProfileScreen() {
             description="Name"
             onPress={() => setVisible(true)}
           />
-          <List.Item title={user.email} description="Email" />
-          <List.Item title={locationName(user)} description="Location" />
+          <List.Item
+            title={user.email}
+            description="Email"
+            onPress={() => setVisible(true)}
+          />
+          <List.Item
+            title={locationName(user)}
+            description="Location"
+            onPress={() => setVisible(true)}
+          />
 
           <List.Subheader>Preferences</List.Subheader>
           <List.Item
@@ -86,9 +91,9 @@ export default function ProfileScreen() {
       <Portal>
         <NameDialog
           user={user}
+          saveUser={saveUser}
           visible={visible}
           close={() => setVisible(false)}
-          save={() => setVisible(false)}
         />
       </Portal>
     </Screen>
@@ -98,24 +103,91 @@ export default function ProfileScreen() {
 interface NameProps {
   user: User;
   visible: boolean;
-  save: () => void;
+  saveUser: (params: UserParams) => Promise<void>;
   close: () => void;
 }
 
 function NameDialog(props: NameProps) {
+  const { user } = props;
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [email, setEmail] = useState(user.email);
+  const [city, setCity] = useState(user.city);
+  const [state, setState] = useState(user.state);
+  const [loading, setLoading] = useState(false);
+
+  function close() {
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    props.close();
+  }
+
+  async function save() {
+    setLoading(true);
+    try {
+      await props.saveUser({
+        email,
+        firstName,
+        lastName,
+        city,
+        state,
+      });
+      setLoading(false);
+      props.close();
+    } catch (e) {
+      setLoading(false);
+      props.close();
+    }
+  }
+
   return (
-    <Dialog visible={props.visible} onDismiss={props.close}>
-      <Dialog.Title>Edit Name</Dialog.Title>
+    <Dialog visible={props.visible} onDismiss={close}>
+      <Dialog.Title>Edit User Information</Dialog.Title>
+
       <Dialog.Content>
         <TextInput
           style={[BaseStyles.mb2]}
           label="First Name"
+          value={firstName}
+          onChangeText={setFirstName}
           mode="outlined"
         />
-        <TextInput style={[BaseStyles.mb2]} label="Last Name" mode="outlined" />
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="Last Name"
+          value={lastName}
+          onChangeText={setLastName}
+          mode="outlined"
+        />
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="Email"
+          value={email}
+          onChangeText={setEmail}
+          mode="outlined"
+        />
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="City"
+          value={city}
+          onChangeText={setCity}
+          mode="outlined"
+        />
+        <TextInput
+          style={[BaseStyles.mb2]}
+          label="state"
+          value={state}
+          onChangeText={setState}
+          mode="outlined"
+        />
       </Dialog.Content>
       <Dialog.Actions>
-        <Button onPress={props.save}>Done</Button>
+        <Button mode="outlined" onPress={close}>
+          Cancel
+        </Button>
+        <Button mode="contained" onPress={save} loading={loading}>
+          Save
+        </Button>
       </Dialog.Actions>
     </Dialog>
   );

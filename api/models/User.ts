@@ -17,4 +17,7 @@ export interface UserParams {
   email?: string;
   firstName?: string;
   lastName?: string;
+  avatar?: string;
+  city?: string;
+  state?: string;
 }

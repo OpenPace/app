@@ -6,3 +6,10 @@ export default interface UserPrefs {
   gender?: string;
   birthdate?: DateTime;
 }
+
+export interface UserPrefsParams {
+  imperial?: boolean;
+  timezone?: string;
+  gender?: string;
+  birthdate?: DateTime;
+}

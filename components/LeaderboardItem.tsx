@@ -3,7 +3,6 @@ import { StyleSheet, View } from "react-native";
 import { Avatar, Text } from "react-native-paper";
 import Score from "../api/models/Score";
 import Challenge from "../api/models/Challenge";
-import User from "../api/models/User";
 import BaseStyles from "../utils/BaseStyles";
 import { formatDistance, formatDuration, formatAltitude } from "../utils";
 
@@ -11,12 +10,12 @@ interface ListItemProps {
   score: Score;
   position: number;
   challenge: Challenge;
-  user: User;
+  imperial: boolean;
 }
 
-function formatScore(score: Score, challenge: Challenge, user: User) {
+function formatScore(score: Score, challenge: Challenge, imperial: boolean) {
   if (challenge.challengeType === "distance") {
-    return formatDistance(score.score, user.imperial);
+    return formatDistance(score.score, imperial);
   }
 
   if (challenge.challengeType === "time") {
@@ -24,7 +23,7 @@ function formatScore(score: Score, challenge: Challenge, user: User) {
   }
 
   if (challenge.challengeType === "altitude") {
-    return formatAltitude(score.score, user.imperial);
+    return formatAltitude(score.score, imperial);
   }
 
   return formatDuration(score.score);
@@ -35,7 +34,7 @@ function formatScore(score: Score, challenge: Challenge, user: User) {
 // altitude -> meters
 // segment -> seconds
 export default function LeaderboardItem(props: ListItemProps) {
-  const { score, position, challenge, user } = props;
+  const { score, position, challenge, imperial } = props;
   const name = `${score.firstName} ${score.lastName}`;
 
   return (
@@ -53,7 +52,7 @@ export default function LeaderboardItem(props: ListItemProps) {
       </View>
 
       <View style={[BaseStyles.p3]}>
-        <Text>{formatScore(score, challenge, user)}</Text>
+        <Text>{formatScore(score, challenge, imperial)}</Text>
       </View>
     </View>
   );

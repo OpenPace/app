@@ -7,12 +7,13 @@ import { ActivityIndicator } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { getLeaderboard } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useUserPrefsContext } from "../contexts/UserPrefsContext";
 import Score from "../api/models/Score";
 
 export default function LeaderboardScreen() {
   const { challenge } = useChallengeContext();
   const { auth } = useAuthContext();
-  const { user } = auth;
+  const { userPrefs } = useUserPrefsContext();
   const [scores, setScores] = useState<Score[] | undefined>(undefined);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function LeaderboardScreen() {
     loadLeaderboard();
   }, [challenge]);
 
-  if (!user || !challenge || !scores) {
+  if (!challenge || !scores) {
     return (
       <Screen style={[BaseStyles.p4]}>
         <ActivityIndicator animating={true} />
@@ -41,7 +42,7 @@ export default function LeaderboardScreen() {
   const items = scores.map((score, idx) => (
     <LeaderboardItem
       key={score.userId}
-      user={user}
+      imperial={userPrefs.imperial}
       position={idx + 1}
       score={score}
       challenge={challenge}

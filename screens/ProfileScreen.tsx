@@ -6,6 +6,7 @@ import UserInfoDialog from "../components/profile/UserInfoDialog";
 import TimezoneDialog from "../components/profile/TimezoneDialog";
 import { useAuthContext, logout } from "../contexts/AuthContext";
 import { useUserContext } from "../contexts/UserContext";
+import { useUserPrefsContext } from "../contexts/UserPrefsContext";
 
 import BaseStyles from "../utils/BaseStyles";
 import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
@@ -13,11 +14,19 @@ import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
 export default function ProfileScreen() {
   const { dispatch } = useAuthContext();
   const { user, saveUser } = useUserContext();
+  const { userPrefs, savePrefs } = useUserPrefsContext()
   const [visible, setVisible] = useState(false);
   const [unitMenuVisible, setUnitMenuVisible] = useState(false);
   const [timezoneDialogVisible, setTimezoneDialogVisible] = useState(false);
 
-  const prefs = user.userPrefs;
+  async function saveUnits(imperial: boolean) {
+    try {
+      await savePrefs({ imperial });
+      setUnitMenuVisible(false);
+    } catch (e) {
+      setUnitMenuVisible(false);
+    }
+  }
 
   return (
     <Screen>
@@ -67,18 +76,28 @@ export default function ProfileScreen() {
             }}
             anchor={
               <List.Item
-                title={unitsLabel(prefs.imperial)}
+                title={unitsLabel(userPrefs.imperial)}
                 description="Units & Measurements"
                 onPress={() => setUnitMenuVisible(true)}
               />
             }
           >
-            <Menu.Item onPress={() => {}} title="Meters & Kilometers" />
-            <Menu.Item onPress={() => {}} title="Feet & Miles" />
+            <Menu.Item
+              onPress={() => {
+                saveUnits(false);
+              }}
+              title="Meters & Kilometers"
+            />
+            <Menu.Item
+              onPress={() => {
+                saveUnits(true);
+              }}
+              title="Feet & Miles"
+            />
           </Menu>
 
           <List.Item
-            title={timezoneLabel(prefs.timezone)}
+            title={timezoneLabel(userPrefs.timezone)}
             description="Timezone"
             onPress={() => setTimezoneDialogVisible(true)}
           />
@@ -99,7 +118,8 @@ export default function ProfileScreen() {
           close={() => setVisible(false)}
         />
         <TimezoneDialog
-          userPrefs={user.userPrefs}
+          userPrefs={userPrefs}
+          savePrefs={savePrefs}
           visible={timezoneDialogVisible}
           close={() => setTimezoneDialogVisible(false)}
         />

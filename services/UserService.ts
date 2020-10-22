@@ -3,7 +3,7 @@ import Credential from "../api/models/Credential";
 import User, { UserParams } from "../api/models/User";
 import { apiGet, Options, apiPut } from "../api/client";
 import { camelizeObject, underscoreObject } from "../utils";
-import UserPrefs from "../api/models/UserPrefs";
+import UserPrefs, { UserPrefsParams } from "../api/models/UserPrefs";
 
 export async function getMe(options: Options) {
   const response = await apiGet(`/users/me`, options);
@@ -21,6 +21,21 @@ export async function saveMe(params: UserParams, options: Options) {
     ...options,
     data: {
       user: underscoreObject(params),
+    },
+  });
+
+  if (response.status !== 204) {
+    throw new Error("User not saved");
+  }
+
+  return {};
+}
+
+export async function savePrefs(params: UserPrefsParams, options: Options) {
+  const response = await apiPut("/user_prefs/me", {
+    ...options,
+    data: {
+      user_prefs: underscoreObject(params),
     },
   });
 

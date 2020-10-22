@@ -14,6 +14,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { ChallengeProvider } from "../contexts/ChallengeContext";
 import { NewChallengeProvider } from "../contexts/NewChallengeContext";
 import { UserProvider } from "../contexts/UserContext";
+import { UserPrefsProvider } from "../contexts/UserPrefsContext";
 
 // If you are not familiar with React Navigation, we recommend going through the
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
@@ -42,8 +43,9 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   const { auth } = useAuthContext();
+  const { user, token } = auth;
 
-  if (!auth.user || !auth.token) {
+  if (!user || !token) {
     return (
       <Stack.Navigator headerMode="none">
         <Stack.Screen name="Root" component={LoggedOutNavigator} />
@@ -52,19 +54,21 @@ function RootNavigator() {
   }
 
   return (
-    <UserProvider user={auth.user} authToken={auth.token}>
-      <ChallengeProvider>
-        <NewChallengeProvider>
-          <Stack.Navigator headerMode="none">
-            <Stack.Screen name="Root" component={BottomTabNavigator} />
-            <Stack.Screen
-              name="NotFound"
-              component={NotFoundScreen}
-              options={{ title: "Oops!" }}
-            />
-          </Stack.Navigator>
-        </NewChallengeProvider>
-      </ChallengeProvider>
+    <UserProvider user={user} authToken={token}>
+      <UserPrefsProvider userPrefs={user.userPrefs} authToken={token}>
+        <ChallengeProvider>
+          <NewChallengeProvider>
+            <Stack.Navigator headerMode="none">
+              <Stack.Screen name="Root" component={BottomTabNavigator} />
+              <Stack.Screen
+                name="NotFound"
+                component={NotFoundScreen}
+                options={{ title: "Oops!" }}
+              />
+            </Stack.Navigator>
+          </NewChallengeProvider>
+        </ChallengeProvider>
+      </UserPrefsProvider>
     </UserProvider>
   );
 }

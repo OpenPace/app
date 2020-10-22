@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Picker } from "@react-native-community/picker";
 import { Dialog, Button } from "react-native-paper";
-import UserPrefs from "../../api/models/UserPrefs";
-import { timezoneList } from "../../utils";
+import UserPrefs, {UserPrefsParams} from "../../api/models/UserPrefs";
+import { timezoneList } from "../../utils/Timezone";
 
 interface Props {
   userPrefs: UserPrefs;
   visible: boolean;
+  savePrefs: (params: UserPrefsParams) => Promise<void>;
   close: () => void;
 }
 
@@ -22,16 +23,33 @@ export default function TimezoneDialog(props: Props) {
 
   async function save() {
     setLoading(true);
+    try {
+      await props.savePrefs({
+        timezone,
+      });
+      setLoading(false);
+      props.close();
+    } catch (e) {
+      setLoading(false);
+      props.close();
+    }
   }
 
-  const options = timezoneList.map((x) => <Picker.Item label={x} value={x} />);
+  const options = timezoneList.map((x) => (
+    <Picker.Item key={x} label={x.replace(/_/, " ")} value={x} />
+  ));
 
   return (
     <Dialog visible={props.visible} onDismiss={close}>
       <Dialog.Title>Choose Timezone</Dialog.Title>
 
       <Dialog.Content>
-        <Picker selectedValue={timezone}>{options}</Picker>
+        <Picker
+          selectedValue={timezone}
+          onValueChange={(itemValue) => setTimezone(itemValue as string)}
+        >
+          {options}
+        </Picker>
       </Dialog.Content>
       <Dialog.Actions>
         <Button mode="outlined" onPress={close}>

@@ -1,6 +1,7 @@
 import React from "react";
 import { DateTime } from "luxon";
 import { View, Share, StyleSheet } from "react-native";
+import * as Linking from "expo-linking";
 import {
   ActivityIndicator,
   Avatar,
@@ -25,6 +26,12 @@ const challengeTypeIcons = {
   segment: "",
 };
 
+function buildShareMessage(challenge: Challenge) {
+  const challengeLink = Linking.makeUrl(`invite/${challenge.slug}`);
+
+  return `Join the Challenge ${challengeLink}`;
+}
+
 export default function ChallengeShowScreen() {
   const { challenge } = useChallengeContext();
 
@@ -39,8 +46,9 @@ export default function ChallengeShowScreen() {
   async function inviteFriends() {
     try {
       const result = await Share.share({
-        message: "Join the Challenge: URL",
+        message: buildShareMessage(challenge),
       });
+
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
           // shared with activity type of result.activityType

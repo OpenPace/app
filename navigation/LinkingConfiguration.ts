@@ -40,7 +40,7 @@ export default {
           Welcome: 'welcome',
           SignUp: 'sign-up',
           LogIn: 'log-in',
-          Invitation: 'invite/:id',
+          Invitation: 'invite/:slug',
         },
       },
       NotFound: '*',

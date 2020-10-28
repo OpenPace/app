@@ -2,7 +2,6 @@ import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   createStackNavigator,
-  StackNavigationProp,
   HeaderBackButton,
 } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -10,6 +9,7 @@ import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import StravaPromptScreen from "../screens/StravaPromptScreen";
+import InvitationScreen from "../screens/InvitationScreen";
 import {
   BottomTabParamList,
   NotificationsParamList,
@@ -32,6 +32,7 @@ export default function BottomTabNavigator() {
         component={NotificationsStackScreen}
       />
       <BottomTab.Screen name="Profile" component={ProfileStackScreen} />
+      <BottomTab.Screen name="Invitation" component={InvitationScreen} />
     </BottomTab.Navigator>
   );
 }

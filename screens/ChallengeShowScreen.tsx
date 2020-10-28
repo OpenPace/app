@@ -29,7 +29,7 @@ const challengeTypeIcons = {
 function buildShareMessage(challenge: Challenge) {
   const challengeLink = Linking.makeUrl(`invite/${challenge.slug}`);
 
-  return `Join the Challenge ${challengeLink}`;
+  return challengeLink;
 }
 
 export default function ChallengeShowScreen() {

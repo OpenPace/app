@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import Challenge, { ChallengeParams } from "../api/models/Challenge";
 import Score from "../api/models/Score";
-import { apiGet, apiPost, Options } from "../api/client";
+import { apiGet, apiPost, apiPut, Options } from "../api/client";
 import { camelizeObject, underscoreObject } from "../utils";
 
 export async function getChallengesByUser(options: Options) {
@@ -49,6 +49,16 @@ export async function createChallenge(params: ChallengeParams, options: Options)
   }
   const body = await response.json();
   return parseChallenge(body);
+}
+
+export async function joinChallenge(slug: string, options: Options) {
+  const response = await apiPut(`/challenges/${slug}/join`, options);
+
+  if (response.status !== 204) {
+    throw new Error("User not saved");
+  }
+
+  return {};
 }
 
 function parseChallenge(challenge: any) {

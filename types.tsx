@@ -14,6 +14,7 @@ export type BottomTabParamList = {
   Notifications: undefined;
   Profile: undefined;
   StravaPrompt: undefined;
+  Invitation: { slug: string };
 };
 
 // Activity type: bike, run, swim

@@ -37,7 +37,10 @@ export async function getLeaderboard(slug: string, options: Options) {
   return body.scores.map(parseScore);
 }
 
-export async function createChallenge(params: ChallengeParams, options: Options) {
+export async function createChallenge(
+  params: ChallengeParams,
+  options: Options
+) {
   const response = await apiPost("/challenges", {
     ...options,
     data: {
@@ -74,6 +77,13 @@ function parseChallenge(challenge: any) {
   } as Challenge;
 }
 
-function parseScore(score: any) {
-  return camelizeObject(score) as Score;
+function parseScore(score: any): Score {
+  return {
+    score: score.score,
+    userId: score.user_id,
+    firstName: score.first_name,
+    lastName: score.last_name,
+    avatar: score.avatar,
+    updatedAt: DateTime.fromISO(score.updated_at),
+  } as Score;
 }

@@ -5,6 +5,7 @@ import Score from "../api/models/Score";
 import Challenge from "../api/models/Challenge";
 import BaseStyles from "../utils/BaseStyles";
 import { formatDistance, formatDuration, formatAltitude } from "../utils";
+import { timeAgo } from "../utils/DateTime";
 
 interface ListItemProps {
   score: Score;
@@ -48,7 +49,7 @@ export default function LeaderboardItem(props: ListItemProps) {
 
       <View style={{ flexGrow: 1, marginLeft: 8 }}>
         <Text>{name}</Text>
-        <Text style={[BaseStyles.textMuted]}>Test</Text>
+        <Text style={[BaseStyles.textMuted]}>{timeAgo(score.updatedAt)}</Text>
       </View>
 
       <View style={[BaseStyles.p3]}>

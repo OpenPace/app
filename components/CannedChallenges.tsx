@@ -47,17 +47,6 @@ export default function CannedChallenges() {
 
       <Card
         style={[BaseStyles.mb3, styles.card]}
-        onPress={() => selectChallenge({ challengeType: "segment" })}
-      >
-        <Card.Title
-          title="Segment Challenge"
-          subtitle="Who can run the fastest segment"
-          left={(props) => <Avatar.Icon {...props} icon="run" />}
-        />
-      </Card>
-
-      <Card
-        style={[BaseStyles.mb3, styles.card]}
         onPress={() => selectChallenge({ challengeType: "altitude" })}
       >
         <Card.Title

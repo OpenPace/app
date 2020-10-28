@@ -55,7 +55,7 @@ export async function joinChallenge(slug: string, options: Options) {
   const response = await apiPut(`/challenges/${slug}/join`, options);
 
   if (response.status !== 204) {
-    throw new Error("User not saved");
+    throw new Error("User already joined");
   }
 
   return {};

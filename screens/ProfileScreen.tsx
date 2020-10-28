@@ -14,7 +14,7 @@ import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
 export default function ProfileScreen() {
   const { dispatch } = useAuthContext();
   const { user, saveUser } = useUserContext();
-  const { userPrefs, savePrefs } = useUserPrefsContext()
+  const { userPrefs, savePrefs } = useUserPrefsContext();
   const [visible, setVisible] = useState(false);
   const [unitMenuVisible, setUnitMenuVisible] = useState(false);
   const [timezoneDialogVisible, setTimezoneDialogVisible] = useState(false);

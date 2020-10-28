@@ -2,7 +2,7 @@ import { Platform } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as SecureStore from "expo-secure-store";
 import { apiPost } from "../api/client";
-import { parseUser } from './UserService';
+import { parseUser } from "./UserService";
 
 type LoginParams = {
   email: string;

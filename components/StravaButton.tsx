@@ -37,7 +37,7 @@ export default function StravaButton(props: Props) {
         native: "openpace://redirect",
       }),
     },
-    discovery
+    discovery,
   );
 
   function handleClick() {

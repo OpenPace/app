@@ -13,9 +13,9 @@ It is built in React Native using Expo.
 
 Here are the steps to get started:
 
-  * Install dependencies with `yarn install`
-  * Start the expo server with `yarn start`
-  * A browser window will pop up with links to run in your browser or on your phone using the expo app.
+- Install dependencies with `yarn install`
+- Start the expo server with `yarn start`
+- A browser window will pop up with links to run in your browser or on your phone using the expo app.
 
 ### Feedback
 

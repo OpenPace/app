@@ -1,49 +1,49 @@
-import * as Linking from 'expo-linking';
+import * as Linking from "expo-linking";
 
 export default {
-  prefixes: [Linking.makeUrl('/')],
+  prefixes: [Linking.makeUrl("/")],
   config: {
     screens: {
       Root: {
         screens: {
-          StravaPrompt: 'strava-connect',
+          StravaPrompt: "strava-connect",
           Challenges: {
-            path: 'challenges',
+            path: "challenges",
             screens: {
-              ChallengesScreen: '',
-              ChallengeActivityScreen: 'new/activity',
-              ChallengeTypeScreen: 'new/type',
-              ChallengeTimelineScreen: 'new/timeline',
-              ChallengeDateScreen: 'new/dates',
-              ChallengeDetailsScreen: 'new/details',
+              ChallengesScreen: "",
+              ChallengeActivityScreen: "new/activity",
+              ChallengeTypeScreen: "new/type",
+              ChallengeTimelineScreen: "new/timeline",
+              ChallengeDateScreen: "new/dates",
+              ChallengeDetailsScreen: "new/details",
               ChallengeShowScreen: {
-                path: ':slug',
+                path: ":slug",
                 screens: {
-                  Home: '',
-                  Leaderboard: 'leaderboard',
-                  Chat: 'chat',
+                  Home: "",
+                  Leaderboard: "leaderboard",
+                  Chat: "chat",
                 },
-              }
+              },
             },
           },
           Notifications: {
             screens: {
-              NotificationsScreen: 'notifications',
+              NotificationsScreen: "notifications",
             },
           },
           Profile: {
             screens: {
-              ProfileScreen: 'profile',
-              SettingsScreen: 'settings',
+              ProfileScreen: "profile",
+              SettingsScreen: "settings",
             },
           },
-          Welcome: 'welcome',
-          SignUp: 'sign-up',
-          LogIn: 'log-in',
-          Invitation: 'invite/:slug',
+          Welcome: "welcome",
+          SignUp: "sign-up",
+          LogIn: "log-in",
+          Invitation: "invite/:slug",
         },
       },
-      NotFound: '*',
+      NotFound: "*",
     },
   },
 };

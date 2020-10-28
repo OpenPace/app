@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Picker } from "@react-native-community/picker";
 import { Dialog, Button } from "react-native-paper";
-import UserPrefs, {UserPrefsParams} from "../../api/models/UserPrefs";
+import UserPrefs, { UserPrefsParams } from "../../api/models/UserPrefs";
 import { timezoneList } from "../../utils/Timezone";
 
 interface Props {

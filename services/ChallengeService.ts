@@ -39,7 +39,7 @@ export async function getLeaderboard(slug: string, options: Options) {
 
 export async function createChallenge(
   params: ChallengeParams,
-  options: Options
+  options: Options,
 ) {
   const response = await apiPost("/challenges", {
     ...options,

@@ -9,7 +9,7 @@ import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import { AuthProvider } from "./contexts/AuthContext";
 
-export default function App() {
+export default function App(): React.ReactNode {
   const isLoadingComplete = useCachedResources();
   const scheme = useColorScheme();
   const theme = scheme === "light" ? DefaultTheme : DarkTheme;

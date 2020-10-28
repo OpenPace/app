@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Screen from "../components/Screen";
 import LeaderboardItem from "../components/LeaderboardItem";
 import BaseStyles from "../utils/BaseStyles";
-import { ScrollView } from "react-native";
+import { RefreshControl, ScrollView } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { getLeaderboard } from "../services/ChallengeService";
@@ -15,19 +15,25 @@ export default function LeaderboardScreen() {
   const { auth } = useAuthContext();
   const { userPrefs } = useUserPrefsContext();
   const [scores, setScores] = useState<Score[] | undefined>(undefined);
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    async function loadLeaderboard() {
-      if (!challenge) {
-        return;
-      }
-
-      const result = await getLeaderboard(challenge.slug, {
-        authToken: auth.token,
-      });
-      setScores(result);
+  async function loadLeaderboard() {
+    if (!challenge) {
+      return;
     }
 
+    const result = await getLeaderboard(challenge.slug, {
+      authToken: auth.token,
+    });
+    setScores(result);
+  }
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    loadLeaderboard().then(() => setRefreshing(false));
+  }, []);
+
+  useEffect(() => {
     loadLeaderboard();
   }, [challenge]);
 
@@ -51,7 +57,14 @@ export default function LeaderboardScreen() {
 
   return (
     <Screen>
-      <ScrollView>{items}</ScrollView>
+      <ScrollView
+        style={[BaseStyles.pbTabBar]}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {items}
+      </ScrollView>
     </Screen>
   );
 }

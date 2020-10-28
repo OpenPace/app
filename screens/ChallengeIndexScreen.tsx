@@ -1,5 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
+import {
+  Image,
+  RefreshControl,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import { Button, Card, Headline, FAB, Subheading } from "react-native-paper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -27,6 +33,19 @@ export default function HomeScreen() {
   const { user } = auth;
 
   const [challenges, setChallenges] = useState<Challenge[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
+
+  async function loadChallenge() {
+    const allChallenges = await getChallengesByUser({
+      authToken: auth.token,
+    });
+    setChallenges(allChallenges);
+  }
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    loadChallenge().then(() => setRefreshing(false));
+  }, []);
 
   // Redirect to strava prompt
   useEffect(() => {
@@ -36,13 +55,6 @@ export default function HomeScreen() {
   }, [user]);
 
   useEffect(() => {
-    async function loadChallenge() {
-      const allChallenges = await getChallengesByUser({
-        authToken: auth.token,
-      });
-      setChallenges(allChallenges);
-    }
-
     loadChallenge();
   }, []);
 
@@ -69,7 +81,12 @@ export default function HomeScreen() {
         subheading="Create a challenge to get started"
       />
 
-      <ScrollView style={[BaseStyles.pbTabBar]}>
+      <ScrollView
+        style={[BaseStyles.pbTabBar]}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View style={[BaseStyles.p4]}>
           <SectionHeader text="Create a Challenge" />
           <CannedChallenges />

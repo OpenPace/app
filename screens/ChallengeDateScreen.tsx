@@ -69,17 +69,17 @@ export default function ChallengeDateScreen() {
   if (timeline === "day") {
     return (
       <Screen style={[BaseStyles.p4]}>
-        <Card style={[BaseStyles.mb3]} onPress={() => setDate(today)}>
+        <Card onPress={() => setDate(today)} style={[BaseStyles.mb3]}>
           <Card.Title
-            title="Start Today"
             left={(props) => <Avatar.Text {...props} label="1" />}
+            title="Start Today"
           />
         </Card>
 
-        <Card style={[BaseStyles.mb3]} onPress={() => setDate(tomorrow)}>
+        <Card onPress={() => setDate(tomorrow)} style={[BaseStyles.mb3]}>
           <Card.Title
-            title="Start Tomorrow"
             left={(props) => <Avatar.Text {...props} label="2" />}
+            title="Start Tomorrow"
           />
         </Card>
       </Screen>
@@ -91,17 +91,17 @@ export default function ChallengeDateScreen() {
   if (timeline === "week") {
     return (
       <Screen style={[BaseStyles.p4]}>
-        <Card style={[BaseStyles.mb3]} onPress={() => setDate(startOfWeek)}>
+        <Card onPress={() => setDate(startOfWeek)} style={[BaseStyles.mb3]}>
           <Card.Title
-            title="Start This Week"
             left={(props) => <Avatar.Text {...props} label="1" />}
+            title="Start This Week"
           />
         </Card>
 
-        <Card style={[BaseStyles.mb3]} onPress={() => setDate(startOfNextWeek)}>
+        <Card onPress={() => setDate(startOfNextWeek)} style={[BaseStyles.mb3]}>
           <Card.Title
-            title="Start Next Monday"
             left={(props) => <Avatar.Text {...props} label="2" />}
+            title="Start Next Monday"
           />
         </Card>
       </Screen>
@@ -113,20 +113,20 @@ export default function ChallengeDateScreen() {
   if (timeline === "weekend") {
     return (
       <Screen style={[BaseStyles.p4]}>
-        <Card style={[BaseStyles.mb3]} onPress={() => setDate(startOfWeekend)}>
+        <Card onPress={() => setDate(startOfWeekend)} style={[BaseStyles.mb3]}>
           <Card.Title
-            title="Start This Weekend"
             left={(props) => <Avatar.Text {...props} label="1" />}
+            title="Start This Weekend"
           />
         </Card>
 
         <Card
-          style={[BaseStyles.mb3]}
           onPress={() => setDate(startOfNextWeekend)}
+          style={[BaseStyles.mb3]}
         >
           <Card.Title
-            title="Start Next Weekend"
             left={(props) => <Avatar.Text {...props} label="2" />}
+            title="Start Next Weekend"
           />
         </Card>
       </Screen>
@@ -142,25 +142,25 @@ export default function ChallengeDateScreen() {
     <Screen style={[BaseStyles.p4]}>
       <DatePickerButton date={startAt || today} onChange={setStartDate}>
         <Card.Title
+          left={(props) => <Avatar.Text {...props} label="1" />}
           title={
             startAt ? `Start: ${startAt.toLocaleString()}` : "Pick Start Date"
           }
-          left={(props) => <Avatar.Text {...props} label="1" />}
         />
       </DatePickerButton>
 
       <DatePickerButton date={endAt || today} onChange={setInclusiveEndDate}>
         <Card.Title
-          title={endAt ? `End: ${endAt.toLocaleString()}` : "Pick End Date"}
           left={(props) => <Avatar.Text {...props} label="2" />}
+          title={endAt ? `End: ${endAt.toLocaleString()}` : "Pick End Date"}
         />
       </DatePickerButton>
 
       <Button
         disabled={disabled}
-        style={[BaseStyles.mb3]}
         mode="contained"
         onPress={submit}
+        style={[BaseStyles.mb3]}
       >
         Continue
       </Button>

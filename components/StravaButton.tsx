@@ -26,7 +26,7 @@ export default function StravaButton(props: Props) {
   const [loading, setLoading] = useState(false);
   const { auth, dispatch } = useAuthContext();
 
-  const [request, response, promptAsync] = useAuthRequest(
+  const request = useAuthRequest(
     {
       clientId: stravaClientId,
       scopes: ["activity:read_all"],
@@ -39,6 +39,9 @@ export default function StravaButton(props: Props) {
     },
     discovery,
   );
+
+  const response = request[1];
+  const promptAsync = request[2];
 
   function handleClick() {
     setLoading(true);

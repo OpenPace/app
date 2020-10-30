@@ -1,4 +1,5 @@
 node_modules
+babel.config.js
 dist
 .expo
 .expo-shared

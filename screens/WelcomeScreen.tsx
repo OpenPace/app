@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
 import Screen from "../components/Screen";
-import { Button, Headline } from "react-native-paper";
+import { Button } from "react-native-paper";
 import BaseStyles from "../utils/BaseStyles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
@@ -27,22 +27,22 @@ export default function WelcomeScreen() {
       <ImageBackground source={image} style={styles.image}>
         <SafeAreaView style={[BaseStyles.p4, styles.container]}>
           <View style={[BaseStyles.p4, styles.logoContainer]}>
-            <Image style={styles.logo} source={logo} />
+            <Image source={logo} style={styles.logo} />
           </View>
 
           <View>
             <Button
-              style={[BaseStyles.mb3]}
               mode="contained"
               onPress={() => navigate("SignUp")}
+              style={[BaseStyles.mb3]}
             >
               Sign Up
             </Button>
 
             <Button
-              style={[BaseStyles.mb4, styles.secondaryBtn]}
               mode="outline"
               onPress={() => navigate("LogIn")}
+              style={[BaseStyles.mb4, styles.secondaryBtn]}
             >
               Sign In
             </Button>

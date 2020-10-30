@@ -16,13 +16,13 @@ export default function Podium({ challenge }: Props) {
   return (
     <View style={[BaseStyles.row, BaseStyles.mb4, styles.placeContainer]}>
       <View style={[BaseStyles.col]}>
-        {second && <Place score={second} place={2} />}
+        {second && <Place place={2} score={second} />}
       </View>
       <View style={[BaseStyles.col]}>
-        {first && <Place score={first} place={1} />}
+        {first && <Place place={1} score={first} />}
       </View>
       <View style={[BaseStyles.col]}>
-        {third && <Place score={third} place={3} />}
+        {third && <Place place={3} score={third} />}
       </View>
     </View>
   );
@@ -42,8 +42,8 @@ function Place({ place, score }: PlaceProps) {
   return (
     <View style={[styles.place]}>
       <Avatar.Image
-        source={{ uri: avatar }}
         size={size}
+        source={{ uri: avatar }}
         style={[BaseStyles.mb2]}
       />
       <Text>

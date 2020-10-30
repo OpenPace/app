@@ -23,38 +23,38 @@ export default function ChallengesStackNavigator() {
   return (
     <ChallengesStack.Navigator>
       <ChallengesStack.Screen
-        name="ChallengesScreen"
         component={ChallengeIndexScreen}
+        name="ChallengesScreen"
         options={{ title: "Challenges", headerShown: false }}
       />
       <ChallengesStack.Screen
-        name="ChallengeShowScreen"
         component={ChallengeTabNavigator}
+        name="ChallengeShowScreen"
         options={{ headerLeft: () => <BackButton />, title: "Challenge" }}
       />
       <ChallengesStack.Screen
-        name="ChallengeActivityScreen"
         component={ChallengeActivityScreen}
+        name="ChallengeActivityScreen"
         options={{ title: "Choose Activity" }}
       />
       <ChallengesStack.Screen
-        name="ChallengeTypeScreen"
         component={ChallengeTypeScreen}
+        name="ChallengeTypeScreen"
         options={{ title: "Choose Your Challenge" }}
       />
       <ChallengesStack.Screen
-        name="ChallengeTimelineScreen"
         component={ChallengeTimelineScreen}
+        name="ChallengeTimelineScreen"
         options={{ title: "Choose Your Timeline" }}
       />
       <ChallengesStack.Screen
-        name="ChallengeDateScreen"
         component={ChallengeDateScreen}
+        name="ChallengeDateScreen"
         options={{ title: "Choose Your Dates" }}
       />
       <ChallengesStack.Screen
-        name="ChallengeDetailsScreen"
         component={ChallengeDetailsScreen}
+        name="ChallengeDetailsScreen"
         options={{ title: "Choose Your Dates" }}
       />
     </ChallengesStack.Navigator>

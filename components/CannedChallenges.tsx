@@ -24,35 +24,35 @@ export default function CannedChallenges() {
   return (
     <ScrollView horizontal style={[BaseStyles.py2]}>
       <Card
-        style={[BaseStyles.mb3, styles.card]}
         onPress={() => selectChallenge({ challengeType: "distance" })}
+        style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-          title="Distance Challenge"
+          left={(props) => <Avatar.Icon {...props} icon="run" />}
           subtitle="Who can run the furthest"
-          left={(props) => <Avatar.Icon {...props} icon="run" />}
+          title="Distance Challenge"
         />
       </Card>
 
       <Card
-        style={[BaseStyles.mb3, styles.card]}
         onPress={() => selectChallenge({ challengeType: "time" })}
+        style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-          title="Duration Challenge"
-          subtitle="Who can run the longest"
           left={(props) => <Avatar.Icon {...props} icon="run" />}
+          subtitle="Who can run the longest"
+          title="Duration Challenge"
         />
       </Card>
 
       <Card
-        style={[BaseStyles.mb3, styles.card]}
         onPress={() => selectChallenge({ challengeType: "altitude" })}
+        style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-          title="Climbing Challenge"
-          subtitle="Who can run the most elevation"
           left={(props) => <Avatar.Icon {...props} icon="run" />}
+          subtitle="Who can run the most elevation"
+          title="Climbing Challenge"
         />
       </Card>
     </ScrollView>

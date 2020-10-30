@@ -52,35 +52,35 @@ export default function ProfileScreen() {
         <List.Section>
           <List.Subheader>User Information</List.Subheader>
           <List.Item
-            title={fullName(user)}
             description="Name"
             onPress={() => setVisible(true)}
+            title={fullName(user)}
           />
           <List.Item
-            title={user.email}
             description="Email"
             onPress={() => setVisible(true)}
+            title={user.email}
           />
           <List.Item
-            title={locationName(user)}
             description="Location"
             onPress={() => setVisible(true)}
+            title={locationName(user)}
           />
 
           <List.Subheader>Preferences</List.Subheader>
 
           <Menu
-            visible={unitMenuVisible}
+            anchor={
+              <List.Item
+                description="Units & Measurements"
+                onPress={() => setUnitMenuVisible(true)}
+                title={unitsLabel(userPrefs.imperial)}
+              />
+            }
             onDismiss={() => {
               setUnitMenuVisible(false);
             }}
-            anchor={
-              <List.Item
-                title={unitsLabel(userPrefs.imperial)}
-                description="Units & Measurements"
-                onPress={() => setUnitMenuVisible(true)}
-              />
-            }
+            visible={unitMenuVisible}
           >
             <Menu.Item
               onPress={() => {
@@ -97,9 +97,9 @@ export default function ProfileScreen() {
           </Menu>
 
           <List.Item
-            title={timezoneLabel(userPrefs.timezone)}
             description="Timezone"
             onPress={() => setTimezoneDialogVisible(true)}
+            title={timezoneLabel(userPrefs.timezone)}
           />
         </List.Section>
       </View>
@@ -112,16 +112,16 @@ export default function ProfileScreen() {
 
       <Portal>
         <UserInfoDialog
-          user={user}
-          saveUser={saveUser}
-          visible={visible}
           close={() => setVisible(false)}
+          saveUser={saveUser}
+          user={user}
+          visible={visible}
         />
         <TimezoneDialog
-          userPrefs={userPrefs}
-          savePrefs={savePrefs}
-          visible={timezoneDialogVisible}
           close={() => setTimezoneDialogVisible(false)}
+          savePrefs={savePrefs}
+          userPrefs={userPrefs}
+          visible={timezoneDialogVisible}
         />
       </Portal>
     </Screen>

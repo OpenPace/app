@@ -44,51 +44,51 @@ export default function UserInfoDialog(props: Props) {
   }
 
   return (
-    <Dialog visible={props.visible} onDismiss={close}>
+    <Dialog onDismiss={close} visible={props.visible}>
       <Dialog.Title>Edit Information</Dialog.Title>
 
       <Dialog.Content>
         <TextInput
-          style={[BaseStyles.mb2]}
           label="First Name"
-          value={firstName}
+          mode="outlined"
           onChangeText={setFirstName}
-          mode="outlined"
+          style={[BaseStyles.mb2]}
+          value={firstName}
         />
         <TextInput
-          style={[BaseStyles.mb2]}
           label="Last Name"
-          value={lastName}
+          mode="outlined"
           onChangeText={setLastName}
-          mode="outlined"
+          style={[BaseStyles.mb2]}
+          value={lastName}
         />
         <TextInput
-          style={[BaseStyles.mb2]}
           label="Email"
-          value={email}
+          mode="outlined"
           onChangeText={setEmail}
-          mode="outlined"
+          style={[BaseStyles.mb2]}
+          value={email}
         />
         <TextInput
-          style={[BaseStyles.mb2]}
           label="City"
-          value={city}
-          onChangeText={setCity}
           mode="outlined"
+          onChangeText={setCity}
+          style={[BaseStyles.mb2]}
+          value={city}
         />
         <TextInput
-          style={[BaseStyles.mb2]}
           label="state"
-          value={state}
-          onChangeText={setState}
           mode="outlined"
+          onChangeText={setState}
+          style={[BaseStyles.mb2]}
+          value={state}
         />
       </Dialog.Content>
       <Dialog.Actions>
         <Button mode="outlined" onPress={close}>
           Cancel
         </Button>
-        <Button mode="contained" onPress={save} loading={loading}>
+        <Button loading={loading} mode="contained" onPress={save}>
           Save
         </Button>
       </Dialog.Actions>

@@ -22,17 +22,17 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator initialRouteName="Challenges" tabBar={() => null}>
-      <BottomTab.Screen name="StravaPrompt" component={StravaPromptScreen} />
+      <BottomTab.Screen component={StravaPromptScreen} name="StravaPrompt" />
       <BottomTab.Screen
-        name="Challenges"
         component={ChallengesStackNavigator}
+        name="Challenges"
       />
       <BottomTab.Screen
-        name="Notifications"
         component={NotificationsStackScreen}
+        name="Notifications"
       />
-      <BottomTab.Screen name="Profile" component={ProfileStackScreen} />
-      <BottomTab.Screen name="Invitation" component={InvitationScreen} />
+      <BottomTab.Screen component={ProfileStackScreen} name="Profile" />
+      <BottomTab.Screen component={InvitationScreen} name="Invitation" />
     </BottomTab.Navigator>
   );
 }
@@ -45,8 +45,8 @@ function NotificationsStackScreen() {
   return (
     <NotificationsStack.Navigator>
       <NotificationsStack.Screen
-        name="NotificationsScreen"
         component={NotificationsScreen}
+        name="NotificationsScreen"
         options={{ title: "Notifications" }}
       />
     </NotificationsStack.Navigator>
@@ -59,13 +59,13 @@ function ProfileStackScreen() {
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
-        name="ProfileScreen"
         component={ProfileScreen}
+        name="ProfileScreen"
         options={{ headerLeft: () => <BackButton />, title: "Profile" }}
       />
       <ProfileStack.Screen
-        name="SettingsScreen"
         component={SettingsScreen}
+        name="SettingsScreen"
         options={{ title: "Settings" }}
       />
     </ProfileStack.Navigator>

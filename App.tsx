@@ -16,17 +16,16 @@ export default function App(): React.ReactNode {
 
   if (!isLoadingComplete) {
     return null;
-  } else {
-    return (
-      <AuthProvider>
-        <PaperProvider theme={theme}>
-          <SafeAreaProvider>
-            <Navigation />
-
-            <StatusBar />
-          </SafeAreaProvider>
-        </PaperProvider>
-      </AuthProvider>
-    );
   }
+  return (
+    <AuthProvider>
+      <PaperProvider theme={theme}>
+        <SafeAreaProvider>
+          <Navigation />
+
+          <StatusBar />
+        </SafeAreaProvider>
+      </PaperProvider>
+    </AuthProvider>
+  );
 }

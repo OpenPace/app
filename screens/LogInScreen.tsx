@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Text, TextInput, Title } from "react-native-paper";
+import { Button, Text, TextInput } from "react-native-paper";
 import {
   useAuthContext,
   loginSuccess,
@@ -31,26 +31,26 @@ export default function LogInScreen() {
   return (
     <Screen style={[BaseStyles.p4]}>
       <TextInput
-        style={[BaseStyles.mb2]}
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        mode="outlined"
-        autoCompleteType="email"
         autoCapitalize="none"
+        autoCompleteType="email"
         keyboardType="email-address"
+        label="Email"
+        mode="outlined"
+        onChangeText={setEmail}
+        style={[BaseStyles.mb2]}
+        value={email}
       />
       <TextInput
-        style={[BaseStyles.mb4]}
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
-        mode="outlined"
         autoCompleteType="password"
+        label="Password"
+        mode="outlined"
+        onChangeText={setPassword}
         secureTextEntry
+        style={[BaseStyles.mb4]}
+        value={password}
       />
 
-      <Button mode="contained" loading={loading} onPress={handleLogin}>
+      <Button loading={loading} mode="contained" onPress={handleLogin}>
         Log In
       </Button>
 

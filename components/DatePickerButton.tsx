@@ -33,12 +33,12 @@ export default function DatePickerButton(props: Props) {
 
       {show && (
         <DateTimePicker
+          display="default"
+          is24Hour={true}
+          mode="date"
+          onChange={_onChange}
           testID="dateTimePicker"
           value={date.toJSDate()}
-          mode="date"
-          is24Hour={true}
-          display="default"
-          onChange={_onChange}
         />
       )}
     </View>

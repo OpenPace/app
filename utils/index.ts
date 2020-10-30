@@ -2,15 +2,15 @@ import User from "../api/models/User";
 
 type StringKeyable<T = any> = { [key: string]: T };
 
-export function camelToUnderscore(key: string) {
+export function camelToUnderscore(key: string): string {
   return key.replace(/([A-Z])/g, "_$1").toLowerCase();
 }
 
-export function underscoreToCamel(key: string) {
+export function underscoreToCamel(key: string): string {
   return key.replace(/_([a-z])/g, (g) => g[1].toUpperCase());
 }
 
-export function underscoreObject(data: StringKeyable) {
+export function underscoreObject(data: StringKeyable): StringKeyable {
   const newObject: StringKeyable = {};
   for (const key in data) {
     newObject[camelToUnderscore(key)] = data[key];
@@ -19,7 +19,7 @@ export function underscoreObject(data: StringKeyable) {
   return newObject;
 }
 
-export function camelizeObject(data: StringKeyable) {
+export function camelizeObject(data: StringKeyable): StringKeyable {
   const newObject: StringKeyable = {};
   for (const key in data) {
     newObject[underscoreToCamel(key)] = data[key];
@@ -28,19 +28,19 @@ export function camelizeObject(data: StringKeyable) {
   return newObject;
 }
 
-export function isStravaConnected(user: User) {
+export function isStravaConnected(user: User): boolean {
   return user.credentials.some((x) => x.provider === "strava");
 }
 
-export function cloudinaryImg(path: string) {
+export function cloudinaryImg(path: string): string {
   return `https://res.cloudinary.com/openpace/image/upload/v1600917437/${path}`;
 }
 
-export function capitalize(str: string) {
+export function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export function toOrdinal(num: number) {
+export function toOrdinal(num: number): string {
   const j = num % 10,
     k = num % 100;
 
@@ -88,21 +88,21 @@ export function formatAltitude(altitude: number, imperial: boolean): string {
   return altitude + " m";
 }
 
-export function fullName(user: User) {
+export function fullName(user: User): string {
   return `${user.firstName} ${user.lastName}`;
 }
 
-export function locationName(user: User) {
-  const arr: (string | undefined)[] = [user.city, user.state];
+export function locationName(user: User): string {
+  const arr: Array<string | undefined> = [user.city, user.state];
 
   return arr.filter((x) => !!x).join(", ");
 }
 
-export function unitsLabel(imperial: boolean) {
+export function unitsLabel(imperial: boolean): string {
   return imperial ? "Feet & Miles" : "Meters & Kilometers";
 }
 
-export function timezoneLabel(timezone: string) {
+export function timezoneLabel(timezone: string): string {
   if (timezone) {
     return timezone.replace(/_/, " ");
   }

@@ -39,7 +39,7 @@ export default function StravaPrompt() {
       <SafeAreaView style={[BaseStyles.p4, styles.container]}>
         <View style={[BaseStyles.p4, styles.logoContainer]}>
           <View style={[BaseStyles.alignCenter]}>
-            <Image style={[BaseStyles.mb4, styles.logo]} source={logo} />
+            <Image source={logo} style={[BaseStyles.mb4, styles.logo]} />
             <Headline>Connect your Strava</Headline>
             <Paragraph style={[BaseStyles.textCenter]}>
               In order to complete in challenges, we need to connect to your

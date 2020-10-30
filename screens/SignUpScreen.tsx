@@ -37,39 +37,39 @@ export default function SignUpScreen() {
   return (
     <Screen style={[BaseStyles.p4]}>
       <TextInput
-        style={[BaseStyles.mb2]}
         label="First Name"
-        value={firstName}
+        mode="outlined"
         onChangeText={setFirstName}
-        mode="outlined"
+        style={[BaseStyles.mb2]}
+        value={firstName}
       />
       <TextInput
-        style={[BaseStyles.mb2]}
         label="Last Name"
-        value={lastName}
+        mode="outlined"
         onChangeText={setLastName}
-        mode="outlined"
-      />
-      <TextInput
         style={[BaseStyles.mb2]}
-        label="Email"
-        value={email}
-        onChangeText={setEmail}
-        mode="outlined"
-        autoCompleteType="email"
-        autoCapitalize="none"
-        keyboardType="email-address"
+        value={lastName}
       />
       <TextInput
-        style={[BaseStyles.mb4]}
-        label="Password"
-        value={password}
-        onChangeText={setPassword}
+        autoCapitalize="none"
+        autoCompleteType="email"
+        keyboardType="email-address"
+        label="Email"
         mode="outlined"
+        onChangeText={setEmail}
+        style={[BaseStyles.mb2]}
+        value={email}
+      />
+      <TextInput
+        label="Password"
+        mode="outlined"
+        onChangeText={setPassword}
         secureTextEntry
+        style={[BaseStyles.mb4]}
+        value={password}
       />
 
-      <Button mode="contained" loading={loading} onPress={handleSignUp}>
+      <Button loading={loading} mode="contained" onPress={handleSignUp}>
         Create an Account
       </Button>
 

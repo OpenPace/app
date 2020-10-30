@@ -44,14 +44,14 @@ export default function ChallengeTypeScreen() {
   const optionBtns = options.map(({ title, subtitle, icon, challengeType }) => {
     return (
       <Card
-        style={[BaseStyles.mb3]}
         key={title}
         onPress={() => selectOption(challengeType)}
+        style={[BaseStyles.mb3]}
       >
         <Card.Title
-          title={title}
-          subtitle={subtitle}
           left={(props) => <Avatar.Icon {...props} icon={icon} />}
+          subtitle={subtitle}
+          title={title}
         />
       </Card>
     );

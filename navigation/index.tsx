@@ -48,21 +48,21 @@ function RootNavigator() {
   if (!user || !token) {
     return (
       <Stack.Navigator headerMode="none">
-        <Stack.Screen name="Root" component={LoggedOutNavigator} />
+        <Stack.Screen component={LoggedOutNavigator} name="Root" />
       </Stack.Navigator>
     );
   }
 
   return (
-    <UserProvider user={user} authToken={token}>
-      <UserPrefsProvider userPrefs={user.userPrefs} authToken={token}>
+    <UserProvider authToken={token} user={user}>
+      <UserPrefsProvider authToken={token} userPrefs={user.userPrefs}>
         <ChallengeProvider>
           <NewChallengeProvider>
             <Stack.Navigator headerMode="none">
-              <Stack.Screen name="Root" component={BottomTabNavigator} />
+              <Stack.Screen component={BottomTabNavigator} name="Root" />
               <Stack.Screen
-                name="NotFound"
                 component={NotFoundScreen}
+                name="NotFound"
                 options={{ title: "Oops!" }}
               />
             </Stack.Navigator>

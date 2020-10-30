@@ -65,7 +65,7 @@ export default function InvitationScreen() {
 
   if (auth.isLoggedIn) {
     actionButtons = (
-      <Button style={[BaseStyles.mb2]} mode="contained" onPress={() => join()}>
+      <Button mode="contained" onPress={() => join()} style={[BaseStyles.mb2]}>
         Join
       </Button>
     );
@@ -73,9 +73,9 @@ export default function InvitationScreen() {
     actionButtons = (
       <>
         <Button
-          style={[BaseStyles.mb2]}
           mode="contained"
           onPress={() => navigate("SignUp")}
+          style={[BaseStyles.mb2]}
         >
           Sign Up
         </Button>
@@ -105,13 +105,13 @@ export default function InvitationScreen() {
 
         <View style={[BaseStyles.row, BaseStyles.mb4, styles.info]}>
           <Avatar.Icon
-            size={24}
             icon={challenge.activityType}
+            size={24}
             style={[BaseStyles.mr1]}
           />
           <Avatar.Icon
-            size={24}
             icon={challengeTypeIcons[challenge.challengeType]}
+            size={24}
             style={[BaseStyles.mr2]}
           />
 

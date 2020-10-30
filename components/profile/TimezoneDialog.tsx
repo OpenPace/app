@@ -40,13 +40,13 @@ export default function TimezoneDialog(props: Props) {
   ));
 
   return (
-    <Dialog visible={props.visible} onDismiss={close}>
+    <Dialog onDismiss={close} visible={props.visible}>
       <Dialog.Title>Choose Timezone</Dialog.Title>
 
       <Dialog.Content>
         <Picker
-          selectedValue={timezone}
           onValueChange={(itemValue) => setTimezone(itemValue as string)}
+          selectedValue={timezone}
         >
           {options}
         </Picker>
@@ -55,7 +55,7 @@ export default function TimezoneDialog(props: Props) {
         <Button mode="outlined" onPress={close}>
           Cancel
         </Button>
-        <Button mode="contained" onPress={save} loading={loading}>
+        <Button loading={loading} mode="contained" onPress={save}>
           Save
         </Button>
       </Dialog.Actions>

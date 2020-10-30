@@ -31,10 +31,10 @@ export default function TabBar() {
       <View key={tab.route} style={[BaseStyles.col]}>
         <TouchableOpacity onPress={() => navigate(tab.route)}>
           <MaterialIcons
-            name={tab.icon}
-            style={[BaseStyles.textCenter]}
-            size={24}
             color={linkColor}
+            name={tab.icon}
+            size={24}
+            style={[BaseStyles.textCenter]}
           />
         </TouchableOpacity>
       </View>

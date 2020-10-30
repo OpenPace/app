@@ -1,25 +1,13 @@
 import React from "react";
 import BaseStyles from "../utils/BaseStyles";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Card, Caption, Title, Surface } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { Card, Caption, Title } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import Challenge from "../api/models/Challenge";
-import { cloudinaryImg } from "../utils";
 import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
 
 interface Props {
   challenge: Challenge;
-}
-
-const images = {
-  distance: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
-  time: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
-  altitude: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
-  segment: [cloudinaryImg("altitude-1.jpg"), cloudinaryImg("altitude-2.jpg")],
-};
-
-function imageSrc(challenge: Challenge): string {
-  return images[challenge.challengeType][0];
 }
 
 export default function PreviewCard({ challenge }: Props) {
@@ -27,8 +15,8 @@ export default function PreviewCard({ challenge }: Props) {
 
   return (
     <Card
-      style={[BaseStyles.mb4]}
       onPress={() => navigate("ChallengeShowScreen", { slug: challenge.slug })}
+      style={[BaseStyles.mb4]}
     >
       <View style={[BaseStyles.py2, styles.details]}>
         <Title>{challenge.name}</Title>

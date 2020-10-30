@@ -1,12 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  Image,
-  RefreshControl,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
-import { Button, Card, Headline, FAB, Subheading } from "react-native-paper";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import { FAB, Subheading } from "react-native-paper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import Screen from "../components/Screen";
@@ -17,9 +11,6 @@ import BaseStyles from "../utils/BaseStyles";
 import { useAuthContext } from "../contexts/AuthContext";
 import { isStravaConnected } from "../utils";
 import { BottomTabParamList } from "../types";
-import { SafeAreaView } from "react-native-safe-area-context";
-import useColorScheme from "../hooks/useColorScheme";
-import Colors from "../constants/Colors";
 import Challenge from "../api/models/Challenge";
 import { getChallengesByUser } from "../services/ChallengeService";
 
@@ -27,8 +18,6 @@ type NavigationProp = StackNavigationProp<BottomTabParamList>;
 
 export default function HomeScreen() {
   const { auth } = useAuthContext();
-  const scheme = useColorScheme();
-  const colors = Colors[scheme];
   const { navigate } = useNavigation<NavigationProp>();
   const { user } = auth;
 
@@ -63,7 +52,7 @@ export default function HomeScreen() {
   }
 
   const cards = challenges.map((challenge) => (
-    <PreviewCard key={challenge.slug} challenge={challenge} />
+    <PreviewCard challenge={challenge} key={challenge.slug} />
   ));
 
   // Steps:
@@ -76,16 +65,16 @@ export default function HomeScreen() {
   return (
     <Screen>
       <Header
-        user={user}
         headline="Challenges"
         subheading="Create a challenge to get started"
+        user={user}
       />
 
       <ScrollView
-        style={[BaseStyles.pbTabBar]}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
         }
+        style={[BaseStyles.pbTabBar]}
       >
         <View style={[BaseStyles.p4]}>
           <SectionHeader text="Create a Challenge" />
@@ -100,11 +89,11 @@ export default function HomeScreen() {
       </ScrollView>
 
       <FAB
-        style={styles.fab}
         icon="plus"
         onPress={() =>
           navigate("Challenges", { screen: "ChallengeActivityScreen" })
         }
+        style={styles.fab}
       />
     </Screen>
   );

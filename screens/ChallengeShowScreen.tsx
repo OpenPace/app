@@ -9,7 +9,6 @@ import {
   Caption,
   ProgressBar,
   Title,
-  Text,
 } from "react-native-paper";
 import Screen from "../components/Screen";
 import Podium from "../components/Podium";
@@ -71,13 +70,13 @@ export default function ChallengeShowScreen() {
 
       <View style={[BaseStyles.row, BaseStyles.mb4, styles.info]}>
         <Avatar.Icon
-          size={24}
           icon={challenge.activityType}
+          size={24}
           style={[BaseStyles.mr1]}
         />
         <Avatar.Icon
-          size={24}
           icon={challengeTypeIcons[challenge.challengeType]}
+          size={24}
           style={[BaseStyles.mr2]}
         />
 

@@ -47,21 +47,21 @@ export default function LeaderboardScreen() {
 
   const items = scores.map((score, idx) => (
     <LeaderboardItem
-      key={score.userId}
+      challenge={challenge}
       imperial={userPrefs.imperial}
+      key={score.userId}
       position={idx + 1}
       score={score}
-      challenge={challenge}
     />
   ));
 
   return (
     <Screen>
       <ScrollView
-        style={[BaseStyles.pbTabBar]}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
         }
+        style={[BaseStyles.pbTabBar]}
       >
         {items}
       </ScrollView>

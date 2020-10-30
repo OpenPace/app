@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Button, Menu, Text, TextInput, Title } from "react-native-paper";
+import { Button, Menu, TextInput } from "react-native-paper";
 import Screen from "../components/Screen";
 import { useAuthContext } from "../contexts/AuthContext";
 import BaseStyles from "../utils/BaseStyles";
@@ -34,27 +33,27 @@ export default function SettingsScreen() {
   return (
     <Screen style={[BaseStyles.p4]}>
       <TextInput
-        style={[BaseStyles.mb2]}
         label="First Name"
-        value={firstName}
-        onChangeText={setFirstName}
         mode="outlined"
+        onChangeText={setFirstName}
+        style={[BaseStyles.mb2]}
+        value={firstName}
       />
       <TextInput
-        style={[BaseStyles.mb2]}
         label="Last Name"
-        value={lastName}
-        onChangeText={setLastName}
         mode="outlined"
+        onChangeText={setLastName}
+        style={[BaseStyles.mb2]}
+        value={lastName}
       />
       <Menu
-        visible={visible}
-        onDismiss={closeMenu}
         anchor={
           <Button onPress={openMenu}>
             {imperial ? "Feet & Miles" : "Meters & Kilometers"}
           </Button>
         }
+        onDismiss={closeMenu}
+        visible={visible}
       >
         <Menu.Item
           onPress={() => {

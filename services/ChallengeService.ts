@@ -2,7 +2,7 @@ import { DateTime } from "luxon";
 import Challenge, { ChallengeParams } from "../api/models/Challenge";
 import Score from "../api/models/Score";
 import { apiGet, apiPost, apiPut, Options } from "../api/client";
-import { camelizeObject, underscoreObject } from "../utils";
+import { underscoreObject } from "../utils";
 
 export async function getChallengesByUser(options: Options) {
   const response = await apiGet(`/challenges`, options);

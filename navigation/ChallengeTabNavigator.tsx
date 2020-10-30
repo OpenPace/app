@@ -23,12 +23,10 @@ export default function ChallengeTabNavigator() {
 
   useEffect(() => {
     async function loadChallenge() {
-      try {
-        const newChallenge = await getChallenge(route.params.slug, {
-          authToken: auth.token,
-        });
-        setChallenge(newChallenge);
-      } catch (e) {}
+      const newChallenge = await getChallenge(route.params.slug, {
+        authToken: auth.token,
+      });
+      setChallenge(newChallenge);
     }
 
     setChallenge(undefined);
@@ -37,8 +35,8 @@ export default function ChallengeTabNavigator() {
 
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={ChallengeShowScreen} />
-      <Tab.Screen name="Leaderboard" component={LeaderboardScreen} />
+      <Tab.Screen component={ChallengeShowScreen} name="Home" />
+      <Tab.Screen component={LeaderboardScreen} name="Leaderboard" />
     </Tab.Navigator>
   );
 }

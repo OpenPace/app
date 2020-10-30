@@ -8,7 +8,6 @@ import {
   Switch,
   Paragraph,
   TouchableRipple,
-  Text,
   TextInput,
 } from "react-native-paper";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -66,16 +65,16 @@ export default function ChallengeDetailsScreen() {
   return (
     <Screen style={[BaseStyles.p4]}>
       <TextInput
-        style={[BaseStyles.mb2]}
         label="Challenge Name"
-        value={name}
-        onChangeText={setName}
         mode="outlined"
+        onChangeText={setName}
+        style={[BaseStyles.mb2]}
+        value={name}
       />
 
       <TouchableRipple
-        style={[BaseStyles.py2, BaseStyles.mb5]}
         onPress={togglePrivate}
+        style={[BaseStyles.py2, BaseStyles.mb5]}
       >
         <View style={[styles.row]}>
           <Paragraph>Make Challenge Private?</Paragraph>
@@ -87,9 +86,9 @@ export default function ChallengeDetailsScreen() {
 
       <Button
         loading={loading}
-        style={[BaseStyles.mb3]}
         mode="contained"
         onPress={submit}
+        style={[BaseStyles.mb3]}
       >
         Create Challenge
       </Button>

@@ -12,21 +12,21 @@ export default function LoggedOutNavigator() {
   return (
     <LoggedOut.Navigator>
       <LoggedOut.Screen
-        name="Welcome"
         component={WelcomeScreen}
+        name="Welcome"
         options={{ headerShown: false }}
       />
       <LoggedOut.Screen
+        component={SignUpScreen}
         name="SignUp"
         options={{ title: "Create an Account" }}
-        component={SignUpScreen}
       />
       <LoggedOut.Screen
+        component={LogInScreen}
         name="LogIn"
         options={{ title: "Welcome Back" }}
-        component={LogInScreen}
       />
-      <LoggedOut.Screen name="Invitation" component={InvitationScreen} />
+      <LoggedOut.Screen component={InvitationScreen} name="Invitation" />
     </LoggedOut.Navigator>
   );
 }

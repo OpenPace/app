@@ -17,31 +17,31 @@ export default function ChallengeTimelineScreen() {
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <Card style={[BaseStyles.mb3]} onPress={() => selectOption("day")}>
+      <Card onPress={() => selectOption("day")} style={[BaseStyles.mb3]}>
         <Card.Title
-          title="One Day"
           left={(props) => <Avatar.Text {...props} label="1" />}
+          title="One Day"
         />
       </Card>
 
-      <Card style={[BaseStyles.mb3]} onPress={() => selectOption("week")}>
+      <Card onPress={() => selectOption("week")} style={[BaseStyles.mb3]}>
         <Card.Title
-          title="Week"
           left={(props) => <Avatar.Text {...props} label="2" />}
+          title="Week"
         />
       </Card>
 
-      <Card style={[BaseStyles.mb3]} onPress={() => selectOption("weekend")}>
+      <Card onPress={() => selectOption("weekend")} style={[BaseStyles.mb3]}>
         <Card.Title
-          title="Weekend"
           left={(props) => <Avatar.Text {...props} label="3" />}
+          title="Weekend"
         />
       </Card>
 
-      <Card style={[BaseStyles.mb3]} onPress={() => selectOption("custom")}>
+      <Card onPress={() => selectOption("custom")} style={[BaseStyles.mb3]}>
         <Card.Title
-          title="Custom Dates"
           left={(props) => <Avatar.Text {...props} label="4" />}
+          title="Custom Dates"
         />
       </Card>
     </Screen>

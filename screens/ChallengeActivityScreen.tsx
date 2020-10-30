@@ -5,7 +5,6 @@ import BaseStyles from "../utils/BaseStyles";
 import { capitalize } from "../utils";
 import { Avatar, Card } from "react-native-paper";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
-import { StyleSheet } from "react-native";
 
 export default function ChallengeActivityScreen() {
   const navigation = useNavigation();
@@ -19,13 +18,13 @@ export default function ChallengeActivityScreen() {
   const options = ["run", "bike", "swim"].map((opt) => {
     return (
       <Card
-        style={[BaseStyles.mb3]}
         key={opt}
         onPress={() => selectOption(opt)}
+        style={[BaseStyles.mb3]}
       >
         <Card.Title
-          title={capitalize(opt)}
           left={(props) => <Avatar.Icon {...props} icon={opt} />}
+          title={capitalize(opt)}
         />
       </Card>
     );

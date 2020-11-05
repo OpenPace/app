@@ -6,7 +6,7 @@ import { RootStackParamList } from "../types";
 import BottomTabNavigator from "./BottomTabNavigator";
 import LoggedOutNavigator from "./LoggedOutNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
-import useColorScheme from "../hooks/useColorScheme";
+import { useThemeContext } from "../contexts/ThemeContext";
 import DefaultTheme from "./DefaultTheme";
 import DarkTheme from "./DarkTheme";
 
@@ -20,7 +20,7 @@ import { UserPrefsProvider } from "../contexts/UserPrefsContext";
 // "Fundamentals" guide: https://reactnavigation.org/docs/getting-started
 export default function Navigation() {
   const { auth } = useAuthContext();
-  const scheme = useColorScheme();
+  const { scheme } = useThemeContext();
 
   // Wait until authentication is finished loading
   if (auth.loading) {

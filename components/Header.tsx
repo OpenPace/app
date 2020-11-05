@@ -3,7 +3,7 @@ import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { Headline, Subheading } from "react-native-paper";
 import BaseStyles from "../utils/BaseStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
-import useColorScheme from "../hooks/useColorScheme";
+import { useThemeContext } from "../contexts/ThemeContext";
 import Colors from "../constants/Colors";
 import User from "../api/models/User";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -20,7 +20,7 @@ interface Props {
 
 export default function Header(props: Props) {
   const { headline, subheading, user } = props;
-  const scheme = useColorScheme();
+  const { scheme } = useThemeContext();
   const colors = Colors[scheme];
   const { navigate } = useNavigation<NavigationProp>();
 

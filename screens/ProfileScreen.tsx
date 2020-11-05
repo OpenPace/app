@@ -7,6 +7,7 @@ import TimezoneDialog from "../components/profile/TimezoneDialog";
 import { useAuthContext, logout } from "../contexts/AuthContext";
 import { useUserContext } from "../contexts/UserContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
+import { useThemeContext } from "../contexts/ThemeContext";
 
 import BaseStyles from "../utils/BaseStyles";
 import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
@@ -15,6 +16,7 @@ export default function ProfileScreen() {
   const { dispatch } = useAuthContext();
   const { user, saveUser } = useUserContext();
   const { userPrefs, savePrefs } = useUserPrefsContext();
+  const { scheme, toggleScheme } = useThemeContext();
   const [visible, setVisible] = useState(false);
   const [unitMenuVisible, setUnitMenuVisible] = useState(false);
   const [timezoneDialogVisible, setTimezoneDialogVisible] = useState(false);
@@ -100,6 +102,12 @@ export default function ProfileScreen() {
             description="Timezone"
             onPress={() => setTimezoneDialogVisible(true)}
             title={timezoneLabel(userPrefs.timezone)}
+          />
+
+          <List.Item
+            title="App Theme"
+            onPress={() => toggleScheme()}
+            description={scheme}
           />
         </List.Section>
       </View>

@@ -84,6 +84,6 @@ function parseScore(score: any): Score {
     firstName: score.first_name,
     lastName: score.last_name,
     avatar: score.avatar,
-    updatedAt: DateTime.fromISO(score.updated_at),
+    updatedAt: DateTime.fromISO(score.updated_at, {zone: 'utc'}),
   } as Score;
 }

@@ -11,8 +11,8 @@ import {
   TextInput,
 } from "react-native-paper";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useChallengeContext } from "../contexts/ChallengeContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
-import { createChallenge } from "../services/ChallengeService";
 import { ChallengeParams } from "../api/models/Challenge";
 
 const activityMap = {
@@ -33,9 +33,8 @@ function generateName(params: ChallengeParams) {
 export default function ChallengeDetailsScreen() {
   const navigation = useNavigation();
   const { params, setName } = useNewChallengeContext();
+  const { createChallenge, loading } = useChallengeContext();
   const { name } = params;
-  const { auth } = useAuthContext();
-  const [loading, setLoading] = useState(false);
   const [isPrivate, setPrivate] = React.useState(false);
 
   const defaultName = generateName(params);
@@ -45,20 +44,15 @@ export default function ChallengeDetailsScreen() {
   }
 
   async function submit() {
-    setLoading(true);
-
     if (!name) {
       params.name = defaultName;
     }
 
     try {
-      const newChallenge = await createChallenge(params, {
-        authToken: auth.token,
-      });
+      const newChallenge = await createChallenge(params);
       navigation.navigate("ChallengeShowScreen", { slug: newChallenge.slug });
-      setLoading(false);
     } catch (e) {
-      setLoading(false);
+      console.log('error')
     }
   }
 

@@ -56,7 +56,7 @@ function RootNavigator() {
   return (
     <UserProvider authToken={token} user={user}>
       <UserPrefsProvider authToken={token} userPrefs={user.userPrefs}>
-        <ChallengeProvider>
+        <ChallengeProvider authToken={token}>
           <NewChallengeProvider>
             <Stack.Navigator headerMode="none">
               <Stack.Screen component={BottomTabNavigator} name="Root" />

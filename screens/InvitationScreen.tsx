@@ -7,6 +7,7 @@ import {
   ProgressBar,
   Caption,
   Title,
+  Text,
 } from "react-native-paper";
 import { View, StyleSheet } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -38,6 +39,10 @@ export default function InvitationScreen() {
   const { navigate } = useNavigation<NavigationProp>();
   const { auth } = useAuthContext();
   const [challenge, setChallenge] = useState<Challenge | undefined>(undefined);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMesssage] = useState<string | undefined>(
+    undefined,
+  );
   const slug = route.params.slug;
 
   useEffect(() => {
@@ -50,22 +55,45 @@ export default function InvitationScreen() {
 
     setChallenge(undefined);
     loadChallenge();
-  }, [route.params.slug]);
+  }, [slug]);
+
+  function navigateToChallenge() {
+    navigate("Challenges", {
+      screen: "ChallengeShowScreen",
+      params: { slug: slug },
+    });
+  }
 
   async function join() {
     if (!challenge) {
       return;
     }
 
-    await joinChallenge(slug, { authToken: auth.token });
-    navigate("ChallengeShowScreen", { slug: challenge.slug });
+    setLoading(true);
+
+    try {
+      await joinChallenge(slug, { authToken: auth.token });
+      navigateToChallenge();
+    } catch (error) {
+      if (error.message === "User already joined") {
+        navigateToChallenge();
+      } else {
+        setErrorMesssage(error.message);
+      }
+    }
+    setLoading(false);
   }
 
   let actionButtons;
 
   if (auth.isLoggedIn) {
     actionButtons = (
-      <Button mode="contained" onPress={() => join()} style={[BaseStyles.mb2]}>
+      <Button
+        loading={loading}
+        mode="contained"
+        onPress={() => join()}
+        style={[BaseStyles.mb2]}
+      >
         Join
       </Button>
     );
@@ -124,6 +152,8 @@ export default function InvitationScreen() {
         <TimeLeft challenge={challenge} />
 
         {actionButtons}
+
+        {errorMessage && <Text>{errorMessage}</Text>}
       </SafeAreaView>
     </Screen>
   );

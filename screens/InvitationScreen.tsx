@@ -15,7 +15,7 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import BaseStyles from "../utils/BaseStyles";
-import { LoggedOutParamList } from "../types";
+import { BottomTabParamList, LoggedOutParamList } from "../types";
 import Challenge from "../api/models/Challenge";
 import Screen from "../components/Screen";
 import { getChallenge, joinChallenge } from "../services/ChallengeService";
@@ -24,7 +24,8 @@ import Podium from "../components/Podium";
 import { capitalize } from "../utils";
 import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
 
-type NavigationProp = StackNavigationProp<LoggedOutParamList>;
+type LoggedOutNavigationProp = StackNavigationProp<LoggedOutParamList>;
+type LoggedInNavigationProp = StackNavigationProp<BottomTabParamList>;
 type InviteRouteProp = RouteProp<LoggedOutParamList, "Invitation">;
 
 const challengeTypeIcons = {
@@ -36,7 +37,8 @@ const challengeTypeIcons = {
 
 export default function InvitationScreen() {
   const route = useRoute<InviteRouteProp>();
-  const { navigate } = useNavigation<NavigationProp>();
+  const loggedOutNav = useNavigation<LoggedOutNavigationProp>();
+  const loggedInNav = useNavigation<LoggedInNavigationProp>();
   const { auth } = useAuthContext();
   const [challenge, setChallenge] = useState<Challenge | undefined>(undefined);
   const [loading, setLoading] = useState(false);
@@ -58,7 +60,7 @@ export default function InvitationScreen() {
   }, [slug]);
 
   function navigateToChallenge() {
-    navigate("Challenges", {
+    loggedInNav.navigate("Challenges", {
       screen: "ChallengeShowScreen",
       params: { slug: slug },
     });
@@ -102,13 +104,16 @@ export default function InvitationScreen() {
       <>
         <Button
           mode="contained"
-          onPress={() => navigate("SignUp")}
+          onPress={() => loggedOutNav.navigate("SignUp", { slug: slug })}
           style={[BaseStyles.mb2]}
         >
           Sign Up
         </Button>
 
-        <Button mode="outlined" onPress={() => navigate("LogIn")}>
+        <Button
+          mode="outlined"
+          onPress={() => loggedOutNav.navigate("LogIn", { slug: slug })}
+        >
           Sign In
         </Button>
       </>

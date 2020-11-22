@@ -4,7 +4,7 @@ import { Menu, Portal, Button, List, Text } from "react-native-paper";
 import Screen from "../components/Screen";
 import UserInfoDialog from "../components/profile/UserInfoDialog";
 import TimezoneDialog from "../components/profile/TimezoneDialog";
-import { useAuthContext, logout } from "../contexts/AuthContext";
+import { useAuthContext } from "../contexts/AuthContext";
 import { useUserContext } from "../contexts/UserContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
 import { useThemeContext } from "../contexts/ThemeContext";
@@ -13,7 +13,7 @@ import BaseStyles from "../utils/BaseStyles";
 import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
 
 export default function ProfileScreen() {
-  const { dispatch } = useAuthContext();
+  const { logOut } = useAuthContext();
   const { user, saveUser } = useUserContext();
   const { userPrefs, savePrefs } = useUserPrefsContext();
   const { scheme, toggleScheme } = useThemeContext();
@@ -113,7 +113,7 @@ export default function ProfileScreen() {
       </View>
 
       <View style={[BaseStyles.p4]}>
-        <Button mode="contained" onPress={() => dispatch(logout())}>
+        <Button mode="contained" onPress={() => logOut()}>
           Log Out
         </Button>
       </View>

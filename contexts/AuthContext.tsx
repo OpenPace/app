@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
-import { loadAuth } from "../services/AuthService";
+import { loadAuth, logOut as apiLogOut } from "../services/AuthService";
 import { getMe } from "../services/UserService";
 import Credential from "../api/models/Credential";
 import User from "../api/models/User";
@@ -24,6 +24,7 @@ type Action = {
 type ContextType = {
   auth: State;
   dispatch: any;
+  logOut: () => Promise<void>;
 };
 
 // Initial state
@@ -101,7 +102,16 @@ export function authReducer(state: State, action: Action): State {
 function AuthProvider({ children }: React.PropsWithChildren<any>) {
   const [auth, dispatch] = useReducer(authReducer, initialState);
 
-  const authData = { auth, dispatch };
+  async function logOut() {
+    await apiLogOut();
+    dispatch(logout());
+  }
+
+  const authData = {
+    auth,
+    dispatch,
+    logOut,
+  };
 
   useEffect(() => {
     async function loadUser() {

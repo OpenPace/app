@@ -9,6 +9,7 @@ import User from "../api/models/User";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabParamList } from "../types";
+import Avatar from './Avatar';
 
 type NavigationProp = StackNavigationProp<BottomTabParamList>;
 
@@ -38,12 +39,7 @@ export default function Header(props: Props) {
         <Subheading>{subheading}</Subheading>
       </View>
       <View>
-        <TouchableOpacity onPress={() => navigate("Profile")}>
-          <Image
-            source={{ uri: user.avatar }}
-            style={[{ borderColor: colors["accent"] }, styles.profileImg]}
-          />
-        </TouchableOpacity>
+        <Avatar user={user} onPress={() => navigate("Profile")} />
       </View>
     </SafeAreaView>
   );

@@ -1,10 +1,11 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Avatar, Headline, Text } from "react-native-paper";
+import { Headline, Text } from "react-native-paper";
 import BaseStyles from "../utils/BaseStyles";
 import Challenge from "../api/models/Challenge";
 import Score from "../api/models/Score";
 import { toOrdinal } from "../utils";
+import Avatar from './Avatar';
 
 interface Props {
   challenge: Challenge;
@@ -36,14 +37,14 @@ interface PlaceProps {
 const sizes: number[] = [80, 60, 50];
 
 function Place({ place, score }: PlaceProps) {
-  const { avatar, firstName, lastName } = score;
+  const { firstName, lastName } = score;
   const size = sizes[place - 1];
 
   return (
     <View style={[styles.place]}>
-      <Avatar.Image
+      <Avatar
         size={size}
-        source={{ uri: avatar }}
+    user={score}
         style={[BaseStyles.mb2]}
       />
       <Text>

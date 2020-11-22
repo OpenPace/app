@@ -5,6 +5,7 @@ import { Card, Caption, Title } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import Challenge from "../api/models/Challenge";
 import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
+import Avatar from "./Avatar";
 
 interface Props {
   challenge: Challenge;
@@ -20,10 +21,24 @@ export default function PreviewCard({ challenge }: Props) {
     >
       <View style={[BaseStyles.py2, styles.details]}>
         <Title>{challenge.name}</Title>
+        <Participants challenge={challenge} />
         <TimeSection challenge={challenge} />
       </View>
     </Card>
   );
+}
+
+function Participants({ challenge }: Props) {
+  const avatars = challenge.scores.map((score) => (
+    <Avatar
+      key={score.userId}
+      size={24}
+      user={score}
+      style={[BaseStyles.mr1]}
+    />
+  ));
+
+  return <View style={[BaseStyles.row, styles.avatars]}>{avatars}</View>;
 }
 
 function TimeSection({ challenge }: { challenge: Challenge }) {
@@ -45,6 +60,9 @@ const styles = StyleSheet.create({
   img: {
     height: 100,
     width: 100,
+  },
+  avatars: {
+    alignItems: "center",
   },
   details: {
     flexGrow: 1,

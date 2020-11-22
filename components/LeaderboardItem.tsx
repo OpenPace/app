@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { Avatar, Text } from "react-native-paper";
+import { Text } from "react-native-paper";
 import Score from "../api/models/Score";
 import Challenge from "../api/models/Challenge";
 import BaseStyles from "../utils/BaseStyles";
 import { formatDistance, formatDuration, formatAltitude } from "../utils";
 import { timeAgo } from "../utils/DateTime";
+import Avatar from './Avatar';
 
 interface ListItemProps {
   score: Score;
@@ -44,7 +45,7 @@ export default function LeaderboardItem(props: ListItemProps) {
         <Text>{position}</Text>
       </View>
       <View>
-        <Avatar.Image source={{ uri: score.avatar }} />
+        <Avatar user={score} />
       </View>
 
       <View style={{ flexGrow: 1, marginLeft: 8 }}>

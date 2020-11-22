@@ -49,8 +49,8 @@ export type ProfileParamList = {
 
 export type LoggedOutParamList = {
   Welcome: undefined;
-  SignUp: undefined;
-  LogIn: undefined;
+  SignUp: { slug: string } | undefined;
+  LogIn: { slug: string } | undefined;
   Invitation: { slug: string };
 };
 

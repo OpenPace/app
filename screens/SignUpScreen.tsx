@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Text, TextInput } from "react-native-paper";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import BaseStyles from "../utils/BaseStyles";
 import Screen from "../components/Screen";
 import {
@@ -8,6 +9,9 @@ import {
   loginFail,
 } from "../contexts/AuthContext";
 import { signUp } from "../services/AuthService";
+import { joinChallenge } from "../services/ChallengeService";
+import { LoggedOutParamList } from "../types";
+type InviteRouteProp = RouteProp<LoggedOutParamList, "LogIn">;
 
 export default function SignUpScreen() {
   const [firstName, setFirstName] = useState("");
@@ -16,9 +20,13 @@ export default function SignUpScreen() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { auth, dispatch } = useAuthContext();
+  const route = useRoute<InviteRouteProp>();
 
   async function handleSignUp() {
     setLoading(true);
+
+    const slug = route.params?.slug;
+
     try {
       const { token, user } = await signUp({
         firstName,
@@ -26,6 +34,11 @@ export default function SignUpScreen() {
         email,
         password,
       });
+
+      if (slug) {
+        await joinChallenge(slug, { authToken: token });
+      }
+
       setLoading(false);
       dispatch(loginSuccess(token, user));
     } catch (error) {

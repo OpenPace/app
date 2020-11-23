@@ -46,6 +46,14 @@ export default function HomeScreen() {
     <PreviewCard challenge={challenge} key={challenge.slug} />
   ));
 
+  const challengeSection = (
+    <View style={[BaseStyles.p4]}>
+      <SectionHeader text="Current Challenges" />
+
+      <View style={[BaseStyles.py2]}>{cards}</View>
+    </View>
+  );
+
   // Steps:
   // Activity type: bike, run, swim
   // Challenge type: total distance, total time, altitude, fastest segment
@@ -72,11 +80,7 @@ export default function HomeScreen() {
           <CannedChallenges />
         </View>
 
-        <View style={[BaseStyles.p4]}>
-          <SectionHeader text="Current Challenges" />
-
-          {cards}
-        </View>
+        {challenges.length > 0 && challengeSection}
       </ScrollView>
 
       <FAB

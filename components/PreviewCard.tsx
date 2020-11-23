@@ -17,7 +17,7 @@ export default function PreviewCard({ challenge }: Props) {
   return (
     <Card
       onPress={() => navigate("ChallengeShowScreen", { slug: challenge.slug })}
-      style={[BaseStyles.mb4]}
+      style={[BaseStyles.mb3]}
     >
       <View style={[BaseStyles.py2, styles.details]}>
         <Title>{challenge.name}</Title>

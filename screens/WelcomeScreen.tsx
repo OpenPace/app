@@ -12,7 +12,7 @@ import { cloudinaryImg } from "../utils";
 type NavigationProp = StackNavigationProp<LoggedOutParamList>;
 
 const image = {
-  uri: cloudinaryImg("welcome.jpg"),
+  uri: cloudinaryImg("welcome-bg.jpg"),
 };
 
 const logo = {

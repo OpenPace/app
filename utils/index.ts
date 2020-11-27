@@ -109,3 +109,7 @@ export function timezoneLabel(timezone: string): string {
 
   return "Not Set";
 }
+
+export function shareLink(slug: string): string {
+  return `https://www.openpace.co/invite/${slug}`;
+}

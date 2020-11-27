@@ -1,7 +1,6 @@
 import React from "react";
 import { DateTime } from "luxon";
 import { View, Share, StyleSheet } from "react-native";
-import * as Linking from "expo-linking";
 import {
   ActivityIndicator,
   Avatar,
@@ -12,7 +11,7 @@ import {
 } from "react-native-paper";
 import Screen from "../components/Screen";
 import Podium from "../components/Podium";
-import { capitalize } from "../utils";
+import { capitalize, shareLink } from "../utils";
 import BaseStyles from "../utils/BaseStyles";
 import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
 import Challenge from "../api/models/Challenge";
@@ -26,9 +25,7 @@ const challengeTypeIcons = {
 };
 
 function buildShareMessage(challenge: Challenge) {
-  const challengeLink = Linking.makeUrl(`invite/${challenge.slug}`);
-
-  return challengeLink;
+  return shareLink(challenge.slug);
 }
 
 export default function ChallengeShowScreen() {

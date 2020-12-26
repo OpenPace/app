@@ -34,7 +34,7 @@ export default function StravaButton(props: Props) {
       redirectUri: makeRedirectUri({
         // For usage in bare and standalone
         // the "redirect" must match your "Authorization Callback Domain" in the Strava dev console.
-        native: "openpace://redirect",
+        native: "openpace://openpace.co/strava/callback",
       }),
     },
     discovery,

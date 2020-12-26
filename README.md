@@ -20,3 +20,9 @@ Here are the steps to get started:
 ### Feedback
 
 Please email us with any ideas, bugs, suggestions at feedback AT openpace.co.
+
+## Releasing
+
+1. Update the version with `yarn run version`
+1. Build a new version using `expo build:android --release-channel prod` or `expo build:ios --release-channel prod`
+1. Once the builds have completed, upload them using `expo upload:android` or `expo upload:ios`

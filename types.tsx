@@ -13,7 +13,6 @@ export type BottomTabParamList = {
   Challenges: undefined;
   Notifications: undefined;
   Profile: undefined;
-  StravaPrompt: undefined;
   Invitation: { slug: string };
 };
 
@@ -29,6 +28,7 @@ interface challengeParams {
 }
 
 export type ChallengesParamList = {
+  StravaPrompt: undefined;
   ChallengesScreen: undefined;
   ChallengeShowScreen: { slug: string };
   ChallengeActivityScreen: challengeParams;

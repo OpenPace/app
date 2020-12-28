@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import { FAB, Subheading } from "react-native-paper";
 import { StackNavigationProp } from "@react-navigation/stack";
@@ -11,11 +11,9 @@ import BaseStyles from "../utils/BaseStyles";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { isStravaConnected } from "../utils";
-import { BottomTabParamList } from "../types";
-import Challenge from "../api/models/Challenge";
-import { getChallengesByUser } from "../services/ChallengeService";
+import { ChallengesParamList } from "../types";
 
-type NavigationProp = StackNavigationProp<BottomTabParamList>;
+type NavigationProp = StackNavigationProp<ChallengesParamList>;
 
 export default function HomeScreen() {
   const { auth } = useAuthContext();
@@ -86,7 +84,7 @@ export default function HomeScreen() {
       <FAB
         icon="plus"
         onPress={() =>
-          navigate("Challenges", { screen: "ChallengeActivityScreen" })
+          navigate("ChallengeActivityScreen", {})
         }
         style={styles.fab}
       />

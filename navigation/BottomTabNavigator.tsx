@@ -8,7 +8,6 @@ import { useNavigation } from "@react-navigation/native";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import StravaPromptScreen from "../screens/StravaPromptScreen";
 import InvitationScreen from "../screens/InvitationScreen";
 import {
   BottomTabParamList,
@@ -22,7 +21,6 @@ const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 export default function BottomTabNavigator() {
   return (
     <BottomTab.Navigator initialRouteName="Challenges" tabBar={() => null}>
-      <BottomTab.Screen component={StravaPromptScreen} name="StravaPrompt" />
       <BottomTab.Screen
         component={ChallengesStackNavigator}
         name="Challenges"

@@ -12,6 +12,7 @@ import ChallengeTypeScreen from "../screens/ChallengeTypeScreen";
 import ChallengeTimelineScreen from "../screens/ChallengeTimelineScreen";
 import ChallengeDateScreen from "../screens/ChallengeDateScreen";
 import ChallengeDetailsScreen from "../screens/ChallengeDetailsScreen";
+import StravaPromptScreen from "../screens/StravaPromptScreen";
 import { ChallengesParamList } from "../types";
 import ChallengeTabNavigator from "./ChallengeTabNavigator";
 
@@ -22,6 +23,11 @@ const ChallengesStack = createStackNavigator<ChallengesParamList>();
 export default function ChallengesStackNavigator() {
   return (
     <ChallengesStack.Navigator>
+      <ChallengesStack.Screen
+        component={StravaPromptScreen}
+        name="StravaPrompt"
+        options={{ headerLeft: () => <BackButton />, title: "Connect to Strava" }}
+      />
       <ChallengesStack.Screen
         component={ChallengeIndexScreen}
         name="ChallengesScreen"

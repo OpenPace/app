@@ -6,11 +6,11 @@ export default {
     screens: {
       Root: {
         screens: {
-          StravaPrompt: "strava-connect",
           Challenges: {
             path: "challenges",
             screens: {
               ChallengesScreen: "",
+              StravaPrompt: "strava-connect",
               ChallengeActivityScreen: "new/activity",
               ChallengeTypeScreen: "new/type",
               ChallengeTimelineScreen: "new/timeline",

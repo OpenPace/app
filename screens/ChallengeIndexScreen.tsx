@@ -12,6 +12,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { isStravaConnected } from "../utils";
 import { ChallengesParamList } from "../types";
+import { hasSeen } from '../services/HasSeenService';
 
 type NavigationProp = StackNavigationProp<ChallengesParamList>;
 
@@ -27,9 +28,15 @@ export default function HomeScreen() {
 
   // Redirect to strava prompt
   useEffect(() => {
-    if (user && !isStravaConnected(user)) {
-      navigate("StravaPrompt");
+    async function promptStrava() {
+      const hasSeenPrompt = await hasSeen("StravaPrompt");
+
+      if (user && !isStravaConnected(user) && !hasSeenPrompt) {
+        navigate("StravaPrompt");
+      }
     }
+
+    promptStrava();
   }, [user]);
 
   useEffect(() => {

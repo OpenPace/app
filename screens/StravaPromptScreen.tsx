@@ -11,6 +11,7 @@ import { isStravaConnected } from "../utils";
 import { BottomTabParamList } from "../types";
 import StravaButton from "../components/StravaButton";
 import Screen from "../components/Screen";
+import { markHasSeen } from '../services/HasSeenService';
 
 type NavigationProp = StackNavigationProp<BottomTabParamList>;
 
@@ -26,8 +27,10 @@ export default function StravaPrompt() {
   // Redirect to home
   useEffect(() => {
     if (user && isStravaConnected(user)) {
-      navigation.navigate("Challenges");
+      return navigation.navigate("Challenges");
     }
+
+    markHasSeen("StravaPrompt");
   }, [user]);
 
   function onSuccess() {

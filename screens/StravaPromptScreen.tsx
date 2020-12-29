@@ -45,7 +45,7 @@ export default function StravaPrompt() {
             <Image source={logo} style={[BaseStyles.mb4, styles.logo]} />
             <Headline>Connect your Strava</Headline>
             <Paragraph style={[BaseStyles.textCenter]}>
-              In order to complete in challenges, we need to connect to your
+              In order to compete in challenges, we need to connect to your
               Strava account.
             </Paragraph>
           </View>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "OpenPace",
     "slug": "openpace-challenges",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "openpace",
@@ -21,7 +21,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.openpace.challenges",
-      "buildNumber": "1.1.0",
+      "buildNumber": "1.1.1",
       "associatedDomains": [
         "applinks:openpace.co"
       ]
@@ -32,7 +32,7 @@
     },
     "android": {
       "package": "com.openpace.challenges",
-      "versionCode": 380010100,
+      "versionCode": 380010101,
       "intentFilters": [
         {
           "action": "VIEW",

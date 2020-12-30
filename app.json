@@ -23,7 +23,7 @@
       "bundleIdentifier": "com.openpace.challenges",
       "buildNumber": "1.1.2",
       "associatedDomains": [
-        "applinks:openpace.co"
+        "applinks:*.openpace.co"
       ]
     },
     "androidStatusBar": {

@@ -24,11 +24,6 @@ export default function ChallengesStackNavigator() {
   return (
     <ChallengesStack.Navigator>
       <ChallengesStack.Screen
-        component={StravaPromptScreen}
-        name="StravaPrompt"
-        options={{ headerLeft: () => <BackButton />, title: "Connect to Strava" }}
-      />
-      <ChallengesStack.Screen
         component={ChallengeIndexScreen}
         name="ChallengesScreen"
         options={{ title: "Challenges", headerShown: false }}
@@ -62,6 +57,11 @@ export default function ChallengesStackNavigator() {
         component={ChallengeDetailsScreen}
         name="ChallengeDetailsScreen"
         options={{ title: "Choose Your Dates" }}
+      />
+      <ChallengesStack.Screen
+        component={StravaPromptScreen}
+        name="StravaPrompt"
+        options={{ headerLeft: () => <BackButton />, title: "Connect to Strava" }}
       />
     </ChallengesStack.Navigator>
   );

@@ -7,12 +7,13 @@ import Screen from "../components/Screen";
 import Header from "../components/Header";
 import PreviewCard from "../components/PreviewCard";
 import CannedChallenges from "../components/CannedChallenges";
+import StravaBanner from "../components/StravaBanner";
 import BaseStyles from "../utils/BaseStyles";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { isStravaConnected } from "../utils";
 import { ChallengesParamList } from "../types";
-import { hasSeen } from '../services/HasSeenService';
+import { hasSeen } from "../services/HasSeenService";
 
 type NavigationProp = StackNavigationProp<ChallengesParamList>;
 
@@ -81,6 +82,8 @@ export default function HomeScreen() {
         style={[BaseStyles.pbTabBar]}
       >
         <View style={[BaseStyles.p4]}>
+          {!isStravaConnected(user) && <StravaBanner />}
+
           <SectionHeader text="Create a Challenge" />
           <CannedChallenges />
         </View>
@@ -90,9 +93,7 @@ export default function HomeScreen() {
 
       <FAB
         icon="plus"
-        onPress={() =>
-          navigate("ChallengeActivityScreen", {})
-        }
+        onPress={() => navigate("ChallengeActivityScreen", {})}
         style={styles.fab}
       />
     </Screen>

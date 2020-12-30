@@ -5,15 +5,19 @@ export async function hasSeen(feature: string): Promise<boolean> {
 
   try {
     hasSeen = await AsyncStorage.getItem(storageKey(feature));
-  } catch {}
+  } catch {
+    return false;
+  }
 
   return !!hasSeen || false;
 }
 
 export async function markHasSeen(feature: string): Promise<void> {
   try {
-    await AsyncStorage.setItem(storageKey(feature), 'true');
-  } catch {}
+    await AsyncStorage.setItem(storageKey(feature), "true");
+  } catch {
+    return;
+  }
 }
 
 function storageKey(feature: string) {

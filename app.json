@@ -15,16 +15,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.openpace.challenges",
       "buildNumber": "1.1.1",
-      "associatedDomains": [
-        "applinks:openpace.co"
-      ]
+      "associatedDomains": ["applinks:openpace.co"]
     },
     "androidStatusBar": {
       "barStyle": "light-content",
@@ -48,10 +44,7 @@
               "pathPrefix": "/invite"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ]
     }

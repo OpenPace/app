@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Headline, Subheading } from "react-native-paper";
 import BaseStyles from "../utils/BaseStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -9,7 +9,7 @@ import User from "../api/models/User";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabParamList } from "../types";
-import Avatar from './Avatar';
+import Avatar from "./Avatar";
 
 type NavigationProp = StackNavigationProp<BottomTabParamList>;
 

@@ -61,7 +61,10 @@ export default function ChallengesStackNavigator() {
       <ChallengesStack.Screen
         component={StravaPromptScreen}
         name="StravaPrompt"
-        options={{ headerLeft: () => <BackButton />, title: "Connect to Strava" }}
+        options={{
+          headerLeft: () => <BackButton />,
+          title: "Connect to Strava",
+        }}
       />
     </ChallengesStack.Navigator>
   );

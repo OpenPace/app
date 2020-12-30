@@ -6,7 +6,7 @@ import Challenge from "../api/models/Challenge";
 import BaseStyles from "../utils/BaseStyles";
 import { formatDistance, formatDuration, formatAltitude } from "../utils";
 import { timeAgo } from "../utils/DateTime";
-import Avatar from './Avatar';
+import Avatar from "./Avatar";
 
 interface ListItemProps {
   score: Score;

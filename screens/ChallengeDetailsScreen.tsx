@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Screen from "../components/Screen";
@@ -10,7 +10,6 @@ import {
   TouchableRipple,
   TextInput,
 } from "react-native-paper";
-import { useAuthContext } from "../contexts/AuthContext";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 import { ChallengeParams } from "../api/models/Challenge";
@@ -52,7 +51,7 @@ export default function ChallengeDetailsScreen() {
       const newChallenge = await createChallenge(params);
       navigation.navigate("ChallengeShowScreen", { slug: newChallenge.slug });
     } catch (e) {
-      console.log('error')
+      console.log("error");
     }
   }
 

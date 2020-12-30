@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { Menu, Portal, Button, List, Text } from "react-native-paper";
 import Screen from "../components/Screen";
+import Avatar from "../components/Avatar";
 import UserInfoDialog from "../components/profile/UserInfoDialog";
 import TimezoneDialog from "../components/profile/TimezoneDialog";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -34,10 +35,7 @@ export default function ProfileScreen() {
     <Screen>
       <View style={[BaseStyles.row, BaseStyles.p4]}>
         <View>
-          <Image
-            source={{ uri: user.avatar }}
-            style={[styles.profileImg, BaseStyles.rounded]}
-          />
+          <Avatar user={user} size={50} />
         </View>
 
         <View style={{ flexGrow: 1, marginLeft: 8 }}>
@@ -66,7 +64,7 @@ export default function ProfileScreen() {
           <List.Item
             description="Location"
             onPress={() => setVisible(true)}
-            title={locationName(user)}
+            title={locationName(user) || "Not Set"}
           />
 
           <List.Subheader>Preferences</List.Subheader>

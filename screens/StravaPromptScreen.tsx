@@ -8,12 +8,12 @@ import BaseStyles from "../utils/BaseStyles";
 import { cloudinaryImg } from "../utils";
 import { useAuthContext } from "../contexts/AuthContext";
 import { isStravaConnected } from "../utils";
-import { BottomTabParamList } from "../types";
+import { ChallengesParamList } from "../types";
 import StravaButton from "../components/StravaButton";
 import Screen from "../components/Screen";
-import { markHasSeen } from '../services/HasSeenService';
+import { markHasSeen } from "../services/HasSeenService";
 
-type NavigationProp = StackNavigationProp<BottomTabParamList>;
+type NavigationProp = StackNavigationProp<ChallengesParamList>;
 
 const logo = {
   uri: cloudinaryImg("strava-app-logo.png"),
@@ -27,14 +27,14 @@ export default function StravaPrompt() {
   // Redirect to home
   useEffect(() => {
     if (user && isStravaConnected(user)) {
-      return navigation.navigate("Challenges");
+      return navigation.navigate("ChallengesScreen");
     }
 
     markHasSeen("StravaPrompt");
   }, [user]);
 
   function onSuccess() {
-    navigation.navigate("Challenges");
+    navigation.navigate("ChallengesScreen");
   }
 
   return (

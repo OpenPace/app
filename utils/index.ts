@@ -82,7 +82,7 @@ export function formatDistance(distance: number, imperial: boolean): string {
 
 export function formatAltitude(altitude: number, imperial: boolean): string {
   if (imperial) {
-    return altitude * 3.28 + " ft";
+    return (altitude * 3.28).toFixed(1) + " ft";
   }
 
   return altitude + " m";

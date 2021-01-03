@@ -18,11 +18,26 @@ export default function CannedChallenges() {
 
   function selectChallenge(params: ChallengeParams) {
     setParams({ ...params, activityType: defaultActivity });
-    navigation.navigate("Challenges", { screen: "ChallengeTimelineScreen" });
+    if (params.challengeType === "segment") {
+      navigation.navigate("Challenges", { screen: "ChallengeSegmentScreen" });
+    } else {
+      navigation.navigate("Challenges", { screen: "ChallengeTimelineScreen" });
+    }
   }
 
   return (
     <ScrollView horizontal style={[BaseStyles.py2]}>
+      <Card
+        onPress={() => selectChallenge({ challengeType: "segment" })}
+        style={[BaseStyles.mb3, styles.card]}
+      >
+        <Card.Title
+          left={(props) => <Avatar.Icon {...props} icon="run" />}
+          subtitle="Who can run the segment the fastest"
+          title="Segment Challenge"
+        />
+      </Card>
+
       <Card
         onPress={() => selectChallenge({ challengeType: "distance" })}
         style={[BaseStyles.mb3, styles.card]}

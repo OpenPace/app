@@ -12,6 +12,7 @@ import ChallengeTypeScreen from "../screens/ChallengeTypeScreen";
 import ChallengeTimelineScreen from "../screens/ChallengeTimelineScreen";
 import ChallengeDateScreen from "../screens/ChallengeDateScreen";
 import ChallengeDetailsScreen from "../screens/ChallengeDetailsScreen";
+import ChallengeSegmentScreen from "../screens/ChallengeSegmentScreen";
 import StravaPromptScreen from "../screens/StravaPromptScreen";
 import { ChallengesParamList } from "../types";
 import ChallengeTabNavigator from "./ChallengeTabNavigator";
@@ -57,6 +58,11 @@ export default function ChallengesStackNavigator() {
         component={ChallengeDetailsScreen}
         name="ChallengeDetailsScreen"
         options={{ title: "Choose Your Dates" }}
+      />
+      <ChallengesStack.Screen
+        component={ChallengeSegmentScreen}
+        name="ChallengeSegmentScreen"
+        options={{ title: "Choose Your Segment" }}
       />
       <ChallengesStack.Screen
         component={StravaPromptScreen}

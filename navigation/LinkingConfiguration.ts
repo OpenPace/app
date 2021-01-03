@@ -12,6 +12,7 @@ export default {
               ChallengesScreen: "",
               StravaPrompt: "strava-connect",
               ChallengeActivityScreen: "new/activity",
+              ChallengeSegmentScreen: "new/segment",
               ChallengeTypeScreen: "new/type",
               ChallengeTimelineScreen: "new/timeline",
               ChallengeDateScreen: "new/dates",

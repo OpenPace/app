@@ -32,9 +32,10 @@ function ChallengeProvider({ authToken, children }: Props) {
   function addToChallenges(challenge: Challenge) {
     const idx = challenges.findIndex((x) => x.slug === challenge.slug);
     if (idx !== -1) {
-      challenges.splice(idx, 1); // Delete the existing challenge
+      challenges.splice(idx, 1, challenge); // Delete the existing challenge
+    } else {
+      challenges.unshift(challenge);
     }
-    challenges.unshift(challenge);
     setChallenges(challenges);
   }
 

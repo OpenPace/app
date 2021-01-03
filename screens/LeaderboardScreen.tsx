@@ -31,7 +31,7 @@ export default function LeaderboardScreen() {
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     loadLeaderboard().then(() => setRefreshing(false));
-  }, []);
+  }, [challenge]);
 
   useEffect(() => {
     loadLeaderboard();

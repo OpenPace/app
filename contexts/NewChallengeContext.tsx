@@ -38,7 +38,7 @@ function NewChallengeProvider({ children }: Props) {
       setParams({ ...params, challengeType }),
     setTimeline: (timeline) => setParams({ ...params, timeline }),
     setDates: (startAt, endAt) => setParams({ ...params, startAt, endAt }),
-    setSegment: (segment) => setParams({...params, segmentId: segment.id}),
+    setSegment: (segment) => setParams({ ...params, segmentId: segment.id }),
   };
 
   return (

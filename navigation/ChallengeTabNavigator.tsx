@@ -15,11 +15,11 @@ type ChallengeTabRouteProp = RouteProp<
 >;
 
 export default function ChallengeTabNavigator() {
-  const { getChallenge } = useChallengeContext();
+  const { fetchChallenge } = useChallengeContext();
   const route = useRoute<ChallengeTabRouteProp>();
 
   useEffect(() => {
-    getChallenge(route.params.slug);
+    fetchChallenge(route.params.slug);
   }, [route.params.slug]);
 
   return (

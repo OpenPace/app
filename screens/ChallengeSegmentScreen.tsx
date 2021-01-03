@@ -44,6 +44,7 @@ export default function ChallengeSegmentScreen() {
 
     return (
       <List.Item
+        key={segment.id}
         title={segment.name}
         description={description}
         left={() => <List.Icon icon="routes" />}

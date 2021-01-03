@@ -12,6 +12,7 @@ type ContextType = {
   setChallenge: (value: Challenge | undefined) => void;
   createChallenge: (params: ChallengeParams) => Promise<Challenge>;
   getChallenge: (slug: string) => Promise<Challenge>;
+  fetchChallenge: (slug: string) => Promise<Challenge>;
   loadChallenges: () => Promise<void>;
   loading: boolean;
 };
@@ -29,6 +30,10 @@ function ChallengeProvider({ authToken, children }: Props) {
   const [loading, setLoading] = useState(false);
 
   function addToChallenges(challenge: Challenge) {
+    const idx = challenges.findIndex((x) => x.slug === challenge.slug);
+    if (idx !== -1) {
+      challenges.splice(idx, 1); // Delete the existing challenge
+    }
     challenges.unshift(challenge);
     setChallenges(challenges);
   }
@@ -59,12 +64,20 @@ function ChallengeProvider({ authToken, children }: Props) {
     return Promise.resolve(challenge);
   }
 
+  async function fetchChallenge(slug: slug) {
+    const challenge = await apiGetChallenge(slug, { authToken });
+    addToChallenges(challenge);
+    setChallenge(challenge);
+    return Promise.resolve(challenge);
+  }
+
   const value: ContextType = {
     challenge,
     challenges,
     setChallenge,
     createChallenge,
     getChallenge,
+    fetchChallenge,
     loadChallenges,
     loading,
   };

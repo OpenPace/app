@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Menu, Portal, Button, List, Text } from "react-native-paper";
 import Screen from "../components/Screen";
 import Avatar from "../components/Avatar";

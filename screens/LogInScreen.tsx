@@ -9,6 +9,8 @@ import {
 import { logIn } from "../services/AuthService";
 import { joinChallenge } from "../services/ChallengeService";
 import Screen from "../components/Screen";
+import AppleSignInButton from "../components/AppleSignInButton";
+import GoogleSignInButton from "../components/GoogleSignInButton";
 import BaseStyles from "../utils/BaseStyles";
 import { LoggedOutParamList } from "../types";
 
@@ -42,6 +44,9 @@ export default function LogInScreen() {
 
   return (
     <Screen style={[BaseStyles.p4]}>
+      <AppleSignInButton />
+      <GoogleSignInButton />
+
       <TextInput
         autoCapitalize="none"
         autoCompleteType="email"

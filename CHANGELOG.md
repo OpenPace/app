@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/openpace/app/compare/v1.1.2...v1.2.0) (2021-01-14)
+
+
+### Features
+
+* Add screen for segment selection ([9fabe82](https://github.com/openpace/app/commit/9fabe82fe4caedbd1db5220e49199dc396b21154))
+
+
+### Bug Fixes
+
+* add openpace.co to linking prefixes ([4c2db45](https://github.com/openpace/app/commit/4c2db45773358c0d530199aae7c79b0a83faa1e5))
+* Add pull to refresh challenge home screen ([03d78d2](https://github.com/openpace/app/commit/03d78d2aff8f9109edc9a1c39aa37487bec78e6f))
+* empty avatar and location on profile page ([0952142](https://github.com/openpace/app/commit/09521420073dff55ca9865faafbda66ac0602804))
+* pull to refresh leaderboard loads the wrong leaderboard ([41f5fb8](https://github.com/openpace/app/commit/41f5fb8ac5127d92c575b34a66f13a4b6d1ad9d9))
+* temporarily hide segment challenge ([2b79054](https://github.com/openpace/app/commit/2b79054935d3943df9a6e07d065ca66c42fa02cc))
+* update applinks domain to use wildcard ([5fe8f06](https://github.com/openpace/app/commit/5fe8f0695a76705a91120f54dfce9810b0ff63d7))
+
 ### [1.1.2](https://github.com/openpace/app/compare/v1.1.1...v1.1.2) (2020-12-30)
 
 

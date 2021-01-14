@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/openpace/app/compare/v1.2.0...v1.2.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* disable ipad support ([4841973](https://github.com/openpace/app/commit/4841973fc1d2503a5b2a607f683fd785ccb94a58))
+
 ## [1.2.0](https://github.com/openpace/app/compare/v1.1.2...v1.2.0) (2021-01-14)
 
 

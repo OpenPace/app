@@ -19,7 +19,7 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "bundleIdentifier": "com.openpace.challenges",
       "buildNumber": "1.2.0",
       "associatedDomains": [

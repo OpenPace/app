@@ -33,6 +33,7 @@
     "android": {
       "package": "com.openpace.challenges",
       "versionCode": 380010201,
+      "permissions": [],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/foregroundImage.png",
         "backgroundImage": "./assets/images/backgroundImage.png"

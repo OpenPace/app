@@ -24,7 +24,10 @@
       "buildNumber": "1.2.1",
       "associatedDomains": [
         "applinks:*.openpace.co"
-      ]
+      ],
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "androidStatusBar": {
       "barStyle": "light-content",

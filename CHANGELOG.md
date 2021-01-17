@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/openpace/app/compare/v1.2.1...v1.2.2) (2021-01-17)
+
+
+### Bug Fixes
+
+* android adaptive icon too large ([ec03b77](https://github.com/openpace/app/commit/ec03b77a617a5c2ac8335da1ee5368e60d41f8ce))
+* remove encryption warning in iOS ([e0ac718](https://github.com/openpace/app/commit/e0ac718b9fa2d2210f4f864955670a43a913d159))
+* remove unused android permissions ([74cedf8](https://github.com/openpace/app/commit/74cedf8bf1074b87323c2fd0d022c106a7cd2c64))
+
 ### [1.2.1](https://github.com/openpace/app/compare/v1.2.0...v1.2.1) (2021-01-14)
 
 

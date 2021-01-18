@@ -7,7 +7,7 @@ import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabParamList } from "../types";
-import AvatarIcon from './AvatarIcon';
+import AvatarIcon from "./AvatarIcon";
 
 type NavigationProp = StackNavigationProp<BottomTabParamList>;
 
@@ -28,23 +28,18 @@ export default function CannedChallenges() {
 
   return (
     <ScrollView horizontal style={[BaseStyles.py2]}>
-      {/* <Card
-          onPress={() => selectChallenge({ challengeType: "segment" })}
-          style={[BaseStyles.mb3, styles.card]}
-          >
-          <Card.Title
-          left={(props) => <Avatar.Icon {...props} icon="run" />}
-          subtitle="Who can run the segment the fastest"
-          title="Segment Challenge"
-          />
-          </Card> */}
-
       <Card
         onPress={() => selectChallenge({ challengeType: "distance" })}
         style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-    left={(props) => <AvatarIcon {...props} bgColor='primary' icon="map-marker-distance" />}
+          left={(props) => (
+            <AvatarIcon
+              {...props}
+              bgColor="primary"
+              icon="map-marker-distance"
+            />
+          )}
           subtitle="Who can run the furthest"
           title="Distance Challenge"
         />
@@ -55,7 +50,9 @@ export default function CannedChallenges() {
         style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-          left={(props) => <AvatarIcon {...props} bgColor="info" icon="timer" />}
+          left={(props) => (
+            <AvatarIcon {...props} bgColor="info" icon="timer" />
+          )}
           subtitle="Who can run the longest"
           title="Duration Challenge"
         />
@@ -66,9 +63,24 @@ export default function CannedChallenges() {
         style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-          left={(props) => <AvatarIcon {...props} bgColor="danger" icon="terrain" />}
+          left={(props) => (
+            <AvatarIcon {...props} bgColor="danger" icon="terrain" />
+          )}
           subtitle="Who can run the most elevation"
           title="Climbing Challenge"
+        />
+      </Card>
+
+      <Card
+        onPress={() => selectChallenge({ challengeType: "segment" })}
+        style={[BaseStyles.mb3, styles.card]}
+      >
+        <Card.Title
+          left={(props) => (
+            <AvatarIcon {...props} bgColor="success" icon="routes" />
+          )}
+          subtitle="Who can run the segment the fastest"
+          title="Segment Challenge"
         />
       </Card>
     </ScrollView>

@@ -1,13 +1,12 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { Text } from "react-native-paper";
+import { StyleSheet, View } from "react-native";
+import { IconButton, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
 import DotCalendar from "../components/DotCalendar";
 import UserAvatar from "../components/UserAvatar";
 import { useUserContext } from "../contexts/UserContext";
-import { FontAwesome } from "@expo/vector-icons";
 
 import BaseStyles from "../utils/BaseStyles";
 
@@ -31,9 +30,11 @@ export default function ProfileScreen() {
           </Text>
         </View>
 
-        <TouchableOpacity onPress={() => navigate("SettingsScreen")}>
-          <FontAwesome name="gear" size={24} color="black" />
-        </TouchableOpacity>
+        <IconButton
+          icon="cog"
+          size={24}
+          onPress={() => navigate("SettingsScreen")}
+        />
       </View>
 
       <View style={[BaseStyles.p4]}>

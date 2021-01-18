@@ -79,7 +79,7 @@ function parseChallenge(challenge: any) {
 
 function parseScore(score: any): Score {
   return {
-    score: score.score,
+    amount: score.amount,
     userId: score.user_id,
     firstName: score.first_name,
     lastName: score.last_name,

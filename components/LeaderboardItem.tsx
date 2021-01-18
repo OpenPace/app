@@ -17,18 +17,18 @@ interface ListItemProps {
 
 function formatScore(score: Score, challenge: Challenge, imperial: boolean) {
   if (challenge.challengeType === "distance") {
-    return formatDistance(score.score, imperial);
+    return formatDistance(score.amount, imperial);
   }
 
   if (challenge.challengeType === "time") {
-    return formatDuration(score.score);
+    return formatDuration(score.amount);
   }
 
   if (challenge.challengeType === "altitude") {
-    return formatAltitude(score.score, imperial);
+    return formatAltitude(score.amount, imperial);
   }
 
-  return formatDuration(score.score);
+  return formatDuration(score.amount);
 }
 
 // distance -> meters

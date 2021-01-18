@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 
 export default interface Score {
-  score: number;
+  amount: number;
   userId: number;
   firstName: string;
   lastName: string;

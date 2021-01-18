@@ -5,7 +5,7 @@ import BaseStyles from "../utils/BaseStyles";
 import Challenge from "../api/models/Challenge";
 import Score from "../api/models/Score";
 import { toOrdinal } from "../utils";
-import Avatar from "./Avatar";
+import UserAvatar from "./UserAvatar";
 
 interface Props {
   challenge: Challenge;
@@ -42,7 +42,7 @@ function Place({ place, score }: PlaceProps) {
 
   return (
     <View style={[styles.place]}>
-      <Avatar size={size} user={score} style={[BaseStyles.mb2]} />
+      <UserAvatar size={size} user={score} style={[BaseStyles.mb2]} />
       <Text>
         {firstName} {lastName}
       </Text>

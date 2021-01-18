@@ -6,7 +6,7 @@ import Challenge from "../api/models/Challenge";
 import BaseStyles from "../utils/BaseStyles";
 import { formatDistance, formatDuration, formatAltitude } from "../utils";
 import { timeAgo } from "../utils/DateTime";
-import Avatar from "./Avatar";
+import UserAvatar from "./UserAvatar";
 
 interface ListItemProps {
   score: Score;
@@ -45,7 +45,7 @@ export default function LeaderboardItem(props: ListItemProps) {
         <Text>{position}</Text>
       </View>
       <View>
-        <Avatar user={score} />
+        <UserAvatar user={score} />
       </View>
 
       <View style={{ flexGrow: 1, marginLeft: 8 }}>

@@ -17,11 +17,12 @@ function userInitials(user: User | Score) {
   return user.firstName[0] + user.lastName[0];
 }
 
-export default function Avatar(props: Props) {
+export default function UserAvatar(props: Props) {
   const { scheme } = useThemeContext();
   const colors = Colors[scheme];
   const { user, onPress, size, style } = props;
   const iconSize = size || 50;
+  const bgColors = [colors.primary, colors.info, colors.danger, colors.warning];
 
   let icon;
 
@@ -30,15 +31,24 @@ export default function Avatar(props: Props) {
       <PaperAvatar.Image
         size={iconSize}
         source={{ uri: user.avatar }}
-        style={[{ borderColor: colors["accent"] }, style]}
+        style={[{ borderColor: colors["secondary"] }, style]}
       />
     );
   } else {
+    const initials = userInitials(user);
+    const bgColor =
+      bgColors[
+        (initials.charCodeAt(0) + initials.charCodeAt(1)) % bgColors.length
+      ];
+
     icon = (
       <PaperAvatar.Text
         size={iconSize}
         label={userInitials(user)}
-        style={[{ borderColor: colors["accent"] }, style]}
+        style={[
+          { backgroundColor: bgColor, borderColor: colors["secondary"] },
+          style,
+        ]}
       />
     );
   }

@@ -9,7 +9,7 @@ import User from "../api/models/User";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { BottomTabParamList } from "../types";
-import Avatar from "./Avatar";
+import UserAvatar from "./UserAvatar";
 
 type NavigationProp = StackNavigationProp<BottomTabParamList>;
 
@@ -39,7 +39,7 @@ export default function Header(props: Props) {
         <Subheading>{subheading}</Subheading>
       </View>
       <View>
-        <Avatar user={user} onPress={() => navigate("Profile")} />
+        <UserAvatar user={user} onPress={() => navigate("Profile")} />
       </View>
     </SafeAreaView>
   );

@@ -5,7 +5,7 @@ import { Card, Caption, Title } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import Challenge from "../api/models/Challenge";
 import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
-import Avatar from "./Avatar";
+import UserAvatar from "./UserAvatar";
 
 interface Props {
   challenge: Challenge;
@@ -30,7 +30,7 @@ export default function PreviewCard({ challenge }: Props) {
 
 function Participants({ challenge }: Props) {
   const avatars = challenge.scores.map((score) => (
-    <Avatar
+    <UserAvatar
       key={score.userId}
       size={24}
       user={score}

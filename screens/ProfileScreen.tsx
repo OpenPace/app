@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
 import DotCalendar from "../components/DotCalendar";
-import Avatar from "../components/Avatar";
+import UserAvatar from "../components/UserAvatar";
 import { useUserContext } from "../contexts/UserContext";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -19,7 +19,7 @@ export default function ProfileScreen() {
     <Screen>
       <View style={[BaseStyles.row, BaseStyles.p4, BaseStyles.alignCenter]}>
         <View>
-          <Avatar user={user} size={50} />
+          <UserAvatar user={user} size={50} />
         </View>
 
         <View style={{ flexGrow: 1, marginLeft: 8 }}>

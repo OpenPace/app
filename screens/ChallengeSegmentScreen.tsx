@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { RefreshControl, ScrollView } from "react-native";
+import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { Button, Headline, List, Paragraph } from "react-native-paper";
+
 import Screen from "../components/Screen";
-import BaseStyles from "../utils/BaseStyles";
-import { Button, List, Paragraph } from "react-native-paper";
+import SegmentStaticMap from "../components/SegmentStaticMap";
+import BaseStyles, { SPACER_4 } from "../utils/BaseStyles";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
@@ -23,6 +25,7 @@ export default function ChallengeSegmentScreen() {
   const route = useRoute<SegmentRouteProp>();
   const segmentId = route.params.segmentId;
   const { setSegmentId } = useNewChallengeContext();
+  const { userPrefs } = useUserPrefsContext();
   const { auth } = useAuthContext();
   const [segment, setSegment] = useState<DetailedSegment | undefined>(
     undefined,
@@ -41,12 +44,23 @@ export default function ChallengeSegmentScreen() {
     navigate("ChallengeTimelineScreen");
   }
 
+  const distance = formatDistance(segment.distance, userPrefs.imperial);
+  const description = `${distance} - ${segment.city}, ${segment.state}`;
+  const width = Dimensions.get("window").width - SPACER_4 * 2;
+
   return (
     <Screen style={[BaseStyles.py4]}>
       <ScrollView style={[BaseStyles.pbTabBar]}>
-        <Paragraph style={[BaseStyles.px4]}>{segment.id}</Paragraph>
-        <Paragraph style={[BaseStyles.px4]}>{segment.polyline}</Paragraph>
-        <Button onPress={onNext}>Next</Button>
+        <View style={[BaseStyles.px4]}>
+          <Headline>{segment.name}</Headline>
+          <Paragraph style={[BaseStyles.pb4]}>{description}</Paragraph>
+
+          <SegmentStaticMap segment={segment} size={width} />
+
+          <Button mode="contained" onPress={onNext} style={[BaseStyles.mt3]}>
+            Select
+          </Button>
+        </View>
       </ScrollView>
     </Screen>
   );

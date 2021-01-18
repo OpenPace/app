@@ -3,6 +3,12 @@ import { StyleSheet } from "react-native";
 const SPACER = 16;
 const BORDER_RADIUS = 8;
 
+export const SPACER_1 = SPACER * 0.25;
+export const SPACER_2 = SPACER * 0.5;
+export const SPACER_3 = SPACER;
+export const SPACER_4 = SPACER * 1.5;
+export const SPACER_5 = SPACER * 3;
+
 export default StyleSheet.create({
   row: {
     flex: 0,

@@ -20,3 +20,7 @@ export default interface Segment {
   // start_latlng: [44.86, -85.53]
   // end_latlng: [44.86, -85.52]
 }
+
+export interface DetailedSegment extends Segment {
+  polyline: string;
+}

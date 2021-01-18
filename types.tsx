@@ -36,7 +36,8 @@ export type ChallengesParamList = {
   ChallengeTimelineScreen: challengeParams;
   ChallengeDateScreen: challengeParams;
   ChallengeDetailsScreen: challengeParams;
-  ChallengeSegmentScreen: challengeParams;
+  ChallengeSegmentSelectScreen: challengeParams;
+  ChallengeSegmentScreen: { segmentId: string };
 };
 
 export type NotificationsParamList = {

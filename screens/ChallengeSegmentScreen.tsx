@@ -1,73 +1,52 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { RefreshControl, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
-import { List, Paragraph } from "react-native-paper";
+import { Button, List, Paragraph } from "react-native-paper";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
 import Segment from "../api/models/Segment";
-import { getStarredSegments } from "../services/SegmentService";
+import { getDetailedSegment } from "../services/SegmentService";
 import { formatDistance } from "../utils";
+import { ChallengesParamList } from "../types";
+
+type SegmentRouteProp = RouteProp<
+  ChallengesParamList,
+  "ChallengeSegmentScreen"
+>;
 
 export default function ChallengeSegmentScreen() {
-  const navigation = useNavigation();
+  const { navigate } = useNavigation();
+  const route = useRoute<SegmentRouteProp>();
+  const segmentId = route.params.segmentId;
+  const { setSegmentId } = useNewChallengeContext();
   const { auth } = useAuthContext();
-  const { setSegment } = useNewChallengeContext();
-  const { userPrefs } = useUserPrefsContext();
-  const [segments, setSegments] = useState<Segment[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
-
-  async function loadStarredSegments() {
-    const result = await getStarredSegments({ authToken: auth.token });
-    setSegments(result);
-  }
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    loadStarredSegments().then(() => setRefreshing(false));
-  }, []);
+  const [segment, setSegment] = useState<DetailedSegment | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
-    onRefresh();
-  }, []);
+    getDetailedSegment(segmentId, { authToken: auth.token }).then(setSegment);
+  }, [segmentId]);
 
-  function selectSegment(segment: Segment) {
-    setSegment(segment);
-    navigation.navigate("ChallengeTimeline");
+  if (!segment) {
+    return null;
   }
 
-  const segmentList = segments.map((segment) => {
-    const distance = formatDistance(segment.distance, userPrefs.imperial);
-    const description = `${distance} - ${segment.city}, ${segment.state}`;
-
-    return (
-      <List.Item
-        key={segment.id}
-        title={segment.name}
-        description={description}
-        left={() => <List.Icon icon="routes" />}
-        onPress={() => selectSegment(segment)}
-      />
-    );
-  });
+  function onNext() {
+    setSegmentId(segment.id);
+    navigate("ChallengeTimelineScreen");
+  }
 
   return (
     <Screen style={[BaseStyles.py4]}>
-      <ScrollView
-        refreshControl={
-          <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
-        }
-        style={[BaseStyles.pbTabBar]}
-      >
-        <Paragraph style={[BaseStyles.px4]}>
-          To see segments in this list, please star them in your Strava app.
-        </Paragraph>
-        <List.Section>
-          <List.Subheader>Starred Segments</List.Subheader>
-          {segmentList}
-        </List.Section>
+      <ScrollView style={[BaseStyles.pbTabBar]}>
+        <Paragraph style={[BaseStyles.px4]}>{segment.id}</Paragraph>
+        <Paragraph style={[BaseStyles.px4]}>{segment.polyline}</Paragraph>
+        <Button onPress={onNext}>Next</Button>
       </ScrollView>
     </Screen>
   );

@@ -1,4 +1,4 @@
-import Segment from "../api/models/Segment";
+import Segment, { DetailedSegment } from "../api/models/Segment";
 import { apiGet, Options } from "../api/client";
 
 export async function getStarredSegments(options: Options): Promise<Segment[]> {
@@ -10,6 +10,21 @@ export async function getStarredSegments(options: Options): Promise<Segment[]> {
 
   const body = await response.json();
   return body.segments.map(parseSegment);
+}
+
+export async function getDetailedSegment(
+  id: number | string,
+  options: Options,
+) {
+  const url = `/segments/${id}`;
+  const response = await apiGet(url, options);
+
+  if (response.status !== 200) {
+    throw new Error("Error fetching segments");
+  }
+
+  const body = await response.json();
+  return parseDetailedSegment(body);
 }
 
 function parseSegment(segment: any) {
@@ -24,4 +39,12 @@ function parseSegment(segment: any) {
     country: segment.country,
     private: segment.private,
   } as Segment;
+}
+
+function parseDetailedSegment(segmentObj: any) {
+  const segment = parseSegment(segmentObj);
+  return {
+    ...segment,
+    polyline: segmentObj.polyline,
+  } as DetailedSegment;
 }

@@ -20,7 +20,9 @@ export default function CannedChallenges() {
   function selectChallenge(params: ChallengeParams) {
     setParams({ ...params, activityType: defaultActivity });
     if (params.challengeType === "segment") {
-      navigation.navigate("Challenges", { screen: "ChallengeSegmentScreen" });
+      navigation.navigate("Challenges", {
+        screen: "ChallengeSegmentSelectScreen",
+      });
     } else {
       navigation.navigate("Challenges", { screen: "ChallengeTimelineScreen" });
     }

@@ -13,8 +13,9 @@ export default interface Challenge {
   timeline: ChallengeTimeline;
   startAt: DateTime;
   endAt: DateTime;
-  segmentId?: string;
   scores: Score[];
+  segmentId?: string;
+  polyline?: string;
 }
 
 export interface ChallengeParams {
@@ -25,4 +26,5 @@ export interface ChallengeParams {
   startAt?: DateTime;
   endAt?: DateTime;
   segmentId?: string;
+  polyline?: string;
 }

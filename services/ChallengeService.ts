@@ -71,6 +71,8 @@ function parseChallenge(challenge: any) {
     activityType: challenge.activity_type,
     challengeType: challenge.challenge_type,
     timeline: challenge.timeline,
+    segmentId: challenge.segment_id,
+    polyline: challenge.polyline,
     startAt: DateTime.fromISO(challenge.start_at),
     endAt: DateTime.fromISO(challenge.end_at),
     scores: challenge.scores.map(parseScore),

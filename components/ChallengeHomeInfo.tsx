@@ -1,6 +1,6 @@
 import * as React from "react";
 import { DateTime } from "luxon";
-import { View, Share, StyleSheet } from "react-native";
+import { Dimensions, View, Share, StyleSheet } from "react-native";
 import {
   Avatar,
   Button,
@@ -10,8 +10,9 @@ import {
 } from "react-native-paper";
 
 import Podium from "../components/Podium";
+import SegmentStaticMap from "../components/SegmentStaticMap";
 import { capitalize, shareLink } from "../utils";
-import BaseStyles from "../utils/BaseStyles";
+import BaseStyles, { SPACER_4 } from "../utils/BaseStyles";
 import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
 import Challenge from "../api/models/Challenge";
 
@@ -31,6 +32,9 @@ function buildShareMessage(challenge: Challenge) {
 }
 
 export default function ChallengeHomeInfo({ challenge }: Props) {
+  const { polyline } = challenge;
+  const width = Dimensions.get("window").width - SPACER_4 * 2;
+
   async function inviteFriends() {
     try {
       const result = await Share.share({
@@ -54,6 +58,14 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
   return (
     <View>
       <Title style={[BaseStyles.mb4]}>{challenge.name}</Title>
+
+      {polyline && (
+        <SegmentStaticMap
+          style={[BaseStyles.mb4]}
+          polyline={polyline}
+          size={width}
+        />
+      )}
 
       <Podium challenge={challenge} />
 

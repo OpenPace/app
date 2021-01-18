@@ -24,7 +24,7 @@ export default function ChallengeSegmentScreen() {
   const { navigate } = useNavigation();
   const route = useRoute<SegmentRouteProp>();
   const segmentId = route.params.segmentId;
-  const { setSegmentId } = useNewChallengeContext();
+  const { params, setParams } = useNewChallengeContext();
   const { userPrefs } = useUserPrefsContext();
   const { auth } = useAuthContext();
   const [segment, setSegment] = useState<DetailedSegment | undefined>(
@@ -40,10 +40,11 @@ export default function ChallengeSegmentScreen() {
   }
 
   function onNext() {
-    setSegmentId(segment.id);
+    setParams({ ...params, segmentId: segment.id, polyline: segment.polyline });
     navigate("ChallengeTimelineScreen");
   }
 
+  const { polyline } = segment;
   const distance = formatDistance(segment.distance, userPrefs.imperial);
   const description = `${distance} - ${segment.city}, ${segment.state}`;
   const width = Dimensions.get("window").width - SPACER_4 * 2;
@@ -55,7 +56,7 @@ export default function ChallengeSegmentScreen() {
           <Headline>{segment.name}</Headline>
           <Paragraph style={[BaseStyles.pb4]}>{description}</Paragraph>
 
-          <SegmentStaticMap segment={segment} size={width} />
+          <SegmentStaticMap polyline={polyline} size={width} />
 
           <Button mode="contained" onPress={onNext} style={[BaseStyles.mt3]}>
             Select

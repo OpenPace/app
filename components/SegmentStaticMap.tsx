@@ -1,16 +1,15 @@
 import React from "react";
-import { Image } from "react-native";
+import { ImageStyle, StyleProp, Image } from "react-native";
 import * as Polyline from "@mapbox/polyline";
-import { DetailedSegment } from "../api/models/Segment";
 import { createSpectrum, hexStringToRGB } from "../utils/ColorUtils";
 
 interface Props {
-  segment: DetailedSegment;
+  polyline: string;
   size: number;
+  style?: StyleProp<ImageStyle>;
 }
 
-export default function SegmentStaticMap({ segment, size }: Props) {
-  const { polyline } = segment;
+export default function SegmentStaticMap({ polyline, size, style }: Props) {
   const coords = Polyline.decode(polyline);
   const startColor = "#FF512F";
   const endColor = "#F09819";
@@ -38,5 +37,10 @@ export default function SegmentStaticMap({ segment, size }: Props) {
     path,
   )}/auto/${size}x${size}@2x?access_token=${mapboxToken}`;
 
-  return <Image style={{ height: size, width: size }} source={{ uri: url }} />;
+  return (
+    <Image
+      style={[style, { height: size, width: size }]}
+      source={{ uri: url }}
+    />
+  );
 }

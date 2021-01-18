@@ -16,7 +16,6 @@ type ContextType = {
   setChallengeType: (challengeType: ChallengeType) => void;
   setTimeline: (timeline: ChallengeTimeline) => void;
   setDates: (startAt: DateTime, endAt: DateTime) => void;
-  setSegmentId: (id: number) => void;
 };
 
 type Props = {
@@ -38,7 +37,6 @@ function NewChallengeProvider({ children }: Props) {
       setParams({ ...params, challengeType }),
     setTimeline: (timeline) => setParams({ ...params, timeline }),
     setDates: (startAt, endAt) => setParams({ ...params, startAt, endAt }),
-    setSegmentId: (id) => setParams({ ...params, segmentId: id }),
   };
 
   return (

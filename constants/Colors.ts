@@ -1,5 +1,8 @@
+import color from "color";
+
 const tintColorLight = "#2f95dc";
 const tintColorDark = "#fff";
+const primary = "#5e72e4";
 const red = "#f5365c";
 const orange = "#fb6340";
 const yellow = "#ffd600";
@@ -24,24 +27,28 @@ export default {
     text: black,
     background: "#f3f5f5",
     foreground: white,
+    surface: white,
     tint: tintColorLight,
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
     default: "#172b4d",
-    primary: "#5e72e4",
     secondary: "#f4f5f7",
+    primary,
     accent: blue,
     info: blue,
     success: green,
     danger: red,
     warning: orange,
-    yellow: yellow,
-    gray: gray,
+    yellow,
+    gray,
+    white,
+    black,
   },
   dark: {
     text: white,
     background: "#363644",
     foreground: "#444454",
+    surface: "#444454",
     tint: tintColorDark,
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorDark,
@@ -55,5 +62,14 @@ export default {
     warning: orange,
     yellow: yellow,
     gray: gray,
+    white: white,
+    black: black,
+    error: "#CF6679",
+    onBackground: "#FFFFFF",
+    onSurface: "#FFFFFF",
+    disabled: color(white).alpha(0.38).rgb().string(),
+    placeholder: color(white).alpha(0.54).rgb().string(),
+    backdrop: color("#363644").alpha(0.5).rgb().string(),
+    notification: primary,
   },
 };

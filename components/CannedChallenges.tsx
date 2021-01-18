@@ -43,7 +43,7 @@ export default function CannedChallenges() {
         style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-          left={(props) => <Avatar.Icon {...props} icon="run" />}
+          left={(props) => <Avatar.Icon {...props} icon="map-marker-distance" />}
           subtitle="Who can run the furthest"
           title="Distance Challenge"
         />
@@ -54,7 +54,7 @@ export default function CannedChallenges() {
         style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-          left={(props) => <Avatar.Icon {...props} icon="run" />}
+          left={(props) => <Avatar.Icon {...props} icon="timer" />}
           subtitle="Who can run the longest"
           title="Duration Challenge"
         />
@@ -65,7 +65,7 @@ export default function CannedChallenges() {
         style={[BaseStyles.mb3, styles.card]}
       >
         <Card.Title
-          left={(props) => <Avatar.Icon {...props} icon="run" />}
+          left={(props) => <Avatar.Icon {...props} icon="terrain" />}
           subtitle="Who can run the most elevation"
           title="Climbing Challenge"
         />

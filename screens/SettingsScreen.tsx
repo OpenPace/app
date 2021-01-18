@@ -1,85 +1,120 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Button, Menu, TextInput } from "react-native-paper";
+import { Menu, Portal, Button, List } from "react-native-paper";
+
 import Screen from "../components/Screen";
+import UserInfoDialog from "../components/profile/UserInfoDialog";
+import TimezoneDialog from "../components/profile/TimezoneDialog";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useUserContext } from "../contexts/UserContext";
+import { useUserPrefsContext } from "../contexts/UserPrefsContext";
+import { useThemeContext } from "../contexts/ThemeContext";
+
 import BaseStyles from "../utils/BaseStyles";
+import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
 
-export default function SettingsScreen() {
-  const { auth } = useAuthContext();
-  const { navigate } = useNavigation();
-  const { user } = auth;
+export default function ProfileScreen() {
+  const { logOut } = useAuthContext();
+  const { user, saveUser } = useUserContext();
+  const { userPrefs, savePrefs } = useUserPrefsContext();
+  const { scheme, toggleScheme } = useThemeContext();
+  const [visible, setVisible] = useState(false);
+  const [unitMenuVisible, setUnitMenuVisible] = useState(false);
+  const [timezoneDialogVisible, setTimezoneDialogVisible] = useState(false);
 
-  if (!user) {
-    return null;
-  }
-
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [imperial, setImperial] = useState(user.imperial);
-  const [visible, setVisible] = React.useState(false);
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
-
-  function save() {
-    navigate("ProfileScreen");
-  }
-
-  function cancel() {
-    navigate("ProfileScreen");
+  async function saveUnits(imperial: boolean) {
+    try {
+      await savePrefs({ imperial });
+      setUnitMenuVisible(false);
+    } catch (e) {
+      setUnitMenuVisible(false);
+    }
   }
 
   return (
-    <Screen style={[BaseStyles.p4]}>
-      <TextInput
-        label="First Name"
-        mode="outlined"
-        onChangeText={setFirstName}
-        style={[BaseStyles.mb2]}
-        value={firstName}
-      />
-      <TextInput
-        label="Last Name"
-        mode="outlined"
-        onChangeText={setLastName}
-        style={[BaseStyles.mb2]}
-        value={lastName}
-      />
-      <Menu
-        anchor={
-          <Button onPress={openMenu}>
-            {imperial ? "Feet & Miles" : "Meters & Kilometers"}
-          </Button>
-        }
-        onDismiss={closeMenu}
-        visible={visible}
-      >
-        <Menu.Item
-          onPress={() => {
-            setImperial(true);
-            closeMenu();
-          }}
-          title="Feet & Miles"
-        />
-        <Menu.Item
-          onPress={() => {
-            setImperial(false);
-            closeMenu();
-          }}
-          title="Meters & Kilometers"
-        />
-      </Menu>
+    <Screen>
+      <View>
+        <List.Section>
+          <List.Subheader>User Information</List.Subheader>
+          <List.Item
+            description="Name"
+            onPress={() => setVisible(true)}
+            title={fullName(user)}
+          />
+          <List.Item
+            description="Email"
+            onPress={() => setVisible(true)}
+            title={user.email}
+          />
+          <List.Item
+            description="Location"
+            onPress={() => setVisible(true)}
+            title={locationName(user) || "Not Set"}
+          />
 
-      <View style={[BaseStyles.row]}>
-        <View style={[BaseStyles.col]}>
-          <Button onPress={cancel}>Cancel</Button>
-        </View>
+          <List.Subheader>Preferences</List.Subheader>
 
-        <View style={[BaseStyles.col]}>
-          <Button onPress={save}>Save</Button>
-        </View>
+          <Menu
+            anchor={
+              <List.Item
+                description="Units & Measurements"
+                onPress={() => setUnitMenuVisible(true)}
+                title={unitsLabel(userPrefs.imperial)}
+              />
+            }
+            onDismiss={() => {
+              setUnitMenuVisible(false);
+            }}
+            visible={unitMenuVisible}
+          >
+            <Menu.Item
+              onPress={() => {
+                saveUnits(false);
+              }}
+              title="Meters & Kilometers"
+            />
+            <Menu.Item
+              onPress={() => {
+                saveUnits(true);
+              }}
+              title="Feet & Miles"
+            />
+          </Menu>
+
+          <List.Item
+            description="Timezone"
+            onPress={() => setTimezoneDialogVisible(true)}
+            title={timezoneLabel(userPrefs.timezone)}
+          />
+
+          <List.Item
+            title="App Theme"
+            onPress={() => toggleScheme()}
+            description={scheme}
+          />
+        </List.Section>
       </View>
+
+      <View style={[BaseStyles.p4]}>
+        <Button mode="contained" onPress={() => logOut()}>
+          Log Out
+        </Button>
+      </View>
+
+      <Portal>
+        <UserInfoDialog
+          close={() => setVisible(false)}
+          saveUser={saveUser}
+          user={user}
+          visible={visible}
+        />
+        <TimezoneDialog
+          close={() => setTimezoneDialogVisible(false)}
+          savePrefs={savePrefs}
+          userPrefs={userPrefs}
+          visible={timezoneDialogVisible}
+        />
+      </Portal>
     </Screen>
   );
 }

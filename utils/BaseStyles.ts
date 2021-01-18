@@ -157,6 +157,21 @@ export default StyleSheet.create({
   mb5: {
     marginBottom: SPACER * 3,
   },
+  mt1: {
+    marginTop: SPACER * 0.25,
+  },
+  mt2: {
+    marginTop: SPACER * 0.5,
+  },
+  mt3: {
+    marginTop: SPACER,
+  },
+  mt4: {
+    marginTop: SPACER * 1.5,
+  },
+  mt5: {
+    marginTop: SPACER * 3,
+  },
 
   // Text
   text: {

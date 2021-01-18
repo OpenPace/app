@@ -1,6 +1,6 @@
 import User from "../api/models/User";
 
-type StringKeyable<T = any> = { [key: string]: T };
+export type StringKeyable<T = any> = { [key: string]: T };
 
 export function camelToUnderscore(key: string): string {
   return key.replace(/([A-Z])/g, "_$1").toLowerCase();

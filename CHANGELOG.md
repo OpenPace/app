@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/openpace/app/compare/v1.2.2...v1.3.0) (2021-01-20)
+
+
+### Features
+
+* add activity calendar to profile page ([4495e35](https://github.com/openpace/app/commit/4495e35bdbea46da5080ca5d35f2f4cb468a5515))
+* add colors to canned challenges ([c94badc](https://github.com/openpace/app/commit/c94badcb89ce7abbae79528e540f385cafe70202))
+* add colors to user avatars without image ([4d53b19](https://github.com/openpace/app/commit/4d53b191b7574440c1657fd33ac70171f8dc27d7))
+* add detailed segment screen ([7e53650](https://github.com/openpace/app/commit/7e536509369127c64205173480ed855b85ad3e30))
+* add map to challenge show if polyline ([365c91c](https://github.com/openpace/app/commit/365c91c7adce246cd48df68cf9cf68adb89c9964))
+* add static image for segment screen ([d95fbe0](https://github.com/openpace/app/commit/d95fbe09f6d6b796e5ee3a4b14f8af817944b79c))
+
+
+### Bug Fixes
+
+* readd segment to canned challenges ([a4a29f8](https://github.com/openpace/app/commit/a4a29f8aea8ece81115a6df66e19c551af95b9bc))
+* rename score to amount in score model ([af49de8](https://github.com/openpace/app/commit/af49de87fe3939ed74f58cd272a446f949c2e029))
+* settings link stays black in dark mode ([78134f3](https://github.com/openpace/app/commit/78134f313320b2a2a7dfcec8d30d6ef8bb795586))
+* typescript and prettier errors ([f6a2c51](https://github.com/openpace/app/commit/f6a2c5136f3072682198621d752515be366b7dc9))
+* update icons for canned challenges ([530f76f](https://github.com/openpace/app/commit/530f76f79724f63a9ab72db427a84d01bbff67dc))
+* use theme colors in the themes ([5259033](https://github.com/openpace/app/commit/5259033d43a7c9ae0e65356754fe1cb2aefbb39c))
+
 ### [1.2.2](https://github.com/openpace/app/compare/v1.2.1...v1.2.2) (2021-01-17)
 
 

@@ -15,16 +15,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.openpace.challenges",
       "buildNumber": "1.2.2",
-      "associatedDomains": [
-        "applinks:*.openpace.co"
-      ],
+      "associatedDomains": ["applinks:*.openpace.co"],
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -52,10 +48,7 @@
               "pathPrefix": "/invite"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ]
     }

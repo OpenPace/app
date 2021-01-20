@@ -9,5 +9,5 @@ export default {
   colors: {
     ...DefaultTheme.colors,
     ...light,
-  }
+  },
 };

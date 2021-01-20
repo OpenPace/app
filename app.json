@@ -15,16 +15,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.openpace.challenges",
       "buildNumber": "1.3.0",
-      "associatedDomains": [
-        "applinks:*.openpace.co"
-      ],
+      "associatedDomains": ["applinks:*.openpace.co"],
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -36,7 +32,11 @@
     "android": {
       "package": "com.openpace.challenges",
       "versionCode": 400010300,
-      "permissions": [],
+      "permissions": [
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE",
+        "READ_INTERNAL_STORAGE"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/foregroundImage.png",
         "backgroundImage": "./assets/images/backgroundImage.png"
@@ -52,10 +52,7 @@
               "pathPrefix": "/invite"
             }
           ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
+          "category": ["BROWSABLE", "DEFAULT"]
         }
       ]
     }

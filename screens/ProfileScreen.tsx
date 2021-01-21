@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { IconButton, Text } from "react-native-paper";
+import { Headline, IconButton, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
@@ -38,6 +38,8 @@ export default function ProfileScreen() {
       </View>
 
       <View style={[BaseStyles.p4]}>
+        <Headline style={[BaseStyles.mb2]}>This Month</Headline>
+
         <DotCalendar />
       </View>
     </Screen>

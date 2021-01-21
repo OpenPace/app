@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Avatar, Headline, Text } from "react-native-paper";
+import { Avatar, Surface, Text } from "react-native-paper";
 import { DateTime } from "luxon";
 
 import Activity from "../api/models/Activity";
@@ -75,13 +75,11 @@ export default function DotCalendar() {
   const labels = weekLabels.map((label) => <Label key={label} text={label} />);
 
   return (
-    <View>
-      <Headline style={[BaseStyles.mb3]}>{today.monthLong} Calendar</Headline>
-
+    <Surface style={[BaseStyles.p3, BaseStyles.rounded]}>
       <View style={[BaseStyles.row]}>{labels}</View>
 
       <View style={[BaseStyles.row]}>{items}</View>
-    </View>
+    </Surface>
   );
 }
 

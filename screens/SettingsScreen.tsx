@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { Menu, Portal, Button, List } from "react-native-paper";
+import * as Updates from "expo-updates";
 
 import Screen from "../components/Screen";
 import UserInfoDialog from "../components/profile/UserInfoDialog";
@@ -12,6 +13,19 @@ import { useThemeContext } from "../contexts/ThemeContext";
 
 import BaseStyles from "../utils/BaseStyles";
 import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
+
+async function checkUpdate() {
+  try {
+    const update = await Updates.checkForUpdateAsync();
+    if (update.isAvailable) {
+      await Updates.fetchUpdateAsync();
+      // ... notify user of update ...
+      await Updates.reloadAsync();
+    }
+  } catch (e) {
+    // handle or log error
+  }
+}
 
 export default function ProfileScreen() {
   const { logOut } = useAuthContext();
@@ -91,6 +105,12 @@ export default function ProfileScreen() {
             title="App Theme"
             onPress={() => toggleScheme()}
             description={scheme}
+          />
+
+          <List.Item
+            title="Check for Update"
+            description="App Updates"
+            onPress={() => checkUpdate()}
           />
         </List.Section>
       </View>

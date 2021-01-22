@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { View } from "react-native";
-import { Menu, Portal, Button, List } from "react-native-paper";
+import { ScrollView, View } from "react-native";
+import { Text, Menu, Portal, Button, List } from "react-native-paper";
 import * as Updates from "expo-updates";
 
 import Screen from "../components/Screen";
@@ -10,22 +10,10 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { useUserContext } from "../contexts/UserContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
 import { useThemeContext } from "../contexts/ThemeContext";
+import { registerForPushNotifications } from "../services/NotificationService";
 
 import BaseStyles from "../utils/BaseStyles";
 import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
-
-async function checkUpdate() {
-  try {
-    const update = await Updates.checkForUpdateAsync();
-    if (update.isAvailable) {
-      await Updates.fetchUpdateAsync();
-      // ... notify user of update ...
-      await Updates.reloadAsync();
-    }
-  } catch (e) {
-    // handle or log error
-  }
-}
 
 export default function ProfileScreen() {
   const { logOut } = useAuthContext();
@@ -33,6 +21,8 @@ export default function ProfileScreen() {
   const { userPrefs, savePrefs } = useUserPrefsContext();
   const { scheme, toggleScheme } = useThemeContext();
   const [visible, setVisible] = useState(false);
+  const [token, setToken] = useState<string>("No Token");
+  const [updateMsg, setUpdateMsg] = useState<string>("Check for Updates");
   const [unitMenuVisible, setUnitMenuVisible] = useState(false);
   const [timezoneDialogVisible, setTimezoneDialogVisible] = useState(false);
 
@@ -45,9 +35,37 @@ export default function ProfileScreen() {
     }
   }
 
+  async function checkUpdate() {
+    try {
+      setUpdateMsg("Checking for Updates...");
+
+      const update = await Updates.checkForUpdateAsync();
+      if (update.isAvailable) {
+        await Updates.fetchUpdateAsync();
+        setUpdateMsg("Updating...");
+        // ... notify user of update ...
+        await Updates.reloadAsync();
+        setUpdateMsg("Up to Date");
+      } else {
+        setUpdateMsg("No Update Found");
+      }
+    } catch (e) {
+      // handle or log error
+    }
+  }
+
+  async function notificationCheck() {
+    try {
+      const token = await registerForPushNotifications();
+      setToken(token);
+    } catch (e) {
+      setToken(e.message);
+    }
+  }
+
   return (
     <Screen>
-      <View>
+      <ScrollView>
         <List.Section>
           <List.Subheader>User Information</List.Subheader>
           <List.Item
@@ -108,18 +126,28 @@ export default function ProfileScreen() {
           />
 
           <List.Item
-            title="Check for Update"
+            title={updateMsg}
             description="App Updates"
             onPress={() => checkUpdate()}
           />
-        </List.Section>
-      </View>
 
-      <View style={[BaseStyles.p4]}>
-        <Button mode="contained" onPress={() => logOut()}>
-          Log Out
-        </Button>
-      </View>
+          <List.Item
+            title={token}
+            description="Debug Notifications"
+            onPress={() => notificationCheck()}
+          />
+        </List.Section>
+
+        <View style={[BaseStyles.p4]}>
+          <Text>{token}</Text>
+        </View>
+
+        <View style={[BaseStyles.p4]}>
+          <Button mode="contained" onPress={() => logOut()}>
+            Log Out
+          </Button>
+        </View>
+      </ScrollView>
 
       <Portal>
         <UserInfoDialog

@@ -35,8 +35,10 @@
       "permissions": [
         "WRITE_EXTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE",
-        "READ_INTERNAL_STORAGE"
+        "READ_INTERNAL_STORAGE",
+        "RECEIVE_BOOT_COMPLETED"
       ],
+      "useNextNotificationsApi": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/foregroundImage.png",
         "backgroundImage": "./assets/images/backgroundImage.png"

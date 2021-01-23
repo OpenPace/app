@@ -14,6 +14,7 @@ import { useChallengeContext } from "../contexts/ChallengeContext";
 import { isStravaConnected } from "../utils";
 import { ChallengesParamList } from "../types";
 import { hasSeen } from "../services/HasSeenService";
+import { registerForPushNotifications } from "../services/NotificationService";
 
 type NavigationProp = StackNavigationProp<ChallengesParamList>;
 
@@ -43,6 +44,16 @@ export default function HomeScreen() {
   useEffect(() => {
     loadChallenges();
   }, []);
+
+  useEffect(() => {
+    try {
+      if (auth.token) {
+        registerForPushNotifications({authToken: auth.token});
+      }
+    } catch (e) {
+      console.log('Token error', e.message);
+    }
+  }, [auth])
 
   if (!user) {
     return null;

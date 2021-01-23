@@ -2,6 +2,23 @@ import { Platform } from "react-native";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 
+import { apiPost, Options } from "../api/client";
+
+export async function savePushToken(token: string, options: Options) {
+  const response = await apiPost("/push_token", {
+    ...options,
+    data: {
+      token,
+    },
+  });
+
+  if (response.status !== 201) {
+    throw new Error("Error saving push token");
+  }
+
+  return;
+}
+
 export async function registerForPushNotifications() {
   let token: string;
 

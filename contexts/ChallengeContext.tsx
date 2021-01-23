@@ -29,19 +29,19 @@ function ChallengeProvider({ authToken, children }: Props) {
   const [challenges, setChallenges] = useState<Challenge[]>([]);
   const [loading, setLoading] = useState(false);
 
-  function addToChallenges(challenge: Challenge) {
-    const idx = challenges.findIndex((x) => x.slug === challenge.slug);
+  function addToChallenges(challengeToAdd: Challenge) {
+    const idx = challenges.findIndex((x) => x.slug === challengeToAdd.slug);
     if (idx !== -1) {
-      challenges.splice(idx, 1, challenge); // Delete the existing challenge
+      challenges.splice(idx, 1, challengeToAdd); // Delete the existing challenge
     } else {
-      challenges.unshift(challenge);
+      challenges.unshift(challengeToAdd);
     }
     setChallenges(challenges);
   }
 
   async function loadChallenges() {
     setLoading(true);
-    const allChallenges = await getChallengesByUser({ authToken: authToken });
+    const allChallenges = await getChallengesByUser({ authToken });
     setChallenges(allChallenges);
     setLoading(false);
   }
@@ -55,21 +55,21 @@ function ChallengeProvider({ authToken, children }: Props) {
   }
 
   async function getChallenge(slug: string) {
-    let challenge = challenges.find((x) => x.slug === slug);
-    if (!challenge) {
-      challenge = await apiGetChallenge(slug, { authToken });
-      addToChallenges(challenge);
+    let c = challenges.find((x) => x.slug === slug);
+    if (!c) {
+      c = await apiGetChallenge(slug, { authToken });
+      addToChallenges(c);
     }
 
-    setChallenge(challenge);
-    return Promise.resolve(challenge);
+    setChallenge(c);
+    return Promise.resolve(c);
   }
 
   async function fetchChallenge(slug: slug) {
-    const challenge = await apiGetChallenge(slug, { authToken });
-    addToChallenges(challenge);
-    setChallenge(challenge);
-    return Promise.resolve(challenge);
+    const c = await apiGetChallenge(slug, { authToken });
+    addToChallenges(c);
+    setChallenge(c);
+    return Promise.resolve(c);
   }
 
   const value: ContextType = {

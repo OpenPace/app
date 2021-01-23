@@ -15,9 +15,7 @@ export async function hasSeen(feature: string): Promise<boolean> {
 export async function markHasSeen(feature: string): Promise<void> {
   try {
     await AsyncStorage.setItem(storageKey(feature), "true");
-  } catch {
-    return;
-  }
+  } catch {}
 }
 
 function storageKey(feature: string) {

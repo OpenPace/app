@@ -45,7 +45,7 @@ export default function InvitationScreen() {
   const [errorMessage, setErrorMesssage] = useState<string | undefined>(
     undefined,
   );
-  const slug = route.params.slug;
+  const { slug } = route.params;
 
   useEffect(() => {
     async function loadChallenge() {
@@ -62,7 +62,7 @@ export default function InvitationScreen() {
   function navigateToChallenge() {
     loggedInNav.navigate("Challenges", {
       screen: "ChallengeShowScreen",
-      params: { slug: slug },
+      params: { slug },
     });
   }
 
@@ -104,7 +104,7 @@ export default function InvitationScreen() {
       <>
         <Button
           mode="contained"
-          onPress={() => loggedOutNav.navigate("SignUp", { slug: slug })}
+          onPress={() => loggedOutNav.navigate("SignUp", { slug })}
           style={[BaseStyles.mb2]}
         >
           Sign Up
@@ -112,7 +112,7 @@ export default function InvitationScreen() {
 
         <Button
           mode="outlined"
-          onPress={() => loggedOutNav.navigate("LogIn", { slug: slug })}
+          onPress={() => loggedOutNav.navigate("LogIn", { slug })}
         >
           Sign In
         </Button>
@@ -123,7 +123,7 @@ export default function InvitationScreen() {
   if (!challenge) {
     return (
       <Screen style={[BaseStyles.p4]}>
-        <ActivityIndicator animating={true} />
+        <ActivityIndicator animating />
       </Screen>
     );
   }

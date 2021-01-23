@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Dimensions, ScrollView, View } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { Button, Headline, List, Paragraph } from "react-native-paper";
+import { Button, Headline, Paragraph } from "react-native-paper";
 
 import Screen from "../components/Screen";
 import SegmentStaticMap from "../components/SegmentStaticMap";
@@ -10,7 +9,6 @@ import BaseStyles, { SPACER_4 } from "../utils/BaseStyles";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
-import Segment from "../api/models/Segment";
 import { getDetailedSegment } from "../services/SegmentService";
 import { formatDistance } from "../utils";
 import { ChallengesParamList } from "../types";
@@ -23,7 +21,7 @@ type SegmentRouteProp = RouteProp<
 export default function ChallengeSegmentScreen() {
   const { navigate } = useNavigation();
   const route = useRoute<SegmentRouteProp>();
-  const segmentId = route.params.segmentId;
+  const { segmentId } = route.params;
   const { params, setParams } = useNewChallengeContext();
   const { userPrefs } = useUserPrefsContext();
   const { auth } = useAuthContext();
@@ -33,7 +31,7 @@ export default function ChallengeSegmentScreen() {
 
   useEffect(() => {
     getDetailedSegment(segmentId, { authToken: auth.token }).then(setSegment);
-  }, [segmentId]);
+  }, [segmentId, auth]);
 
   if (!segment) {
     return null;

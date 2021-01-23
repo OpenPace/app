@@ -17,7 +17,7 @@ export async function logIn(params: LoginParams) {
 
   const body = await response.json();
   const user = parseUser(body.user);
-  const token: string = body.token;
+  const { token } = body;
   persistUser(user);
   persistToken(body.token);
 
@@ -49,7 +49,7 @@ export async function signUp(params: SignupParams) {
   }
 
   const user = parseUser(body.user);
-  const token: string = body.token;
+  const { token } = body;
   persistUser(user);
   persistToken(body.token);
 

@@ -51,7 +51,7 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
         // dismissed
       }
     } catch (error) {
-      alert(error.message);
+      // show error
     }
   }
 

@@ -5,9 +5,9 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BaseStyles from "../utils/BaseStyles";
-import { cloudinaryImg } from "../utils";
+import { cloudinaryImg, isStravaConnected } from "../utils";
 import { useAuthContext } from "../contexts/AuthContext";
-import { isStravaConnected } from "../utils";
+
 import { ChallengesParamList } from "../types";
 import StravaButton from "../components/StravaButton";
 import Screen from "../components/Screen";
@@ -27,11 +27,12 @@ export default function StravaPrompt() {
   // Redirect to home
   useEffect(() => {
     if (user && isStravaConnected(user)) {
-      return navigation.navigate("ChallengesScreen");
+      navigation.navigate("ChallengesScreen");
+      return;
     }
 
     markHasSeen("StravaPrompt");
-  }, [user]);
+  }, [user, navigation]);
 
   function onSuccess() {
     navigation.navigate("ChallengesScreen");

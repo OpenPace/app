@@ -26,7 +26,7 @@ export function hexStringToRGB(hexString: string) {
 // numSteps: number of steps in the gradient
 export function createSpectrum(sRGB: Rgb, eRGB: Rgb, numSteps: number) {
   const colors = [];
-  for (let i = 0; i < numSteps; i++) {
+  for (let i = 0; i < numSteps; i += 1) {
     const r = Math.round(((eRGB[0] - sRGB[0]) * i) / numSteps) + sRGB[0];
     const g = Math.round(((eRGB[1] - sRGB[1]) * i) / numSteps) + sRGB[1];
     const b = Math.round(((eRGB[2] - sRGB[2]) * i) / numSteps) + sRGB[2];

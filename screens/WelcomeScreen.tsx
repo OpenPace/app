@@ -1,12 +1,12 @@
 import React from "react";
 import { Image, ImageBackground, StyleSheet, View } from "react-native";
-import Screen from "../components/Screen";
 import { Button } from "react-native-paper";
-import BaseStyles from "../utils/BaseStyles";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
-import { LoggedOutParamList } from "../types";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LoggedOutParamList } from "../types";
+import BaseStyles from "../utils/BaseStyles";
+import Screen from "../components/Screen";
 import { cloudinaryImg } from "../utils";
 
 type NavigationProp = StackNavigationProp<LoggedOutParamList>;

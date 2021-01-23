@@ -11,6 +11,7 @@ import {
 import { signUp } from "../services/AuthService";
 import { joinChallenge } from "../services/ChallengeService";
 import { LoggedOutParamList } from "../types";
+
 type InviteRouteProp = RouteProp<LoggedOutParamList, "LogIn">;
 
 export default function SignUpScreen() {

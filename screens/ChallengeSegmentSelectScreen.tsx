@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { RefreshControl, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { List, Paragraph } from "react-native-paper";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
-import { List, Paragraph } from "react-native-paper";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
 import Segment from "../api/models/Segment";

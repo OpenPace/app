@@ -1,8 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import Screen from "../components/Screen";
-import BaseStyles from "../utils/BaseStyles";
 import {
   Button,
   Switch,
@@ -10,6 +8,8 @@ import {
   TouchableRipple,
   TextInput,
 } from "react-native-paper";
+import Screen from "../components/Screen";
+import BaseStyles from "../utils/BaseStyles";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 import { ChallengeParams } from "../api/models/Challenge";

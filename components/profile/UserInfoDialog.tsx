@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function UserInfoDialog(props: Props) {
-  const { user } = props;
+  const { user, visible } = props;
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [email, setEmail] = useState(user.email);
@@ -44,7 +44,7 @@ export default function UserInfoDialog(props: Props) {
   }
 
   return (
-    <Dialog onDismiss={close} visible={props.visible}>
+    <Dialog onDismiss={close} visible={visible}>
       <Dialog.Title>Edit Information</Dialog.Title>
 
       <Dialog.Content>

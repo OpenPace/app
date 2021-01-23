@@ -31,7 +31,7 @@ export default function UserAvatar(props: Props) {
       <PaperAvatar.Image
         size={iconSize}
         source={{ uri: user.avatar }}
-        style={[{ borderColor: colors["secondary"] }, style]}
+        style={[{ borderColor: colors.secondary }, style]}
       />
     );
   } else {
@@ -46,7 +46,7 @@ export default function UserAvatar(props: Props) {
         size={iconSize}
         label={userInitials(user)}
         style={[
-          { backgroundColor: bgColor, borderColor: colors["secondary"] },
+          { backgroundColor: bgColor, borderColor: colors.secondary },
           style,
         ]}
       />

@@ -21,7 +21,7 @@ export default function ProfileScreen() {
   const { userPrefs, savePrefs } = useUserPrefsContext();
   const { scheme, toggleScheme } = useThemeContext();
   const [visible, setVisible] = useState(false);
-  const [token, setToken] = useState<string>("No Token");
+  const [pushToken, setPushToken] = useState<string>("No Token");
   const [updateMsg, setUpdateMsg] = useState<string>("Check for Updates");
   const [unitMenuVisible, setUnitMenuVisible] = useState(false);
   const [timezoneDialogVisible, setTimezoneDialogVisible] = useState(false);
@@ -57,9 +57,9 @@ export default function ProfileScreen() {
   async function notificationCheck() {
     try {
       const token = await registerForPushNotifications();
-      setToken(token);
+      setPushToken(token);
     } catch (e) {
-      setToken(e.message);
+      setPushToken(e.message);
     }
   }
 
@@ -132,14 +132,14 @@ export default function ProfileScreen() {
           />
 
           <List.Item
-            title={token}
+            title={pushToken}
             description="Debug Notifications"
             onPress={() => notificationCheck()}
           />
         </List.Section>
 
         <View style={[BaseStyles.p4]}>
-          <Text>{token}</Text>
+          <Text>{pushToken}</Text>
         </View>
 
         <View style={[BaseStyles.p4]}>

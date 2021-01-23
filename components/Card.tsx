@@ -1,14 +1,14 @@
 import * as React from "react";
+import { StyleSheet, View } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import { StyleSheet, View } from "react-native";
 
 type ViewProps = View["props"];
 
 export default function Card(props: ViewProps) {
   const { style, ...otherProps } = props;
   const theme = useColorScheme();
-  const backgroundColor = Colors[theme]["foreground"];
+  const backgroundColor = Colors[theme].foreground;
 
   return (
     <View style={[{ backgroundColor }, styles.card, style]} {...otherProps} />

@@ -41,19 +41,19 @@ export function capitalize(str: string): string {
 }
 
 export function toOrdinal(num: number): string {
-  const j = num % 10,
-    k = num % 100;
+  const j = num % 10;
+  const k = num % 100;
 
-  if (j == 1 && k != 11) {
-    return num + "st";
+  if (j === 1 && k !== 11) {
+    return `${num}st`;
   }
-  if (j == 2 && k != 12) {
-    return num + "nd";
+  if (j === 2 && k !== 12) {
+    return `${num}nd`;
   }
-  if (j == 3 && k != 13) {
-    return num + "rd";
+  if (j === 3 && k !== 13) {
+    return `${num}rd`;
   }
-  return num + "th";
+  return `${num}th`;
 }
 
 export function formatDuration(duration: number): string {
@@ -61,7 +61,7 @@ export function formatDuration(duration: number): string {
   const minutes = Math.floor((duration - hours * 3600) / 60);
   const seconds = duration - hours * 3600 - minutes * 60;
 
-  return padNum(hours) + ":" + padNum(minutes) + ":" + padNum(seconds);
+  return `${padNum(hours)}:${padNum(minutes)}:${padNum(seconds)}`;
 }
 
 function padNum(num: number) {
@@ -74,18 +74,18 @@ function padNum(num: number) {
 
 export function formatDistance(distance: number, imperial: boolean): string {
   if (imperial) {
-    return (distance / 1609).toFixed(1) + " mi";
+    return `${(distance / 1609).toFixed(1)} mi`;
   }
 
-  return (distance / 1000).toFixed(1) + " km";
+  return `${(distance / 1000).toFixed(1)} km`;
 }
 
 export function formatAltitude(altitude: number, imperial: boolean): string {
   if (imperial) {
-    return (altitude * 3.28).toFixed(1) + " ft";
+    return `${(altitude * 3.28).toFixed(1)} ft`;
   }
 
-  return altitude + " m";
+  return `${altitude} m`;
 }
 
 export function fullName(user: User): string {

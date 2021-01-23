@@ -4,7 +4,7 @@ const units = ["year", "month", "week", "day", "hour", "minute"] as const;
 
 export function timeLeft(dateTime: DateTime) {
   const diff = dateTime.diffNow().shiftTo(...units);
-  const unit = units.find((unit) => diff.get(unit) !== 0) || "second";
+  const unit = units.find((u) => diff.get(u) !== 0) || "second";
   const amount = Math.trunc(diff.as(unit));
 
   if (amount === 0) {
@@ -19,7 +19,7 @@ export function timeLeft(dateTime: DateTime) {
 
 export function timeAgo(dateTime: DateTime) {
   const diff = dateTime.diffNow().shiftTo(...units);
-  const unit = units.find((unit) => diff.get(unit) !== 0) || "second";
+  const unit = units.find((u) => diff.get(u) !== 0) || "second";
   const amount = Math.trunc(diff.as(unit)) * -1;
 
   if (amount === 0) {

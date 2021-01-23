@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Headline, Subheading } from "react-native-paper";
-import BaseStyles from "../utils/BaseStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import BaseStyles from "../utils/BaseStyles";
 import { useThemeContext } from "../contexts/ThemeContext";
 import Colors from "../constants/Colors";
 import User from "../api/models/User";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
 import { BottomTabParamList } from "../types";
 import UserAvatar from "./UserAvatar";
 
@@ -28,7 +28,7 @@ export default function Header(props: Props) {
   return (
     <SafeAreaView
       style={[
-        { backgroundColor: colors["foreground"] },
+        { backgroundColor: colors.foreground },
         BaseStyles.row,
         BaseStyles.p4,
         BaseStyles.pt5,

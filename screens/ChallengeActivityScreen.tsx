@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Avatar, Card } from "react-native-paper";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
 import { capitalize } from "../utils";
-import { Avatar, Card } from "react-native-paper";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 
 export default function ChallengeActivityScreen() {

@@ -1,6 +1,7 @@
 import getEnvVars from "../environment";
-const { apiUrl } = getEnvVars();
 import { underscoreObject } from "../utils";
+
+const { apiUrl } = getEnvVars();
 
 const API_ENDPOINT = `${apiUrl}/api`;
 
@@ -44,7 +45,7 @@ function buildHeaders({ authToken }: Options) {
   };
 
   if (authToken) {
-    headers["Authorization"] = `Bearer ${authToken}`;
+    headers.Authorization = `Bearer ${authToken}`;
   }
 
   return headers;

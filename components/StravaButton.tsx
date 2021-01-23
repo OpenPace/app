@@ -1,8 +1,8 @@
-import getEnvVars from "../environment";
 import React, { useEffect, useState } from "react";
 import { makeRedirectUri, useAuthRequest } from "expo-auth-session";
 import { Button } from "react-native-paper";
 import * as WebBrowser from "expo-web-browser";
+import getEnvVars from "../environment";
 
 import { restoreSuccess, useAuthContext } from "../contexts/AuthContext";
 import { exchangeCode } from "../services/StravaService";

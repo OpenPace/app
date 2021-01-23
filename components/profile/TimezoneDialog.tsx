@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function TimezoneDialog(props: Props) {
-  const { userPrefs } = props;
+  const { userPrefs, visible } = props;
   const [timezone, setTimezone] = useState(userPrefs.timezone);
   const [loading, setLoading] = useState(false);
 
@@ -40,7 +40,7 @@ export default function TimezoneDialog(props: Props) {
   ));
 
   return (
-    <Dialog onDismiss={close} visible={props.visible}>
+    <Dialog onDismiss={close} visible={visible}>
       <Dialog.Title>Choose Timezone</Dialog.Title>
 
       <Dialog.Content>

@@ -15,10 +15,12 @@ export default function DatePickerButton(props: Props) {
   const { children, date, onChange } = props;
   const [show, setShow] = useState(false);
 
-  function _onChange(_event: any, selectedDate: any) {
+  function handleChange(_event: any, selectedDate: any) {
     const currentDate = selectedDate ? DateTime.fromJSDate(selectedDate) : date;
     setShow(Platform.OS === "ios");
-    onChange && onChange(currentDate);
+    if (onChange) {
+      onChange(currentDate);
+    }
   }
 
   function showDatepicker() {
@@ -34,9 +36,9 @@ export default function DatePickerButton(props: Props) {
       {show && (
         <DateTimePicker
           display="default"
-          is24Hour={true}
+          is24Hour
           mode="date"
-          onChange={_onChange}
+          onChange={handleChange}
           testID="dateTimePicker"
           value={date.toJSDate()}
         />

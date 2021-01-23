@@ -1,11 +1,11 @@
 import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { Avatar, Card } from "react-native-paper";
+import { Card } from "react-native-paper";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 import BaseStyles from "../utils/BaseStyles";
 import { ChallengeParams } from "../api/models/Challenge";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
 import { BottomTabParamList } from "../types";
 import AvatarIcon from "./AvatarIcon";
 

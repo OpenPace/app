@@ -30,7 +30,7 @@ function NewChallengeProvider({ children }: Props) {
   const value: ContextType = {
     params,
     reset: () => setParams({} as ChallengeParams),
-    setParams: setParams,
+    setParams,
     setName: (name) => setParams({ ...params, name }),
     setActivityType: (activityType) => setParams({ ...params, activityType }),
     setChallengeType: (challengeType) =>

@@ -1,8 +1,8 @@
 import React from "react";
-import BaseStyles from "../utils/BaseStyles";
 import { StyleSheet, View } from "react-native";
 import { Card, Caption, Title } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
+import BaseStyles from "../utils/BaseStyles";
 import Challenge from "../api/models/Challenge";
 import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
 import UserAvatar from "./UserAvatar";

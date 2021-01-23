@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { RefreshControl, ScrollView } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
 import Screen from "../components/Screen";
 import LeaderboardItem from "../components/LeaderboardItem";
 import BaseStyles from "../utils/BaseStyles";
-import { RefreshControl, ScrollView } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { getLeaderboard } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
@@ -40,7 +40,7 @@ export default function LeaderboardScreen() {
   if (!challenge || !scores) {
     return (
       <Screen style={[BaseStyles.p4]}>
-        <ActivityIndicator animating={true} />
+        <ActivityIndicator animating />
       </Screen>
     );
   }

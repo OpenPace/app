@@ -1,11 +1,11 @@
 import * as React from "react";
 import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import BaseStyles from "../utils/BaseStyles";
 import Card from "../components/Card";
-import { MaterialIcons } from "@expo/vector-icons";
 import useColorScheme from "../hooks/useColorScheme";
 import Colors from "../constants/Colors";
-import { useNavigation, useRoute } from "@react-navigation/native";
 
 function getTabs() {
   return [
@@ -18,8 +18,8 @@ function getTabs() {
 
 export default function TabBar() {
   const theme = useColorScheme();
-  const color = Colors[theme]["text"];
-  const primaryColor = Colors[theme]["primary"];
+  const color = Colors[theme].text;
+  const primaryColor = Colors[theme].primary;
 
   const { navigate } = useNavigation();
   const route = useRoute();

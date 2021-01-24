@@ -37,10 +37,10 @@
       "package": "com.openpace.challenges",
       "versionCode": 400010400,
       "permissions": [
-        "WRITE_EXTERNAL_STORAGE",
-        "READ_EXTERNAL_STORAGE",
-        "READ_INTERNAL_STORAGE",
-        "RECEIVE_BOOT_COMPLETED"
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.READ_INTERNAL_STORAGE",
+        "android.permission.RECEIVE_BOOT_COMPLETED"
       ],
       "useNextNotificationsApi": true,
       "adaptiveIcon": {

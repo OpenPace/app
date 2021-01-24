@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.4.1](https://github.com/openpace/app/compare/v1.4.0...v1.4.1) (2021-01-24)
+
+
+### Bug Fixes
+
+* update android app permissions ([e7ef020](https://github.com/openpace/app/commit/e7ef020b342e071356cae811ad4b25f7807c28cd))
+
 ## [1.4.0](https://github.com/openpace/app/compare/v1.3.0...v1.4.0) (2021-01-24)
 
 

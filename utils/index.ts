@@ -60,8 +60,12 @@ export function formatDuration(duration: number): string {
   const hours = Math.floor(duration / 3600);
   const minutes = Math.floor((duration - hours * 3600) / 60);
   const seconds = duration - hours * 3600 - minutes * 60;
+  const parts = [padNum(minutes), padNum(seconds)];
+  if (hours > 0) {
+    parts.unshift(hours.toString());
+  }
 
-  return padNum(hours) + ":" + padNum(minutes) + ":" + padNum(seconds);
+  return parts.join(":");
 }
 
 function padNum(num: number) {
@@ -72,20 +76,25 @@ function padNum(num: number) {
   return num.toString();
 }
 
+export function formatNumber(num: number) {
+  const str = num.toFixed(0);
+  return str.replace(/(.)(?=(\d{3})+$)/g,'$1,');
+}
+
 export function formatDistance(distance: number, imperial: boolean): string {
   if (imperial) {
-    return (distance / 1609).toFixed(1) + " mi";
+    return formatNumber(distance / 1609) + " mi";
   }
 
-  return (distance / 1000).toFixed(1) + " km";
+  return formatNumber(distance / 1000) + " km";
 }
 
 export function formatAltitude(altitude: number, imperial: boolean): string {
   if (imperial) {
-    return (altitude * 3.28).toFixed(1) + " ft";
+    return formatNumber(altitude * 3.28) + " ft";
   }
 
-  return altitude + " m";
+  return formatNumber(altitude) + " m";
 }
 
 export function fullName(user: User): string {

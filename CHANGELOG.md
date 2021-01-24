@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/openpace/app/compare/v1.3.0...v1.4.0) (2021-01-24)
+
+
+### Features
+
+* add expo-notifications support ([cd94b9e](https://github.com/openpace/app/commit/cd94b9ef54895bd8deaf6e88544fd51fbc53fa15))
+
+
+### Bug Fixes
+
+* add button to check for updates ([3efd3f4](https://github.com/openpace/app/commit/3efd3f491f879c814ab904d2395479600bc4ca49))
+* add surface to calendar UI ([ba5d911](https://github.com/openpace/app/commit/ba5d911ab1ff1cdf71791851327fcb2035a92eb1))
+* format numbers for leaderboard ([b218b16](https://github.com/openpace/app/commit/b218b16c301dba65052c0f06e31cb07cf58f54f0))
+* overflow dot calendar issue ([ff31b0c](https://github.com/openpace/app/commit/ff31b0c291b04fc66ae5c90f75aa05ced6768d00))
+* refactor notifications to work in settings screen ([5439341](https://github.com/openpace/app/commit/5439341eb4efe095f125e6c0a766af8f99b84b12))
+* remove background permissions ([760b598](https://github.com/openpace/app/commit/760b598828567961613ce8bf2b31ce58ba9dce4c))
+
 ## [1.3.0](https://github.com/openpace/app/compare/v1.2.2...v1.3.0) (2021-01-20)
 
 

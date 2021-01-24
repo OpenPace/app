@@ -2,7 +2,7 @@
   "expo": {
     "name": "OpenPace",
     "slug": "openpace-challenges",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "openpace",
@@ -15,12 +15,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.openpace.challenges",
-      "buildNumber": "1.3.0",
-      "associatedDomains": ["applinks:*.openpace.co"],
+      "buildNumber": "1.4.0",
+      "associatedDomains": [
+        "applinks:*.openpace.co"
+      ],
       "config": {
         "usesNonExemptEncryption": false
       }
@@ -31,7 +35,7 @@
     },
     "android": {
       "package": "com.openpace.challenges",
-      "versionCode": 400010300,
+      "versionCode": 400010400,
       "permissions": [
         "WRITE_EXTERNAL_STORAGE",
         "READ_EXTERNAL_STORAGE",
@@ -54,7 +58,10 @@
               "pathPrefix": "/invite"
             }
           ],
-          "category": ["BROWSABLE", "DEFAULT"]
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
         }
       ]
     }

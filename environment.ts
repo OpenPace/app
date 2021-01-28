@@ -1,8 +1,13 @@
 import Constants from "expo-constants";
-import { Platform } from "react-native";
 
-const localhost =
-  Platform.OS === "web" ? "http://localhost:4000" : "http://192.168.1.10:4000";
+const { manifest } = Constants;
+const devPort = '4000';
+
+let localhost = `http://localhost:${devPort}`;
+
+if (manifest?.debuggerHost) {
+  localhost = `http://${manifest.debuggerHost.split(':').shift()}:${devPort}`;
+}
 
 const ENV = {
   dev: {

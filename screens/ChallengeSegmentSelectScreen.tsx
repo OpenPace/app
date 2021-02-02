@@ -51,17 +51,17 @@ export default function ChallengeSegmentScreen() {
   });
 
   return (
-    <Screen style={[BaseStyles.py4]}>
+    <Screen>
       <ScrollView
         refreshControl={
           <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
         }
-        style={[BaseStyles.pbTabBar]}
+        style={[BaseStyles.py4]}
       >
         <Paragraph style={[BaseStyles.px4]}>
           To see segments in this list, please star them in your Strava app.
         </Paragraph>
-        <List.Section>
+        <List.Section style={[BaseStyles.pb4]}>
           <List.Subheader>Starred Segments</List.Subheader>
           {segmentList}
         </List.Section>

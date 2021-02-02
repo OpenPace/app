@@ -24,7 +24,7 @@ const challengeTypeIcons = {
   distance: "map-marker-distance",
   time: "timer",
   altitude: "terrain",
-  segment: "",
+  segment: "routes",
 };
 
 function buildShareMessage(challenge: Challenge) {

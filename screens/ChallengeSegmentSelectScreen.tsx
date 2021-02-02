@@ -36,7 +36,7 @@ export default function ChallengeSegmentScreen() {
   }
 
   const segmentList = segments.map((segment) => {
-    const distance = formatDistance(segment.distance, userPrefs.imperial);
+    const distance = formatDistance(segment.distance, userPrefs.imperial, 2);
     const description = `${distance} - ${segment.city}, ${segment.state}`;
 
     return (

@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { Dimensions, RefreshControl, ScrollView, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Dimensions, ScrollView, View } from "react-native";
 import { useNavigation, useRoute, RouteProp } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { Button, Headline, List, Paragraph } from "react-native-paper";
+import { Button, Headline, Paragraph } from "react-native-paper";
 
 import Screen from "../components/Screen";
 import SegmentStaticMap from "../components/SegmentStaticMap";
@@ -10,7 +9,7 @@ import BaseStyles, { SPACER_4 } from "../utils/BaseStyles";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
-import Segment from "../api/models/Segment";
+import { DetailedSegment } from "../api/models/Segment";
 import { getDetailedSegment } from "../services/SegmentService";
 import { formatDistance } from "../utils";
 import { ChallengesParamList } from "../types";
@@ -40,12 +39,16 @@ export default function ChallengeSegmentScreen() {
   }
 
   function onNext() {
+    if (!segment) {
+      return;
+    }
+
     setParams({ ...params, segmentId: segment.id, polyline: segment.polyline });
     navigate("ChallengeTimelineScreen");
   }
 
   const { polyline } = segment;
-  const distance = formatDistance(segment.distance, userPrefs.imperial);
+  const distance = formatDistance(segment.distance, userPrefs.imperial, 2);
   const description = `${distance} - ${segment.city}, ${segment.state}`;
   const width = Dimensions.get("window").width - SPACER_4 * 2;
 

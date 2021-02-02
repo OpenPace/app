@@ -1,5 +1,5 @@
 export default interface Segment {
-  id: number;
+  id: string;
   name: string;
   activityType: "Ride" | "Run";
   distance: number;

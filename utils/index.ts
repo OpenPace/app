@@ -1,4 +1,5 @@
 import User from "../api/models/User";
+import { ChallengeParams } from "../api/models/Challenge";
 
 export type StringKeyable<T = any> = { [key: string]: T };
 
@@ -78,16 +79,20 @@ function padNum(num: number) {
 
 export function formatNumber(num: number, decimals = 0) {
   const str = num.toFixed(decimals);
-  const parts = str.split('.');
-  const firstPart = parts[0].replace(/(.)(?=(\d{3})+$)/g,'$1,');
+  const parts = str.split(".");
+  const firstPart = parts[0].replace(/(.)(?=(\d{3})+$)/g, "$1,");
   parts.shift();
   if (parts.length === 0) {
     return firstPart;
   }
-  return `${firstPart}.${parts.join('')}`;
+  return `${firstPart}.${parts.join("")}`;
 }
 
-export function formatDistance(distance: number, imperial: boolean, decimals = 0): string {
+export function formatDistance(
+  distance: number,
+  imperial: boolean,
+  decimals = 0,
+): string {
   if (imperial) {
     return formatNumber(distance / 1609, decimals) + " mi";
   }
@@ -127,4 +132,32 @@ export function timezoneLabel(timezone: string): string {
 
 export function shareLink(slug: string): string {
   return `https://www.openpace.co/invite/${slug}`;
+}
+
+export function generateChallengeName(params: ChallengeParams) {
+  const challengeSyn = ["challenge", "gauntlet", "bracket", "competition"];
+
+  const activityMap = {
+    run: "Running",
+    bike: "Biking",
+    swim: "Swimming",
+  };
+
+  const parts = [challengeSyn[Math.floor(Math.random() * challengeSyn.length)]];
+
+  const { activityType, timeline, challengeType } = params;
+
+  if (challengeType) {
+    parts.unshift(challengeType);
+  }
+
+  if (activityType) {
+    parts.unshift(activityMap[activityType]);
+  }
+
+  if (timeline && timeline !== "custom") {
+    parts.unshift(timeline);
+  }
+
+  return parts.map((x) => capitalize(x)).join(" ");
 }

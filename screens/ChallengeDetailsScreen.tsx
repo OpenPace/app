@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Screen from "../components/Screen";
@@ -12,42 +12,22 @@ import {
 } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
-import { ChallengeParams } from "../api/models/Challenge";
-
-const activityMap = {
-  run: "Running",
-  bike: "Biking",
-  swim: "Swimming",
-};
-
-function generateName(params: ChallengeParams) {
-  const { activityType } = params;
-  if (!activityType) {
-    return "Challenge";
-  }
-
-  return `${activityMap[activityType]} Challenge`;
-}
+import { generateChallengeName } from "../utils";
 
 export default function ChallengeDetailsScreen() {
   const navigation = useNavigation();
-  const { params, setName } = useNewChallengeContext();
+  const { params } = useNewChallengeContext();
   const { createChallenge, loading } = useChallengeContext();
-  const { name } = params;
   const [isPrivate, setPrivate] = React.useState(false);
-
-  const defaultName = generateName(params);
+  const [name, setName] = useState<string>(generateChallengeName(params))
 
   function togglePrivate() {
     setPrivate(!isPrivate);
   }
 
   async function submit() {
-    if (!name) {
-      params.name = defaultName;
-    }
-
     try {
+      params.name = name;
       const newChallenge = await createChallenge(params);
       navigation.navigate("ChallengeShowScreen", { slug: newChallenge.slug });
     } catch (e) {

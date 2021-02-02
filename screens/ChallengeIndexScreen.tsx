@@ -48,12 +48,12 @@ export default function HomeScreen() {
   useEffect(() => {
     try {
       if (auth.token) {
-        registerForPushNotifications({authToken: auth.token});
+        registerForPushNotifications({ authToken: auth.token });
       }
     } catch (e) {
-      console.log('Token error', e.message);
+      console.log("Token error", e.message);
     }
-  }, [auth])
+  }, [auth]);
 
   if (!user) {
     return null;

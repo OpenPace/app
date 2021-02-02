@@ -76,17 +76,23 @@ function padNum(num: number) {
   return num.toString();
 }
 
-export function formatNumber(num: number) {
-  const str = num.toFixed(0);
-  return str.replace(/(.)(?=(\d{3})+$)/g,'$1,');
+export function formatNumber(num: number, decimals = 0) {
+  const str = num.toFixed(decimals);
+  const parts = str.split('.');
+  const firstPart = parts[0].replace(/(.)(?=(\d{3})+$)/g,'$1,');
+  parts.shift();
+  if (parts.length === 0) {
+    return firstPart;
+  }
+  return `${firstPart}.${parts.join('')}`;
 }
 
-export function formatDistance(distance: number, imperial: boolean): string {
+export function formatDistance(distance: number, imperial: boolean, decimals = 0): string {
   if (imperial) {
-    return formatNumber(distance / 1609) + " mi";
+    return formatNumber(distance / 1609, decimals) + " mi";
   }
 
-  return formatNumber(distance / 1000) + " km";
+  return formatNumber(distance / 1000, decimals) + " km";
 }
 
 export function formatAltitude(altitude: number, imperial: boolean): string {

@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageStyle, StyleProp, Image } from "react-native";
+import { View, ImageStyle, StyleProp, Image } from "react-native";
 import * as Polyline from "@mapbox/polyline";
 import { createSpectrum, hexStringToRGB } from "../utils/ColorUtils";
 
@@ -10,6 +10,7 @@ interface Props {
 }
 
 export default function SegmentStaticMap({ polyline, size, style }: Props) {
+  const imgSize = Math.floor(size);
   const coords = Polyline.decode(polyline);
   const startColor = "#FF512F";
   const endColor = "#F09819";
@@ -32,15 +33,19 @@ export default function SegmentStaticMap({ polyline, size, style }: Props) {
     return pathStrings.join(",");
   }
 
+  const firstCoord = coords[0];
+  const lastCoord = coords[coords.length - 1];
   const path = makePathWithGradient();
   const url = `https://api.mapbox.com/styles/v1/mapbox/light-v9/static/${encodeURIComponent(
     path,
-  )}/auto/${size}x${size}@2x?access_token=${mapboxToken}`;
+  )}/auto/${imgSize}x${imgSize}@2x?access_token=${mapboxToken}`;
 
   return (
-    <Image
-      style={[style, { height: size, width: size }]}
-      source={{ uri: url }}
-    />
+    <View>
+      <Image
+        style={[style, { height: size, width: size }]}
+        source={{ uri: url }}
+      />
+    </View>
   );
 }

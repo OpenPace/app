@@ -1,10 +1,13 @@
 import * as Linking from "expo-linking";
+import { getStateFromPath } from "@react-navigation/native";
 
 export default {
-  prefixes: [Linking.makeUrl("/"), "https://*.openpace.co"],
+  prefixes: [Linking.makeUrl("/"), "https://www.openpace.co"],
   config: {
     screens: {
       Root: {
+        path: "",
+        initialRouteName: "Challenges",
         screens: {
           Challenges: {
             path: "challenges",
@@ -47,5 +50,13 @@ export default {
       },
       NotFound: "*",
     },
+  },
+  getStateFromPath: (path: string, options: any) => {
+    // Don't handle expo-auth-session strings
+    if (path.indexOf("expo-auth-session") !== -1) {
+      return;
+    }
+
+    return getStateFromPath(path, options);
   },
 };

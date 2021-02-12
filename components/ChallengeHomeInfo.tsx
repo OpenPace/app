@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, View, Share } from "react-native";
 import { Button, Title } from "react-native-paper";
 
@@ -8,6 +8,11 @@ import { shareLink } from "../utils";
 import BaseStyles, { SPACER_4 } from "../utils/BaseStyles";
 import Challenge from "../api/models/Challenge";
 import ChallengeMeta from "./ChallengeMeta";
+import {
+  userHasJoinedChallenge,
+  joinChallenge,
+} from "../services/ChallengeService";
+import { useAuthContext } from "../contexts/AuthContext";
 
 interface Props {
   challenge: Challenge;
@@ -20,6 +25,17 @@ function buildShareMessage(challenge: Challenge) {
 export default function ChallengeHomeInfo({ challenge }: Props) {
   const { polyline } = challenge;
   const width = Dimensions.get("window").width - SPACER_4 * 2;
+  const [loading, setLoading] = useState<boolean>(false);
+  const [joined, setJoined] = useState<boolean>(false);
+  const [errorMessage, setErrorMesssage] = useState<string | undefined>(
+    undefined,
+  );
+  const { auth } = useAuthContext();
+  const options = { authToken: auth.token };
+
+  useEffect(() => {
+    userHasJoinedChallenge(challenge.slug, options).then(setJoined);
+  }, [challenge]);
 
   async function inviteFriends() {
     try {
@@ -37,8 +53,41 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
         // dismissed
       }
     } catch (error) {
-      alert(error.message);
+      setErrorMesssage(error.message);
     }
+  }
+
+  async function join() {
+    setLoading(true);
+
+    try {
+      await joinChallenge(challenge.slug, options);
+      setJoined(true);
+    } catch (error) {
+      setErrorMesssage(error.message);
+    }
+    setLoading(false);
+  }
+
+  let actionButtons;
+
+  if (joined) {
+    actionButtons = (
+      <Button mode="contained" onPress={inviteFriends} style={[BaseStyles.mb4]}>
+        Invite Friends
+      </Button>
+    );
+  } else {
+    actionButtons = (
+      <Button
+        loading={loading}
+        mode="contained"
+        onPress={() => join()}
+        style={[BaseStyles.mb2]}
+      >
+        Join
+      </Button>
+    );
   }
 
   return (
@@ -57,9 +106,9 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
 
       <ChallengeMeta challenge={challenge} />
 
-      <Button mode="contained" onPress={inviteFriends} style={[BaseStyles.mb4]}>
-        Invite Friends
-      </Button>
+      {actionButtons}
+
+      {errorMessage && <Text>{errorMessage}</Text>}
     </View>
   );
 }

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  ActivityIndicator,
-  Button,
-  Caption,
-  Title,
-  Text,
-} from "react-native-paper";
+import { ActivityIndicator, Button, Caption, Title } from "react-native-paper";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,11 +8,7 @@ import BaseStyles from "../utils/BaseStyles";
 import { BottomTabParamList, LoggedOutParamList } from "../types";
 import Challenge from "../api/models/Challenge";
 import Screen from "../components/Screen";
-import {
-  getChallenge,
-  joinChallenge,
-  userHasJoinedChallenge,
-} from "../services/ChallengeService";
+import { getChallenge } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
 import Podium from "../components/Podium";
 import ChallengeMeta from "../components/ChallengeMeta";
@@ -33,10 +23,6 @@ export default function InvitationScreen() {
   const loggedInNav = useNavigation<LoggedInNavigationProp>();
   const { auth } = useAuthContext();
   const [challenge, setChallenge] = useState<Challenge | undefined>(undefined);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMesssage] = useState<string | undefined>(
-    undefined,
-  );
   const slug = route.params.slug;
 
   function navigateToChallenge() {
@@ -47,75 +33,14 @@ export default function InvitationScreen() {
   }
 
   useEffect(() => {
-    async function loadChallenge() {
-      const options = { authToken: auth.token };
-      const hasJoined = await userHasJoinedChallenge(slug, options);
-
-      if (hasJoined) {
-        navigateToChallenge();
-      } else {
-        const newChallenge = await getChallenge(slug, options);
-        setChallenge(newChallenge);
-      }
-    }
-
-    setChallenge(undefined);
-    loadChallenge();
-  }, [slug]);
-
-  async function join() {
-    if (!challenge) {
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      await joinChallenge(slug, { authToken: auth.token });
+    if (auth.isLoggedIn) {
       navigateToChallenge();
-    } catch (error) {
-      if (error.message === "User already joined") {
-        navigateToChallenge();
-      } else {
-        setErrorMesssage(error.message);
-      }
+    } else {
+      const options = { authToken: auth.token };
+      setChallenge(undefined);
+      getChallenge(slug, options).then(setChallenge);
     }
-    setLoading(false);
-  }
-
-  let actionButtons;
-
-  if (auth.isLoggedIn) {
-    actionButtons = (
-      <Button
-        loading={loading}
-        mode="contained"
-        onPress={() => join()}
-        style={[BaseStyles.mb2]}
-      >
-        Join
-      </Button>
-    );
-  } else {
-    actionButtons = (
-      <>
-        <Button
-          mode="contained"
-          onPress={() => loggedOutNav.navigate("SignUp", { slug: slug })}
-          style={[BaseStyles.mb2]}
-        >
-          Sign Up
-        </Button>
-
-        <Button
-          mode="outlined"
-          onPress={() => loggedOutNav.navigate("LogIn", { slug: slug })}
-        >
-          Sign In
-        </Button>
-      </>
-    );
-  }
+  }, [slug]);
 
   if (!challenge) {
     return (
@@ -135,9 +60,20 @@ export default function InvitationScreen() {
 
         <ChallengeMeta challenge={challenge} />
 
-        {actionButtons}
+        <Button
+          mode="contained"
+          onPress={() => loggedOutNav.navigate("SignUp", { slug: slug })}
+          style={[BaseStyles.mb2]}
+        >
+          Sign Up
+        </Button>
 
-        {errorMessage && <Text>{errorMessage}</Text>}
+        <Button
+          mode="outlined"
+          onPress={() => loggedOutNav.navigate("LogIn", { slug: slug })}
+        >
+          Sign In
+        </Button>
       </SafeAreaView>
     </Screen>
   );

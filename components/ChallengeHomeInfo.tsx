@@ -1,31 +1,17 @@
 import * as React from "react";
-import { DateTime } from "luxon";
-import { Dimensions, View, Share, StyleSheet } from "react-native";
-import {
-  Avatar,
-  Button,
-  Caption,
-  ProgressBar,
-  Title,
-} from "react-native-paper";
+import { Dimensions, View, Share } from "react-native";
+import { Button, Title } from "react-native-paper";
 
 import Podium from "../components/Podium";
 import SegmentStaticMap from "../components/SegmentStaticMap";
-import { capitalize, shareLink } from "../utils";
+import { shareLink } from "../utils";
 import BaseStyles, { SPACER_4 } from "../utils/BaseStyles";
-import { inFuture, inPast, timeAgo, timeLeft } from "../utils/DateTime";
 import Challenge from "../api/models/Challenge";
+import ChallengeMeta from "./ChallengeMeta";
 
 interface Props {
   challenge: Challenge;
 }
-
-const challengeTypeIcons = {
-  distance: "map-marker-distance",
-  time: "timer",
-  altitude: "terrain",
-  segment: "routes",
-};
 
 function buildShareMessage(challenge: Challenge) {
   return shareLink(challenge.slug);
@@ -69,25 +55,7 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
 
       <Podium challenge={challenge} />
 
-      <View style={[BaseStyles.row, BaseStyles.mb4, styles.info]}>
-        <Avatar.Icon
-          icon={challenge.activityType}
-          size={24}
-          style={[BaseStyles.mr1]}
-        />
-        <Avatar.Icon
-          icon={challengeTypeIcons[challenge.challengeType]}
-          size={24}
-          style={[BaseStyles.mr2]}
-        />
-
-        <Caption>
-          {capitalize(challenge.activityType)} &middot;{" "}
-          {capitalize(challenge.challengeType)}
-        </Caption>
-      </View>
-
-      <TimeLeft challenge={challenge} />
+      <ChallengeMeta challenge={challenge} />
 
       <Button mode="contained" onPress={inviteFriends} style={[BaseStyles.mb4]}>
         Invite Friends
@@ -95,35 +63,3 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
     </View>
   );
 }
-
-function TimeLeft({ challenge }: Props) {
-  let caption = `Ends ${timeLeft(challenge.endAt)}`;
-  const totalTime = challenge.endAt.diff(challenge.startAt).as("seconds");
-  const timeElapsed = DateTime.local().diff(challenge.startAt).as("seconds");
-  let progress = timeElapsed / totalTime;
-
-  // Not started (startAt in the future)
-  if (inFuture(challenge.startAt)) {
-    progress = 0;
-    caption = `Starts ${timeLeft(challenge.startAt)}`;
-  }
-
-  // Ended (show when)
-  if (inPast(challenge.endAt)) {
-    progress = 1;
-    caption = `Ended ${timeAgo(challenge.startAt)}`;
-  }
-
-  return (
-    <View style={[BaseStyles.mb4]}>
-      <ProgressBar progress={progress} />
-      <Caption>{caption}</Caption>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  info: {
-    alignItems: "center",
-  },
-});

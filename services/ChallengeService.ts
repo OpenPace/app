@@ -64,6 +64,13 @@ export async function joinChallenge(slug: string, options: Options) {
   return {};
 }
 
+export async function userHasJoinedChallenge(slug: string, options: Options) {
+  const response = await apiGet(`/challenges/${slug}/status`, options);
+  const body = await response.json();
+
+  return !!body.joined;
+}
+
 function parseChallenge(challenge: any) {
   return {
     slug: challenge.slug,

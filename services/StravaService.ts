@@ -9,7 +9,7 @@ export async function exchangeCode(code: string, options: Options) {
     },
   });
 
-  const body = await response.json();
+  const body = response.body;
   return {
     provider: body.provider,
     uid: body.uid,

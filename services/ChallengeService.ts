@@ -11,8 +11,7 @@ export async function getChallengesByUser(options: Options) {
     throw new Error("Error creating challenge");
   }
 
-  const body = await response.json();
-  return body.challenges.map(parseChallenge);
+  return response.body.challenges.map(parseChallenge);
 }
 
 export async function getChallenge(slug: string, options: Options) {
@@ -22,8 +21,7 @@ export async function getChallenge(slug: string, options: Options) {
     throw new Error("Error creating challenge");
   }
 
-  const body = await response.json();
-  return parseChallenge(body);
+  return parseChallenge(response.body);
 }
 
 export async function getLeaderboard(slug: string, options: Options) {
@@ -33,8 +31,7 @@ export async function getLeaderboard(slug: string, options: Options) {
     throw new Error("Error getting leaderboard");
   }
 
-  const body = await response.json();
-  return body.scores.map(parseScore);
+  return response.body.scores.map(parseScore);
 }
 
 export async function createChallenge(
@@ -50,8 +47,7 @@ export async function createChallenge(
   if (response.status !== 201) {
     throw new Error("Error creating challenge");
   }
-  const body = await response.json();
-  return parseChallenge(body);
+  return parseChallenge(response.body);
 }
 
 export async function joinChallenge(slug: string, options: Options) {
@@ -66,9 +62,7 @@ export async function joinChallenge(slug: string, options: Options) {
 
 export async function userHasJoinedChallenge(slug: string, options: Options) {
   const response = await apiGet(`/challenges/${slug}/status`, options);
-  const body = await response.json();
-
-  return !!body.joined;
+  return !!response.body.joined;
 }
 
 function parseChallenge(challenge: any) {

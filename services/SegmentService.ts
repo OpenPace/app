@@ -8,7 +8,7 @@ export async function getStarredSegments(options: Options): Promise<Segment[]> {
     throw new Error("Error fetching segments");
   }
 
-  const body = await response.json();
+  const body = response.body;
   return body.segments.map(parseSegment);
 }
 
@@ -23,7 +23,7 @@ export async function getDetailedSegment(
     throw new Error("Error fetching segments");
   }
 
-  const body = await response.json();
+  const body = response.body;
   return parseDetailedSegment(body);
 }
 

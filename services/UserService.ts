@@ -12,7 +12,7 @@ export async function getMe(options: Options) {
     throw new Error("User not found");
   }
 
-  const body = await response.json();
+  const body = response.body;
   return parseUser(body);
 }
 

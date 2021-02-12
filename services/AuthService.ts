@@ -15,7 +15,8 @@ export async function logIn(params: LoginParams) {
     throw new Error("Email or password incorrect");
   }
 
-  const body = await response.json();
+  debugger;
+  const body = response.body;
   const user = parseUser(body.user);
   const token: string = body.token;
   persistUser(user);
@@ -42,7 +43,7 @@ export async function signUp(params: SignupParams) {
   const response = await apiPost("/users/signup", {
     data,
   });
-  const body = await response.json();
+  const body = response.body;
 
   if (response.status !== 201) {
     throw new Error("Email or password incorrect");

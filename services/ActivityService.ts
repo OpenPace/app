@@ -14,8 +14,7 @@ export async function getActivitiesByDates(
     throw new Error("Error fetching activities");
   }
 
-  const body = await response.json();
-  return body.activities.map(parseActivity);
+  return response.body.activities.map(parseActivity);
 }
 
 function parseActivity(activityObj: any) {

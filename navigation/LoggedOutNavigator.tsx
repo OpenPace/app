@@ -26,7 +26,11 @@ export default function LoggedOutNavigator() {
         name="LogIn"
         options={{ title: "Welcome Back" }}
       />
-      <LoggedOut.Screen component={InvitationScreen} name="Invitation" />
+      <LoggedOut.Screen
+        component={InvitationScreen}
+        name="Invitation"
+        options={{ title: "Challenge Invite" }}
+      />
     </LoggedOut.Navigator>
   );
 }

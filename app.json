@@ -21,6 +21,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.openpace.challenges",
+      "usesAppleSignIn": true,
       "buildNumber": "1.4.1",
       "associatedDomains": [
         "applinks:*.openpace.co"

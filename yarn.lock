@@ -4702,6 +4702,16 @@ expect@^25.5.0:
     jest-message-util "^25.5.0"
     jest-regex-util "^25.2.6"
 
+expo-apple-authentication@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/expo-apple-authentication/-/expo-apple-authentication-3.0.0.tgz#50024dc1c646752003e60cb260d3584f57d6d8bf"
+  integrity sha512-ik6ild8AXwIGAlGNepacDJYhSK2bljLtw/B6/P93J3f9Ui9uklYHVmRRs1FdsufOIeivqTy5rhfu1mjbuODxRw==
+
+expo-application@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/expo-application/-/expo-application-3.0.0.tgz#a74fa03eca64635f0546c53f38904a66a67ee066"
+  integrity sha512-e5usObB4dwmNWPP+K7nbpxv/h6Omer33xqu1lMQVwc+mfZbzZybR/n/EEOEw/Xw6tiD5ZEhtvHeE5Obk4jG+9Q==
+
 expo-application@~2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/expo-application/-/expo-application-2.4.1.tgz#f8eb4a3a05a0b8a8f38f2e981f587a815945b685"

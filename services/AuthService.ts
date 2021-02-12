@@ -86,11 +86,11 @@ export async function loadAuth() {
   };
 }
 
-async function persistUser(user: any) {
+export async function persistUser(user: any) {
   await AsyncStorage.setItem("user", JSON.stringify(user));
 }
 
-async function persistToken(token: string) {
+export async function persistToken(token: string) {
   if (Platform.OS === "web") {
     await AsyncStorage.setItem("authToken", token);
   } else {

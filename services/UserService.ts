@@ -4,6 +4,7 @@ import User, { UserParams } from "../api/models/User";
 import { apiGet, Options, apiPut } from "../api/client";
 import { camelizeObject, underscoreObject } from "../utils";
 import UserPrefs, { UserPrefsParams } from "../api/models/UserPrefs";
+import { persistUser } from "./AuthService";
 
 export async function getMe(options: Options) {
   const response = await apiGet(`/users/me`, options);
@@ -13,7 +14,10 @@ export async function getMe(options: Options) {
   }
 
   const body = await response.json();
-  return parseUser(body);
+  const user = parseUser(body);
+  persistUser(user);
+
+  return user;
 }
 
 export async function saveMe(params: UserParams, options: Options) {

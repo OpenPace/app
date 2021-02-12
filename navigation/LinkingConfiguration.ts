@@ -1,4 +1,5 @@
 import * as Linking from "expo-linking";
+import { getStateFromPath } from "@react-navigation/native";
 
 export default {
   prefixes: [Linking.makeUrl("/"), "https://*.openpace.co"],
@@ -47,5 +48,13 @@ export default {
       },
       NotFound: "*",
     },
+  },
+  getStateFromPath: (path: string, options: any) => {
+    // Don't handle expo-auth-session strings
+    if (path.indexOf("expo-auth-session") !== -1) {
+      return;
+    }
+
+    return getStateFromPath(path, options);
   },
 };

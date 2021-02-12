@@ -28,6 +28,10 @@ function formatScore(score: Score, challenge: Challenge, imperial: boolean) {
     return formatAltitude(score.amount, imperial);
   }
 
+  if (challenge.challengeType === "segment" && score.amount === 0) {
+    return "No Attempt";
+  }
+
   return formatDuration(score.amount);
 }
 

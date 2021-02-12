@@ -23,7 +23,7 @@ export function timeAgo(dateTime: DateTime) {
   const amount = Math.trunc(diff.as(unit)) * -1;
 
   if (amount === 0) {
-    return "today";
+    return "moments ago";
   }
   if (amount === 1) {
     return `${amount} ${unit} ago`;

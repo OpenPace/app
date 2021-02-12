@@ -19,7 +19,7 @@ export default function ChallengeDetailsScreen() {
   const { params } = useNewChallengeContext();
   const { createChallenge, loading } = useChallengeContext();
   const [isPrivate, setPrivate] = React.useState(false);
-  const [name, setName] = useState<string>(generateChallengeName(params))
+  const [name, setName] = useState<string>(generateChallengeName(params));
 
   function togglePrivate() {
     setPrivate(!isPrivate);
@@ -31,7 +31,7 @@ export default function ChallengeDetailsScreen() {
       const newChallenge = await createChallenge(params);
       navigation.navigate("ChallengeShowScreen", { slug: newChallenge.slug });
     } catch (e) {
-      console.log("error");
+      console.log(e.message);
     }
   }
 

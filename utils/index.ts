@@ -145,18 +145,22 @@ export function generateChallengeName(params: ChallengeParams) {
 
   const parts = [challengeSyn[Math.floor(Math.random() * challengeSyn.length)]];
 
-  const { activityType, timeline, challengeType } = params;
+  const { activityType, timeline, challengeType, segmentName } = params;
 
-  if (challengeType) {
-    parts.unshift(challengeType);
-  }
+  if (challengeType === 'segment' && segmentName) {
+    parts.unshift(segmentName);
+  } else {
+    if (challengeType) {
+      parts.unshift(challengeType);
+    }
 
-  if (activityType) {
-    parts.unshift(activityMap[activityType]);
-  }
+    if (activityType) {
+      parts.unshift(activityMap[activityType]);
+    }
 
-  if (timeline && timeline !== "custom") {
-    parts.unshift(timeline);
+    if (timeline && timeline !== "custom") {
+      parts.unshift(timeline);
+    }
   }
 
   return parts.map((x) => capitalize(x)).join(" ");

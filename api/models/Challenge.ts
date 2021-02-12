@@ -27,4 +27,5 @@ export interface ChallengeParams {
   endAt?: DateTime;
   segmentId?: string;
   polyline?: string;
+  segmentName?: string; // We don't send this to the server
 }

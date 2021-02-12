@@ -43,7 +43,12 @@ export default function ChallengeSegmentScreen() {
       return;
     }
 
-    setParams({ ...params, segmentId: segment.id, polyline: segment.polyline });
+    setParams({
+      ...params,
+      segmentId: segment.id,
+      segmentName: segment.name,
+      polyline: segment.polyline,
+    });
     navigate("ChallengeTimelineScreen");
   }
 

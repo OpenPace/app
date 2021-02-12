@@ -12,7 +12,7 @@ export function rgbToHexString(rgb: Rgb) {
   return decToHex(rgb[0]) + decToHex(rgb[1]) + decToHex(rgb[2]);
 }
 
-export function hexStringToRGB(hexString: string) {
+export function hexStringToRGB(hexString: string): Rgb {
   const s = hexString.replace("#", "");
   return [
     hexToDec(s.substr(0, 2)),

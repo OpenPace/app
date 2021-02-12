@@ -1,7 +1,11 @@
 import React from "react";
 import { View, ImageStyle, StyleProp, Image } from "react-native";
 import * as Polyline from "@mapbox/polyline";
-import { createSpectrum, hexStringToRGB } from "../utils/ColorUtils";
+import {
+  createSpectrum,
+  hexStringToRGB,
+  rgbToHexString,
+} from "../utils/ColorUtils";
 
 interface Props {
   polyline: string;
@@ -9,9 +13,22 @@ interface Props {
   style?: StyleProp<ImageStyle>;
 }
 
+function decodePolyline(polyline: string) {
+  const coords = Polyline.decode(polyline);
+
+  // easy sampling to reduce to 100
+  if (coords.length > 100) {
+    const x = Math.ceil(coords.length / 100);
+    return coords.filter((_, idx) => idx % x === 0);
+  }
+
+  return coords;
+}
+
 export default function SegmentStaticMap({ polyline, size, style }: Props) {
   const imgSize = Math.floor(size);
-  const coords = Polyline.decode(polyline);
+  const coords = decodePolyline(polyline);
+
   const startColor = "#FF512F";
   const endColor = "#F09819";
   const strokeWidth = 4;
@@ -35,7 +52,14 @@ export default function SegmentStaticMap({ polyline, size, style }: Props) {
 
   const firstCoord = coords[0];
   const lastCoord = coords[coords.length - 1];
-  const path = makePathWithGradient();
+  const startMarker = `pin-s-a+${rgbToHexString(colorA)}(${firstCoord[1]},${
+    firstCoord[0]
+  })`;
+  const endMarker = `pin-s-b+${rgbToHexString(colorB)}(${lastCoord[1]},${
+    lastCoord[0]
+  })`;
+
+  const path = makePathWithGradient() + "," + startMarker + "," + endMarker;
   const url = `https://api.mapbox.com/styles/v1/mapbox/light-v9/static/${encodeURIComponent(
     path,
   )}/auto/${imgSize}x${imgSize}@2x?access_token=${mapboxToken}`;

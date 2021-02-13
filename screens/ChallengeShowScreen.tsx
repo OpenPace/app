@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { RefreshControl, ScrollView } from "react-native";
+import { RefreshControl, ScrollView, View } from "react-native";
 import Screen from "../components/Screen";
 import ChallengeHomeInfo from "../components/ChallengeHomeInfo";
 import BaseStyles from "../utils/BaseStyles";
@@ -19,14 +19,16 @@ export default function ChallengeShowScreen() {
   }, [challenge]);
 
   return (
-    <Screen style={[BaseStyles.p4]}>
+    <Screen>
       <ScrollView
         refreshControl={
           <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
         }
         style={[BaseStyles.pbTabBar]}
       >
-        {challenge && <ChallengeHomeInfo challenge={challenge} />}
+        <View style={[BaseStyles.p4]}>
+          {challenge && <ChallengeHomeInfo challenge={challenge} />}
+        </View>
       </ScrollView>
     </Screen>
   );

@@ -2,6 +2,55 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/OpenPace/app/compare/v1.2.1...v1.5.0) (2021-02-13)
+
+
+### Features
+
+* add activity calendar to profile page ([4495e35](https://github.com/OpenPace/app/commit/4495e35bdbea46da5080ca5d35f2f4cb468a5515))
+* add colors to canned challenges ([c94badc](https://github.com/OpenPace/app/commit/c94badcb89ce7abbae79528e540f385cafe70202))
+* add colors to user avatars without image ([4d53b19](https://github.com/OpenPace/app/commit/4d53b191b7574440c1657fd33ac70171f8dc27d7))
+* add detailed segment screen ([7e53650](https://github.com/OpenPace/app/commit/7e536509369127c64205173480ed855b85ad3e30))
+* add expo-notifications support ([cd94b9e](https://github.com/OpenPace/app/commit/cd94b9ef54895bd8deaf6e88544fd51fbc53fa15))
+* add map to challenge show if polyline ([365c91c](https://github.com/OpenPace/app/commit/365c91c7adce246cd48df68cf9cf68adb89c9964))
+* add static image for segment screen ([d95fbe0](https://github.com/OpenPace/app/commit/d95fbe09f6d6b796e5ee3a4b14f8af817944b79c))
+
+
+### Bug Fixes
+
+* add button to check for updates ([3efd3f4](https://github.com/OpenPace/app/commit/3efd3f491f879c814ab904d2395479600bc4ca49))
+* add cache layer between requests ([7f30bd7](https://github.com/OpenPace/app/commit/7f30bd7365eed78cd36ab0f9370f98be2c923df5))
+* add NA text for segment challenges without attempt ([78edf08](https://github.com/OpenPace/app/commit/78edf082ae59e93ba77a2bfb77a893b3c98921ec))
+* add surface to calendar UI ([ba5d911](https://github.com/OpenPace/app/commit/ba5d911ab1ff1cdf71791851327fcb2035a92eb1))
+* android adaptive icon too large ([ec03b77](https://github.com/OpenPace/app/commit/ec03b77a617a5c2ac8335da1ee5368e60d41f8ce))
+* blank icon for segment challenges ([4bff03c](https://github.com/OpenPace/app/commit/4bff03c0cf3164e1de1594c56c46e4a8327e4545))
+* deep linking for invites ([bb3a19b](https://github.com/OpenPace/app/commit/bb3a19b7c4971bfde97ae5ee659617134ba3eb80))
+* distance amount on segment screens ([86fc97d](https://github.com/OpenPace/app/commit/86fc97d459fa4796f832a36caa1696fd80bd9b0e))
+* format numbers for leaderboard ([b218b16](https://github.com/OpenPace/app/commit/b218b16c301dba65052c0f06e31cb07cf58f54f0))
+* join challenge from challenges page ([e5a0aee](https://github.com/OpenPace/app/commit/e5a0aee6fda65fb4c6df56e9190433624a0037bd))
+* margin on segment select screen ([9dc527a](https://github.com/OpenPace/app/commit/9dc527a4f115c888f8d4b72c93698d5bd76ff1e9))
+* name generator to use segment name ([342c00e](https://github.com/OpenPace/app/commit/342c00e9e9abae817f40525f06730bcbb7d696c0))
+* overflow dot calendar issue ([ff31b0c](https://github.com/OpenPace/app/commit/ff31b0c291b04fc66ae5c90f75aa05ced6768d00))
+* padding on challenge info page ([42a59c6](https://github.com/OpenPace/app/commit/42a59c638722248ad21fbeb1a2e92a79a97b8bab))
+* reactor challenge meta to be shared ([45649cc](https://github.com/OpenPace/app/commit/45649ccecd1688c89c91b29e9d6b241c666364cf))
+* readd segment to canned challenges ([a4a29f8](https://github.com/OpenPace/app/commit/a4a29f8aea8ece81115a6df66e19c551af95b9bc))
+* refactor notifications to work in settings screen ([5439341](https://github.com/OpenPace/app/commit/5439341eb4efe095f125e6c0a766af8f99b84b12))
+* remove background permissions ([760b598](https://github.com/OpenPace/app/commit/760b598828567961613ce8bf2b31ce58ba9dce4c))
+* remove encryption warning in iOS ([e0ac718](https://github.com/OpenPace/app/commit/e0ac718b9fa2d2210f4f864955670a43a913d159))
+* remove hardcoded api host for development ([567fecd](https://github.com/OpenPace/app/commit/567fecd199698bf02cee4813f0192e16e903c928))
+* remove unused android permissions ([74cedf8](https://github.com/OpenPace/app/commit/74cedf8bf1074b87323c2fd0d022c106a7cd2c64))
+* rename score to amount in score model ([af49de8](https://github.com/OpenPace/app/commit/af49de87fe3939ed74f58cd272a446f949c2e029))
+* sample polyline for static map ([5541e81](https://github.com/OpenPace/app/commit/5541e8159fe82febab6eb1aa19a6d3842fe609fd))
+* settings link stays black in dark mode ([78134f3](https://github.com/OpenPace/app/commit/78134f313320b2a2a7dfcec8d30d6ef8bb795586))
+* time ago when amount is zero ([5633361](https://github.com/OpenPace/app/commit/563336183cfd6e8085b150a9fdcbc7c022cda3e8))
+* title on invitation screen ([9fa17a3](https://github.com/OpenPace/app/commit/9fa17a3c1f7ab3f6900e6d7429dc74bd8fa60cda))
+* typescript and prettier errors ([f6a2c51](https://github.com/OpenPace/app/commit/f6a2c5136f3072682198621d752515be366b7dc9))
+* update android app permissions ([e7ef020](https://github.com/OpenPace/app/commit/e7ef020b342e071356cae811ad4b25f7807c28cd))
+* update icons for canned challenges ([530f76f](https://github.com/OpenPace/app/commit/530f76f79724f63a9ab72db427a84d01bbff67dc))
+* use default name on details screen ([4dfa553](https://github.com/OpenPace/app/commit/4dfa553ccd60a531f878896806de900e5339eadd))
+* use theme colors in the themes ([5259033](https://github.com/OpenPace/app/commit/5259033d43a7c9ae0e65356754fe1cb2aefbb39c))
+* width for mapbox static maps ([a3a76a5](https://github.com/OpenPace/app/commit/a3a76a5147fbef973ff0b820fba594b1f2611afe))
+
 ### [1.4.1](https://github.com/openpace/app/compare/v1.4.0...v1.4.1) (2021-01-24)
 
 

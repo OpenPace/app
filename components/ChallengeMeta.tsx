@@ -38,10 +38,12 @@ export default function ChallengeMeta({ challenge }: Props) {
           size={24}
           style={[BaseStyles.mr2]}
         />
-
         <Caption>
           {capitalize(challenge.activityType)} &middot;{" "}
-          {capitalize(challenge.challengeType)}
+          {capitalize(challenge.challengeType)} &middot;{" "}
+          {challenge.startDate.toLocaleString(DateTime.DATE_MED)}
+          {" - "}
+          {challenge.endDate.toLocaleString(DateTime.DATE_MED)}
         </Caption>
       </View>
 

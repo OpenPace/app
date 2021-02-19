@@ -51,21 +51,21 @@ export default function ChallengeMeta({ challenge }: Props) {
 }
 
 function TimeLeft({ challenge }: Props) {
-  let caption = `Ends ${timeLeft(challenge.endAt)}`;
-  const totalTime = challenge.endAt.diff(challenge.startAt).as("seconds");
-  const timeElapsed = DateTime.local().diff(challenge.startAt).as("seconds");
+  let caption = `Ends ${timeLeft(challenge.endDate)}`;
+  const totalTime = challenge.endDate.diff(challenge.startDate).as("seconds");
+  const timeElapsed = DateTime.local().diff(challenge.startDate).as("seconds");
   let progress = timeElapsed / totalTime;
 
-  // Not started (startAt in the future)
-  if (inFuture(challenge.startAt)) {
+  // Not started (startDate in the future)
+  if (inFuture(challenge.startDate)) {
     progress = 0;
-    caption = `Starts ${timeLeft(challenge.startAt)}`;
+    caption = `Starts ${timeLeft(challenge.startDate)}`;
   }
 
   // Ended (show when)
-  if (inPast(challenge.endAt)) {
+  if (inPast(challenge.endDate)) {
     progress = 1;
-    caption = `Ended ${timeAgo(challenge.startAt)}`;
+    caption = `Ended ${timeAgo(challenge.startDate)}`;
   }
 
   return (

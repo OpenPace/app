@@ -11,8 +11,8 @@ export default interface Challenge {
   activityType: ActivityType;
   challengeType: ChallengeType;
   timeline: ChallengeTimeline;
-  startAt: DateTime;
-  endAt: DateTime;
+  startDate: DateTime;
+  endDate: DateTime;
   scores: Score[];
   segmentId?: string;
   polyline?: string;
@@ -23,8 +23,8 @@ export interface ChallengeParams {
   activityType?: ActivityType;
   challengeType?: ChallengeType;
   timeline?: ChallengeTimeline;
-  startAt?: DateTime;
-  endAt?: DateTime;
+  startDate?: DateTime;
+  endDate?: DateTime;
   segmentId?: string;
   polyline?: string;
   segmentName?: string; // We don't send this to the server

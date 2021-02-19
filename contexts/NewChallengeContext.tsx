@@ -15,7 +15,7 @@ type ContextType = {
   setActivityType: (activityType: ActivityType) => void;
   setChallengeType: (challengeType: ChallengeType) => void;
   setTimeline: (timeline: ChallengeTimeline) => void;
-  setDates: (startAt: DateTime, endAt: DateTime) => void;
+  setDates: (startDate: DateTime, endDate: DateTime) => void;
 };
 
 type Props = {
@@ -36,7 +36,7 @@ function NewChallengeProvider({ children }: Props) {
     setChallengeType: (challengeType) =>
       setParams({ ...params, challengeType }),
     setTimeline: (timeline) => setParams({ ...params, timeline }),
-    setDates: (startAt, endAt) => setParams({ ...params, startAt, endAt }),
+    setDates: (startDate, endDate) => setParams({ ...params, startDate, endDate }),
   };
 
   return (

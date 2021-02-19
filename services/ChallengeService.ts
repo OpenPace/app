@@ -74,8 +74,8 @@ function parseChallenge(challenge: any) {
     timeline: challenge.timeline,
     segmentId: challenge.segment_id,
     polyline: challenge.polyline,
-    startAt: DateTime.fromISO(challenge.start_at),
-    endAt: DateTime.fromISO(challenge.end_at),
+    startDate: DateTime.fromISO(challenge.start_date),
+    endDate: DateTime.fromISO(challenge.end_date),
     scores: challenge.scores.map(parseScore),
   } as Challenge;
 }

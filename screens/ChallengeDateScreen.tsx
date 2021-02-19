@@ -11,7 +11,7 @@ export default function ChallengeDateScreen() {
   const navigation = useNavigation();
   const { params, setDates } = useNewChallengeContext();
   const { timeline } = params;
-  const { startAt, endAt } = params;
+  const { startDate, endDate } = params;
 
   const today = DateTime.local().startOf("day");
   const tomorrow = today.plus({ days: 1 });
@@ -42,8 +42,8 @@ export default function ChallengeDateScreen() {
     const date = startDate.startOf("day");
 
     // Don't allow start dates after the end date
-    if (endAt && date < endAt) {
-      setDates(date, endAt);
+    if (endDate && date < endDate) {
+      setDates(date, endDate);
     } else {
       setDates(date, date.plus({ days: 1 }));
     }
@@ -53,8 +53,8 @@ export default function ChallengeDateScreen() {
   function setInclusiveEndDate(endDate: DateTime) {
     const date = endDate.startOf("day");
 
-    if (startAt && startAt < date) {
-      setDates(startAt, date);
+    if (startDate && startDate < date) {
+      setDates(startDate, date);
     } else {
       setDates(date.minus({ days: 1 }), date);
     }
@@ -136,23 +136,23 @@ export default function ChallengeDateScreen() {
   // Custom Date Range
   // Start date
   // End date
-  const disabled = !startAt && !endAt;
+  const disabled = !startDate && !endDate;
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <DatePickerButton date={startAt || today} onChange={setStartDate}>
+      <DatePickerButton date={startDate || today} onChange={setStartDate}>
         <Card.Title
           left={(props) => <Avatar.Text {...props} label="1" />}
           title={
-            startAt ? `Start: ${startAt.toLocaleString()}` : "Pick Start Date"
+            startDate ? `Start: ${startDate.toLocaleString()}` : "Pick Start Date"
           }
         />
       </DatePickerButton>
 
-      <DatePickerButton date={endAt || today} onChange={setInclusiveEndDate}>
+      <DatePickerButton date={endDate || today} onChange={setInclusiveEndDate}>
         <Card.Title
           left={(props) => <Avatar.Text {...props} label="2" />}
-          title={endAt ? `End: ${endAt.toLocaleString()}` : "Pick End Date"}
+          title={endDate ? `End: ${endDate.toLocaleString()}` : "Pick End Date"}
         />
       </DatePickerButton>
 

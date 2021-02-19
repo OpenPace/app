@@ -42,18 +42,18 @@ function Participants({ challenge }: Props) {
 }
 
 function TimeSection({ challenge }: { challenge: Challenge }) {
-  // Not started (startAt in the future)
-  if (inFuture(challenge.startAt)) {
-    return <Caption>Starts {timeLeft(challenge.startAt)}</Caption>;
+  // Not started (startDate in the future)
+  if (inFuture(challenge.startDate)) {
+    return <Caption>Starts {timeLeft(challenge.startDate)}</Caption>;
   }
 
   // Ended (show when)
-  if (inPast(challenge.endAt)) {
-    return <Caption>Ended {timeAgo(challenge.startAt)}</Caption>;
+  if (inPast(challenge.endDate)) {
+    return <Caption>Ended {timeAgo(challenge.startDate)}</Caption>;
   }
 
   // Current challenge (show time remaining)
-  return <Caption>Ends {timeLeft(challenge.endAt)}</Caption>;
+  return <Caption>Ends {timeLeft(challenge.endDate)}</Caption>;
 }
 
 const styles = StyleSheet.create({

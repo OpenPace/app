@@ -1,17 +1,27 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { DateTime } from "luxon";
 import { Avatar, Button, Card } from "react-native-paper";
 import Screen from "../components/Screen";
-import DatePickerButton from "../components/DatePickerButton";
 import BaseStyles from "../utils/BaseStyles";
 import { useNewChallengeContext } from "../contexts/NewChallengeContext";
+import { Calendar, DateObject } from "react-native-calendars";
+import { useThemeContext } from "../contexts/ThemeContext";
+import Colors from "../constants/Colors";
+import { StringKeyable } from "../utils";
 
 export default function ChallengeDateScreen() {
   const navigation = useNavigation();
+  const { scheme } = useThemeContext();
+  const colors = Colors[scheme];
   const { params, setDates } = useNewChallengeContext();
   const { timeline } = params;
-  const { startDate, endDate } = params;
+  const [calendarStart, setCalendarStart] = useState<DateTime | undefined>(
+    undefined,
+  );
+  const [calendarEnd, setCalendarEnd] = useState<DateTime | undefined>(
+    undefined,
+  );
 
   const today = DateTime.local().startOf("day");
   const tomorrow = today.plus({ days: 1 });
@@ -38,25 +48,10 @@ export default function ChallengeDateScreen() {
     submit();
   }
 
-  function setStartDate(startDate: DateTime) {
-    const date = startDate.startOf("day");
-
-    // Don't allow start dates after the end date
-    if (endDate && date < endDate) {
-      setDates(date, endDate);
-    } else {
-      setDates(date, date.plus({ days: 1 }));
-    }
-  }
-
-  // When picking an end date, the user wants to include that date
-  function setInclusiveEndDate(endDate: DateTime) {
-    const date = endDate.startOf("day");
-
-    if (startDate && startDate < date) {
-      setDates(startDate, date);
-    } else {
-      setDates(date.minus({ days: 1 }), date);
+  function customSubmit() {
+    if (calendarStart && calendarEnd) {
+      setDates(calendarStart, calendarEnd);
+      submit();
     }
   }
 
@@ -134,33 +129,85 @@ export default function ChallengeDateScreen() {
   }
 
   // Custom Date Range
-  // Start date
-  // End date
-  const disabled = !startDate && !endDate;
+  const disabled = !calendarStart || !calendarEnd;
+
+  const markedDates: StringKeyable = {};
+  const markerColor = colors.accent;
+
+  if (calendarStart) {
+    markedDates[calendarStart.toISODate()] = {
+      startingDay: true,
+      color: markerColor,
+    };
+
+    if (calendarEnd) {
+      const days = calendarEnd.diff(calendarStart).as("days");
+
+      for (let i = 1; i < days; i++) {
+        markedDates[calendarStart.plus({ days: i }).toISODate()] = {
+          color: markerColor,
+        };
+      }
+
+      markedDates[calendarEnd.toISODate()] = {
+        endingDay: true,
+        color: markerColor,
+      };
+    }
+  }
+
+  function onDayPress(day: DateObject) {
+    const date = DateTime.fromISO(day.dateString);
+
+    if (calendarStart && calendarEnd) {
+      setCalendarStart(date);
+      setCalendarEnd(undefined);
+    } else if (calendarStart && calendarStart < date) {
+      setCalendarEnd(date);
+    } else if (calendarStart) {
+      setCalendarStart(date);
+      setCalendarEnd(calendarStart);
+    } else {
+      setCalendarStart(date);
+    }
+  }
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <DatePickerButton date={startDate || today} onChange={setStartDate}>
-        <Card.Title
-          left={(props) => <Avatar.Text {...props} label="1" />}
-          title={
-            startDate ? `Start: ${startDate.toLocaleString()}` : "Pick Start Date"
-          }
-        />
-      </DatePickerButton>
-
-      <DatePickerButton date={endDate || today} onChange={setInclusiveEndDate}>
-        <Card.Title
-          left={(props) => <Avatar.Text {...props} label="2" />}
-          title={endDate ? `End: ${endDate.toLocaleString()}` : "Pick End Date"}
-        />
-      </DatePickerButton>
+      <Calendar
+        enableSwipeMonths
+        markingType={"period"}
+        markedDates={markedDates}
+        onDayPress={onDayPress}
+        style={BaseStyles.rounded}
+        theme={{
+          backgroundColor: colors.surface,
+          calendarBackground: colors.surface,
+          dayTextColor: colors.text,
+          // textDisabledColor: "#d9e1e8",
+          // dotColor: "#00adf5",
+          // selectedDotColor: "#ffffff",
+          arrowColor: colors.primary,
+          // disabledArrowColor: "#d9e1e8",
+          monthTextColor: colors.text,
+          // indicatorColor: "blue",
+          // textDayFontFamily: "monospace",
+          // textMonthFontFamily: "monospace",
+          // textDayHeaderFontFamily: "monospace",
+          // textDayFontWeight: "300",
+          // textMonthFontWeight: "bold",
+          // textDayHeaderFontWeight: "300",
+          textDayFontSize: 16,
+          textMonthFontSize: 16,
+          textDayHeaderFontSize: 16,
+        }}
+      />
 
       <Button
         disabled={disabled}
         mode="contained"
-        onPress={submit}
-        style={[BaseStyles.mb3]}
+        onPress={customSubmit}
+        style={[BaseStyles.mt4, BaseStyles.mb3]}
       >
         Continue
       </Button>

@@ -53,7 +53,7 @@ export default function HomeScreen() {
   ));
 
   const challengeSection = (
-    <View style={[BaseStyles.p4]}>
+    <View style={[BaseStyles.px4, BaseStyles.pbTabBar]}>
       <SectionHeader text="Current Challenges" />
 
       <View style={[BaseStyles.py2]}>{cards}</View>

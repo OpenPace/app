@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { RouteProp, useRoute } from "@react-navigation/native";
+import React from "react";
+import { RouteProp, useRoute, useFocusEffect } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { ChallengeTabParamList, ChallengesParamList } from "../types";
 
@@ -15,12 +15,12 @@ type ChallengeTabRouteProp = RouteProp<
 >;
 
 export default function ChallengeTabNavigator() {
-  const { fetchChallenge } = useChallengeContext();
+  const { getChallenge } = useChallengeContext();
   const route = useRoute<ChallengeTabRouteProp>();
 
-  useEffect(() => {
-    fetchChallenge(route.params.slug);
-  }, [route.params.slug]);
+  useFocusEffect(() => {
+    getChallenge(route.params.slug);
+  });
 
   return (
     <Tab.Navigator>

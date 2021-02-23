@@ -49,7 +49,7 @@ function TimeSection({ challenge }: { challenge: Challenge }) {
 
   // Ended (show when)
   if (inPast(challenge.endDate)) {
-    return <Caption>Ended {timeAgo(challenge.startDate)}</Caption>;
+    return <Caption>Ended {timeAgo(challenge.endDate)}</Caption>;
   }
 
   // Current challenge (show time remaining)

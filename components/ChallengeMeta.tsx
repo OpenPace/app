@@ -67,7 +67,7 @@ function TimeLeft({ challenge }: Props) {
   // Ended (show when)
   if (inPast(challenge.endDate)) {
     progress = 1;
-    caption = `Ended ${timeAgo(challenge.startDate)}`;
+    caption = `Ended ${timeAgo(challenge.endDate)}`;
   }
 
   return (

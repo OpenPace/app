@@ -17,7 +17,7 @@ interface ListItemProps {
 
 function formatScore(score: Score, challenge: Challenge, imperial: boolean) {
   if (challenge.challengeType === "distance") {
-    return formatDistance(score.amount, imperial);
+    return formatDistance(score.amount, imperial, 2);
   }
 
   if (challenge.challengeType === "time") {

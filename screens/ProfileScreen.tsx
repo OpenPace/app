@@ -95,6 +95,7 @@ export default function ProfileScreen() {
             backgroundColor: colors.surface,
             calendarBackground: colors.surface,
             dayTextColor: colors.text,
+            todayTextColor: colors.gray[600],
             arrowColor: colors.primary,
             monthTextColor: colors.text,
             textDayFontSize: 16,

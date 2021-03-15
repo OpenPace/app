@@ -15,7 +15,6 @@ export async function logIn(params: LoginParams) {
     throw new Error("Email or password incorrect");
   }
 
-  debugger;
   const body = response.body;
   const user = parseUser(body.user);
   const token: string = body.token;

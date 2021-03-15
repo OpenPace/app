@@ -10,7 +10,7 @@ export default interface User {
   city?: string;
   state?: string;
   credentials: Credential[];
-  userPrefs: UserPrefs;
+  userPrefs?: UserPrefs;
 }
 
 export interface UserParams {

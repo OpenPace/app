@@ -26,7 +26,7 @@ export default {
                 screens: {
                   Home: "",
                   Leaderboard: "leaderboard",
-                  Chat: "chat",
+                  Feed: "feed",
                 },
               },
             },

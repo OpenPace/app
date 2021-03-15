@@ -17,14 +17,16 @@ export async function getActivitiesByDates(
   return response.body.activities.map(parseActivity);
 }
 
-function parseActivity(activityObj: any) {
+export function parseActivity(activityObj: any) {
   return {
     id: activityObj.id,
     name: activityObj.name,
+    description: activityObj.description,
     activityType: activityObj.activity_type,
     workoutType: activityObj.workout_type,
     distance: activityObj.distance,
     startAt: DateTime.fromISO(activityObj.start_at),
+    startAtLocal: DateTime.fromISO(activityObj.start_at_local),
     duration: activityObj.duration,
     elevationGain: activityObj.elevation_gain,
     externalId: activityObj.external_id,

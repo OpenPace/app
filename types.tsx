@@ -59,5 +59,5 @@ export type LoggedOutParamList = {
 export type ChallengeTabParamList = {
   Home: undefined;
   Leaderboard: undefined;
-  Chat: undefined;
+  Feed: undefined;
 };

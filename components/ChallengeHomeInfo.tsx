@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, View, Share } from "react-native";
+import { Dimensions, Share } from "react-native";
 import { Button, Title } from "react-native-paper";
 
 import Podium from "../components/Podium";
@@ -13,6 +13,7 @@ import {
   joinChallenge,
 } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
+import Card from "./Card";
 
 interface Props {
   challenge: Challenge;
@@ -73,7 +74,7 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
 
   if (joined) {
     actionButtons = (
-      <Button mode="contained" onPress={inviteFriends} style={[BaseStyles.mb4]}>
+      <Button mode="contained" onPress={inviteFriends} style={[BaseStyles.mb2]}>
         Invite Friends
       </Button>
     );
@@ -91,7 +92,7 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
   }
 
   return (
-    <View>
+    <Card style={[BaseStyles.p4]}>
       <Title style={[BaseStyles.mb4]}>{challenge.name}</Title>
 
       {polyline && (
@@ -109,6 +110,6 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
       {actionButtons}
 
       {errorMessage && <Text>{errorMessage}</Text>}
-    </View>
+    </Card>
   );
 }

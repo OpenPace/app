@@ -53,7 +53,10 @@ export function parseUser(userObj: any) {
   if (userObj.credentials) {
     user.credentials = userObj.credentials.map(parseCredential);
   }
-  user.userPrefs = parseUserPrefs(userObj.user_prefs);
+
+  if (userObj.user_prefs) {
+    user.userPrefs = parseUserPrefs(userObj.user_prefs);
+  }
 
   return camelizeObject(user) as User;
 }

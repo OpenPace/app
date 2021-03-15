@@ -3,6 +3,9 @@ import Challenge, { ChallengeParams } from "../api/models/Challenge";
 import Score from "../api/models/Score";
 import { apiGet, apiPost, apiPut, Options } from "../api/client";
 import { underscoreObject } from "../utils";
+import ChallengeActivity from "../api/models/ChallengeActivity";
+import { parseUser } from "./UserService";
+import { parseActivity } from "./ActivityService";
 
 export async function getChallengesByUser(options: Options) {
   const response = await apiGet(`/challenges`, options);
@@ -22,6 +25,16 @@ export async function getChallenge(slug: string, options: Options) {
   }
 
   return parseChallenge(response.body);
+}
+
+export async function getActivities(slug: string, options: Options) {
+  const response = await apiGet(`/challenges/${slug}/activities`, options);
+
+  if (response.status !== 200) {
+    throw new Error("Error getting feed");
+  }
+
+  return response.body.challenge_activities.map(parseChallengeActivity);
 }
 
 export async function getLeaderboard(slug: string, options: Options) {
@@ -78,6 +91,14 @@ function parseChallenge(challenge: any) {
     endDate: DateTime.fromISO(challenge.end_date),
     scores: challenge.scores.map(parseScore),
   } as Challenge;
+}
+
+function parseChallengeActivity(challengeActivity: any): ChallengeActivity {
+  return {
+    amount: challengeActivity.amount,
+    user: parseUser(challengeActivity.user),
+    activity: parseActivity(challengeActivity.activity),
+  } as ChallengeActivity;
 }
 
 function parseScore(score: any): Score {

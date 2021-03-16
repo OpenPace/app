@@ -1,14 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Screen from "../components/Screen";
-import LeaderboardItem from "../components/LeaderboardItem";
 import BaseStyles from "../utils/BaseStyles";
 import { RefreshControl, ScrollView, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
-import { getLeaderboard, getActivities } from "../services/ChallengeService";
+import { getActivities } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
-import Score from "../api/models/Score";
 import ChallengeActivity from "../api/models/ChallengeActivity";
 import ChallengeFeedItem from "../components/ChallengeFeedItem";
 
@@ -49,7 +47,12 @@ export default function ChallengeFeedScreen() {
   }
 
   const items = activities.map((activity) => (
-    <ChallengeFeedItem key={activity.id} challengeActivity={activity} />
+    <ChallengeFeedItem
+      key={activity.id}
+      imperial={userPrefs.imperial}
+      challenge={challenge}
+      challengeActivity={activity}
+    />
   ));
 
   return (

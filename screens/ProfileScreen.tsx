@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { IconButton, Text } from "react-native-paper";
+import { Card, IconButton, Text } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 
 import Screen from "../components/Screen";
@@ -84,25 +84,27 @@ export default function ProfileScreen() {
       </View>
 
       <View style={[BaseStyles.p4]}>
-        <Calendar
-          enableSwipeMonths
-          markingType={"custom"}
-          markedDates={markedDates}
-          style={BaseStyles.rounded}
-          firstDay={1}
-          onMonthChange={getActivitiesByMonth}
-          theme={{
-            backgroundColor: colors.surface,
-            calendarBackground: colors.surface,
-            dayTextColor: colors.text,
-            todayTextColor: colors.gray[600],
-            arrowColor: colors.primary,
-            monthTextColor: colors.text,
-            textDayFontSize: 16,
-            textMonthFontSize: 16,
-            textDayHeaderFontSize: 16,
-          }}
-        />
+        <Card style={{ height: 370 }}>
+          <Calendar
+            enableSwipeMonths
+            markingType={"custom"}
+            markedDates={markedDates}
+            style={BaseStyles.rounded}
+            firstDay={1}
+            onMonthChange={getActivitiesByMonth}
+            theme={{
+              backgroundColor: colors.surface,
+              calendarBackground: colors.surface,
+              dayTextColor: colors.text,
+              todayTextColor: colors.gray[600],
+              arrowColor: colors.primary,
+              monthTextColor: colors.text,
+              textDayFontSize: 16,
+              textMonthFontSize: 16,
+              textDayHeaderFontSize: 16,
+            }}
+          />
+        </Card>
       </View>
     </Screen>
   );

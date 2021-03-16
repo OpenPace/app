@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions, Share } from "react-native";
-import { Button, Title } from "react-native-paper";
+import { Button, Card, Title } from "react-native-paper";
 
 import Podium from "../components/Podium";
 import SegmentStaticMap from "../components/SegmentStaticMap";
@@ -13,7 +13,6 @@ import {
   joinChallenge,
 } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
-import Card from "./Card";
 
 interface Props {
   challenge: Challenge;

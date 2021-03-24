@@ -55,7 +55,7 @@ export default function ChallengeSegmentScreen() {
   const { polyline } = segment;
   const distance = formatDistance(segment.distance, userPrefs.imperial, 2);
   const description = `${distance} - ${segment.city}, ${segment.state}`;
-  const width = Dimensions.get("window").width - SPACER_4 * 2;
+  const width = Dimensions.get("window").width - SPACER_4 * 4;
 
   return (
     <Screen style={[BaseStyles.py4]}>

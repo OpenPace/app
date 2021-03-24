@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, Share } from "react-native";
+import { Dimensions, Share, View } from "react-native";
 import { Button, Card, Title } from "react-native-paper";
 
 import Podium from "../components/Podium";
@@ -13,6 +13,7 @@ import {
   joinChallenge,
 } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
+import { staticMapUrl } from "../utils/StaticMap";
 
 interface Props {
   challenge: Challenge;
@@ -25,6 +26,7 @@ function buildShareMessage(challenge: Challenge) {
 export default function ChallengeHomeInfo({ challenge }: Props) {
   const { polyline } = challenge;
   const width = Dimensions.get("window").width - SPACER_4 * 2;
+  const height = width * 0.6;
   const [loading, setLoading] = useState<boolean>(false);
   const [joined, setJoined] = useState<boolean>(false);
   const [errorMessage, setErrorMesssage] = useState<string | undefined>(
@@ -69,6 +71,16 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
     setLoading(false);
   }
 
+  let url;
+
+  if (polyline) {
+    url = staticMapUrl(polyline, {
+      height,
+      width,
+      showPins: true,
+    });
+  }
+
   let actionButtons;
 
   if (joined) {
@@ -91,24 +103,24 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
   }
 
   return (
-    <Card style={[BaseStyles.p4]}>
-      <Title style={[BaseStyles.mb4]}>{challenge.name}</Title>
-
+    <Card>
       {polyline && (
-        <SegmentStaticMap
-          style={[BaseStyles.mb4]}
-          polyline={polyline}
-          size={width}
-        />
+        <Card.Cover style={{ width, height }} source={{ uri: url }} />
       )}
 
-      <Podium challenge={challenge} />
+      <Card.Content>
+        <View style={[BaseStyles.py3]}>
+          <Podium challenge={challenge} />
 
-      <ChallengeMeta challenge={challenge} />
+          <Title style={[BaseStyles.mb4]}>{challenge.name}</Title>
 
-      {actionButtons}
+          <ChallengeMeta challenge={challenge} />
 
-      {errorMessage && <Text>{errorMessage}</Text>}
+          {actionButtons}
+
+          {errorMessage && <Text>{errorMessage}</Text>}
+        </View>
+      </Card.Content>
     </Card>
   );
 }

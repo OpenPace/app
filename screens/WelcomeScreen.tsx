@@ -44,7 +44,7 @@ export default function WelcomeScreen() {
               onPress={() => navigate("LogIn")}
               style={[BaseStyles.mb4, styles.secondaryBtn]}
             >
-              Sign In
+              Log In
             </Button>
           </View>
         </SafeAreaView>

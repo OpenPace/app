@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, Headline, Text, TextInput, Surface } from "react-native-paper";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import BaseStyles from "../utils/BaseStyles";
 import Screen from "../components/Screen";
@@ -49,44 +49,52 @@ export default function SignUpScreen() {
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <TextInput
-        label="First Name"
-        mode="outlined"
-        onChangeText={setFirstName}
-        style={[BaseStyles.mb2]}
-        value={firstName}
-      />
-      <TextInput
-        label="Last Name"
-        mode="outlined"
-        onChangeText={setLastName}
-        style={[BaseStyles.mb2]}
-        value={lastName}
-      />
-      <TextInput
-        autoCapitalize="none"
-        autoCompleteType="email"
-        keyboardType="email-address"
-        label="Email"
-        mode="outlined"
-        onChangeText={setEmail}
-        style={[BaseStyles.mb2]}
-        value={email}
-      />
-      <TextInput
-        label="Password"
-        mode="outlined"
-        onChangeText={setPassword}
-        secureTextEntry
-        style={[BaseStyles.mb4]}
-        value={password}
-      />
+      <Surface style={[BaseStyles.rounded, BaseStyles.p4]}>
+        <Headline style={[BaseStyles.mb3]}>Create an Account</Headline>
+        <TextInput
+          label="First Name"
+          mode="outlined"
+          onChangeText={setFirstName}
+          style={[BaseStyles.mb2]}
+          value={firstName}
+        />
+        <TextInput
+          label="Last Name"
+          mode="outlined"
+          onChangeText={setLastName}
+          style={[BaseStyles.mb2]}
+          value={lastName}
+        />
+        <TextInput
+          autoCapitalize="none"
+          autoCompleteType="email"
+          keyboardType="email-address"
+          label="Email"
+          mode="outlined"
+          onChangeText={setEmail}
+          style={[BaseStyles.mb2]}
+          value={email}
+        />
+        <TextInput
+          label="Password"
+          mode="outlined"
+          onChangeText={setPassword}
+          secureTextEntry
+          style={[BaseStyles.mb4]}
+          value={password}
+        />
 
-      <Button loading={loading} mode="contained" onPress={handleSignUp}>
-        Create an Account
-      </Button>
+        {auth.error && <Text>{auth.error}</Text>}
 
-      {auth.error && <Text>{auth.error}</Text>}
+        <Button
+          style={[BaseStyles.mt2, BaseStyles.mb3]}
+          loading={loading}
+          mode="contained"
+          onPress={handleSignUp}
+        >
+          Sign Up
+        </Button>
+      </Surface>
     </Screen>
   );
 }

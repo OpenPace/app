@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Text, TextInput } from "react-native-paper";
+import { Button, Text, TextInput, Surface, Headline } from "react-native-paper";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import {
   useAuthContext,
@@ -11,8 +11,13 @@ import { joinChallenge } from "../services/ChallengeService";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
 import { LoggedOutParamList } from "../types";
+import * as WebBrowser from "expo-web-browser";
 
 type InviteRouteProp = RouteProp<LoggedOutParamList, "LogIn">;
+
+function handleForgotPassword() {
+  WebBrowser.openBrowserAsync("https://www.openpace.co/forgot-password");
+}
 
 export default function LogInScreen() {
   const [email, setEmail] = useState("");
@@ -42,31 +47,44 @@ export default function LogInScreen() {
 
   return (
     <Screen style={[BaseStyles.p4]}>
-      <TextInput
-        autoCapitalize="none"
-        autoCompleteType="email"
-        keyboardType="email-address"
-        label="Email"
-        mode="outlined"
-        onChangeText={setEmail}
-        style={[BaseStyles.mb2]}
-        value={email}
-      />
-      <TextInput
-        autoCompleteType="password"
-        label="Password"
-        mode="outlined"
-        onChangeText={setPassword}
-        secureTextEntry
-        style={[BaseStyles.mb4]}
-        value={password}
-      />
+      <Surface style={[BaseStyles.rounded, BaseStyles.p4]}>
+        <Headline style={[BaseStyles.mb3]}>Welcome back!</Headline>
 
-      <Button loading={loading} mode="contained" onPress={handleLogin}>
-        Log In
-      </Button>
+        <TextInput
+          autoCapitalize="none"
+          autoCompleteType="email"
+          keyboardType="email-address"
+          label="Email"
+          mode="outlined"
+          onChangeText={setEmail}
+          style={[BaseStyles.mb2]}
+          value={email}
+        />
+        <TextInput
+          autoCompleteType="password"
+          label="Password"
+          mode="outlined"
+          onChangeText={setPassword}
+          secureTextEntry
+          style={[BaseStyles.mb4]}
+          value={password}
+        />
 
-      {auth.error && <Text>{auth.error}</Text>}
+        <Button
+          style={[BaseStyles.mb3]}
+          loading={loading}
+          mode="contained"
+          onPress={handleLogin}
+        >
+          Log In
+        </Button>
+
+        <Text onPress={handleForgotPassword} style={BaseStyles.textMuted}>
+          Forgot password?
+        </Text>
+
+        {auth.error && <Text>{auth.error}</Text>}
+      </Surface>
     </Screen>
   );
 }

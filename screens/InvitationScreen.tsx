@@ -72,7 +72,7 @@ export default function InvitationScreen() {
           mode="outlined"
           onPress={() => loggedOutNav.navigate("LogIn", { slug: slug })}
         >
-          Sign In
+          Log In
         </Button>
       </SafeAreaView>
     </Screen>

@@ -44,7 +44,7 @@ export default {
           },
           Welcome: "welcome",
           SignUp: "sign-up",
-          LogIn: "log-in",
+          LogIn: "login",
           Invitation: "invite/:slug",
         },
       },

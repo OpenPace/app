@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
-import { RefreshControl, ScrollView, View } from "react-native";
+import { RefreshControl, ScrollView, View, FlatList } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { getActivities } from "../services/ChallengeService";
@@ -9,6 +9,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
 import ChallengeActivity from "../api/models/ChallengeActivity";
 import ChallengeFeedItem from "../components/ChallengeFeedItem";
+import Activity from "../api/models/Activity";
 
 export default function ChallengeFeedScreen() {
   const { challenge } = useChallengeContext();
@@ -38,33 +39,30 @@ export default function ChallengeFeedScreen() {
     loadFeed();
   }, [challenge]);
 
-  if (!challenge) {
+  function renderItem({ item }: { item: ChallengeActivity }) {
+    if (!challenge) {
+      return null;
+    }
+
     return (
-      <Screen style={[BaseStyles.p4]}>
-        <ActivityIndicator animating={true} />
-      </Screen>
+      <ChallengeFeedItem
+        imperial={userPrefs.imperial}
+        challenge={challenge}
+        challengeActivity={item}
+      />
     );
   }
 
-  const items = activities.map((activity) => (
-    <ChallengeFeedItem
-      key={activity.id}
-      imperial={userPrefs.imperial}
-      challenge={challenge}
-      challengeActivity={activity}
-    />
-  ));
-
   return (
     <Screen>
-      <ScrollView
+      <FlatList
         refreshControl={
           <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
         }
-        style={[BaseStyles.pbTabBar]}
-      >
-        <View style={[BaseStyles.p4]}>{items}</View>
-      </ScrollView>
+        style={[BaseStyles.p4, BaseStyles.pbTabBar]}
+        data={activities}
+        renderItem={renderItem}
+      />
     </Screen>
   );
 }

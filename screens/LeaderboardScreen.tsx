@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import Screen from "../components/Screen";
 import LeaderboardItem from "../components/LeaderboardItem";
 import BaseStyles from "../utils/BaseStyles";
-import { RefreshControl, ScrollView } from "react-native";
+import { RefreshControl, ScrollView, FlatList } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { useChallengeContext } from "../contexts/ChallengeContext";
 import { getLeaderboard } from "../services/ChallengeService";
@@ -14,7 +14,7 @@ export default function LeaderboardScreen() {
   const { challenge } = useChallengeContext();
   const { auth } = useAuthContext();
   const { userPrefs } = useUserPrefsContext();
-  const [scores, setScores] = useState<Score[] | undefined>(undefined);
+  const [scores, setScores] = useState<Score[]>([]);
   const [refreshing, setRefreshing] = useState(false);
 
   async function loadLeaderboard() {
@@ -37,34 +37,32 @@ export default function LeaderboardScreen() {
     loadLeaderboard();
   }, [challenge]);
 
-  if (!challenge || !scores) {
+  function renderItem({ item, index }: { item: Score; index: number }) {
+    if (!challenge) {
+      return null;
+    }
+
     return (
-      <Screen style={[BaseStyles.p4]}>
-        <ActivityIndicator animating={true} />
-      </Screen>
+      <LeaderboardItem
+        challenge={challenge}
+        imperial={userPrefs.imperial}
+        position={index + 1}
+        score={item}
+      />
     );
   }
 
-  const items = scores.map((score, idx) => (
-    <LeaderboardItem
-      challenge={challenge}
-      imperial={userPrefs.imperial}
-      key={score.userId}
-      position={idx + 1}
-      score={score}
-    />
-  ));
-
   return (
     <Screen>
-      <ScrollView
+      <FlatList
         refreshControl={
           <RefreshControl onRefresh={onRefresh} refreshing={refreshing} />
         }
         style={[BaseStyles.pbTabBar]}
-      >
-        {items}
-      </ScrollView>
+        data={scores}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.userId.toString()}
+      />
     </Screen>
   );
 }

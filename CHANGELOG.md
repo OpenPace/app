@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/openpace/app/compare/v1.5.0...v1.6.0) (2021-03-26)
+
+
+### Features
+
+* add bugsnag to trace errors ([1d54720](https://github.com/openpace/app/commit/1d54720f8765a2f8fa8a6b09b4293910d5a4aa25))
+* add challenge cards ([b004c9c](https://github.com/openpace/app/commit/b004c9c7c0d457a6c029f640c65d5f140ec08b89))
+* add challenge feed ([ba5dbad](https://github.com/openpace/app/commit/ba5dbadc08a121058eae79d48d3c63615bd8e310))
+* add improved calendar picker library ([af3d56a](https://github.com/openpace/app/commit/af3d56ab411d3590eff866f658a6c5a4f5c21e6c))
+
+
+### Bug Fixes
+
+* add color for today on calendars ([6c8f449](https://github.com/openpace/app/commit/6c8f44906316d0a4b44600c65a982b08656e515a))
+* add color to show increase for challenge activity ([fb06d51](https://github.com/openpace/app/commit/fb06d5142bc08f43137ec4959ebd139c851a12e5))
+* add decimal places to distance in leaderboard ([6669a34](https://github.com/openpace/app/commit/6669a34ea0cc1ea723c2ff9c464a74373d3a5b20))
+* add key extractor to challenge feed ([229024c](https://github.com/openpace/app/commit/229024cef833de86d5ce3b913dd40853fd6e86b6))
+* add reset password link to sign in screen ([e12ca19](https://github.com/openpace/app/commit/e12ca196060b7aad15a6b965e64c9172a6c84ba5))
+* add start/end dates to challenge meta ([932fbdc](https://github.com/openpace/app/commit/932fbdc70a770d7155e0790662f63cfbf350a8c8))
+* base ended time off of end date and not start date ([274257c](https://github.com/openpace/app/commit/274257c528d8462c2a24885b3620e493c5400117))
+* errors when joining challenge ([8912721](https://github.com/openpace/app/commit/89127214d40fedd42f8661a17678add0a9304ab7))
+* flicker of other challenge ([d5b35c7](https://github.com/openpace/app/commit/d5b35c7717afcf3c71fff3a6bfd7e5d7207172eb))
+* padding on current challenges ([02796bc](https://github.com/openpace/app/commit/02796bc447d5e0dc3fc01c0703ac0705c58f5f5b))
+* refactor dot calendar ([b8b1d66](https://github.com/openpace/app/commit/b8b1d66f3d4e0697972fe3cc6d45c56140e876f1))
+* round formatted duration ([20e0339](https://github.com/openpace/app/commit/20e03394d8a75975df336b9ef2dd585cdab1066b))
+* segment map overflow issue ([1d9f6fb](https://github.com/openpace/app/commit/1d9f6fb048b0c10c3d7b5ee20b05ab5cf307a46f))
+* update start and end to dates ([7d92dce](https://github.com/openpace/app/commit/7d92dce6bd5fdb5e0dffe272b3710244d63039c9))
+* use flatlist for challenge feed ([3c8446e](https://github.com/openpace/app/commit/3c8446e47416dd22900102b0689b08e414b75a14))
+* use flatlist for leaderboard items ([d6c2669](https://github.com/openpace/app/commit/d6c26691bd2e36e380c82db7616d873d4f605eb1))
+
 ## [1.5.0](https://github.com/OpenPace/app/compare/v1.2.1...v1.5.0) (2021-02-13)
 
 

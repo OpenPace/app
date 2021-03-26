@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions, Share, View } from "react-native";
-import { Button, Card, Title } from "react-native-paper";
-
+import { Button, Card, Text, Title } from "react-native-paper";
 import Podium from "../components/Podium";
-import SegmentStaticMap from "../components/SegmentStaticMap";
-import { shareLink } from "../utils";
 import BaseStyles, { SPACER_4 } from "../utils/BaseStyles";
 import Challenge from "../api/models/Challenge";
 import ChallengeMeta from "./ChallengeMeta";
@@ -14,6 +11,8 @@ import {
 } from "../services/ChallengeService";
 import { useAuthContext } from "../contexts/AuthContext";
 import { staticMapUrl } from "../utils/StaticMap";
+import { shareLink } from "../utils/Linking";
+import { useChallengeContext } from "../contexts/ChallengeContext";
 
 interface Props {
   challenge: Challenge;
@@ -32,11 +31,10 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
   const [errorMessage, setErrorMesssage] = useState<string | undefined>(
     undefined,
   );
-  const { auth } = useAuthContext();
-  const options = { authToken: auth.token };
+  const { hasJoinedChallenge, joinChallenge } = useChallengeContext();
 
   useEffect(() => {
-    userHasJoinedChallenge(challenge.slug, options).then(setJoined);
+    hasJoinedChallenge(challenge.slug).then(setJoined);
   }, [challenge]);
 
   async function inviteFriends() {
@@ -63,7 +61,7 @@ export default function ChallengeHomeInfo({ challenge }: Props) {
     setLoading(true);
 
     try {
-      await joinChallenge(challenge.slug, options);
+      await joinChallenge(challenge.slug);
       setJoined(true);
     } catch (error) {
       setErrorMesssage(error.message);

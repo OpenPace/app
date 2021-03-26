@@ -12,10 +12,12 @@ if (manifest?.debuggerHost) {
 const ENV = {
   dev: {
     apiUrl: localhost,
+    linkingUrl: undefined,
     stravaClientId: "20972",
   },
   prod: {
     apiUrl: "https://www.openpace.co",
+    linkingUrl: "https://www.openpace.co",
     stravaClientId: "20972",
   },
 };

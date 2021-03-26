@@ -4,6 +4,8 @@ import {
   createChallenge as apiCreateChallenge,
   getChallengesByUser,
   getChallenge as apiGetChallenge,
+  joinChallenge as apiJoinChallenge,
+  userHasJoinedChallenge,
 } from "../services/ChallengeService";
 
 type ContextType = {
@@ -13,6 +15,8 @@ type ContextType = {
   createChallenge: (params: ChallengeParams) => Promise<Challenge>;
   getChallenge: (slug: string) => Promise<Challenge>;
   fetchChallenge: (slug: string) => Promise<Challenge>;
+  joinChallenge: (slug: string) => Promise<void>;
+  hasJoinedChallenge: (slug: string) => Promise<boolean>;
   loadChallenges: () => Promise<void>;
   loading: boolean;
 };
@@ -65,11 +69,22 @@ function ChallengeProvider({ authToken, children }: Props) {
     return Promise.resolve(challenge);
   }
 
-  async function fetchChallenge(slug: slug) {
+  async function fetchChallenge(slug: string) {
     const challenge = await apiGetChallenge(slug, { authToken });
     addToChallenges(challenge);
     setChallenge(challenge);
     return Promise.resolve(challenge);
+  }
+
+  async function joinChallenge(slug: string) {
+    await apiJoinChallenge(slug, { authToken });
+    const newChallenge = await apiGetChallenge(slug, { authToken });
+    addToChallenges(newChallenge);
+    setChallenge(newChallenge);
+  }
+
+  async function hasJoinedChallenge(slug: string) {
+    return userHasJoinedChallenge(slug, { authToken });
   }
 
   const value: ContextType = {
@@ -79,6 +94,8 @@ function ChallengeProvider({ authToken, children }: Props) {
     createChallenge,
     getChallenge,
     fetchChallenge,
+    joinChallenge,
+    hasJoinedChallenge,
     loadChallenges,
     loading,
   };

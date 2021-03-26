@@ -130,10 +130,6 @@ export function timezoneLabel(timezone: string): string {
   return "Not Set";
 }
 
-export function shareLink(slug: string): string {
-  return `https://www.openpace.co/invite/${slug}`;
-}
-
 export function generateChallengeName(params: ChallengeParams) {
   const challengeSyn = ["challenge", "gauntlet", "bracket", "competition"];
 

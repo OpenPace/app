@@ -66,7 +66,7 @@ function buildHeaders({ authToken }: Options) {
 }
 
 async function parseApiResponse(response: Response) {
-  const body = await response.json();
+  const body = response.status === 204 ? {} : await response.json();
   return {
     body,
     status: response.status,

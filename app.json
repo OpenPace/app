@@ -64,6 +64,19 @@
           ]
         }
       ]
+    },
+    "extra": {
+      "bugsnag": {
+        "apiKey": "b11a50651c63de57a6e8b970ec18c078"
+      }
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "@bugsnag/expo/hooks/post-publish.js",
+          "config": {}
+        }
+      ]
     }
   }
 }

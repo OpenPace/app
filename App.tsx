@@ -1,11 +1,14 @@
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import Bugsnag from "@bugsnag/expo";
 
 import useCachedResources from "./hooks/useCachedResources";
 import Navigation from "./navigation";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import StatusBar from "./components/StatusBar";
+
+Bugsnag.start();
 
 // Notifications.setNotificationHandler({
 //   handleNotification: async () => ({

@@ -62,6 +62,7 @@ export default function ChallengeFeedScreen() {
         style={[BaseStyles.p4, BaseStyles.pbTabBar]}
         data={activities}
         renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
       />
     </Screen>
   );

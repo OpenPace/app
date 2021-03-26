@@ -95,6 +95,7 @@ function parseChallenge(challenge: any) {
 
 function parseChallengeActivity(challengeActivity: any): ChallengeActivity {
   return {
+    id: challengeActivity.id,
     amount: challengeActivity.amount,
     user: parseUser(challengeActivity.user),
     activity: parseActivity(challengeActivity.activity),

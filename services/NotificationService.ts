@@ -1,8 +1,22 @@
 import { Platform } from "react-native";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
+import { Options, apiPost } from "../api/client";
 
-export async function registerForPushNotifications() {
+export async function savePushToken(token: string, options: Options) {
+  const response = await apiPost("/push_tokens", {
+    ...options,
+    data: { token },
+  });
+
+  if (response.status !== 201) {
+    throw new Error("Cannot save push token");
+  }
+
+  return token;
+}
+
+export async function registerForPushNotifications(options: Options) {
   let token: string;
 
   if (Constants.isDevice) {
@@ -34,5 +48,5 @@ export async function registerForPushNotifications() {
     });
   }
 
-  return token;
+  return savePushToken(token, options);
 }

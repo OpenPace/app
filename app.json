@@ -43,6 +43,7 @@
         "android.permission.RECEIVE_BOOT_COMPLETED"
       ],
       "useNextNotificationsApi": true,
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/foregroundImage.png",
         "backgroundImage": "./assets/images/backgroundImage.png"

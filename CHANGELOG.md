@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/openpace/app/compare/v1.6.0...v1.6.1) (2021-04-10)
+
+
+### Bug Fixes
+
+* add notification handler ([0f6a1f2](https://github.com/openpace/app/commit/0f6a1f20675bfc91bd0e59827819d42114da8e6e))
+* save push token to api ([74e2e3a](https://github.com/openpace/app/commit/74e2e3a60f864394beae565a3b6cb605cf68e711))
+
 ## [1.6.0](https://github.com/openpace/app/compare/v1.5.0...v1.6.0) (2021-03-26)
 
 

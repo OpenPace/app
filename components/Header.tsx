@@ -53,6 +53,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   headline: {
-    fontWeight: "bold",
+    fontFamily: "Lato_700Bold",
   },
 });

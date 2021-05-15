@@ -1,30 +1,22 @@
 import { Ionicons } from "@expo/vector-icons";
-import * as Font from "expo-font";
+import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import * as React from "react";
+import {
+  useFonts as useGoogleFonts,
+  Lato_700Bold,
+} from "@expo-google-fonts/dev";
 
 export default function useCachedResources() {
-  const [isLoadingComplete, setLoadingComplete] = React.useState(false);
+  const [fontsLoaded] = useFonts({
+    ...Ionicons.font,
+  });
+  const [googleFontsLoaded] = useGoogleFonts({ Lato_700Bold });
 
-  // Load any resources or data that we need prior to rendering the app
-  React.useEffect(() => {
-    async function loadResourcesAndDataAsync() {
-      try {
-        SplashScreen.preventAutoHideAsync();
+  SplashScreen.preventAutoHideAsync();
 
-        // Load fonts
-        await Font.loadAsync({
-          ...Ionicons.font,
-          "space-mono": require("../assets/fonts/SpaceMono-Regular.ttf"),
-        });
-      } finally {
-        setLoadingComplete(true);
-        SplashScreen.hideAsync();
-      }
-    }
+  if (fontsLoaded && googleFontsLoaded) {
+    SplashScreen.hideAsync();
+  }
 
-    loadResourcesAndDataAsync();
-  }, []);
-
-  return isLoadingComplete;
+  return fontsLoaded && googleFontsLoaded;
 }

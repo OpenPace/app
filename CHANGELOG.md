@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/openpace/app/compare/v1.6.1...v1.6.2) (2021-05-16)
+
+
+### Bug Fixes
+
+* add font styles ([293f876](https://github.com/openpace/app/commit/293f87640c78916ded79eb73427e568d0548d2db))
+* add notification icon ([400d823](https://github.com/openpace/app/commit/400d823a870ea1aa4b0f4dd4e1d807aea5f15056))
+
 ### [1.6.1](https://github.com/openpace/app/compare/v1.6.0...v1.6.1) (2021-04-10)
 
 

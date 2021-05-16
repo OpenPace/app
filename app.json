@@ -18,6 +18,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "notification": {
+      "icon": "./assets/images/notificationImage.png",
+      "color": "#ffffff"
+    },
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.openpace.challenges",

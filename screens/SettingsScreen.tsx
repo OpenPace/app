@@ -10,7 +10,7 @@ import { useAuthContext } from "../contexts/AuthContext";
 import { useUserContext } from "../contexts/UserContext";
 import { useUserPrefsContext } from "../contexts/UserPrefsContext";
 import { useThemeContext } from "../contexts/ThemeContext";
-import { registerForPushNotifications, savePushToken } from "../services/NotificationService";
+import { registerForPushNotifications } from "../services/NotificationService";
 
 import BaseStyles from "../utils/BaseStyles";
 import { fullName, locationName, unitsLabel, timezoneLabel } from "../utils";
@@ -56,7 +56,9 @@ export default function ProfileScreen() {
 
   async function notificationCheck() {
     try {
-      const token = await registerForPushNotifications({authToken: auth.token});
+      const token = await registerForPushNotifications({
+        authToken: auth.token,
+      });
       setToken(token);
     } catch (e) {
       setToken(e.message);

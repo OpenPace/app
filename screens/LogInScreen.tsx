@@ -6,6 +6,7 @@ import {
   loginFail,
 } from "../contexts/AuthContext";
 import { logIn } from "../services/AuthService";
+import { registerForPushNotifications } from "../services/NotificationService";
 import Screen from "../components/Screen";
 import BaseStyles from "../utils/BaseStyles";
 import * as WebBrowser from "expo-web-browser";
@@ -27,10 +28,17 @@ export default function LogInScreen() {
       const { token, user } = await logIn({ email, password });
       setLoading(false);
       dispatch(loginSuccess(token, user));
+      await afterLoginSuccess(token);
     } catch (error) {
       setLoading(false);
       dispatch(loginFail(error.message));
     }
+  }
+
+  async function afterLoginSuccess(authToken: string) {
+    try {
+      await registerForPushNotifications({ authToken });
+    } catch (error) {}
   }
 
   return (

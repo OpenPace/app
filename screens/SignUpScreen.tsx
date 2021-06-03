@@ -10,6 +10,7 @@ import {
 } from "../contexts/AuthContext";
 import { signUp } from "../services/AuthService";
 import { joinChallenge } from "../services/ChallengeService";
+import { registerForPushNotifications } from "../services/NotificationService";
 import { LoggedOutParamList } from "../types";
 type InviteRouteProp = RouteProp<LoggedOutParamList, "LogIn">;
 
@@ -41,10 +42,17 @@ export default function SignUpScreen() {
 
       setLoading(false);
       dispatch(loginSuccess(token, user));
+      await afterLoginSuccess(token);
     } catch (error) {
       setLoading(false);
       dispatch(loginFail(error.message));
     }
+  }
+
+  async function afterLoginSuccess(authToken: string) {
+    try {
+      await registerForPushNotifications({ authToken });
+    } catch (error) {}
   }
 
   return (

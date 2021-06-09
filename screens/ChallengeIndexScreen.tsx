@@ -14,6 +14,7 @@ import { useChallengeContext } from "../contexts/ChallengeContext";
 import { isStravaConnected } from "../utils";
 import { ChallengesParamList } from "../types";
 import { hasSeen } from "../services/HasSeenService";
+import { registerForPushNotifications } from "../services/NotificationService";
 
 type NavigationProp = StackNavigationProp<ChallengesParamList>;
 
@@ -26,6 +27,12 @@ export default function HomeScreen() {
   const onRefresh = useCallback(() => {
     loadChallenges();
   }, []);
+
+  useEffect(() => {
+    try {
+      registerForPushNotifications({ authToken: auth.token });
+    } catch (error) {}
+  }, [user])
 
   // Redirect to strava prompt
   useEffect(() => {

@@ -33,16 +33,16 @@ export default function ChallengeDateScreen() {
 
   function setDate(startDate: DateTime) {
     if (timeline === "day") {
-      setDates(startDate, startDate.plus({ days: 1 }));
+      setDates(startDate, startDate);
     }
 
     if (timeline === "week") {
-      setDates(startDate, startDate.plus({ days: 7 }));
+      setDates(startDate, startDate.plus({ days: 6 }));
     }
 
     // Saturday and Sunday
     if (timeline === "weekend") {
-      setDates(startDate, startDate.plus({ days: 2 }));
+      setDates(startDate, startDate.plus({ days: 1 }));
     }
 
     submit();

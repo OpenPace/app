@@ -88,7 +88,7 @@ function parseChallenge(challenge: any) {
     segmentId: challenge.segment_id,
     polyline: challenge.polyline,
     startDate: DateTime.fromISO(challenge.start_date),
-    endDate: DateTime.fromISO(challenge.end_date),
+    endDate: DateTime.fromISO(challenge.end_date).endOf("day"),
     scores: challenge.scores.map(parseScore),
   } as Challenge;
 }

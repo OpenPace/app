@@ -29,10 +29,10 @@ export default function HomeScreen() {
   }, []);
 
   useEffect(() => {
-    try {
-      registerForPushNotifications({ authToken: auth.token });
-    } catch (error) {}
-  }, [user])
+    registerForPushNotifications({ authToken: auth.token }).catch((x) =>
+      console.log(x.message),
+    );
+  }, [user]);
 
   // Redirect to strava prompt
   useEffect(() => {

@@ -19,7 +19,7 @@ export async function savePushToken(token: string, options: Options) {
 export async function registerForPushNotifications(options: Options) {
   let token: string;
 
-  if (Constants.isDevice) {
+  if (Constants.isDevice && Platform.OS !== "web") {
     const {
       status: existingStatus,
     } = await Notifications.getPermissionsAsync();
